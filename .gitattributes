@@ -1,0 +1,10 @@
+videos/*.mov filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+images/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+images/**/*.JPG filter=lfs diff=lfs merge=lfs -text
+images/**/*.png filter=lfs diff=lfs merge=lfs -text
+images/**/*.PNG filter=lfs diff=lfs merge=lfs -text
+images/**/*.jpg !text !filter !merge !diff
+images/**/*.JPG !text !filter !merge !diff
+images/**/*.png !text !filter !merge !diff
+images/**/*.PNG !text !filter !merge !diff
