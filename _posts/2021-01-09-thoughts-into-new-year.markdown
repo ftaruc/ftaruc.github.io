@@ -8,7 +8,7 @@ According to Google, an `expectation` is
 
 > a strong belief that something will happen or be the case in the future.
 
-We set resolutions in a new year hoping that our behavior will change in accordance with them. Whether it's fitness goals or exploring new hobbies, inconsistencies after the 'honeymoon' phase will lead people's behaviors back to what is comfortable.
+We set resolutions in a new year hoping that our behavior will change in accordance with them. Whether it's fitness goals or exploring new hobbies, inconsistencies after the 'honeymoon' phase will revert people's behaviors back to what is comfortable.
 
 Consequently, I learned that if I really want to grow, I have to be *stricter* on myself.
 
