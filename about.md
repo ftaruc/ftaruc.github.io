@@ -4,10 +4,12 @@ title: About
 permalink: /about/
 ---
 
-*Re-imagining data* -- this website is dedicated to transparent discussions on the broad field of data science and analytics in today's data bubble. I'll be sharing my own personal projects, and blogging about new topics I have learned throughout the year.
+*Re-imagining data* -- this website is dedicated to transparent discussions on the broad field of data science and analytics in today's data bubble. I'll be sharing my own personal projects and will be blogging about new topics I have learned throughout the year.
 
-> Some `current goals set for 2021:
+> Some **current goals** set for 2021:
 
-* Learn how to create interactive dashboards through Shiny (R*) or Bokeh (Python). [Mastering Shiny](https://mastering-shiny.org/)
+* Learn how to create interactive dashboards through Shiny (R*) or Bokeh (Python). 
+
+  [Online Book for Mastering Shiny](https://mastering-shiny.org/)
 
 * Re-learn statistical, ML, and AI theory  for interviews.
