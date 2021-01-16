@@ -5,7 +5,7 @@ date:   2021-01-15 15:10:56 +0900
 categories: notes
 ---
 
-![MICE-explained](C:\Users\ferdi\Downloads\ftaruc.github.io\images\missing_values.png){:class="img-responsive"}
+![title](https://ferdie.org/images/missing_values.png)
 
 
 
@@ -44,7 +44,7 @@ Using different models for more accurate imputation, you can use the following:
 
 #### MICE explained:
 
-![MICE-explained](C:\Users\ferdi\Downloads\ftaruc.github.io\images\MICE.jpg){:class="img-responsive"}
+![MICE-explained](https://ferdie.org/images/MICE.jpg)
 
 The procedure imputes missing data through an iterative series of predictive models. The model in practice is through regression.
 
@@ -60,7 +60,7 @@ The procedure imputes missing data through an iterative series of predictive mod
 
 <u>Step 6:</u> Steps 2–4 are repeated for a number of cycles, with the imputations being updated at each cycle.
 
---
+-
 
 One way to evaluate different techniques is to use a known column that has no missing values. Then, you are able to drop certain observations from this column, creating "*fake* missing values" that will be imputed by these techniques. Then, compare the distortion, precision, and errors of these known values to test accuracy.
 
@@ -68,7 +68,7 @@ Although some models do not handle these types of imputation well -- such as whe
 
 Having a holistic understanding on why we impute can help you decide whether to choose a complex method or not to handle missing values.
 
----
+--
 
 For more resources, I suggest the following two links:
 
