@@ -5,7 +5,7 @@ date:   2021-01-15 15:10:56 +0900
 categories: notes
 ---
 
-![title](https://ferdie.org/images/missing_values.png)
+<img src="https://ferdie.org/images/missing_values.png" alt="title" style="zoom: 25%;" />
 
 
 
@@ -23,7 +23,7 @@ Or comes at random:
 * **missing at random (MAR)**: missingness is not random, but where missingness can be fully accounted for by variables where there is complete information -- for example, knowing that some employee forgot to input certain observations on a certain day for a study on accident (reason has to be unrelated to the variable)
 * **missing not at random (MNAR):** neither MCAR or MAR, one example is if users fail to fill in a depression survey *because* of their level of depression
 
-#### known techniques?
+#### what are some known techniques?
 
 One of the main reasons why I am exploring this topic is that most articles do not provide any critical thinking on how to handle such a sensitive part in the data pipeline. Rather, they tell you to do either one of two things:
 
@@ -42,7 +42,7 @@ Using different models for more accurate imputation, you can use the following:
 * [predictive-mean-matching](https://en.wikipedia.org/wiki/Predictive_mean_matching)
 * [MICE](https://cran.r-project.org/web/packages/miceRanger/vignettes/miceAlgorithm.html) as described more below:
 
-#### MICE explained:
+#### explaining MICE:
 
 ![MICE-explained](https://ferdie.org/images/MICE.jpg)
 
