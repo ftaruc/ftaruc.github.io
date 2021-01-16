@@ -5,7 +5,7 @@ date:   2021-01-15 15:10:56 +0900
 categories: notes
 ---
 
-<img src="https://ferdie.org/images/missing_values.png" alt="title" style="zoom: 25%;" />
+<center><img src="https://ferdie.org/images/missing_values.png" alt="title" style="zoom: 25%;" /></center>
 
 
 
