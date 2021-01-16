@@ -10,11 +10,11 @@ According to Google, an `expectation` is
 
 We set resolutions in a new year hoping that our behavior will change in accordance with them. Whether it's fitness goals or exploring new hobbies, inconsistencies after the 'honeymoon' phase will revert people's behaviors back to what is comfortable.
 
-Consequently, I learned that if I really want to grow, I have to be *stricter* on myself.
+Consequently, I learned that if I wanted to grow, I have to be *stricter* on myself.
 
 > Some current <s>goals</s> **expectations** placed for 2021:
 
-* Learn how to create interactive dashboards through Shiny (R*) or Bokeh (Python), and learn which KPI's are important to convey to certain stakeholders (whether focusing on sales, margins, volumes and conversions -- or the performance of a products in different regions). Dashboards can also provide fun infographs, i.e: Charlie Thompson's [Sentify](http://www.rcharlie.net/sentify/), which uses RShiny to create interactive dashboards of Spotify's valence and energy metadata.
+* Learn how to create interactive dashboards through Shiny (R*) or Bokeh (Python), and learn which KPI's are important to convey to certain stakeholders (such as: focusing on sales, margins, volumes and conversions -- or the performance of a products in different regions). Dashboards can also provide fun infographs, i.e: Charlie Thompson's [Sentify](http://www.rcharlie.net/sentify/), which uses RShiny to create interactive dashboards using Spotify's valence and energy metadata.
 
   [Online Book for Mastering Shiny](https://mastering-shiny.org/)
 
@@ -24,4 +24,5 @@ Consequently, I learned that if I really want to grow, I have to be *stricter* o
 
 * Be employed as a data analyst, and continue to grow in my free time to transition into a career as a data scientist.
 
-Let's see what this year brings us.
+2020 was rather *interesting*... so let's see what this year brings us.
+
