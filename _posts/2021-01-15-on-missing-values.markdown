@@ -9,15 +9,17 @@ categories: notes
 
 
 
-Missing values -- `nan`, `n/a`, or just an empty value for an observation -- have a significant effect on conclusions that can be made from data.
 
-They can occur systematically:
+
+Missing values -- `nan`, `n/a`, or just an empty observations -- have a significant effect on conclusions that can be made from data.
+
+They can occur <u>systematically</u>:
 
 * as a **nonresponse**: no information is provided for one or more items or for a whole unit; private subjects like income can push people to not answer
-* comes from **attrition** in longitudinal studies, where participants drop out before the experiment or test ends
+* from **attrition** in longitudinal studies, where participants drop out before the experiment or test ends
 * on **purpose**  -- entities choose not to, or fail to, report critical statistics, such as through governments or private entities; or because the information is not available
 
-Or comes at random: 
+Or at <u>random</u>: 
 
 * **missing completely at random (MCAR)**: if the events that lead to any particular data-item being missing are independent both of observable variables and of unobservable parameters of interest, and occur entirely at random -- causes the dataset to be unbiased
 * **missing at random (MAR)**: missingness is not random, but where missingness can be fully accounted for by variables where there is complete information -- for example, knowing that some employee forgot to input certain observations on a certain day for a study on accident (reason has to be unrelated to the variable)
@@ -25,16 +27,19 @@ Or comes at random:
 
 #### what are some known techniques?
 
-One of the main reasons why I am exploring this topic is that most articles do not provide any critical thinking on how to handle such a sensitive part in the data pipeline. Rather, they tell you to do either one of two things:
+During my formal education, there was no section on the `why` we use certain techniques to handle missing values -- especially when it is such a sensitive part in the data pipeline. During my classes, they tell you to do either one of two things:
 
 1.  **Impute** a value based on its distribution (median if the data is skewed) or fill it with the mean.
-2.  **Drop missing values** otherwise, especially 
+2.  **Drop missing values** otherwise (especially when there's only few missing points)
 
-Generally speaking they are both easy to do, but imputing with the mean or median tends to be not as accurate to the true value (might be true only if MCAR). It also reduces the variance of the imputed variable and fails to preserve the relationship between the imputed variable and other variables in the dataset. Dropping missing values might also create more biased subsets of the true dataset due to a MAR or MNAR process.
+Generally they are both easy to do, but problems tend to arise:
 
-It's best to ask: 
+1. Imputing with the mean or median tends to be not as accurate to the true value that is missing, which is only true if the data is MCAR. It also reduces the variance of the imputed variable and fails to preserve the relationship between the imputed variable and other variables in the dataset. 
+2. Dropping missing values might also create more biased subsets of the true dataset if these values are missing because of a MAR or MNAR process.
 
-> **why** are the values missing? Is there a systematic reason (from a MAR/MNAR process)?
+Instead, we should ask:
+
+> **why** are the values missing? Is there a systematic reason (like it's from a MAR/MNAR process)?
 
 Using different models for more accurate imputation, you can use the following: 
 
@@ -46,7 +51,7 @@ Using different models for more accurate imputation, you can use the following:
 
 ![MICE-explained](https://ferdie.org/images/MICE.jpg)
 
-The procedure imputes missing data through an iterative series of predictive models. The model in practice is through regression.
+The procedure imputes missing data through an iterative series of predictive models. The model in practice is through `regression`.
 
 <u>Step 1:</u> A simple imputation, such as imputing the mean, is performed for every missing value in the dataset. These mean imputations can be thought of as `place-holders`.
 
@@ -70,7 +75,7 @@ Having a holistic understanding on why we impute can help you decide whether to 
 
 --
 
-For more resources, I suggest the following two links:
+For more resources, I suggest looking through these two articles:
 
 1. [Wikipedia (missing data)](https://en.wikipedia.org/wiki/Missing_data)
 2. [Wikipedia (imputation in statistics)](https://en.wikipedia.org/wiki/Imputation_%28statistics%29)
