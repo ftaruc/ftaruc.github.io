@@ -11,7 +11,7 @@ categories: notes
 
 
 
-Missing values -- `nan`, `n/a`, or just an empty observations -- have a significant effect on conclusions that can be made from data.
+Missing values -- `nan`, `n/a`, or just empty observations -- have a significant effect on conclusions that can be made from data.
 
 They can occur <u>systematically</u>:
 
