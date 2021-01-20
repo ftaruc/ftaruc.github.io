@@ -5,7 +5,7 @@ date:   2021-01-20 15:10:56 +0900
 categories: notes
 ---
 
-<center><img src="https://ferdie.org/images/rstudio.jpg" alt="title" style="zoom: 25%;" /></center>
+<center><img src="https://ferdie.org/images/rstudio.jpg" alt="title" style="zoom: 100%;" /></center>
 
 It's finally here! *Well,* it has been here actually. The `reticulate` package provides tools for interoperability between Python and R, which allows:
 
@@ -35,7 +35,7 @@ Currently, only static plots are supported, and may be implemented by future upd
 
 
 
-<center><img src="https://ferdie.org/images/seaborn.png" alt="seaborn" style="zoom: 25%;" /></center>
+<center><img src="https://ferdie.org/images/seaborn.png" alt="seaborn" style="zoom: 100%;" /></center>
 
 ### Configuring Python in RStudio:
 
@@ -66,7 +66,7 @@ Now, you can run different chunks using both python and R:
 
 
 
-<center><img src="https://ferdie.org/images/chunks.png" alt="chunks" style="zoom: 25%;" /></center>
+<center><img src="https://ferdie.org/images/chunks.png" alt="chunks" style="zoom: 100%;" /></center>
 
 --
 
