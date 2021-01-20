@@ -5,7 +5,7 @@ date:   2021-01-20 15:10:56 +0900
 categories: notes
 ---
 
-<center><img src="https://ferdie.org/images/python.jpg" alt="title" style="zoom: 100%;" /></center>
+<center><img src="https://ferdie.org/images/python.jpg" alt="title" style="zoom: 60%;" /></center>
 
 
 
@@ -15,7 +15,7 @@ It's finally here! *Well,* it has been here actually. The `reticulate` package h
 * Translation between R and Python objects (for example, between R and Pandas data frames, or between R-matrices and NumPy arrays).
 * Flexible binding to different versions of Python including virtual environments and Conda environments.
 
-#### So What Changed?
+#### **So What Changed?**
 
 Through the new [update](https://blog.rstudio.com/2021/01/19/announcing-rstudio-1-4/) for RStudio 1.4, the Python editing experience has been improved even further:
 
@@ -29,9 +29,11 @@ Currently, only static plots are supported, and may be implemented by future upd
 
 <center><img src="https://ferdie.org/images/seaborn.png" alt="seaborn" style="zoom: 100%;" /></center>
 
-#### So *Why* Integrate? 
+#### **So *Why* Integrate?** 
 
-Data scientists no longer have to choose between R or Python -- especially when data science teams today have the ability to leverage both R and Python in their projects. Under the same platform there is:
+Data scientists no longer have to choose between R or Python -- especially when data science teams today have the ability to leverage both R and Python in their projects. 
+
+Under the same platform there is:
 
 1. Easier collaboration and sharing work among teams 
 2. Less cost on a project for organization and maintenance of projects with the elimination of additional overhead
@@ -39,16 +41,15 @@ Data scientists no longer have to choose between R or Python -- especially when 
 
 Like Anaconda, the data science ecosystem can be readily accessible by one platform.
 
-#### Configuring Python in RStudio:
+#### **Configuring Python in RStudio:**
 
 So to configure python with RStudio, make sure to first install a base version of Python.
-
--
 
 Then install the `reticulate` package from CRAN:
 
 ```R
 install.packages("reticulate")
+reticulate::py_config()
 ```
 
 `reticulate` uses the Python version from your PATH which can be checked through:
@@ -74,3 +75,4 @@ For more resources:
 
 1. [Reticulate Documentation](https://rstudio.github.io/reticulate/)
 2. [Why RStudio Supports Python for Data Science](https://blog.rstudio.com/2020/10/30/why-rstudio-supports-python/)
+3. [Configuring RStudio with Python](https://support.rstudio.com/hc/en-us/articles/360023654474-Installing-and-Configuring-Python-with-RStudio)
