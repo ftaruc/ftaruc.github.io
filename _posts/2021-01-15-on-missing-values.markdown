@@ -25,7 +25,7 @@ Or at <u>random</u>:
 * **missing at random (MAR)**: missingness is not random, but where missingness can be fully accounted for by variables where there is complete information -- for example, knowing that some employee forgot to input certain observations on a certain day for a study on accident (reason has to be unrelated to the variable)
 * **missing not at random (MNAR):** neither MCAR or MAR, one example is if users fail to fill in a depression survey *because* of their level of depression
 
-#### What are some known Techniques?
+#### **What are some known Techniques?**
 
 During my formal education, there was no section on the `why` we use certain techniques to handle missing values -- especially when it is such a sensitive part in the data pipeline. In my classes, they tell you to do either one of two things:
 
@@ -47,7 +47,7 @@ Using different models for more accurate imputation, you can use the following:
 * [predictive-mean-matching](https://en.wikipedia.org/wiki/Predictive_mean_matching)
 * [MICE](https://cran.r-project.org/web/packages/miceRanger/vignettes/miceAlgorithm.html) as described more below:
 
-#### Explaining MICE:
+#### **Explaining MICE:**
 
 ![MICE-explained](https://ferdie.org/images/MICE.jpg)
 
