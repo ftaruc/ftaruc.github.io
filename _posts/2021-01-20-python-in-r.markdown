@@ -5,7 +5,7 @@ date:   2021-01-20 15:10:56 +0900
 categories: notes
 ---
 
-<center><img src="https://ferdie.org/images/rstudio.jpg" alt="title" style="zoom: 100%;" /></center>
+<center><img src="https://ferdie.org/images/python.jpg" alt="title" style="zoom: 100%;" /></center>
 
 It's finally here! *Well,* it has been here actually. The `reticulate` package provides tools for interoperability between Python and R, which allows:
 
@@ -41,7 +41,7 @@ Currently, only static plots are supported, and may be implemented by future upd
 
 So to configure python with RStudio, make sure to first install a base version of Python.
 
-
+-
 
 Then install the `reticulate` package from CRAN:
 
@@ -62,9 +62,7 @@ library(reticulate)
 use_virtualenv("myenv") or use_condaenv("myenv")
 ```
 
-Now, you can run different chunks using both python and R:
-
-
+>  Now, you can run different chunks using both python and R:
 
 <center><img src="https://ferdie.org/images/chunks.png" alt="chunks" style="zoom: 100%;" /></center>
 
@@ -73,4 +71,4 @@ Now, you can run different chunks using both python and R:
 For more resources:
 
 1. [Reticulate Documentation](https://rstudio.github.io/reticulate/)
-2. [Why RStudio Supports Python for Data Science)](https://blog.rstudio.com/2020/10/30/why-rstudio-supports-python/)
+2. [Why RStudio Supports Python for Data Science](https://blog.rstudio.com/2020/10/30/why-rstudio-supports-python/)
