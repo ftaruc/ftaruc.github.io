@@ -29,6 +29,8 @@ Currently, only static plots are supported, and may be implemented by future upd
 
 <center><img src="https://ferdie.org/images/seaborn.png" alt="seaborn" style="zoom: 100%;" /></center>
 
+
+
 #### **So *Why* Integrate?** 
 
 Data scientists no longer have to choose between R or Python -- especially when data science teams today have the ability to leverage both R and Python in their projects. 
