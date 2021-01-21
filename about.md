@@ -2,24 +2,29 @@
 layout: page
 title: About
 permalink: /about/
+
 ---
 
-*Re-imagining data* -- this website is dedicated to transparent discussions on the broad field of data science and analytics in today's data bubble. I'll be sharing my own personal projects and will be blogging about new topics I have learned throughout the year.  <u>For inquiries</u>, email me : `ferdie@berkeley.edu`
+`*Re-imagining data* `-- this website is dedicated to transparent discussions on the broad field of data science and analytics in today's data bubble. I'll be sharing my own personal projects and will be blogging about new topics I have learned throughout the year.  
+
+Read about my thoughts for 2021 [here](https://ferdie.org/2021/01/09/thoughts-into-new-year/).
 
 --
 
-I am **Ferdie Taruc**, a recent *U.C. Berkeley* graduate in Economics and Data Science. Read about my thoughts for 2021 [here](https://ferdie.org/2021/01/09/thoughts-into-new-year/).
+I am **Ferdie Taruc**, a recent *U.C. Berkeley* graduate in Economics and Data Science. 
+
+<u>For inquiries</u>, reach me through my email : `ferdie@berkeley.edu`.
 
 ----
 
-#### **Current Favorite ___ :**
+#### **Current Favorites:**
 
-`films:` (found [here](https://letterboxd.com/ferdie/))
+`films:` ([letterbox'd](https://letterboxd.com/ferdie/))
 
 <center><img src="https://ferdie.org/images/movies.png" alt="movies" style="zoom: 125%;" /></center>
 
 `albums`: 
 
-<center><img src="https://ferdie.org/images/albums_final.png" alt="albums" style="zoom: 125%;" /></center>
+<center><img src="https://ferdie.org/images/albums_final.jpg" alt="albums" style="zoom: 125%;" /></center>
 
 `books`: (will add full list soon)
