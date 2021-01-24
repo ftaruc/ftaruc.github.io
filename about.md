@@ -1,12 +1,11 @@
 ---
 layout: page
 title: About
-spotifyplaylist: playlist/3Fuga0Pnb50vCkQzPB8m0h?si=dkLHfqr2QBCBAxA_KZBeUQ
 permalink: /about/
 
 ---
 
-`*Re-imagining data* `-- this website is dedicated to transparent discussions on the broad field of data science and analytics in today's data bubble. I'll be sharing my own personal projects and will be blogging about new topics I have learned throughout the year.  
+`*Reimagining data* `-- this website is dedicated to transparent discussions on the broad field of data science and analytics in today's data bubble. I'll be sharing my own personal projects and will be blogging about new topics I have learned throughout the year.  
 
 Read about my thoughts for 2021 [here](https://ferdie.org/2021/01/09/thoughts-into-new-year/).
 
@@ -34,4 +33,4 @@ I am **Ferdie Taruc**, a recent *U.C. Berkeley* graduate in Economics and Data S
 
 `playlist of the month`:
 
-{% include spotifyplaylist.html id=page.spotifyplaylist %}
+{% include spotifyplaylist.html id="3Fuga0Pnb50vCkQzPB8m0h" %}
