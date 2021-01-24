@@ -5,15 +5,15 @@ permalink: /about/
 
 ---
 
-`*Reimagining data* `-- this website is dedicated to transparent discussions on the broad field of data science and analytics in today's data bubble. I'll be sharing my own personal projects and will be blogging about new topics I have learned throughout the year.  
+`Reimagining data` -- this website is dedicated to transparent discussions on the broad field of data science and analytics in today's data bubble. I'll be sharing my own personal projects and will be blogging about new topics I have learned throughout the year.  
 
 Read about my thoughts for 2021 [here](https://ferdie.org/2021/01/09/thoughts-into-new-year/).
 
 --
 
-I am **Ferdie Taruc**, a recent *U.C. Berkeley* graduate in Economics and Data Science.
+I am **Ferdie Taruc**, a recent U.C. Berkeley graduate in Economics and Data Science.
 
-<u>For inquiries</u>, reach me through my email : `ferdie@berkeley.edu`.
+For inquiries, reach me through my email : `ferdie@berkeley.edu`.
 
 ----
 
