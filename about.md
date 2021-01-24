@@ -1,6 +1,7 @@
 ---
 layout: page
 title: About
+spotifyplaylist: playlist/3Fuga0Pnb50vCkQzPB8m0h?si=dkLHfqr2QBCBAxA_KZBeUQ
 permalink: /about/
 
 ---
@@ -28,3 +29,11 @@ I am **Ferdie Taruc**, a recent *U.C. Berkeley* graduate in Economics and Data S
 <center><img src="https://ferdie.org/images/albums_final.jpg" alt="albums" style="zoom: 125%;" /></center>
 
 `books`: (will add full list soon)
+
+
+
+`playlist of the month`:
+
+```
+{% include spotifyplaylist.html id=page.spotifyplaylist %}
+```
