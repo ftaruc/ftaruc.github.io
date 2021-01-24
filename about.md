@@ -34,6 +34,4 @@ I am **Ferdie Taruc**, a recent *U.C. Berkeley* graduate in Economics and Data S
 
 `playlist of the month`:
 
-```
 {% include spotifyplaylist.html id=page.spotifyplaylist %}
-```
