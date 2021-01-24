@@ -11,13 +11,13 @@ Read about my thoughts for 2021 [here](https://ferdie.org/2021/01/09/thoughts-in
 
 --
 
-I am **Ferdie Taruc**, a recent *U.C. Berkeley* graduate in Economics and Data Science. 
+I am **Ferdie Taruc**, a recent *U.C. Berkeley* graduate in Economics and Data Science.
 
 <u>For inquiries</u>, reach me through my email : `ferdie@berkeley.edu`.
 
 ----
 
-#### **Current Favorites:**
+#### <u>Current Favorites:</u>
 
 `films:` ([letterbox'd](https://letterboxd.com/ferdie/))
 
