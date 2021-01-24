@@ -33,4 +33,4 @@ For inquiries, reach me through my email : `ferdie@berkeley.edu`.
 
 `playlist of the month (jan)`:
 
-{% include spotifyplaylist.html id="3Fuga0Pnb50vCkQzPB8m0h" %}
+{% include spotifyplaylist.html id="4lDl97fws5cTzmqXvkKaIy" %}
