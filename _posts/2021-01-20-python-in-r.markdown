@@ -15,6 +15,8 @@ It's finally here! *Well,* it has been here actually. The `reticulate` package h
 * Translation between R and Python objects (for example, between R and Pandas data frames, or between R-matrices and NumPy arrays).
 * Flexible binding to different versions of Python including virtual environments and Conda environments.
 
+<!-- more -->
+
 #### **So What Changed?**
 
 Through the new [update](https://blog.rstudio.com/2021/01/19/announcing-rstudio-1-4/) for RStudio 1.4, the Python editing experience has been improved even further:

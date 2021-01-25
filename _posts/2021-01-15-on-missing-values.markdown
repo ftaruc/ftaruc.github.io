@@ -25,6 +25,8 @@ Or at <u>random</u>:
 * **missing at random (MAR)**: missingness is not random, but where missingness can be fully accounted for by variables where there is complete information -- for example, knowing that some employee forgot to input certain observations on a certain day for a study on accident (reason has to be unrelated to the variable)
 * **missing not at random (MNAR):** neither MCAR or MAR, one example is if users fail to fill in a depression survey *because* of their level of depression
 
+<!-- more -->
+
 #### **What are some known Techniques?**
 
 During my formal education, there was no section on the `why` we use certain techniques to handle missing values -- especially when it is such a sensitive part in the data pipeline. In my classes, they tell you to do either one of two things:

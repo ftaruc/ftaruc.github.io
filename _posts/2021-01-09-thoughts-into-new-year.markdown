@@ -10,6 +10,8 @@ According to Google, an `expectation` is
 
 We set resolutions in a new year hoping that our behavior will change in accordance with them. Whether it's fitness goals or exploring new hobbies, inconsistencies after the 'honeymoon' phase will revert people's behaviors back to what is comfortable.
 
+<!-- more -->
+
 Consequently, I learned that if I wanted to grow, I have to be *stricter* on myself.
 
 > Some current <s>goals</s> **expectations** placed for 2021:

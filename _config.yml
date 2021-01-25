@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: ferdie taruc
+title: ferdie
 author: Ferdie Taruc
 description: >- # this means to ignore newlines until "baseurl:"
   Data Reimagined -- a personal portfolio of Ferdie Taruc.
