@@ -13,7 +13,7 @@ Read about my thoughts for 2021 [here](https://ferdie.org/2021/01/09/thoughts-in
 
 I am **Ferdie Taruc**, a recent U.C. Berkeley graduate in Economics and Data Science.
 
-For inquiries, reach me through my email : `ferdie@berkeley.edu`.
+For inquiries, reach me through my email : `ferdie@berkeley.edu`
 
 ----
 
