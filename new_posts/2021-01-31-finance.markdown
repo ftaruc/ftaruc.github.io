@@ -1,0 +1,69 @@
+---
+layout: post
+title:  "Understanding the Stock Market"
+date:   2021-01-31 15:10:56 +0900
+categories: notes
+---
+
+Most traditional (i.e. boomer) investors usually try to make money by going long - i.e. “buy low and sell high”; this is when you buy a stock thinking it will go up in the future (bullish). Shorting is the opposite of this, you “sell high and buy low”, thinking the stock will go down in the future (bearish). This is usually done through the broker, where the prospective short seller would “borrow” the shares from them, and they would need to pay back these shares in some future date by “covering their shorts” - or buying back the exact same quantity of shares they owe the broker.
+
+**Short Squeezes**
+
+So when does a short seller need to cover their shorts? Well, either when a) The short seller wants to, either to take profit or to stop a loss, b) Their broker forces them to through a margin call, or c) The broker forces them to as the broker has recalled their loan, usually for a hard to borrow stock - they get “bought in”. Today, we’ll focus on C) because this is how short squeezes happen.
+
+<!-- more -->
+
+**What are Stock Options**
+
+A stock option is a contract between the writer and whoever holds it that gives the option holder the right to buy (call option) or sell (put option) 100 shares of the underlying stock on or before the expiry date at a specified strike price. So for example, buying a GME 1/29 $1000c gives whoever the holder of this contract is the option to buy from the writer of this contract 100 shares of GME at $1000 / share on or before 1/29. Obviously if GME is lower than $1000 before that date, the holder would be an idiot to exercise this option to buy GME shares for more than their current market value, so they expire worthless.
+
+This effectively provides the option holder an immense amount of leverage, and provides the opportunity for them to 10x or even 100x their original investment if the underlying asset moves the right way - for example because a subreddit declares war on a hedge fund and pumps up a stock to make them go bankrupt, while limiting their losses to the cost of the option. The option writer will in return receive a premium for the option, potentially risking an infinite amount of money, but with a high likelihood of making a small profit. These writers would either be
+
+1. Theta gang - who are looking to generate a tidy income source from those option premiums and pray that the stock doesn’t move in the wrong direction too much
+2. A market maker - who writes the contract when they see an arbitrage opportunity between the market value of an option and the theoretical value of it, and hedging their contract they wrote by buying / shorting the underlying assets so they effectively don’t actually take a position in the market.
+
+We’ll go over how 2) works and how this mechanism can be used as a financial nuclear bomb, but first you need to learn some greek.
+
+
+
+**The Greeks**
+
+The greeks in finance is a set of factors that can affect the price of a stock option / group of options
+
+<u>Delta</u> - Change of the option price as the stock price changes
+
+<u>Gamma</u> - Change in Delta as the stock price changes
+
+<u>Vega</u> - Change in the option price as volatility of the stock changes
+
+<u>Theta</u> - The decay in the option price as the expiration date gets nearer
+
+<u>Rho</u> - Change of the option price as the interest rate changes; Most people ignore this
+
+Looking at the greeks of the gambling tickets you buy is very useful to analyzing the ways you can make or lose money on them. Think TSLA will go up a modest amount? Buy a high-Delta call. Think GME is going to 🚀🚀🚀 1000% more? Look for a high Gamma call so your Delta gains accelerate as GME 🚀🌕. Do you feel like a vampire and want to have a steady income source from degenerate [r/wallstreetbet](https://www.reddit.com/r/wallstreetbet) gamblers on a stock you think will go flat (relative to historical volatility) over the next few months? Join theta gang and sell a high-Theta and high-Vega option!
+
+**Market Makers**
+
+The Black-Scholes model is a fancy mathematical model that describes a “perfect price” (a lot of caveats here) for a stock option. This is done by showing how every option written can theoretically be perfectly hedged by a series of purchases or short sells on the underlying stock. This means that theoretically, if there is a large gap between the theoretical price from Black Scholes and the actual price for an option, there is an “arbitrage” opportunity - this is where market makers come in.
+
+Market makers are companies that provide liquidity to a market by offering to be counterparty to trades. This is especially useful in stock options, where a single ticker can have thousands of options, and there might be someone who wants to buy a GME 1/29 $1000c but no one is actually actively selling it. However, this option might be listed anyways and Citadel will sell you the call if anyone tries to buy it and then immediately hedge it. In fact, when you buy an option chances are you’re not actually buying it from its previous owner selling an option they already own, but from a market maker like Citadel (who is responsible for over 99% of all options volume in 3000 stocks).
+
+So what happens when someone buys an option from a market maker? Since the market maker typically can’t (and probably don’t want to) take a position, meaning taking a directional bet if a stock goes up or down, they’ll immediately hedge the option they just conjured out of thin air by buying or shorting the equivalent number of shares such that the Delta of those shares is the same as the Delta of the option they wrote to remain Delta-neutral, so if the stock goes up or down their position value doesn’t change - this is called **Delta hedging**. Furthermore, as the stock price moves up (calls) or down (puts), they’ll need to buy or sell even more of those shares to remain Delta neutral since the Delta will change due to the option’s Gamma - this is called **Gamma hedging**.
+
+
+
+### Putting It All Together - How options can be used as weapons of mass destruction against short sellers
+
+Now we have the tools to understand how these two financial concepts put together can make billion-dollar hedge funds go bankrupt. Through Delta and Gamma hedging of market makers, buyers can have the effect of buying shares dozens of times the value they actually spent buying their option; a XYZ 4/20 690c can cost only $100 in premiums but causes the market maker to buy $2000 in the underlying stock to hedge against it. If you get enough retail investors to do this, they'll have the impact of billion-dollar whales on the market despite their small stimulus-check-funded portfolios.
+
+Now, you do this on a stock that is heavily shorted, and with very little institutions actually holding real shares of these - making it harder for brokers to find shares to borrow, and you have yourself a weapon of mass financial destruction capable of making billions of Melvin’s money disappear in a single day and potentially have GME 🚀🚀🚀 to a trillion dollar market cap.
+
+
+
+--
+
+For more resources:
+
+1. [WSB](https://www.reddit.com/r/wallstreetbets/comments/l5ygab/dddd_how_rwallstreetbets_created_a_financial/)
+
+   

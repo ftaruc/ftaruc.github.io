@@ -27,10 +27,14 @@ For inquiries, reach me through my email : `ferdie@berkeley.edu`
 
 <center><img src="https://ferdie.org/images/albums_final.jpg" alt="albums" style="zoom: 125%;" /></center>
 
+`playlist of the month (jan)`:
+
+{% include spotifyplaylist.html id="4lDl97fws5cTzmqXvkKaIy" %}
+
 `books`: (will add full list soon)
 
 
 
-`playlist of the month (jan)`:
+> “If you only read the books that everyone else is reading, you can only think what everyone else is thinking. ” 
 
-{% include spotifyplaylist.html id="4lDl97fws5cTzmqXvkKaIy" %}
+-- Haruki Murakami
