@@ -25,7 +25,7 @@ For inquiries, reach me through my email : `ferdie@berkeley.edu`
 
 --
 
-`albums`: ([high resolution](https://ferdie.org/images/albums_final.jpg)) 
+`albums`: ([high resolution](https://ferdie.org/images/final_albums.jpg)) 
 
 <center><img src="https://ferdie.org/images/final_albums.jpg" alt="albums" style="zoom: 125%;" /></center>
 
