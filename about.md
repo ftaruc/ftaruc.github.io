@@ -23,19 +23,23 @@ For inquiries, reach me through my email : `ferdie@berkeley.edu`
 
 <center><img src="https://ferdie.org/images/movies.png" alt="movies" style="zoom: 125%;" /></center>
 
+--
+
 `albums`: ([high resolution](https://ferdie.org/images/albums_final.jpg)) 
 
-<center><img src="https://ferdie.org/images/albums_final.jpg" alt="albums" style="zoom: 125%;" /></center>
+<center><img src="https://ferdie.org/images/final_albums.jpg" alt="albums" style="zoom: 125%;" /></center>
+
+--
 
 `current playlist of the month`: ([click here for the full list](https://ferdie.org/2021/01/01/playlists/))
 
 {% include spotifyplaylist.html id="4lDl97fws5cTzmqXvkKaIy" %}
 
+--
+
 `books`: (that I am currently reading)
 
 <center><img src="https://ferdie.org/images/books.png" alt="books" style="zoom: 125%;" /></center>
-
-
 
 > “If you only read the books that everyone else is reading, you can only think what everyone else is thinking. ” 
 
