@@ -7,7 +7,7 @@ categories: music
 
 Music has always been an important aspect in my life. 
 
-Here you can find some highlights of the year: sounds that make me dance at 1am in my garage, lyrics that make me want to sing like a hooligan trying to sound like Mariah Carey, and nostalgic waveforms that make me cry during the hours when you realize that memories remain as memories.
+Here you can find some highlights of the year: sounds that make me dance at 1am in my garage, lyrics that make me want to sing like a hooligan trying to sound like Mariah Carey, and nostalgic waveforms that make me cry during the hours you realize that memories remain in the past.
 
 <!-- more -->
 
