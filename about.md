@@ -9,6 +9,10 @@ permalink: /about/
 
 Read about my thoughts for 2021 [here](https://ferdie.org/2021/01/09/thoughts-into-new-year/).
 
+`some research papers i'm reading`: 
+
+1. [Machine Learning Methods Economists Should Know About](https://arxiv.org/pdf/1903.10075.pdf?fbclid=IwAR3myRPQgNZaYOsvbGeG5LIXtyIpFU-fZ5P1AizjpEV2mtA4tzQ8yfLlU1c)
+
 --
 
 I am **Ferdie Taruc**, a recent U.C. Berkeley graduate in Economics and Data Science.
@@ -43,4 +47,7 @@ For inquiries, reach me through my email : `ferdie@berkeley.edu`
 
 > “If you only read the books that everyone else is reading, you can only think what everyone else is thinking. ” 
 
--- *Haruki Murakami*
+*Haruki Murakami*
+
+---
+
