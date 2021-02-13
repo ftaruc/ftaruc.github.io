@@ -37,7 +37,7 @@ There's no argument that SQL is a must-learn language if you want to work with d
 
 2. Update (include `SET` to change value)
 
-   ```sql
+   ```sqlite
     UPDATE Customers
     SET City = 'Oslo', 
     COUNTRY = 'Norway'
@@ -46,7 +46,7 @@ There's no argument that SQL is a must-learn language if you want to work with d
 
 3. Delete (Deletes all records from X -- can be filtered)
 
-   ```SQL
+   ```sql
     DELETE FROM Customers
     WHERE Country = 'Norway';
    ```
@@ -81,7 +81,7 @@ There's no argument that SQL is a must-learn language if you want to work with d
 8. Distinctively, a **view** is saved in the database **and** can be reused by any query, whereas a `WITH` clause (or Common Table Expression) is tied to one specific query.
    - In tandem, they can be used together in the following query:
 
-```SQL
+```sqlite
 CREATE VIEW q4iv(playerid, namefirst, namelast, salary, yearid)
 AS
   WITH st(m00) AS (
@@ -107,7 +107,7 @@ AS
 
   - example: 
 
-  ```SQL
+  ```sqlite
   WITH st(m00) AS (
       SELECT MAX(salary)
       
@@ -119,7 +119,7 @@ AS
 
 * `HAVING` or `WHERE` can have boolean conditions that include subqueries:
 
-  ```SQL
+  ```sql
     HAVING s.yearid > (SELECT yearid
                     FROM salaries
                     ORDER BY yearid asc
@@ -130,7 +130,7 @@ AS
 
   - OR:
 
-    ```SQL
+    ```sql
     #EXAMPLE OF CASTING TO A FLOAT
     HAVING SUM(b.AB) > 50 and lslg >  (
     

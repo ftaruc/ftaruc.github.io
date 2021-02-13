@@ -107,8 +107,90 @@ ggplot(data = mpg) +
   ![img](https://d33wubrfki0l68.cloudfront.net/df1b0254da67bacb41a51381d310864d3a5a7dc7/10834/visualize_files/figure-html/unnamed-chunk-40-1.png)
 
 - use position = `jitter` for scatterplot when points over plot with each other; + geom_jitter()
+
 - can use `bar + coord_polar()` to make bar charts into pie charts
+
 - explore labs for tags/titles/etc
+
+--
+
+**The Basics**
+
+1. Do not use `=`, instead do `ALT` + `-` to create `<-` to assign variables
+
+2. Use snake case for styling convention (underscore to separate lowercase):
+
+   example: `i_use_snake_case`
+
+3. Use `CTRL` + `UP_ARROW` to look at all commands executed in terminal (fast-ease to re-do past commands)
+
+4. Variables are case-sensitive -- typos will happen
+
+5. When shifting through different functions using `TAB` autofill,  press `F1` to get more detailed documentation
+
+6. `ALT` + `SHIFT` + `K` to access all keyboard shortcuts
+
+7. `dplyr ` overwrites base functions of R -- to access original, use: `stats::function`
+
+8. Easy access of functions / objects using `::`
+
+   - one example: `nycflights13::flights` to access df
+
+9. To print and save assignments, wrap in parantheses:
+
+   - example: `(dec25 <- filter(flights, month == 12, day == 25))`
+
+10. When using `==` to check for boolean conditions, use `near` instead:
+
+    ```
+    sqrt(2) ^ 2 == 2
+    #> [1] FALSE
+    1 / 49 * 49 == 1
+    #> [1] FALSE
+    --
+    near(sqrt(2) ^ 2,  2)
+    #> [1] TRUE
+    near(1 / 49 * 49, 1)
+    #> [1] TRUE
+    ```
+
+**Data Transformation**
+
+* `tibbles` are dataframes but tweaked to work under `tidyverse`
+
+* `&` = "and", `|` = "or", `!` =  "not"
+
+* the following abbreviations for types of variables:
+
+  - `int`: integer, `dbl`: doubles/real numbers
+  - `chr`: character vectors, or strings
+  - `dttm`: date-times (date+time)
+  - `lgl`: logical (booleans), vectors with only `TRUE` or `FALSE`
+  - `fctr`: factors (used to represent categorical variables with fixed possible values)
+
+* the basics of `dplyr`, in which the first argument is a `df`: 
+
+  - Pick observations by their values (`filter()`).
+
+    - example: 
+
+      ```R
+      filter(flights, !(arr_delay > 120 | dep_delay > 120))
+      filter(flights, arr_delay <= 120, dep_delay <= 120)
+      
+      #Demorgans law: !(x & y) is the same as !x | !y, 
+      #and !(x | y) is the same as !x & !y
+      ```
+
+  - Reorder the rows (`arrange()`).
+
+  - Pick variables by their names (`select()`).
+
+  - Create new variables with functions of existing variables (`mutate()`).
+
+  - Collapse many values down to a single summary (`summarise()`).
+
+  - And then can operate by groups, using `group_by()`
 
 --
 
