@@ -1,11 +1,11 @@
 ---
 layout: post
 title:  "Relearning R"
-date:   2021-02-15 15:10:56 +0900
+date:   2021-02-12 15:10:56 +0900
 categories: notes
 ---
 
-A hodgepodge of notes for learning R for my reference, segmented by 
+A hodgepodge of notes for learning R for my reference, segmented so it is easy to read.
 
 <!-- more -->
 
