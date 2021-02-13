@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Relearning SQL"
-date:   2021-02-15 15:10:56 +0900
+date:   2021-02-12 15:10:56 +0900
 categories: notes
 ---
 
