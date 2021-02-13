@@ -1,12 +1,15 @@
 ---
 layout: post
-title:  "Understanding the Stock Market"
-date:   2021-02-31 15:10:56 +0900
+title:  "Relearning R"
+date:   2021-02-15 15:10:56 +0900
 categories: notes
-
 ---
 
+A hodgepodge of notes for learning R for my reference, segmented by 
 
+<!-- more -->
+
+--
 
 **Visualisations**
 
@@ -20,8 +23,6 @@ ggplot(data = <DATA>) +
   <COORDINATE_FUNCTION> +
   <FACET_FUNCTION>
 ```
-
-
 
 - use `facets`: subplots that display subsets of data (categorical variables)
 
@@ -113,8 +114,6 @@ ggplot(data = mpg) +
 
 For more resources:
 
-1. [Taken from online book:](https://r4ds.had.co.nz/index.html)	
-
-2. 
+1. Notes taken from an online book [here](https://r4ds.had.co.nz/index.html)
 
    
