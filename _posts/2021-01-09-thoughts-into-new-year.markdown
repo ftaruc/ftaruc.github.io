@@ -22,6 +22,8 @@ Consequently, I learned that if I wanted to grow, I have to be *stricter* on mys
 
 * Re-learn statistical, ML, and AI theory  for interviews. Some online textbooks that I will continue to link as I find more resources: [forecasting](https://otexts.com/fpp2/), etc.
 
+  * [DS cheatsheet](http://ferdie.org/files/cheatsheet.pdf) -- thank you to this [user](https://github.com/aaronwangy/Data-Science-Cheatsheet). 
+
 * Learn Docker containerization and its relation to deployment, AWS services like Redshift, Azure, or GCP.
 
 * Learn and deploy a personal project through [StreamLit](https://docs.streamlit.io/en/stable/). 
