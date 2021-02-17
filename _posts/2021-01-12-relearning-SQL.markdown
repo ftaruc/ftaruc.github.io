@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Relearning SQL"
-date:   2021-02-12 15:10:56 +0900
+date:   2021-01-12 15:10:56 +0900
 categories: notes
 ---
 
@@ -37,7 +37,7 @@ There's no argument that SQL is a must-learn language if you want to work with d
 
 2. Update (include `SET` to change value)
 
-   ```sqlite
+   ```sql
     UPDATE Customers
     SET City = 'Oslo', 
     COUNTRY = 'Norway'
@@ -57,7 +57,7 @@ There's no argument that SQL is a must-learn language if you want to work with d
    - example: so `%a` = ends with a; while`%a%` contains letter a
    - can also do NOT LIKE 
 
-   ```SQL
+   ```sql
    SELECT * FROM Customers
    WHERE City LIKE 'a%'
    ```
@@ -81,7 +81,7 @@ There's no argument that SQL is a must-learn language if you want to work with d
 8. Distinctively, a **view** is saved in the database **and** can be reused by any query, whereas a `WITH` clause (or Common Table Expression) is tied to one specific query.
    - In tandem, they can be used together in the following query:
 
-```sqlite
+```sql
 CREATE VIEW q4iv(playerid, namefirst, namelast, salary, yearid)
 AS
   WITH st(m00) AS (
@@ -107,7 +107,7 @@ AS
 
   - example: 
 
-  ```sqlite
+  ```sql
   WITH st(m00) AS (
       SELECT MAX(salary)
       
