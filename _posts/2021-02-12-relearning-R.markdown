@@ -7,7 +7,7 @@ categories: notes
 
 
 
-<center><img src="https://lh3.googleusercontent.com/proxy/mETb1voiHloWE32YW8taweu7EK3Gsw9NeCn1twET9X0R40lGfqstF6UC_ppqrbUHN7ItYOexqryR_1ZW55wCKMzVjIO8tJJaJ67hHjEjvH7bqcB2Hi0PZALn3vSCT6AetSRsjGa_b-FggSLCPHw" alt="title" style="zoom: 50%;" /></center>
+<center><img src="https://lh3.googleusercontent.com/proxy/mETb1voiHloWE32YW8taweu7EK3Gsw9NeCn1twET9X0R40lGfqstF6UC_ppqrbUHN7ItYOexqryR_1ZW55wCKMzVjIO8tJJaJ67hHjEjvH7bqcB2Hi0PZALn3vSCT6AetSRsjGa_b-FggSLCPHw" alt="title" style="zoom: 40%;" /></center>
 
 A hodgepodge of notes for learning R for my reference, segmented so it is easy to read.
 
@@ -196,7 +196,7 @@ ggplot(data = mpg) +
       
     - can use `between(x, left, right)`instead of boolean condition statements: ` x >= left & x <= right`
 
-  - Reorder the rows: <u>**arrange()**</u>
+  - Reorder the rows: **<u>arrange()</u>**
 
     - selects rows in ascending order, can use `desc()` to re-order in descending order:  `arrange(flights, desc(dep_delay))`
 
@@ -307,7 +307,9 @@ ggplot(data = mpg) +
       filter(count > 20, dest != "HNL")
     ```
   
-  - sum of one variable (total # of miles a certain plane flew)                                           :
+  - sum of one variable (total # of miles a certain plane flew), where `wt` refers to weight of the variable being counted.
+  
+    - think of this as a sum of a variable based on another variable
   
     ```R
     not_cancelled %>% 
