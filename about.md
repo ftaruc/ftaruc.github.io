@@ -16,6 +16,10 @@ Read about my thoughts for 2021 [here](https://ferdie.org/2021/01/09/thoughts-in
 3. [Machine Learning: An Applied Econometric Approach](https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.31.2.87)
 4. [The case of the disappearing teaspoons: longitudinal cohort study of the displacement of teaspoons in an Australian research institute](https://www.bmj.com/content/bmj/331/7531/1498.full.pdf)
 
+`favorite wikipedia articles`
+
+1. [Hanakotoba (花言葉)](https://en.wikipedia.org/wiki/Hanakotoba)
+
 --
 
 I am **Ferdie Taruc**, a recent U.C. Berkeley graduate in Economics and Data Science.
