@@ -5,6 +5,10 @@ date:   2021-01-12 15:10:56 +0900
 categories: notes
 ---
 
+<center><img src="https://ferdie.org/images/sql.png" alt="title" style="zoom: 25%;" /></center>
+
+
+
 There's no argument that SQL is a must-learn language if you want to work with data. Like with any language, you need to keep notes to refresh yourself for future projects.
 
 <!-- more -->
