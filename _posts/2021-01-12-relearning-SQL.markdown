@@ -143,7 +143,55 @@ AS
       )
     ```
 
+    --
+
+    **Some Examples:**
+
+    - Getting the first or last value for each user in a table, we will use `transactions as an example`, inner join on the id's that were filtered out so it includes additional variables that were removed from groupby:
+
+    ```SQL
+          SELECT t.user_id, t.created_at, t.product
+          FROM transactions AS t
+          INNER JOIN (
+              SELECT user_id, MIN(created_at) AS min_created_at
+              FROM transactions
+              GROUP BY 1
+          ) AS t1
+              ON t.user_id = t1.user_id
+                t.created_at = t1.min_created_at
+                
+     =========================================================================
+    #Initial:
+             user_id | created_at | product  
+           --------+------------+--------
+            123    | 2019-01-01 | apple    
+            456    | 2019-01-02 | banana   
+            123    | 2019-01-05 | pear    
+            456    | 2019-01-10 | apple   
+            789    | 2019-01-11 | banana  
     
+    #Solution:
+           user_id | created_at | product   
+          ---------+------------+--------
+           123     | 2019-01-01 | apple      
+           456     | 2019-01-02 | banana     
+           789     | 2019-01-11 | banana   
+    ```
+
+    - Reminder, left join allows null values to exist for variables (so not omitted from inner joins): 
+
+      ```
+            INNER JOIN: returns rows when there is a match in both tables. 
+            LEFT JOIN: returns all rows from the left table, even if there are no matches in the right table.
+            
+            cities.name  | users.id
+            _____________|__________
+            seattle      | 123
+            seattle      | 124
+            portland     | null #no users in users table that live in portland, but still included
+            san diego    | 534
+            san diego    | 564
+      ```
 
 ---
 
