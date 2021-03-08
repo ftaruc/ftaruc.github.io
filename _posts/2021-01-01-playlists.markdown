@@ -13,7 +13,7 @@ Here you can find some highlights of the year: sounds that make me dance at 1am 
 
 --
 
-`Current Playlist (Feb)`: 
+`Current Playlist (Mar)`: 
 
 {% include spotifyplaylist.html id="4lDl97fws5cTzmqXvkKaIy" %}
 
@@ -25,7 +25,11 @@ Here you can find some highlights of the year: sounds that make me dance at 1am 
 
 <center><iframe src="https://open.spotify.com/embed/playlist/2IRhy7qwUArIQgqWbYZntv" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
 
-`Februrary`: 
+`February`: 
 
 <center><iframe src="https://open.spotify.com/embed/playlist/2f05BsGICIClV9pI0qLbuD" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
+
+`March:`
+
+<iframe src="https://open.spotify.com/embed/playlist/1uaEumdPBKS5DbV8Dzv8hv" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
