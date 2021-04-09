@@ -163,11 +163,11 @@ Here is a .gif that shows the process in action:
 
 **For unsold listings:**
 
-<center></center><iframe src="https://giphy.com/embed/bOZejyBQvMYECDPYbN" width="600" height="450" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bOZejyBQvMYECDPYbN"></a></p></center>
+<center></center><iframe src="https://ferdie.org/images/part1.gif width="600" height="450" frameBorder="0" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bOZejyBQvMYECDPYbN"></a></p></center>
 
 **For sold listings:**
 
-<center></center><iframe src="https://giphy.com/embed/CFabL5qS17kqS81rnP" width="600" height="450" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/CFabL5qS17kqS81rnP"></a></p></center>
+<center></center><iframe src="https://ferdie.org/images/part2.gif width="600" height="450" frameBorder="0" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bOZejyBQvMYECDPYbN"></a></p></center>
 
 
 
