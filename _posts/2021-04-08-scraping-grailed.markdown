@@ -7,17 +7,11 @@ categories: projects
 
 <center><img src="https://ferdie.org/images/grailed_banner.png" alt="title" style="zoom: 50%;" /></center>
 
-
-
-
-
 Recently, I have been selling a large portion of my closet to this community marketplace for men's clothing centered on streetwear & designer clothes, Grailed.
 
 
 
-<center><img src="https://ferdie.org/images/grailed1.jng" alt="ex1" style="zoom: 50%;" /></center>
-
-
+<center><img src="https://ferdie.org/images/grailed1.jpg" alt="ex1" style="zoom: 50%;" /></center>
 
 As an avid user, the platform makes it hard to compare prices easily of current listings and listings that sold for certain items, as you would have to scan through each listing and attempt to capture trends over time. Unfortunately, Grailed does not have a public API, so I though this would be a perfect opportunity to attempt to scrape this data and create relevant features from each listing to visualize these trends through data. 
 
