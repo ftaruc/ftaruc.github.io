@@ -1,11 +1,13 @@
 ---
 layout: post
-title:  "Grailed: Scraping Automation & Streamlit"
+title:  "Scraping Grailed (Streamlit/Selenium)"
 date:   2021-04-8 15:10:56 +0900
 categories: projects
 ---
 
-<center><img src="https://ferdie.org/images/grailed_banner.png" alt="title" style="zoom: 50%;" /></center>
+<center><img src="https://ferdie.org/images/grailed_banner.png" alt="title" style="zoom: 35%;" /></center>
+
+
 
 Recently, I have been selling a large portion of my closet to this community marketplace for men's clothing centered on streetwear & designer clothes, Grailed.
 
@@ -17,7 +19,7 @@ As an avid user, the platform makes it hard to compare prices easily of current 
 
 <!-- more -->
 
-<u>***Disclaimer:***</u> The acceptable use policy for `grailed.com` [does not officially allow for web scrapers or automated processes to gather their data](https://www.grailed.com/acceptable). This project is purely for educational purposes to learn about underlying trends surrounding clothes.
+**Disclaimer:** The acceptable use policy for `grailed.com` [does not officially allow for web scrapers or automated processes to gather their data](https://www.grailed.com/acceptable). This project is purely for educational purposes to learn about underlying trends surrounding clothes.
 
 #### **Selenium & BeautifulSoup:**
 
