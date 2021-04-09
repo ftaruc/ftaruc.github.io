@@ -9,17 +9,25 @@ categories: projects
 
 
 
-Recently, I have been selling a large portion of my closet to this community marketplace for men's clothing centered on streetwear & designer clothes, Grailed.
+Recently, I have been selling a large portion of my closet to this community marketplace for men's clothing centered on streetwear & designer clothes, **Grailed**:
+
+
 
 
 
 <center><img src="https://ferdie.org/images/grailed1.jpg" alt="ex1" style="zoom: 50%;" /></center>
+
+
 
 As an avid user, the platform makes it hard to compare prices easily of current listings and listings that sold for certain items, as you would have to scan through each listing and attempt to capture trends over time. Unfortunately, Grailed does not have a public API, so I though this would be a perfect opportunity to attempt to scrape this data and create relevant features from each listing to visualize these trends through data. 
 
 <!-- more -->
 
 **Disclaimer:** The acceptable use policy for `grailed.com` [does not officially allow for web scrapers or automated processes to gather their data](https://www.grailed.com/acceptable). This project is purely for educational purposes to learn about underlying trends surrounding clothes.
+
+
+
+Code can be found on my [GitHub](https://github.com/ftaruc/projects/tree/main/grailed).
 
 #### **Selenium & BeautifulSoup:**
 
@@ -34,10 +42,17 @@ As a static scraper, Python often requires no more than the use of the Beautiful
 
 There are many [resources](https://www.selenium.dev/) to get started with Selenium and bs4, but I will omit the majority of the set-up and include what was implemented in my code in my GitHub `readme`. However, I would like to detail some things before getting started:
 
-* **Chrome webdriver was used**: different OS can be used with different browsers for automation through Selenium
+* **Chrome Webdriver was used**: different OS can be used with different browsers for automation through Selenium
+
 * **The first run creates cookies to ignore log-in element:** we use pickle to dump and get previous cookies so Selenium remembers our log-in information for future sessions. Each session on grailed will start at this create account screen that will prevent us from filtering listings.
 
+  
+
 <center><img src="https://ferdie.org/images/grailed_login.jpg" alt="login" style="zoom: 50%;" /></center>
+
+
+
+>  And you can refer to the code here:
 
 ```python
 def first_run():
@@ -72,7 +87,7 @@ def first_run():
     pickle.dump(driver.get_cookies() , open(COOKIES_PATH,"wb"))
 ```
 
-* **Uses package `fake_useragent`:** sometimes, cloud security services like CloudFlare prevents web-scraping due to bot-like behavior. To prevent this, we need to use this package to not look like a bot when using Selenium.
+* **Used package `fake_useragent`:** sometimes, cloud security services like CloudFlare prevents web-scraping due to bot-like behavior. To prevent this, we need to use this package to not look like a bot when using Selenium.
 
 ```python
    from fake_useragent import UserAgent
@@ -86,29 +101,175 @@ def first_run():
     driver.get(url)
 ```
 
+- **Runs the following arguments**:  
+
+  ```python
+  options = webdriver.ChromeOptions()
+  options.add_argument("--start-maximized")
+  options.add_argument("--window-size=1920,1080")
+  options.add_argument("disable-infobars"); # disabling infobars
+  options.add_argument("--disable-extensions"); # disabling extensions
+  options.add_argument("--disable-gpu"); # applicable to windows os only
+  options.add_argument("--proxy-server='direct://'")
+  options.add_argument("--proxy-bypass-list=*")
+  options.add_argument('--ignore-certificate-errors')
+  options.add_argument('--allow-running-insecure-content')
+  options.add_argument("--disable-dev-shm-usage"); # overcome limited resource problems
+  options.add_argument('--headless') #browsers runs hidden locally
+  ```
+
 #### **Data Collection Steps:**
 
-The procedure imputes missing data through an iterative series of predictive models. The model in practice is through `regression`.
+I want to thank [Mike Liu](https://medium.com/@mike_liu/scraping-grailed-8501eef914a8) for his initial help to help me get started in this process as his code was the foundation for mine. You can check out his Medium article which shows how he scraped Grailed in a similar fashion. Unfortunately, some of the identifiers he used for some features no longer worked, so I updated them accordingly and added more features to be scraped for my version, as well as including filters for both sold and unsold items.  
 
-<u>Step 1:</u> A simple imputation, such as imputing the mean, is performed for every missing value in the dataset. These mean imputations can be thought of as `place-holders`.
+> To highlight the scraping process after doing the first "set-up" run (I am omitting what each section of code in `sel.py` does, there is some comments on some lines, but please email me for questions).
 
-<u>Step 2:</u> The `place-holder` mean imputations for one variable `var` are set back to missing.
+<u>Step 1:</u> Given user input (item name and amount to scrape), Selenium goes to the search page of the item.
 
-<u>Step 3:</u> The observed values from the variable `var` in Step 2 are regressed on the other variables in the imputation model, which may or may not consist of all of the variables in the dataset. In other words, `var` is the dependent variable in a regression model and all the other variables are independent variables in the regression model. These regression models operate under the same assumptions that one would make when performing linear, logistic, or Poison regression models outside of the context of imputing missing data.
+<u>Step 2:</u> Apply the filters placed by the user, filter first if you want items that are sold only, unsold only, or include both. Then locate all containers (which is each listing) on the page using bs4. We will have to scroll to the amount of listings that the user wants to scrape (using a function that Mike created). There are also containers that are empty, so we have to also track this amount for future functions.
 
-<u>Step 4:</u> The missing values for `var` are then replaced with predictions (imputations) from the regression model. When `var` is subsequently used as an independent variable in the regression models for other variables, both the observed and these imputed values will be used.
+```python
+driver, display_amount = check_unlimited_scroll(display_amount, driver)
+bs = BeautifulSoup(driver.page_source, 'html.parser')
+containers = bs.find_all("div", class_="feed-item")
+num_empty = len(bs.find_all("div", class_="feed-item empty-item"))
+```
 
-<u>Step 5:</u> Steps 2–4 are then repeated for each variable that has missing data. The cycling through each of the variables constitutes one iteration or `cycle`. At the end of one cycle all of the missing values have been replaced with predictions from regressions that reflect the relationships observed in the data.
+<u>Step 3:</u> For each container which has information for every listing, we can generalize to scrape the following attributes (Refer to the data dictionary from my GitHub for a definition of each feature). There are helper functions that do the scraping for us. 
 
-<u>Step 6:</u> Steps 2–4 are repeated for a number of cycles, with the imputations being updated at each cycle.
+```python
+columns = ['pid', 'b_name', 'title', 'size', 'og_price', 'new_price', 'sold_price', 'is_sold', 'old_date', 'new_date', '%p_change', 'Link'])
+```
 
--
+<u>Step 4:</u>  From `step3`, we also stored the website link to the listing as it contains a lot more features that we can extract. These features include: listing description, the amount of pictures in the listing, and user-based features (how much feedback seller received, their average feedback, amount of items sold, etc.) We can then also create user dataframes and append any new sellers if we truly wanted to (and update new information on previous sellers), however for the sake of time I have ignored this.
 
-One way to evaluate different techniques is to use a known column that has no missing values. Then, you are able to drop certain observations from this column, creating "*fake* missing values" that will be imputed by these techniques. Then, compare the distortion, precision, and errors of these known values to test accuracy.
+```python
+columns = ['uname', 'ship_cost', 'amt_sold', 'amt_feedback', 'amt_listings', 'desc', 'amt_likes', 'prf_link', 'feed_link', 'size_desc', 'loc', 'amt_pics'])
+```
 
-Although some models do not handle these types of imputation well -- such as when working with timeseries which can create large assumptions that will affect the accuracy of the model. However, when working with quick predictive models like OLS, sometimes imputation with the mean might do the trick. 
+For future reference for myself, if you would like to track amount of images from a container, use the `img` tag: 
 
-Having a holistic understanding on why we impute can help you decide whether to choose a complex method or not to handle missing values.
+``` python
+numPics = len(bs.find_all("img", class_="PhotoGallery--Thumbnail"))
+```
+
+<u>Step 5:</u>  Then, we merge both dataframes using `Link` as the joining variables.
+
+<u>Step 6:</u>  If including both sold or unsold items, merge both append dataframes together, and if necessary export the data to a .csv file so the user can use for future analysis.
+
+
+
+Here is a .gif that shows the process in action:
+
+<iframe src="https://giphy.com/embed/bOZejyBQvMYECDPYbN" width="600" height="450" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bOZejyBQvMYECDPYbN"></a></p>
+
+
+
+<iframe src="https://giphy.com/embed/CFabL5qS17kqS81rnP" width="600" height="450" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/CFabL5qS17kqS81rnP"></a></p>
+
+
+
+<center><img src="https://ferdie.org/images/terminal1.jpg" alt="terminal" style="zoom: 50%;" /></center>
+
+--
+
+#### Issues Handled:
+
+> Unfortunately, there was some obstructions to my approach:
+
+1. Some listings had different amount of filters when trying to filter out `"Sold only"`, so it was hard to locate that element by PATH as it could be in different locations. I had to hard-code to include each edge-case.
+
+```python
+check_sold = "/html/body/div[3]/div[7]/div/div/div[3]/div[1]/div/div[8]/div[2]/div/div/ul/li/label/div/input"
+check_sold_2 = "/html/body/div[3]/div[7]/div/div/div[3]/div[1]/div/div[8]/div[2]/div/div/ul/li[2]/label/div/input"
+check_sold_3 = "/html/body/div[3]/div[7]/div/div/div[3]/div[1]/div/div[8]/div[2]/div/div/ul/li[3]/label/div/input"
+check_sold_4 = "/html/body/div[3]/div[7]/div/div/div[3]/div[1]/div/div[8]/div[2]/div/div/ul/li[4]/label/div/input"
+
+    if len(driver.find_elements_by_xpath(check_sold)) > 0:
+        driver.find_element_by_xpath(check_sold).click()
+    elif len(driver.find_elements_by_xpath(check_sold_2)) > 0:
+        driver.find_elements_by_xpath(check_sold_2)[0].click()
+    elif len(driver.find_elements_by_xpath(check_sold_3)) > 0:
+        driver.find_element_by_xpath(check_sold_3).click()
+    else:
+        driver.find_elements_by_xpath(check_sold_4).click()
+```
+
+2.  Dates were extracted as `'x` months, days, minutes, etc. ago'.  In order to normalize it to one date, we use `relativedeltas` from `datetime` to normalize it based on today's date:
+
+```python
+"""
+returns datetime with "X ... Ago" to relative date from a string
+org_date: original date to be converted (str)
+"""
+def get_past_date(org_date):
+
+    if org_date == "na" or org_date == "nan" or pd.isnull(org_date) or len(org_date.split()) == 1: #handles edge cases
+        return "nan"
+
+    fixed = org_date.replace("Sold", "").replace("almost", "").replace("over", "")
+    splitted = fixed.split()
+
+    TODAY = datetime.date.today()
+
+    if len(splitted) == 1 and splitted[0].lower() == 'today':
+        return str(TODAY.isoformat())
+    elif len(splitted) == 1 and splitted[0].lower() == 'yesterday':
+        date = TODAY - relativedelta(days=1)
+        return str(date.isoformat())
+    elif splitted[1].lower() in ['hour', 'hours', 'hr', 'hrs', 'h']:
+        date = datetime.datetime.now() - relativedelta(hours=int(splitted[0]))
+        return str(date.date().isoformat())
+    elif splitted[1].lower() in ['minute', 'minutes', 'm', 'min']:
+        date = datetime.datetime.now() - relativedelta(minutes=int(splitted[0]))
+        return str(date.date().isoformat())
+    elif splitted[1].lower() in ['day', 'days', 'd']:
+        date = TODAY - relativedelta(days=int(splitted[0]))
+        return str(date.isoformat())
+    elif splitted[1].lower() in ['wk', 'wks', 'week', 'weeks', 'w']:
+        date = TODAY - relativedelta(weeks=int(splitted[0]))
+        return str(date.isoformat())
+    elif splitted[1].lower() in ['mon', 'mons', 'month', 'months', 'm']:
+        date = TODAY - relativedelta(months=int(splitted[0]))
+        return str(date.isoformat())
+    elif splitted[1].lower() in ['yrs', 'yr', 'years', 'year', 'y']:
+        date = TODAY - relativedelta(years=int(splitted[0]))
+        return str(date.isoformat())
+    else:
+        return "Wrong Argument format"
+```
+
+3. I also needed to normalize a `final price` given that there were three prices to choose from (the initial old price, the newest adjusted price, or the sold price).
+
+```python
+"""
+adds "final_price" variable, which consolidates:
+1. keeps org_price if listing not sold or updated price
+2. keeps new_price if listing not sold
+3. keeps sold_price if listing sold
+"""
+def fix_new_price(sold_prices, new_prices, is_sold, og_price):
+    fixed = [x if (z == True) else y for (x,y,z) in zip(sold_prices, new_prices, is_sold) ]
+    #now add final_price if only has original_price (not sold and price hasn't changed)
+    final_price = [y if (pd.isnull(x) or pd.isna(x) or x == "NA") else x for (x,y) in zip(fixed, og_price)]
+    return final_price
+```
+
+#### Implementing a Dashboard in Streamlit:
+
+As described by the creators: 
+
+> Streamlit turns data scripts into shareable web apps in minutes. All in Python. All for free. No front‑end experience required.
+
+I wanted to finally implement Streamlit on a personal project, and thought this would be a perfect opportunity. I didn't want the user to have to use a terminal to run the code locally, so I thought [Streamlit Sharing](https://streamlit.io/sharing) would be a great way that doesn't use Docker to upload my app online for others to use. 
+
+
+
+So here is a demo video of what the dashboard when it's run locally through `streamlit run "st-app.py"`
+
+
+
+[VIDEO]
 
 
 
@@ -122,7 +283,8 @@ Using different models for more accurate imputation, you can use the following:
 
 --
 
-For more resources, I suggest looking through these two articles:
+For more resources, I suggest looking through relevant articles on Grailed Scraping:
 
-1. [Wikipedia (missing data)](https://en.wikipedia.org/wiki/Missing_data)
-2. [Wikipedia (imputation in statistics)](https://en.wikipedia.org/wiki/Imputation_%28statistics%29)
+1. [For Scraping Grailed Images](https://github.com/KwhoaKai/Grailed-Scraper)
+2. [Another Grailed Scraper](https://github.com/jamiejann/grailed-scraper)
+3. [Streamlit API Documentation](https://docs.streamlit.io/en/stable/api.html)
