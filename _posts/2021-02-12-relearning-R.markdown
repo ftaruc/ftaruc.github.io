@@ -199,6 +199,37 @@ ggplot(data = mpg) +
 
 * `tibbles` are dataframes but tweaked to work under `tidyverse`
 
+* vectors can be named (used for subsetting):
+
+  * ```R
+    c(x = 1, y = 2, z = 4)
+    #or
+    set_names(1:3, c("a", "b", "c"))
+    #> a b c 
+    #> 1 2 3
+    ```
+
+* subsetting starts at index 1:
+
+  * ```R
+    x <- c("one", "two", "three", "four", "five")
+    x[c(3, 2, 5)]
+    #> [1] "three" "two"   "five"
+    ```
+
+  * negative values drop element, and mixing negative and positive do not work:
+
+    ```R
+    x[c(-1, -3, -5)]
+    #> [1] "two"  "four"
+    x[c(1, -1)]
+    #> Error in x[c(1, -1)]: only 0's may be mixed with negative subscripts
+    ```
+
+  * subsetting in lists with [] returns smaller list, [[]] gets element:
+
+    ![Subsetting a list, visually.](https://d33wubrfki0l68.cloudfront.net/2f3f752cae25018554d484464f117e600ff365a2/37627/diagrams/lists-subsetting.png)
+
 * `&` = "and", `|` = "or", `!` =  "not"
 
   * Boolean operations in picture:
@@ -379,7 +410,7 @@ ggplot(data = mpg) +
 
 -- 
 
-**Data Exploration**
+**Data Exploration**/Transformation
 
 <u>Questions to Explore:</u>
 
@@ -412,6 +443,14 @@ ggplot(data = mpg) +
    ```
 
    ![img](https://lh6.googleusercontent.com/xpdRyZv-YFA1-Lwth0cyS7XrK9-p24THb91s7Vx72dvA3bEvkMri9sycEAD1TXdhNCW-utF37VEI0J7ogEoPxvfMPvLdHkQAHnNha9Q-FWWpoKAhXUfSS_vWzm5GQOI_hWse6oWh)
+
+**Using `map` instead of for loops:**
+
+* `map()` makes a list.
+* `map_lgl()` makes a logical vector.
+* `map_int()` makes an integer vector.
+* `map_dbl()` makes a double vector.
+* `map_chr()` makes a character vector.
 
 --
 
@@ -473,7 +512,7 @@ ggplot(data = mpg) +
 
 5. Compared to base R, `tidyverse` creates tibbles and doesn’t convert character vectors to factors
 
-
+--
 
 **Parsing Data:**
 
@@ -577,6 +616,60 @@ ggplot(data = mpg) +
 - Similar to `pivot_wider`:
 
 ![img](https://lh3.googleusercontent.com/vSUBevh0q4qNE98mWXAMj9tAyzyHFjuptdi-FAEeu6lTvRUpscIGQx04BDGL0Q3TYtiQ5f5DZBGT0HM_spnD-kPH2dbeI9XGJE8R-WEBGCRw_77L3MgKH3syWcBQSmVEuV2kDOaP)
+
+--
+
+**Memory:**
+
+`pryr::object_size()` gives the memory occupied by all of its arguments. 
+
+- If two dataframes share the same columns from mutations, etc. then they have the same memory; if one value of one dataframe is changed, then memory is increased since column can no longe rbe shared
+
+--
+
+**When to not pipe (%>%)**
+
+The pipe is a powerful tool, but it’s not the only tool at your disposal, and it doesn’t solve every problem! Pipes are most useful for rewriting a fairly short linear sequence of operations. I think you should reach for another tool when:
+
+- Your pipes are longer than (say) ten steps. In that case, create intermediate objects with meaningful names. That will make debugging easier, because you can more easily check the intermediate results, and it makes it easier to understand your code, because the variable names can help communicate intent.
+- You have multiple inputs or outputs. If there isn’t one primary object being transformed, but two or more objects being combined together, don’t use the pipe.
+- You are starting to think about a directed graph with a complex dependency structure. Pipes are fundamentally linear and expressing complex relationships with them will typically yield confusing code.
+
+--
+
+**Coercion:**
+
+* converting one variable type to another
+
+1. Explicit coercion happens when you call a function like `as.logical()`, `as.integer()`, `as.double()`, or `as.character()`
+
+   - should always try to upstream the change first so the vector isn't read wrong in the first place (tweak readr col_types)
+
+2. Implicit coercion happens when you use a vector in a specific context that expects a certain type of vector. For example, when you use a logical vector with a numeric summary function, or when you use a double vector where an integer vector is expected.
+
+3. Most complex variables of a vector wins for the type of the list:
+
+   ```R
+   typeof(c(TRUE, 1L))
+   #> [1] "integer"
+   typeof(c(1L, 1.5))
+   #> [1] "double"
+   typeof(c(1.5, "a"))
+   #> [1] "character"
+   ```
+
+4. Use the following instead of general `is_vector`:
+
+   |                  | lgl  | int  | dbl  | chr  | list |
+   | ---------------- | ---- | ---- | ---- | ---- | ---- |
+   | `is_logical()`   | x    |      |      |      |      |
+   | `is_integer()`   |      | x    |      |      |      |
+   | `is_double()`    |      |      | x    |      |      |
+   | `is_numeric()`   |      | x    | x    |      |      |
+   | `is_character()` |      |      |      | x    |      |
+   | `is_atomic()`    | x    | x    | x    | x    |      |
+   | `is_list()`      |      |      |      |      | x    |
+   | `is_vector()`    | x    | x    | x    | x    | x    |
 
 --
 
