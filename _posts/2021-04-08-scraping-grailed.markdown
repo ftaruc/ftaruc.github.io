@@ -1,17 +1,15 @@
 ---
 layout: post
-title:  "Scraping Grailed (Streamlit/Selenium)"
+title:  "Scraping Grailed"
 date:   2021-04-8 15:10:56 +0900
 categories: projects
 ---
 
 <center><img src="https://ferdie.org/images/grailed_banner.png" alt="title" style="zoom: 35%;" /></center>
 
+---
 
-
-Recently, I have been selling a large portion of my closet to this community marketplace for men's clothing centered on streetwear & designer clothes, **Grailed**:
-
-
+> Recently, I have been selling a large portion of my closet to this community marketplace for men's clothing centered on streetwear & designer clothes, **Grailed**:
 
 
 
@@ -161,15 +159,19 @@ numPics = len(bs.find_all("img", class_="PhotoGallery--Thumbnail"))
 
 Here is a .gif that shows the process in action:
 
-<iframe src="https://giphy.com/embed/bOZejyBQvMYECDPYbN" width="600" height="450" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bOZejyBQvMYECDPYbN"></a></p>
+<center><img src="https://ferdie.org/images/terminal1.jpg" alt="terminal" style="zoom: 80%;" /></center>
+
+**For unsold listings:**
+
+<center></center><iframe src="https://giphy.com/embed/bOZejyBQvMYECDPYbN" width="600" height="450" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bOZejyBQvMYECDPYbN"></a></p></center>
+
+**For sold listings:**
+
+<center></center><iframe src="https://giphy.com/embed/CFabL5qS17kqS81rnP" width="600" height="450" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/CFabL5qS17kqS81rnP"></a></p></center>
 
 
 
-<iframe src="https://giphy.com/embed/CFabL5qS17kqS81rnP" width="600" height="450" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/CFabL5qS17kqS81rnP"></a></p>
 
-
-
-<center><img src="https://ferdie.org/images/terminal1.jpg" alt="terminal" style="zoom: 50%;" /></center>
 
 --
 
@@ -267,11 +269,15 @@ I wanted to finally implement Streamlit on a personal project, and thought this 
 
 So here is a demo video of what the dashboard when it's run locally through `streamlit run "st-app.py"`
 
+**Demo Video:**
 
 
-[VIDEO]
 
 
+
+
+
+The dashboard is like 30% done as I need to include visualizations and more features, but the scraping portion of it is done.
 
 ####  **Future Applications:**
 
