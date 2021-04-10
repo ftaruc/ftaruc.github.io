@@ -265,17 +265,17 @@ As described by the creators:
 
 I wanted to finally implement Streamlit on a personal project, and thought this would be a perfect opportunity. I didn't want the user to have to use a terminal to run the code locally, so I thought [Streamlit Sharing](https://streamlit.io/sharing) would be a great way that doesn't use Docker to upload my app online for others to use. 
 
-<center><img src="https://ferdie.org/images/grailed_desc.gif" alt="part1" style="zoom: 105%;" /></center>
+<center><img src="https://ferdie.org/images/grailed_desc.gif" alt="desc" style="zoom: 105%;" /></center>
 
 So here is a demo video of what the dashboard when it's run locally through `streamlit run "st-app.py"`
 
 **Demo Video (two parts due to loading time):**
 
-1. <center><video><source src="https://ferdie.org/images/load_pt1.mp4" alt="load_part1" type = "video/mp4" style="zoom: 105%;" /></video></center>
+1. <center><video><source src="https://ferdie.org/images/load_pt1.mp4" type = "video/mp4" alt="load_part1" style="zoom: 40%;" /></video></center>
 
-2. <center><video><source src="https://ferdie.org/images/load_pt2.mp4" type = "video/mp4" alt="load_part2" style="zoom: 105%;" /></video></center>
+2. <center><video><source src="https://ferdie.org/images/load_pt2.mp4" type = "video/mp4" alt="load_part2" style="zoom: 40%;" /></video></center>
 
-The dashboard is like 30% done as I need to include visualizations and more features, but the scraping portion of it is done.
+The dashboard is like 30% done as I need to include visualizations and more features, but the scraping portion of it is done as users can download the output as a .csv file.
 
 ####  **Future Applications:**
 
