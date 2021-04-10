@@ -9,7 +9,7 @@ categories: projects
 
 ---
 
-> Recently, I have been selling a large portion of my closet to this community marketplace for men's clothing centered on streetwear & designer: **Grailed**.
+> Recently, I have been selling a large portion of my closet to **Grailed**, a community marketplace for men's clothing centered on streetwear & designer.
 
 
 
@@ -17,13 +17,11 @@ categories: projects
 
 
 
-As an avid user, the platform makes it hard to compare prices easily of current listings and listings that sold for certain items, as you would have to scan through each listing and attempt to capture trends over time. Unfortunately, Grailed does not have a public API, so I though this would be a perfect opportunity to attempt to scrape this data and create relevant features from each listing to visualize these trends through data. 
+As an avid user of this platform, I find it hard to easily compare prices of current listings versus sold listings of the same item, as you would have to scan through all listings in attempt to capture an overlying trend over time. Thus, it was hard to extrapolate best prices and listing features to sell your item quicker. Unfortunately, Grailed does not have a public API, so I though this would be a perfect opportunity to attempt to scrape relevant features from each listing to visualize fashion trends through data. 
 
 <!-- more -->
 
 **Disclaimer:** The acceptable use policy for `grailed.com` [does not officially allow for web scrapers or automated processes to gather their data](https://www.grailed.com/acceptable). This project is purely for educational purposes to learn about underlying trends surrounding clothes.
-
-
 
 Code can be found on my [GitHub](https://github.com/ftaruc/projects/tree/main/grailed).
 
@@ -40,9 +38,9 @@ As a static scraper, Python often requires no more than the use of the Beautiful
 
 There are many [resources](https://www.selenium.dev/) to get started with Selenium and bs4, but I will omit the majority of the set-up and include what was implemented in my code in my GitHub `readme`. However, I would like to detail some things before getting started:
 
-* **Chrome Webdriver was used**: different OS can be used with different browsers for automation through Selenium
+* **Chrome Webdriver is used**: different OS can be used with different browsers for automation through Selenium
 
-* **The first run creates cookies to ignore log-in element:** we use pickle to dump and get previous cookies so Selenium remembers our log-in information for future sessions. Each session on grailed will start at this create account screen that will prevent us from filtering listings.
+* **The first run creates cookies to ignore the log-in element:** we use pickle to dump and get previous cookies so Selenium remembers our log-in information for future sessions. Each session on grailed will start at this create account screen that will prevent us from filtering listings, so to avoid this we must remember previous cookies.
 
   
 
@@ -85,21 +83,21 @@ def first_run():
     pickle.dump(driver.get_cookies() , open(COOKIES_PATH,"wb"))
 ```
 
-* **Used package `fake_useragent`:** sometimes, cloud security services like CloudFlare prevents web-scraping due to bot-like behavior. To prevent this, we need to use this package to not look like a bot when using Selenium.
+* **Used package `fake_useragent`:** sometimes, cloud security services like CloudFlare prevents web-scraping due to bot-like behavior. To prevent this, we need to use this package and cycle through different user-agents to not look like a bot when using Selenium.
 
 ```python
-   from fake_useragent import UserAgent
-       ua = UserAgent()
-    userAgent = ua.random
-    #print(str(userAgent)) to see which agent is used
-    options.add_argument(f'user-agent={userAgent}')
+from fake_useragent import UserAgent
+ua = UserAgent()
+userAgent = ua.random
+#print(str(userAgent)) to see which agent is used
+options.add_argument(f'user-agent={userAgent}')
 
-    url = "https://www.grailed.com/"
-    driver = webdriver.Chrome(WEBDRIVER_PATH, options=options)
-    driver.get(url)
+url = "https://www.grailed.com/"
+driver = webdriver.Chrome(WEBDRIVER_PATH, options=options)
+driver.get(url)
 ```
 
-- **Runs the following arguments**:  
+- **Runs the following arguments** (optimizes performance and ignores anything that is unnecessary):  
 
   ```python
   options = webdriver.ChromeOptions()
@@ -118,7 +116,7 @@ def first_run():
 
 #### **Data Collection Steps:**
 
-I want to thank [Mike Liu](https://medium.com/@mike_liu/scraping-grailed-8501eef914a8) for his initial help to help me get started in this process as his code was the foundation for mine. You can check out his Medium article which shows how he scraped Grailed in a similar fashion. Unfortunately, some of the identifiers he used for some features no longer worked, so I updated them accordingly and added more features to be scraped for my version, as well as including filters for both sold and unsold items.  
+I want to thank [Mike Liu](https://medium.com/@mike_liu/scraping-grailed-8501eef914a8) for his initial help from his article to help me get started as his code acted as the foundation for mine. You can check out his Medium article which shows how he scraped Grailed. Unfortunately, some of the identifiers he used for some features are outdated as the website changed, so I updated them accordingly and added more features to be scraped in my version, as well as including filters for listings.  
 
 > To highlight the scraping process after doing the first "set-up" run (I am omitting what each section of code in `sel.py` does, there is some comments on some lines, but please email me for questions).
 
@@ -151,13 +149,13 @@ For future reference for myself, if you would like to track amount of images fro
 numPics = len(bs.find_all("img", class_="PhotoGallery--Thumbnail"))
 ```
 
-<u>Step 5:</u>  Then, we merge both dataframes using `Link` as the joining variables.
+<u>Step 5:</u>  Then, we merge both dataframes using variable `Link` as the common key.
 
 <u>Step 6:</u>  If including both sold or unsold items, merge both append dataframes together, and if necessary export the data to a .csv file so the user can use for future analysis.
 
 
 
-Here is a .gif that shows the process in action:
+Here are .gif's that shows the process in action:
 
 <center><img src="https://ferdie.org/images/terminal1.jpg" alt="terminal" style="zoom: 80%;" /></center>
 
@@ -165,7 +163,7 @@ Here is a .gif that shows the process in action:
 
 <center><img src="https://ferdie.org/images/part1.gif" alt="part1" style="zoom: 105%;" /></center>
 
-**For sold listings:**
+**For sold listings:** (note that a filter must be applied before cycling through each listing)
 
 <center><img src="https://ferdie.org/images/part2.gif" alt="part2" style="zoom: 105%;" /></center>
 
@@ -173,11 +171,11 @@ Here is a .gif that shows the process in action:
 
 --
 
-#### **Issues Handled:**
+#### **Prior Issues Handled:**
 
-> Unfortunately, there was some obstructions to my approach:
+> Unfortunately, there were some problems I ran into during this project:
 
-1. Some listings had different amount of filters when trying to filter out `"Sold only"`, so it was hard to locate that element by PATH as it could be in different locations. I had to hard-code to include each edge-case.
+1. Some listings had different amount of filters when trying to filter out `"Sold only"`, so it was hard to locate that element by PATH as it could be in different locations. I had to hard-code to include each edge-case:
 
 ```python
 check_sold = "/html/body/div[3]/div[7]/div/div/div[3]/div[1]/div/div[8]/div[2]/div/div/ul/li/label/div/input"
@@ -195,7 +193,7 @@ check_sold_4 = "/html/body/div[3]/div[7]/div/div/div[3]/div[1]/div/div[8]/div[2]
         driver.find_elements_by_xpath(check_sold_4).click()
 ```
 
-2.  Dates were extracted as `'x` months, days, minutes, etc. ago'.  In order to normalize it to one date, we use `relativedeltas` from `datetime` to normalize it based on today's date:
+2.  Dates were extracted as `'x time ago'`.  In order to normalize it to one date, I used `relativedeltas` from `datetime` to normalize it based on today's date:
 
 ```python
 """
@@ -239,11 +237,11 @@ def get_past_date(org_date):
         return "Wrong Argument format"
 ```
 
-3. I also needed to normalize a `final price` given that there were three prices to choose from (the initial old price, the newest adjusted price, or the sold price).
+3. I also needed to normalize a `final_price` given that there were three prices to choose from (the initial old price, the newest adjusted price, or the sold price). This was necessary for further visualizations.
 
 ```python
 """
-adds "final_price" variable, which consolidates:
+adds "final_price" variable, which does the following:
 1. keeps org_price if listing not sold or updated price
 2. keeps new_price if listing not sold
 3. keeps sold_price if listing sold
@@ -267,17 +265,19 @@ I wanted to finally implement Streamlit on a personal project, and thought this 
 
 <center><img src="https://ferdie.org/images/grailed_desc.gif" alt="desc" style="zoom: 105%;" /></center>
 
-So here is a demo of what the dashboard when it's run locally through `streamlit run "st-app.py"`
+So here is a demo of what the dashboard when it's run locally in bash through `streamlit run "st-app.py"`
 
 **Demo Videos (Two parts since skipped waiting):**
 
 <center><video width="750" height="500" controls> <source src="https://ferdie.org/images/load_pt1.mp4" type="video/mp4"> </video></center>
 
-Ignore the sound (was in a call with friends):
+*Ignore the sound (was in a call with friends):*
 
 <center><video width="750" height="500" controls> <source src="https://ferdie.org/images/load_pt2.mp4" type="video/mp4"> </video></center>
 
-The dashboard is like 30% done as I need to include visualizations and more features, but the scraping portion of it is done as users can download the output as a .csv file.
+>  The dashboard is like **30% done** as I need to include visualizations and more features, but the scraping portion of it is done as users can download the output as a .csv file. Expect more things soon!
+
+You can download the code to run this application locally! <u>Unfortunately,</u> I was not able to deploy this app through Streamlit sharing as it requires a browser to be installed on their server, so Selenium can not be properly run server-side without a browser to use the webdriver.
 
 ####  **Future Applications:**
 
