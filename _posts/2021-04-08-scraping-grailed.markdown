@@ -173,7 +173,7 @@ Here is a .gif that shows the process in action:
 
 --
 
-#### Issues Handled:
+#### **Issues Handled:**
 
 > Unfortunately, there was some obstructions to my approach:
 
