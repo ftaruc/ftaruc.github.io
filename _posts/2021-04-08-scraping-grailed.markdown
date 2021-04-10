@@ -267,15 +267,19 @@ I wanted to finally implement Streamlit on a personal project, and thought this 
 
 <center><img src="https://ferdie.org/images/grailed_desc.gif" alt="desc" style="zoom: 105%;" /></center>
 
-So here is a demo  of what the dashboard when it's run locally through `streamlit run "st-app.py"`
+So here is a demo of what the dashboard when it's run locally through `streamlit run "st-app.py"`
 
-**Demo:**
+**Demo Videos (Two parts since skipped waiting):**
 
-1. <center><img src="https://ferdie.org/images/load_pt1.gif" alt="load_pt1" style="zoom: 105%;" /></center>
+1. <center></center><video width="750" height="500" controls> <source src="https://ferdie.org/images/load_pt1.mp4" type="video/mp4"> </video></center>
 
 
 
-2. <center><img src="https://ferdie.org/images/load_pt2.gif" alt="load_pt2" style="zoom: 105%;" /></center>
+2. <center></center><video width="750" height="500" controls> <source src="https://ferdie.org/images/load_pt2.mp4" type="video/mp4"> </video></center>
+
+
+
+<center></center><video width="750" height="500" controls> <source src="https://ferdie.org/images/load_pt2.mp4" type="video/mp4"> </video></center>
 
 
 
