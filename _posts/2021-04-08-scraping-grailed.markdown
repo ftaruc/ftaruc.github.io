@@ -271,17 +271,12 @@ So here is a demo of what the dashboard when it's run locally through `streamlit
 
 **Demo Videos (Two parts since skipped waiting):**
 
-1. <center></center><video width="750" height="500" controls> <source src="https://ferdie.org/images/load_pt1.mp4" type="video/mp4"> </video></center>
+1. 
+   <center><video width="750" height="500" controls> <source src="https://ferdie.org/images/load_pt1.mp4" type="video/mp4"> </video></center>
 
+2.  Ignore the sound (was in a call with friends)
 
-
-2. <center></center><video width="750" height="500" controls> <source src="https://ferdie.org/images/load_pt2.mp4" type="video/mp4"> </video></center>
-
-
-
-<center></center><video width="750" height="500" controls> <source src="https://ferdie.org/images/load_pt2.mp4" type="video/mp4"> </video></center>
-
-
+   <center><video width="750" height="500" controls> <source src="https://ferdie.org/images/load_pt2.mp4" type="video/mp4"> </video></center>
 
 The dashboard is like 30% done as I need to include visualizations and more features, but the scraping portion of it is done as users can download the output as a .csv file.
 
