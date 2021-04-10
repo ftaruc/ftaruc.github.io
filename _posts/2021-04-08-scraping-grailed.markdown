@@ -9,7 +9,7 @@ categories: projects
 
 ---
 
-> Recently, I have been selling a large portion of my closet to this community marketplace for men's clothing centered on streetwear & designer clothes, **Grailed**:
+> Recently, I have been selling a large portion of my closet to this community marketplace for men's clothing centered on streetwear & designer: **Grailed**.
 
 
 
@@ -163,13 +163,11 @@ Here is a .gif that shows the process in action:
 
 **For unsold listings:**
 
-<center></center><iframe src="https://ferdie.org/images/part1.gif width="600" height="450" frameBorder="0" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bOZejyBQvMYECDPYbN"></a></p></center>
+<center><img src="https://ferdie.org/images/part1.gif" alt="part1" style="zoom: 105%;" /></center>
 
 **For sold listings:**
 
-<center></center><iframe src="https://ferdie.org/images/part2.gif width="600" height="450" frameBorder="0" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bOZejyBQvMYECDPYbN"></a></p></center>
-
-
+<center><img src="https://ferdie.org/images/part2.gif" alt="part2" style="zoom: 105%;" /></center>
 
 
 
@@ -257,7 +255,9 @@ def fix_new_price(sold_prices, new_prices, is_sold, og_price):
     return final_price
 ```
 
-#### Implementing a Dashboard in Streamlit:
+
+
+#### **Implementing a Dashboard in Streamlit:**
 
 As described by the creators: 
 
@@ -265,17 +265,15 @@ As described by the creators:
 
 I wanted to finally implement Streamlit on a personal project, and thought this would be a perfect opportunity. I didn't want the user to have to use a terminal to run the code locally, so I thought [Streamlit Sharing](https://streamlit.io/sharing) would be a great way that doesn't use Docker to upload my app online for others to use. 
 
-
+<center><img src="https://ferdie.org/images/grailed_desc.gif" alt="part1" style="zoom: 105%;" /></center>
 
 So here is a demo video of what the dashboard when it's run locally through `streamlit run "st-app.py"`
 
-**Demo Video:**
+**Demo Video (two parts due to loading time):**
 
+1. <center><video><source src="https://ferdie.org/images/load_pt1.mp4" alt="load_part1" type = "video/mp4" style="zoom: 105%;" /></video></center>
 
-
-
-
-
+2. <center><video><source src="https://ferdie.org/images/load_pt2.mp4" type = "video/mp4" alt="load_part2" style="zoom: 105%;" /></video></center>
 
 The dashboard is like 30% done as I need to include visualizations and more features, but the scraping portion of it is done.
 
