@@ -279,6 +279,14 @@ So here is a demo of what the dashboard when it's run locally in bash through `s
 
 You can download the code to run this application locally! <u>Unfortunately,</u> I was not able to deploy this app through Streamlit sharing as it requires a browser to be installed on their server, so Selenium can not be properly run server-side without a browser to use the webdriver.
 
+**Update**: I just added interactive graphs with tooltips as seen below. You can adjust the x-domain to exclude outliers. 
+
+Unfortunately, the way I scraped sold listings are based on the most recent (will randomize in the future), so if you scraped few points the graph will be very biased to recent sold listings.
+
+
+
+<center><img src="https://ferdie.org/images/grailed_graph.jpg" alt="graph1" style="zoom: 100%;" /></center>
+
 ####  **Future Applications:**
 
 Using different models for more accurate imputation, you can use the following: 
