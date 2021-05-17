@@ -13,7 +13,7 @@ Here you can find some highlights of the year: sounds that make me dance at 1am 
 
 --
 
-`Current Playlist (Mar)`: 
+`Current Playlist (May)`: 
 
 {% include spotifyplaylist.html id="4lDl97fws5cTzmqXvkKaIy" %}
 
@@ -33,6 +33,10 @@ Here you can find some highlights of the year: sounds that make me dance at 1am 
 
 <center><iframe src="https://open.spotify.com/embed/playlist/1uaEumdPBKS5DbV8Dzv8hv" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
 
-`April: (still incomplete)`
+`April:`
 
-<center></center><iframe src="https://open.spotify.com/embed/playlist/07BBEm8xUcAjjYHmwsol3h" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
+<center><iframe src="https://open.spotify.com/embed/playlist/07BBEm8xUcAjjYHmwsol3h" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
+
+`May:`
+
+<center><iframe src="https://open.spotify.com/embed/playlist/4lDl97fws5cTzmqXvkKaIy" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
