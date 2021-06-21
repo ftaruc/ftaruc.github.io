@@ -23,6 +23,7 @@ Read about my thoughts for 2021 [here](https://ferdie.org/2021/01/09/thoughts-in
 3. [Hiroo Onoda - What is a Right Goal?](https://en.wikipedia.org/wiki/Hiroo_Onoda)
 4. [MY FAVORITE PHOTOGRAPHER: RINKO KAWAUCHI (川内 倫子)](https://www.youtube.com/watch?v=8bKy_MR_G80)
 5. [【Park Live】青葉市子｜Ichiko Aoba 2020.7.3（fri） 20:00〜](https://www.youtube.com/watch?v=p3zsx13sd0A)
+6. [GENESIS 2](https://www.youtube.com/watch?v=VQbcEF_3pEQ)/[GODSPEED](https://www.youtube.com/watch?v=ZYAzo5OdqHM)
 
 --
 
