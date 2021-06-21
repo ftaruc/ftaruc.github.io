@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Scraping Grailed</title>
+  <meta name="description" content="Recently, I have been selling a large portion of my closet to Grailed, a community marketplace for men’s clothing centered on streetwear &amp;amp; designer. As an avid user of this platform, I find it hard to easily compare prices of current listings versus sold listings of the same item, as you would have to scan through all listings in attempt to capture an overlying trend over time. Thus, it was hard to extrapolate best prices and listing features to sell your item quicker. Unfortunately, Grailed does not have a public API, so I though this would be a perfect opportunity to attempt to scrape relevant features from each listing to visualize fashion trends through data.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://ftaruc.github.io/2021/04/08/scraping-grailed/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="ferdie" href="https://ftaruc.github.io/feed.xml">
+
+  
+
+  
+  <meta property="og:title" content="Scraping Grailed">
+  <meta property="og:site_name" content="ferdie">
+  <meta property="og:url" content="https://ftaruc.github.io/2021/04/08/scraping-grailed/">
+  <meta property="og:description" content="Recently, I have been selling a large portion of my closet to Grailed, a community marketplace for men’s clothing centered on streetwear &amp;amp; designer. As an avid user of this platform, I find it hard to easily compare prices of current listings versus sold listings of the same item, as you would have to scan through all listings in attempt to capture an overlying trend over time. Thus, it was hard to extrapolate best prices and listing features to sell your item quicker. Unfortunately, Grailed does not have a public API, so I though this would be a perfect opportunity to attempt to scrape relevant features from each listing to visualize fashion trends through data.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="Scraping Grailed">
+  <meta name="twitter:description" content="Recently, I have been selling a large portion of my closet to Grailed, a community marketplace for men’s clothing centered on streetwear &amp;amp; designer. As an avid user of this platform, I find...">
+  
+  
+
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">ferdie</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/about/">About</a>
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="https://github.com/ftaruc">GitHub</a>
+      
+        
+        <a class="page-link" href="https://ftaruc.github.io/files/resume.pdf">Resume</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Scraping Grailed</h1>
+    
+    <p class="post-meta"><time datetime="2021-04-08T06:10:56+00:00" itemprop="datePublished">Apr 8, 2021</time> •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/categories/projects/">projects</a>
+      
+    
+  
+
+
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <center><img src="https://ferdie.org/images/grailed_banner.png" alt="title" style="zoom: 35%;" /></center>
+
+<hr />
+
+<blockquote>
+  <p>Recently, I have been selling a large portion of my closet to <strong>Grailed</strong>, a community marketplace for men’s clothing centered on streetwear &amp; designer.</p>
+</blockquote>
+
+<center><img src="https://ferdie.org/images/grailed1.jpg" alt="ex1" style="zoom: 50%;" /></center>
+
+<p>As an avid user of this platform, I find it hard to easily compare prices of current listings versus sold listings of the same item, as you would have to scan through all listings in attempt to capture an overlying trend over time. Thus, it was hard to extrapolate best prices and listing features to sell your item quicker. Unfortunately, Grailed does not have a public API, so I though this would be a perfect opportunity to attempt to scrape relevant features from each listing to visualize fashion trends through data.</p>
+
+<!-- more -->
+
+<p><strong>Disclaimer:</strong> The acceptable use policy for <code class="language-plaintext highlighter-rouge">grailed.com</code> <a href="https://www.grailed.com/acceptable">does not officially allow for web scrapers or automated processes to gather their data</a>. This project is purely for educational purposes to learn about underlying trends surrounding clothes.</p>
+
+<p>Code can be found on my <a href="https://github.com/ftaruc/projects/tree/main/grailed">GitHub</a>.</p>
+
+<h4><strong>Selenium &amp; BeautifulSoup:</strong></h4>
+
+<p>There are many python packages suitable for web scraping:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">BeautifulSoup</code> (will be referred as bs4 for now on )</li>
+  <li><code class="language-plaintext highlighter-rouge">Scrapy</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Requests</code> or <code class="language-plaintext highlighter-rouge">LXML</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Selenium</code> and a wrapper that makes it easier, <a href="https://github.com/mherrmann/selenium-python-helium">Helium</a>.</li>
+</ul>
+
+<p>As a static scraper, Python often requires no more than the use of the Beautiful Soup by traversing the <code class="language-plaintext highlighter-rouge">DOM </code>(document object model) to reach its goal. However, static scraping ignores JavaScript and does not really capture other dynamic elements. Thus, automation through Selenium allows these dynamic elements to be clicked on, updating the static page so new information can be scraped.</p>
+
+<p>There are many <a href="https://www.selenium.dev/">resources</a> to get started with Selenium and bs4, but I will omit the majority of the set-up and include what was implemented in my code in my GitHub <code class="language-plaintext highlighter-rouge">readme</code>. However, I would like to detail some things before getting started:</p>
+
+<ul>
+  <li>
+    <p><strong>Chrome Webdriver is used</strong>: different OS can be used with different browsers for automation through Selenium</p>
+  </li>
+  <li>
+    <p><strong>The first run creates cookies to ignore the log-in element:</strong> we use pickle to dump and get previous cookies so Selenium remembers our log-in information for future sessions. Each session on grailed will start at this create account screen that will prevent us from filtering listings, so to avoid this we must remember previous cookies.</p>
+  </li>
+</ul>
+
+<center><img src="https://ferdie.org/images/grailed_login.jpg" alt="login" style="zoom: 50%;" /></center>
+
+<blockquote>
+  <p>And you can refer to the code here:</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">first_run</span><span class="p">():</span>
+    <span class="c1">##Initialize Selenium
+</span>    <span class="n">options</span> <span class="o">=</span> <span class="n">Options</span><span class="p">()</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"user-data-dir=selenium"</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s">"https://www.grailed.com/users/sign_up"</span>
+    <span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="p">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">WEBDRIVER_PATH</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+    <span class="n">driver</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1">#Login to account
+</span>    <span class="n">email</span> <span class="o">=</span> <span class="s">"PUT GRAILED EMAIL HERE"</span>
+    <span class="n">pw</span> <span class="o">=</span> <span class="s">"PUT GRAILED PWORD HERE"</span>
+
+    <span class="n">og_logxpath</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[2]/div/div/p[2]/a"</span>
+    <span class="n">login_xpath</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[2]/div/div/button[4]"</span>
+    <span class="n">driver</span><span class="p">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="n">og_logxpath</span><span class="p">).</span><span class="n">click</span><span class="p">()</span>
+    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#adds delay
+</span>    <span class="n">driver</span><span class="p">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="n">login_xpath</span><span class="p">).</span><span class="n">click</span><span class="p">()</span>
+    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">email_xpath</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[2]/div/div/form/div[1]/input"</span>
+    <span class="n">pw_xpath</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[2]/div/div/form/div[2]/input"</span>
+    <span class="n">driver</span><span class="p">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="n">email_xpath</span><span class="p">).</span><span class="n">send_keys</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+    <span class="n">driver</span><span class="p">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="n">pw_xpath</span><span class="p">).</span><span class="n">send_keys</span><span class="p">(</span><span class="n">pw</span><span class="p">)</span>
+    <span class="n">final_login_xpath</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[2]/div/div/form/button"</span>
+    <span class="n">driver</span><span class="p">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="n">final_login_xpath</span><span class="p">).</span><span class="n">click</span><span class="p">()</span>
+
+    <span class="c1">#uses pickle to save cookies
+</span>    <span class="c1">#time.sleep(5)
+</span>    <span class="n">pickle</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">driver</span><span class="p">.</span><span class="n">get_cookies</span><span class="p">()</span> <span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">COOKIES_PATH</span><span class="p">,</span><span class="s">"wb"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>Used package <code class="language-plaintext highlighter-rouge">fake_useragent</code>:</strong> sometimes, cloud security services like CloudFlare prevents web-scraping due to bot-like behavior. To prevent this, we need to use this package and cycle through different user-agents to not look like a bot when using Selenium.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">fake_useragent</span> <span class="kn">import</span> <span class="n">UserAgent</span>
+<span class="n">ua</span> <span class="o">=</span> <span class="n">UserAgent</span><span class="p">()</span>
+<span class="n">userAgent</span> <span class="o">=</span> <span class="n">ua</span><span class="p">.</span><span class="n">random</span>
+<span class="c1">#print(str(userAgent)) to see which agent is used
+</span><span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="sa">f</span><span class="s">'user-agent=</span><span class="si">{</span><span class="n">userAgent</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://www.grailed.com/"</span>
+<span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="p">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">WEBDRIVER_PATH</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+<span class="n">driver</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p><strong>Runs the following arguments</strong> (optimizes performance and ignores anything that is unnecessary):</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">options</span> <span class="o">=</span> <span class="n">webdriver</span><span class="p">.</span><span class="n">ChromeOptions</span><span class="p">()</span>
+<span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"--start-maximized"</span><span class="p">)</span>
+<span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"--window-size=1920,1080"</span><span class="p">)</span>
+<span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"disable-infobars"</span><span class="p">);</span> <span class="c1"># disabling infobars
+</span><span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"--disable-extensions"</span><span class="p">);</span> <span class="c1"># disabling extensions
+</span><span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"--disable-gpu"</span><span class="p">);</span> <span class="c1"># applicable to windows os only
+</span><span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"--proxy-server='direct://'"</span><span class="p">)</span>
+<span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"--proxy-bypass-list=*"</span><span class="p">)</span>
+<span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--ignore-certificate-errors'</span><span class="p">)</span>
+<span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--allow-running-insecure-content'</span><span class="p">)</span>
+<span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"--disable-dev-shm-usage"</span><span class="p">);</span> <span class="c1"># overcome limited resource problems
+</span><span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--headless'</span><span class="p">)</span> <span class="c1">#browsers runs hidden locally
+</span></code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4><strong>Data Collection Steps:</strong></h4>
+
+<p>I want to thank <a href="https://medium.com/@mike_liu/scraping-grailed-8501eef914a8">Mike Liu</a> for his initial help from his article to help me get started as his code acted as the foundation for mine. You can check out his Medium article which shows how he scraped Grailed. Unfortunately, some of the identifiers he used for some features are outdated as the website changed, so I updated them accordingly and added more features to be scraped in my version, as well as including filters for listings.</p>
+
+<blockquote>
+  <p>To highlight the scraping process after doing the first “set-up” run (I am omitting what each section of code in <code class="language-plaintext highlighter-rouge">sel.py</code> does, there is some comments on some lines, but please email me for questions).</p>
+</blockquote>
+
+<p><u>Step 1:</u> Given user input (item name and amount to scrape), Selenium goes to the search page of the item.</p>
+
+<p><u>Step 2:</u> Apply the filters placed by the user, filter first if you want items that are sold only, unsold only, or include both. Then locate all containers (which is each listing) on the page using bs4. We will have to scroll to the amount of listings that the user wants to scrape (using a function that Mike created). There are also containers that are empty, so we have to also track this amount for future functions.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">driver</span><span class="p">,</span> <span class="n">display_amount</span> <span class="o">=</span> <span class="n">check_unlimited_scroll</span><span class="p">(</span><span class="n">display_amount</span><span class="p">,</span> <span class="n">driver</span><span class="p">)</span>
+<span class="n">bs</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">driver</span><span class="p">.</span><span class="n">page_source</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+<span class="n">containers</span> <span class="o">=</span> <span class="n">bs</span><span class="p">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">"div"</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s">"feed-item"</span><span class="p">)</span>
+<span class="n">num_empty</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bs</span><span class="p">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">"div"</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s">"feed-item empty-item"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p><u>Step 3:</u> For each container which has information for every listing, we can generalize to scrape the following attributes (Refer to the data dictionary from my GitHub for a definition of each feature). There are helper functions that do the scraping for us.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'pid'</span><span class="p">,</span> <span class="s">'b_name'</span><span class="p">,</span> <span class="s">'title'</span><span class="p">,</span> <span class="s">'size'</span><span class="p">,</span> <span class="s">'og_price'</span><span class="p">,</span> <span class="s">'new_price'</span><span class="p">,</span> <span class="s">'sold_price'</span><span class="p">,</span> <span class="s">'is_sold'</span><span class="p">,</span> <span class="s">'old_date'</span><span class="p">,</span> <span class="s">'new_date'</span><span class="p">,</span> <span class="s">'%p_change'</span><span class="p">,</span> <span class="s">'Link'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p><u>Step 4:</u>  From <code class="language-plaintext highlighter-rouge">step3</code>, we also stored the website link to the listing as it contains a lot more features that we can extract. These features include: listing description, the amount of pictures in the listing, and user-based features (how much feedback seller received, their average feedback, amount of items sold, etc.) We can then also create user dataframes and append any new sellers if we truly wanted to (and update new information on previous sellers), however for the sake of time I have ignored this.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'uname'</span><span class="p">,</span> <span class="s">'ship_cost'</span><span class="p">,</span> <span class="s">'amt_sold'</span><span class="p">,</span> <span class="s">'amt_feedback'</span><span class="p">,</span> <span class="s">'amt_listings'</span><span class="p">,</span> <span class="s">'desc'</span><span class="p">,</span> <span class="s">'amt_likes'</span><span class="p">,</span> <span class="s">'prf_link'</span><span class="p">,</span> <span class="s">'feed_link'</span><span class="p">,</span> <span class="s">'size_desc'</span><span class="p">,</span> <span class="s">'loc'</span><span class="p">,</span> <span class="s">'amt_pics'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>For future reference for myself, if you would like to track amount of images from a container, use the <code class="language-plaintext highlighter-rouge">img</code> tag:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">numPics</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bs</span><span class="p">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">"img"</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s">"PhotoGallery--Thumbnail"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p><u>Step 5:</u>  Then, we merge both dataframes using variable <code class="language-plaintext highlighter-rouge">Link</code> as the common key.</p>
+
+<p><u>Step 6:</u>  If including both sold or unsold items, merge both append dataframes together, and if necessary export the data to a .csv file so the user can use for future analysis.</p>
+
+<p>Here are .gif’s that shows the process in action:</p>
+
+<center><img src="https://ferdie.org/images/terminal1.jpg" alt="terminal" style="zoom: 80%;" /></center>
+
+<p><strong>For unsold listings:</strong></p>
+
+<center><img src="https://ferdie.org/images/part1.gif" alt="part1" style="zoom: 105%;" /></center>
+
+<p><strong>For sold listings:</strong> (note that a filter must be applied before cycling through each listing)</p>
+
+<center><img src="https://ferdie.org/images/part2.gif" alt="part2" style="zoom: 105%;" /></center>
+
+<p>–</p>
+
+<h4><strong>Prior Issues Handled:</strong></h4>
+
+<blockquote>
+  <p>Unfortunately, there were some problems I ran into during this project:</p>
+</blockquote>
+
+<ol>
+  <li>Some listings had different amount of filters when trying to filter out <code class="language-plaintext highlighter-rouge">"Sold only"</code>, so it was hard to locate that element by PATH as it could be in different locations. I had to hard-code to include each edge-case:</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">check_sold</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[3]/div[1]/div/div[8]/div[2]/div/div/ul/li/label/div/input"</span>
+<span class="n">check_sold_2</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[3]/div[1]/div/div[8]/div[2]/div/div/ul/li[2]/label/div/input"</span>
+<span class="n">check_sold_3</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[3]/div[1]/div/div[8]/div[2]/div/div/ul/li[3]/label/div/input"</span>
+<span class="n">check_sold_4</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[3]/div[1]/div/div[8]/div[2]/div/div/ul/li[4]/label/div/input"</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">driver</span><span class="p">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="n">check_sold</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">driver</span><span class="p">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="n">check_sold</span><span class="p">).</span><span class="n">click</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">driver</span><span class="p">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="n">check_sold_2</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">driver</span><span class="p">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="n">check_sold_2</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="n">click</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">driver</span><span class="p">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="n">check_sold_3</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">driver</span><span class="p">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="n">check_sold_3</span><span class="p">).</span><span class="n">click</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">driver</span><span class="p">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="n">check_sold_4</span><span class="p">).</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Dates were extracted as <code class="language-plaintext highlighter-rouge">'x time ago'</code>.  In order to normalize it to one date, I used <code class="language-plaintext highlighter-rouge">relativedeltas</code> from <code class="language-plaintext highlighter-rouge">datetime</code> to normalize it based on today’s date:</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""
+returns datetime with "X ... Ago" to relative date from a string
+org_date: original date to be converted (str)
+"""</span>
+<span class="k">def</span> <span class="nf">get_past_date</span><span class="p">(</span><span class="n">org_date</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">org_date</span> <span class="o">==</span> <span class="s">"na"</span> <span class="ow">or</span> <span class="n">org_date</span> <span class="o">==</span> <span class="s">"nan"</span> <span class="ow">or</span> <span class="n">pd</span><span class="p">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">org_date</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">org_date</span><span class="p">.</span><span class="n">split</span><span class="p">())</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1">#handles edge cases
+</span>        <span class="k">return</span> <span class="s">"nan"</span>
+
+    <span class="n">fixed</span> <span class="o">=</span> <span class="n">org_date</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"Sold"</span><span class="p">,</span> <span class="s">""</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">"almost"</span><span class="p">,</span> <span class="s">""</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">"over"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+    <span class="n">splitted</span> <span class="o">=</span> <span class="n">fixed</span><span class="p">.</span><span class="n">split</span><span class="p">()</span>
+
+    <span class="n">TODAY</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">date</span><span class="p">.</span><span class="n">today</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">splitted</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s">'today'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">TODAY</span><span class="p">.</span><span class="n">isoformat</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">splitted</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s">'yesterday'</span><span class="p">:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">TODAY</span> <span class="o">-</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="n">isoformat</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'hour'</span><span class="p">,</span> <span class="s">'hours'</span><span class="p">,</span> <span class="s">'hr'</span><span class="p">,</span> <span class="s">'hrs'</span><span class="p">,</span> <span class="s">'h'</span><span class="p">]:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="n">date</span><span class="p">().</span><span class="n">isoformat</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'minute'</span><span class="p">,</span> <span class="s">'minutes'</span><span class="p">,</span> <span class="s">'m'</span><span class="p">,</span> <span class="s">'min'</span><span class="p">]:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="n">date</span><span class="p">().</span><span class="n">isoformat</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'day'</span><span class="p">,</span> <span class="s">'days'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">]:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">TODAY</span> <span class="o">-</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="n">isoformat</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'wk'</span><span class="p">,</span> <span class="s">'wks'</span><span class="p">,</span> <span class="s">'week'</span><span class="p">,</span> <span class="s">'weeks'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">]:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">TODAY</span> <span class="o">-</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">weeks</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="n">isoformat</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'mon'</span><span class="p">,</span> <span class="s">'mons'</span><span class="p">,</span> <span class="s">'month'</span><span class="p">,</span> <span class="s">'months'</span><span class="p">,</span> <span class="s">'m'</span><span class="p">]:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">TODAY</span> <span class="o">-</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="n">isoformat</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'yrs'</span><span class="p">,</span> <span class="s">'yr'</span><span class="p">,</span> <span class="s">'years'</span><span class="p">,</span> <span class="s">'year'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">]:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">TODAY</span> <span class="o">-</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="n">isoformat</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">"Wrong Argument format"</span>
+</code></pre></div></div>
+
+<ol>
+  <li>I also needed to normalize a <code class="language-plaintext highlighter-rouge">final_price</code> given that there were three prices to choose from (the initial old price, the newest adjusted price, or the sold price). This was necessary for further visualizations.</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""
+adds "final_price" variable, which does the following:
+1. keeps org_price if listing not sold or updated price
+2. keeps new_price if listing not sold
+3. keeps sold_price if listing sold
+"""</span>
+<span class="k">def</span> <span class="nf">fix_new_price</span><span class="p">(</span><span class="n">sold_prices</span><span class="p">,</span> <span class="n">new_prices</span><span class="p">,</span> <span class="n">is_sold</span><span class="p">,</span> <span class="n">og_price</span><span class="p">):</span>
+    <span class="n">fixed</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">if</span> <span class="p">(</span><span class="n">z</span> <span class="o">==</span> <span class="bp">True</span><span class="p">)</span> <span class="k">else</span> <span class="n">y</span> <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sold_prices</span><span class="p">,</span> <span class="n">new_prices</span><span class="p">,</span> <span class="n">is_sold</span><span class="p">)</span> <span class="p">]</span>
+    <span class="c1">#now add final_price if only has original_price (not sold and price hasn't changed)
+</span>    <span class="n">final_price</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="k">if</span> <span class="p">(</span><span class="n">pd</span><span class="p">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">or</span> <span class="n">pd</span><span class="p">.</span><span class="n">isna</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">==</span> <span class="s">"NA"</span><span class="p">)</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fixed</span><span class="p">,</span> <span class="n">og_price</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">final_price</span>
+</code></pre></div></div>
+
+<h4><strong>Implementing a Dashboard in Streamlit:</strong></h4>
+
+<p>As described by the creators:</p>
+
+<blockquote>
+  <p>Streamlit turns data scripts into shareable web apps in minutes. All in Python. All for free. No front‑end experience required.</p>
+</blockquote>
+
+<p>I wanted to finally implement Streamlit on a personal project, and thought this would be a perfect opportunity. I didn’t want the user to have to use a terminal to run the code locally, so I thought <a href="https://streamlit.io/sharing">Streamlit Sharing</a> would be a great way that doesn’t use Docker to upload my app online for others to use.</p>
+
+<center><img src="https://ferdie.org/images/grailed_desc.gif" alt="desc" style="zoom: 105%;" /></center>
+
+<p>So here is a demo of what the dashboard when it’s run locally in bash through <code class="language-plaintext highlighter-rouge">streamlit run "st-app.py"</code></p>
+
+<p><strong>Demo Videos (Two parts since skipped waiting):</strong></p>
+
+<center><video width="750" height="500" controls=""> <source src="https://ferdie.org/images/load_pt1.mp4" type="video/mp4" /> </video></center>
+
+<p><em>Ignore the sound (was in a call with friends):</em></p>
+
+<center><video width="750" height="500" controls=""> <source src="https://ferdie.org/images/load_pt2.mp4" type="video/mp4" /> </video></center>
+
+<blockquote>
+  <p>The dashboard is like <strong>30% done</strong> as I need to include visualizations and more features, but the scraping portion of it is done as users can download the output as a .csv file. Expect more things soon!</p>
+</blockquote>
+
+<p>You can download the code to run this application locally! <u>Unfortunately,</u> I was not able to deploy this app through Streamlit sharing as it requires a browser to be installed on their server, so Selenium can not be properly run server-side without a browser to use the webdriver.</p>
+
+<p><strong>Update</strong>: I just added interactive graphs with tooltips as seen below. You can adjust the x-domain to exclude outliers.</p>
+
+<p>Unfortunately, the way I scraped sold listings are based on the most recent (will randomize in the future), so if you scraped few points the graph will be very biased to recent sold listings.</p>
+
+<center><img src="https://ferdie.org/images/grailed_graph.jpg" alt="graph1" style="zoom: 100%;" /></center>
+
+<h4><strong>Future Applications:</strong></h4>
+
+<p>Using different models for more accurate imputation, you can use the following:</p>
+
+<ul>
+  <li>Use listing descriptions to capture sentiment for further analysis, can also apply <code class="language-plaintext highlighter-rouge">NLP</code> to create the ‘perfect description’ for that item</li>
+  <li>Create a <code class="language-plaintext highlighter-rouge">binary classifier</code> to figure out which features are the best to predict which listings will sell for a certain item (we have both sold and unsold listings for each item, can find an item with a lot of listings)</li>
+  <li><code class="language-plaintext highlighter-rouge">Regression model</code> on price, predict which price is optimal to sell given the features of the item.</li>
+</ul>
+
+<p>–</p>
+
+<p>For more resources, I suggest looking through relevant articles on Grailed Scraping:</p>
+
+<ol>
+  <li><a href="https://github.com/KwhoaKai/Grailed-Scraper">For Scraping Grailed Images</a></li>
+  <li><a href="https://github.com/jamiejann/grailed-scraper">Another Grailed Scraper</a></li>
+  <li><a href="https://docs.streamlit.io/en/stable/api.html">Streamlit API Documentation</a></li>
+</ol>
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy; Ferdie Taruc - Reimagining Data
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

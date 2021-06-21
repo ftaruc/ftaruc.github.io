@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Analyzing Atlanta&#39;s SFR Housing Market</title>
+  <meta name="description" content="_ Note: This report is written using markdown, and will reference source code written in the raw.ipynb. I decided to use this format so it’s clearer for the reader, and will provide a .pdf for this report and a .pdf of the source code so you don’t need to go into a .ipynb reader to look at the source code. Introduction This report looks to analyze house listings sourced from MLS that were actively listed as of 4/29/2021. We hope to model Atlanta’s SFR (single-family housing) market by comparing different regression models to explore which various factors influence home prices in the Atlanta region, and potentially identify areas that might be good for investment if we can find under-priced homes using our model. According to this article, we see a rise of interest in investment in the Atlanta region, which makes this analysis relevant to today’s demand. Listing Prices: Realtor.com’s April 2021 report shows Atlanta is a seller’s real estate market, which means that more people are looking to buy than there are homes available. Home prices have been surging largely because of limited supply and fierce competition for available homes. The median list price of homes in Atlanta, GA was $379,900, trending up 16.9% year-over-year while the median sale price was $345,500.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://ftaruc.github.io/2021/06/20/analyzing-atlanta-housing/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="ferdie" href="https://ftaruc.github.io/feed.xml">
+
+  
+
+  
+  <meta property="og:title" content="Analyzing Atlanta&#39;s SFR Housing Market">
+  <meta property="og:site_name" content="ferdie">
+  <meta property="og:url" content="https://ftaruc.github.io/2021/06/20/analyzing-atlanta-housing/">
+  <meta property="og:description" content="_ Note: This report is written using markdown, and will reference source code written in the raw.ipynb. I decided to use this format so it’s clearer for the reader, and will provide a .pdf for this report and a .pdf of the source code so you don’t need to go into a .ipynb reader to look at the source code. Introduction This report looks to analyze house listings sourced from MLS that were actively listed as of 4/29/2021. We hope to model Atlanta’s SFR (single-family housing) market by comparing different regression models to explore which various factors influence home prices in the Atlanta region, and potentially identify areas that might be good for investment if we can find under-priced homes using our model. According to this article, we see a rise of interest in investment in the Atlanta region, which makes this analysis relevant to today’s demand. Listing Prices: Realtor.com’s April 2021 report shows Atlanta is a seller’s real estate market, which means that more people are looking to buy than there are homes available. Home prices have been surging largely because of limited supply and fierce competition for available homes. The median list price of homes in Atlanta, GA was $379,900, trending up 16.9% year-over-year while the median sale price was $345,500.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="Analyzing Atlanta&#39;s SFR Housing Market">
+  <meta name="twitter:description" content="_ Note: This report is written using markdown, and will reference source code written in the raw.ipynb. I decided to use this format so it’s clearer for the reader, and will provide a .pdf for this...">
+  
+  
+
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">ferdie</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/about/">About</a>
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="https://github.com/ftaruc">GitHub</a>
+      
+        
+        <a class="page-link" href="https://ftaruc.github.io/files/resume.pdf">Resume</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Analyzing Atlanta&#39;s SFR Housing Market</h1>
+    
+    <p class="post-meta"><time datetime="2021-06-20T06:10:56+00:00" itemprop="datePublished">Jun 20, 2021</time> •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/categories/projects/">projects</a>
+      
+    
+  
+
+
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <center><img src="https://ferdie.org/images/atlanta.jpg" alt="main_photo" style="zoom: 60%;" /></center>
+
+<p>_</p>
+
+<ul>
+  <li><u>Note:</u> This report is written using markdown, and will reference source code written in the <code class="language-plaintext highlighter-rouge">raw.ipynb</code>. I decided to use this format so it’s clearer for the reader, and will provide a .pdf for this report and a .pdf of the source code so you don’t need to go into a .<code class="language-plaintext highlighter-rouge">ipynb reader</code> to look at the source code.</li>
+</ul>
+
+<h2>Introduction</h2>
+
+<p>This report looks to analyze house listings sourced from MLS that were actively listed as of 4/29/2021. We hope to model Atlanta’s SFR (single-family housing) market by comparing different regression models to explore which various factors influence home prices in the Atlanta region, and potentially identify areas that might be good for investment if we can find under-priced homes using our model.</p>
+
+<p>According to <a href="https://www.noradarealestate.com/blog/atlanta-real-estate-market/">this article</a>, we see a rise of interest in investment in the Atlanta region, which makes this analysis relevant to today’s demand.</p>
+
+<blockquote>
+  <p><strong>Listing Prices:</strong> Realtor.com’s April 2021 report shows Atlanta is a seller’s real estate market, which means that more people are looking to buy than there are homes available. Home prices have been surging largely because of limited supply and fierce competition for available homes.</p>
+
+  <p>The median list price of homes in Atlanta, GA was $379,900, trending up <strong>16.9% year-over-year</strong> while the median sale price was $345,500.</p>
+</blockquote>
+
+<hr />
+
+<!-- more -->
+
+<p><strong>Data Exploration</strong>:</p>
+
+<ul>
+  <li>The original data was made up of 8,168 listings, with 23 initial main features + 37 extra features made of arrays of miscellaneous features that only some homes included.</li>
+</ul>
+
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620180156506.png" alt="data1" style="zoom: 85%;" /></center>
+
+<p>It became immediately obvious that although the report stated that it included only homes in Atlanta, that other cities of Georgia was also included. Additionally,  many errors in how <code class="language-plaintext highlighter-rouge">(lat,long)</code> was scraped or sourced made it impossible to accurately map coordinates in a local GIS system.</p>
+
+<blockquote>
+  <p>We find that some listings from Virginia and Alabama were included, and were removed for future analysis as we plan to focus on Atlanta.</p>
+</blockquote>
+
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620181731058.png" alt="data2" style="zoom: 200%;" /></center>
+
+<blockquote>
+  <p>Below maps the points into a Python package known as Folium; this image shows that current lat/longitude coordinates need to be fixed for some listings.</p>
+</blockquote>
+
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620180713207.png" alt="folium" style="zoom: 100%;" /></center>
+
+<p>For the sake of time, I will not attempt to map listings to a GIS system to explore trends of house prices and house features among different regions in Atlanta, due to the construction of some parts of the dataset. For an actual analysis, I think understanding the context of different regions in Georgia is important, but given the time constraints (3-5 hours, I rather explore the modeling process more thoroughly). However, since I lack domain knowledge, this is something that might affect later analysis.</p>
+
+<ul>
+  <li>
+    <p>In addition to some coordinates being wrong for some listings, many of the listings have null or no values, particularly for features <code class="language-plaintext highlighter-rouge">school district</code> and <code class="language-plaintext highlighter-rouge">subdivision</code>:</p>
+
+    <blockquote>
+      <p>The picture below only shows a subset of columns with missing values</p>
+    </blockquote>
+
+    <center><img src="https://ferdie.org/images/typora-user-images/image-20210620182216801.png" alt="null" style="zoom: 80%;" /></center>
+  </li>
+  <li>
+    <p>This is hard to impute given the nonsensical way it was coded, and without context it’s best to leave these features out for the analysis <em>(below shows all unique values of school district)</em>:</p>
+
+    <center><img src="https://ferdie.org/images/typora-user-images/image-20210620182400180.png" alt="school_dist" style="zoom: 80%;" /></center>
+  </li>
+  <li>
+    <p>I decided to also drop the 916 listings with null value for <code class="language-plaintext highlighter-rouge">lotsize_sqft</code>, as there is no correct value to impute these listings without increasing variance for our future models.</p>
+
+    <ul>
+      <li>After removing some redundant features and unusable rows, this leaves us with a starting dataset of <strong>7,252 listings</strong> and <strong>46 house features</strong> to work with:</li>
+    </ul>
+
+    <center><img src="https://ferdie.org/images/typora-user-images/image-20210620182820629.png" alt="data4" style="zoom: 85%;" /></center>
+  </li>
+</ul>
+
+<h2>Initial Visualization:</h2>
+
+<p>Since I do not plan to visualize these listings in a GIS system to infer geographic trends, I still think it’s best to contextualize how well Atlanta’s housing market is to other cities in Georgia.</p>
+
+<blockquote>
+  <p>The following boxplots were used using the python package <code class="language-plaintext highlighter-rouge">Seaborn</code> where the <a href="https://worldpopulationreview.com/states/cities/georgia">15 most populated cities in Georgia</a> were selected as comparison. The graphs also include the 15 cities with the most listings from the dataset, as there might be bias from the lack of data from the other graphs.</p>
+
+  <p><u>Outliers have been removed for visual clarity.</u></p>
+</blockquote>
+
+<p>–</p>
+
+<p>**Analyzing Price Listings: **</p>
+
+<p>As shown below, the cities are ordered based on the median house price-listings from this dataset.</p>
+
+<ul>
+  <li>
+    <p>We find that Atlanta has the sixth-highest median compared to the top 15 populated cities in Georgia, and also has the highest peak if we count outliers.</p>
+  </li>
+  <li>
+    <p>Additionally, we also see that Atlanta has the second highest median out of the top 15 cities with the most listings. However, due to bias that this dataset scraped more Atlanta listings compared to other cities, there may have been a selection bias. Still, we can get a rough estimate of Atlanta’s housing interval through the boxplot, where at least 50% of housings remain between [$500,000, $1,500,000]. Still compared to other cities in Georgia, we find that Atlanta is doing relatively well.</p>
+  </li>
+</ul>
+
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620185809299.png" alt="viz1" style="zoom: 115%;" /></center>
+
+<p>We find that our analysis is rather similar to the <a href="https://www.bestplaces.net/cost_of_living/city/georgia/brookhaven">actual cost of living</a> of these locations :</p>
+
+<blockquote>
+  <p>source: https://www.bestplaces.net/cost_of_living/city/georgia/brookhaven</p>
+</blockquote>
+
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620190311999.png" alt="cost_liv" style="zoom: 80%;" /></center>
+
+<p><strong>Analyzing Lot Price/Sqft</strong></p>
+
+<p>However, in terms of bang-for your buck, it’s quite expensive living in Atlanta. For the amount of lot size you get per sqft, it’s much more expensive to have more space living in Atlanta compared to other cities that are further from living in the capital. Only Brookhaven (which is known to be expensive to live in), and Savannah (which is possibly due to the lack of datapoints) beats Atlanta in the highest median lot price/sqft.</p>
+
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620190039898.png" alt="viz2" style="zoom: 115%;" /></center>
+
+<hr />
+
+<p>We see a similar conclusion when analyzing listing price/sqft (interior house space).  (Excuse the visual bug with Albany)</p>
+
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620190558199.png" alt="viz3" style="zoom: 115%;" /></center>
+
+<h2>Modeling:</h2>
+
+<p>Given that there seems to be high demand to live near the metropolis given that both Atlanta’s <code class="language-plaintext highlighter-rouge">price/sqft</code> and <code class="language-plaintext highlighter-rouge">lot price/sqft</code> is the really expensive compared to other cities, we should focus on creating a model to evaluate which features causes this and how we can exploit the model to find under-priced houses to invest in.</p>
+
+<ul>
+  <li>We can use a <code class="language-plaintext highlighter-rouge">correlation heatmap</code> to initially determine some features that correlate (if there a linear trend between two variables), to contextualize which features may impact <code class="language-plaintext highlighter-rouge">list_price</code>. Out of some features from the initial dataset, we find that <code class="language-plaintext highlighter-rouge">beds</code>, <code class="language-plaintext highlighter-rouge">baths_full</code>, <code class="language-plaintext highlighter-rouge">sq_ft</code>, ` baths_full` have the strongest correlations.</li>
+  <li>Given that we do not plan to use regression, but decision trees for our models, we do not have to worry about multicollinearity from this analysis.</li>
+</ul>
+
+<p>![image-20210620192258593](C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210620192258593.png</p>
+
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620192258593.png" alt="corrmap" style="zoom: 100%;" /></center>
+
+<p><strong>Segmenting the Datasets</strong> :</p>
+
+<ul>
+  <li>I filtered out any other category homes (townhouses and condos) out of the dataset. I will store these datasets for any future analysis. After including only SFR homes, there are now only <strong>5,916 listings</strong>.</li>
+</ul>
+
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620193126645.png" alt="segment" style="zoom: 200%;" /></center>
+
+<ul>
+  <li>Additionally, I filtered homes to only include Atlanta listings, which leaves us with a small sample of <strong>916 listings</strong> left to work with for modeling. Given the lack of data-points, I do not expect a model with a strong accuracy for predictions. This is something to be concerned about when actually putting something in production.</li>
+  <li>For future models, I did a 70/30 training to test split, which caused <strong>642 listings as training data</strong>, and <strong>275 listings as test data</strong>. Given the lack of data, I did not include another set of validation set to be more precise. If I had more time, I would attempt to use all of Georgia’s dataset to create a general model for the housing market just to use more data points or even scrape more Atlanta listings instead.</li>
+</ul>
+
+<p><strong>Engineering New Features:</strong></p>
+
+<p>I engineered new features based on the features found in the dataset; for the sake of time, I will focus on few in particular, but after everything there are 491 features that was used in the model.</p>
+
+<blockquote>
+  <p>Note: using a lot of new features is very prone to over-fitting for certain models like decision trees, which we will see later in the report.</p>
+</blockquote>
+
+<ol>
+  <li>
+    <p><u>Creating Binary Variables from Features_X:</u> There were 30+ optional features included into the dataset that some homes used, where they included specific features for their household. This included the following:</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="s">'features_bathrooms'</span><span class="p">,</span> <span class="s">'features_bedrooms'</span><span class="p">,</span> <span class="s">'features_dining_room'</span><span class="p">,</span> <span class="s">'features_fireplaces'</span><span class="p">,</span> <span class="s">'features_fees'</span><span class="p">,</span> <span class="s">'features_garage'</span><span class="p">,</span> <span class="s">'features_heating'</span><span class="p">,</span> <span class="s">'features_home_owners_association'</span><span class="p">,</span> <span class="s">'features_house'</span><span class="p">,</span> <span class="s">'features_interior_features'</span><span class="p">,</span> <span class="s">'features_kitchen'</span><span class="p">,</span> <span class="s">'features_laundry'</span><span class="p">,</span> <span class="s">'features_location'</span><span class="p">,</span> <span class="s">'features_lot'</span><span class="p">,</span> <span class="s">'features_parking'</span><span class="p">,</span> <span class="s">'features_property'</span><span class="p">,</span> <span class="s">'features_property_access'</span><span class="p">,</span> <span class="s">'features_roof'</span><span class="p">,</span> <span class="s">'features_sewer'</span><span class="p">,</span> <span class="s">'features_taxes'</span><span class="p">,</span> <span class="s">'features_water'</span><span class="p">,</span> <span class="s">'features_utilities'</span><span class="p">]</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>The plan was to engineer new features from the list of feature descriptions. For example, some homes were marked having a “Split Bedroom Plan”, “Oversized Master”, or “Roommate Floor Plan”. I engineered individual binary values to handle these instances. And as a result,  400+ new features were created for future models.</li>
+    </ul>
+
+    <center><img src="https://ferdie.org/images/typora-user-images/image-20210620195350381.png" alt="bath_eng" style="zoom: 150%;" /></center>
+  </li>
+</ol>
+
+<blockquote>
+  <p>The code format made it easy to modularize for other features:</p>
+</blockquote>
+
+<center><img src="https://ferdie.org/images/typora-user-images\image-20210620195621324.png" alt="bed_eng" style="zoom: 100%;" /></center>
+
+<ol>
+  <li>
+    <p><u>Extract listing month and year:</u> there might be seasonal effects that might affect how listing prices vary over time.</p>
+
+    <center><img src="https://ferdie.org/images/typora-user-images\image-20210620195655132.png" alt="list_date_conv" style="zoom: 100%;" /></center>
+  </li>
+  <li>
+    <p><u>Number of Photos:</u> Some listings might be more detailed with extra information like photos, which might affect the overall listing price. This was pulled from  <code class="language-plaintext highlighter-rouge">photo_urls</code></p>
+  </li>
+</ol>
+
+<p><strong>Models:</strong></p>
+
+<ol>
+  <li><u>Decision Tree:</u>  supervised learning method that can be used to predict listing price, maximizes information gain at each node split (which is powerful when inferring which variables could be important for the model).
+    <ul>
+      <li>We see that it initially does fairly well (despite RMSE being fairly high however this might be from house listings in the millions). We see that the score of our model is 84% (score is measured by how accurate the predictions are relative to the actual predictions). However, later we see that there was a flaw with this initial model.</li>
+    </ul>
+  </li>
+</ol>
+
+<center><img src="https://ferdie.org/images/typora-user-images\image-20210620214455616.png" alt="model1" style="zoom: 200%;" /></center>
+
+<ul>
+  <li>
+    <p>However, we see that by looking at the <code class="language-plaintext highlighter-rouge">SHAP values</code> (a metric for feature importance in a given model), that I accidently left in heavily correlated variables: <code class="language-plaintext highlighter-rouge">price_per_sqft</code>, <code class="language-plaintext highlighter-rouge">taxes_in_2020</code>, and <code class="language-plaintext highlighter-rouge">lot_price_per_sqft</code> which is scalars of the other two variables.</p>
+
+    <center><img src="https://ferdie.org/images/typora-user-images\image-20210620215418797.png" alt="shap1" style="zoom: 70%;" /></center>
+  </li>
+  <li>
+    <p>What’s interesting are some of the features that were found to be important for the model like <code class="language-plaintext highlighter-rouge">zip_30349</code>, which is an area located south of Atlanta.</p>
+
+    <center><img src="https://ferdie.org/images/typora-user-images\image-20210620211444442.png" alt="map2" style="zoom: 70%;" /></center>
+  </li>
+  <li>
+    <p>After removing variables that correlate heavily with <code class="language-plaintext highlighter-rouge">list_price</code> and limiting the amount of features used to only 15, we still see a decrease in performance for the model:</p>
+
+    <center><img src="https://ferdie.org/images/typora-user-images\image-20210620214714669.png" alt="score1" style="zoom: 100%;" /></center>
+
+    <ul>
+      <li>
+        <p>Now, the most important features are ones we expected, with some interesting ones now added: <code class="language-plaintext highlighter-rouge">num_photos</code> (number of photos in the listing) , <code class="language-plaintext highlighter-rouge">roof_composition </code>(if the room is made of composition shingles), <code class="language-plaintext highlighter-rouge">has_pantry</code> (if there is a kitchen pantry), <code class="language-plaintext highlighter-rouge">has_gasL</code> if there is a gas log for the fireplace, <code class="language-plaintext highlighter-rouge">has_famR</code> if there is a family room, and <code class="language-plaintext highlighter-rouge">pa_citystr</code> if there is city street parking.</p>
+
+        <center><img src="https://ferdie.org/images/typora-user-images\image-20210620215636746.png" alt="shap2" style="zoom: 100%;" /></center>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<ol>
+  <li><u>Random Forest:</u> ensemble method bootstrapping multiple decisions trees, and as a result is less prone to over-fitting.
+    <ul>
+      <li>Another adjustment made to improve performance was to predict the <code class="language-plaintext highlighter-rouge">log(listing_price)</code> to increase accuracy, as the scale of predictions was way too large, causing increased variance in predictions. We see that this is a steady improvement from the decision tree model despite removing  correlated variables: <code class="language-plaintext highlighter-rouge">taxes_in_2020</code>, <code class="language-plaintext highlighter-rouge">lot_price_per_sqft</code>, and <code class="language-plaintext highlighter-rouge">price_per_sqft</code>.</li>
+      <li>We see that performance greatly increased by using Random Forest, with the score boosting up to <code class="language-plaintext highlighter-rouge">81%</code>.</li>
+    </ul>
+  </li>
+</ol>
+
+<center><img src="https://ferdie.org/images/typora-user-images\image-20210620214952695.png" alt="model2" style="zoom: 180%;" /></center>
+
+<ul>
+  <li>Additionally, the most important features have also changed: with having laundry and having stone kitchen counters as some important features that helped predict listing price.</li>
+</ul>
+
+<center><img src="https://ferdie.org/images/typora-user-images\image-20210620220524468.png" alt="shap3" style="zoom: 75%;" /></center>
+
+<ol>
+  <li>
+    <p><u>XGBoost:</u> uses gradient boosting instead of bootstrapping of decision trees.  One of the best models for maximizing performance.</p>
+
+    <ul>
+      <li>
+        <p>Performance slightly increased through the use of XGBoost.</p>
+
+        <center><img src="https://ferdie.org/images/typora-user-images\image-20210620224214395.png" alt="xgboost" style="zoom: 150%;" /></center>
+      </li>
+      <li>
+        <p>We see that features surrounding region (zipcode and county) are more important now.</p>
+
+        <center><img src="https://ferdie.org/images/typora-user-images\image-20210620224140314.png" alt="shap4" style="zoom: 80%;" /></center>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<blockquote>
+  <p>For the interest of my time and making this a concise report, I won’t be exploring how we can use these models for finding under-priced assests.</p>
+</blockquote>
+
+<h3>Conclusion:</h3>
+
+<p>Despite the lack of data for the model, we were able to make a decent model that can predict the listing price of future houses in Atlanta. By using this model, we can find current listings and check if it should be priced much higher using our model, a potential way for investors to make profit. Additionally, we now have a general understanding of what features are important in determining house value depending on the model.</p>
+
+<h2>What Else To Explore?</h2>
+
+<ul>
+  <li>
+    <p>The features provided in the dataset provides so much different directions that the project can be improved. Since the accuracy of my model completely failed, there are things that I am missing in my assumptions of the Atlanta housing market. The following are suggestions to improve the quality of the model, or potentially take another route when analyzing the data.</p>
+
+    <ol>
+      <li>
+        <p>Research more about Georgia and Atlanta neighborhoods to understand the unique values of certain features so it can be implemented inside the model.</p>
+      </li>
+      <li>
+        <p>The use of clustering to find segmentation in the housing market (whether it would be by K-means), to include as a feature in our model, or to help house seekers find similar homes that they enjoy using these clusters.</p>
+      </li>
+      <li>
+        <p>The use of NLP to readily process the feature <code class="language-plaintext highlighter-rouge">description</code>, whether to engineer new features to improve the model that was not captured by the features that were scraped.</p>
+      </li>
+      <li>
+        <p>Similar to Airbnb, use ML image recognition to identify extra features from photos that could not be captured initially.</p>
+      </li>
+      <li>
+        <p>Scrape and append extra features online that are potential factors to housing prices (like commute times to popular metro hubs or school quality for the nearby district). Since I did not use school district at all, the value of the quality of schools were never captured.</p>
+      </li>
+      <li>
+        <p>Optimize current models based on parameter tuning.</p>
+      </li>
+    </ol>
+  </li>
+</ul>
+
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy; Ferdie Taruc - Reimagining Data
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

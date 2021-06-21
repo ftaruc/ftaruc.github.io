@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>On Missing Values</title>
+  <meta name="description" content="Data Reimagined -- a personal portfolio of Ferdie Taruc.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://ftaruc.github.io/files/test/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="ferdie" href="https://ftaruc.github.io/feed.xml">
+
+  
+
+  
+  <meta property="og:title" content="On Missing Values">
+  <meta property="og:site_name" content="ferdie">
+  <meta property="og:url" content="https://ftaruc.github.io/files/test/">
+  <meta property="og:description" content="Data Reimagined -- a personal portfolio of Ferdie Taruc.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="On Missing Values">
+  <meta name="twitter:description" content="Data Reimagined -- a personal portfolio of Ferdie Taruc.">
+  
+  
+
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">ferdie</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/about/">About</a>
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="https://github.com/ftaruc">GitHub</a>
+      
+        
+        <a class="page-link" href="https://ftaruc.github.io/files/resume.pdf">Resume</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">On Missing Values</h1>
+    
+    <p class="post-meta"><time datetime="2021-01-15T06:10:56+00:00" itemprop="datePublished">Jan 15, 2021</time> •
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/categories/notes/">notes</a>
+      
+    
+      
+    
+  
+
+
+ •
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <center><img src="https://ferdie.org/images/missing_values.png" alt="title" style="zoom: 25%;" /></center>
+
+<p>Missing values – <code class="language-plaintext highlighter-rouge">nan</code>, <code class="language-plaintext highlighter-rouge">n/a</code>, or just empty observations – have a significant effect on conclusions that can be made from data.</p>
+
+<p>They can occur <u>systematically</u>:</p>
+
+<ul>
+  <li>as a <strong>nonresponse</strong>: no information is provided for one or more items or for a whole unit; private subjects like income can push people to not answer</li>
+  <li>from <strong>attrition</strong> in longitudinal studies, where participants drop out before the experiment or test ends</li>
+  <li>on <strong>purpose</strong>  – entities choose not to, or fail to, report critical statistics, such as through governments or private entities; or because the information is not available</li>
+</ul>
+
+<p>Or at <u>random</u>:</p>
+
+<ul>
+  <li><strong>missing completely at random (MCAR)</strong>: if the events that lead to any particular data-item being missing are independent both of observable variables and of unobservable parameters of interest, and occur entirely at random – causes the dataset to be unbiased</li>
+  <li><strong>missing at random (MAR)</strong>: missingness is not random, but where missingness can be fully accounted for by variables where there is complete information – for example, knowing that some employee forgot to input certain observations on a certain day for a study on accident (reason has to be unrelated to the variable)</li>
+  <li><strong>missing not at random (MNAR):</strong> neither MCAR or MAR, one example is if users fail to fill in a depression survey <em>because</em> of their level of depression</li>
+</ul>
+
+<!-- more -->
+
+<h4><strong>What are some known Techniques?</strong></h4>
+
+<p>During my formal education, there was no section on the <code class="language-plaintext highlighter-rouge">why</code> we use certain techniques to handle missing values – especially when it is such a sensitive part in the data pipeline. In my classes, they tell you to do either one of two things:</p>
+
+<ol>
+  <li><strong>Impute</strong> a value based on its distribution (median if the data is skewed) or fill it with the mean.</li>
+  <li><strong>Drop missing values</strong> otherwise (especially when there’s only few missing points)</li>
+</ol>
+
+<p>Generally they are both easy to do, but problems tend to arise:</p>
+
+<ol>
+  <li>Imputing with the mean or median tends to be not as accurate to the true value that is missing, which is only true if the data is MCAR. It also reduces the variance of the imputed variable and fails to preserve the relationship between the imputed variable and other variables in the dataset.</li>
+  <li>Dropping missing values might also create more biased subsets of the true dataset if these values are missing because of a MAR or MNAR process.</li>
+</ol>
+
+<p>Instead, we should ask:</p>
+
+<blockquote>
+  <p><strong>why</strong> are the values missing? Is there a systematic reason (like it’s from a MAR/MNAR process)?</p>
+</blockquote>
+
+<p>Using different models for more accurate imputation, you can use the following:</p>
+
+<ul>
+  <li>KNN  (such as 1NN) - <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959387/">article</a> describing evaluation of different NN models</li>
+  <li><a href="https://en.wikipedia.org/wiki/Predictive_mean_matching">predictive-mean-matching</a></li>
+  <li><a href="https://cran.r-project.org/web/packages/miceRanger/vignettes/miceAlgorithm.html">MICE</a> as described more below:</li>
+</ul>
+
+<h4><strong>Explaining MICE:</strong></h4>
+
+<p><img src="https://ferdie.org/images/MICE.jpg" alt="MICE-explained" /></p>
+
+<p>The procedure imputes missing data through an iterative series of predictive models. The model in practice is through <code class="language-plaintext highlighter-rouge">regression</code>.</p>
+
+<p><u>Step 1:</u> A simple imputation, such as imputing the mean, is performed for every missing value in the dataset. These mean imputations can be thought of as <code class="language-plaintext highlighter-rouge">place-holders</code>.</p>
+
+<p><u>Step 2:</u> The <code class="language-plaintext highlighter-rouge">place-holder</code> mean imputations for one variable <code class="language-plaintext highlighter-rouge">var</code> are set back to missing.</p>
+
+<p><u>Step 3:</u> The observed values from the variable <code class="language-plaintext highlighter-rouge">var</code> in Step 2 are regressed on the other variables in the imputation model, which may or may not consist of all of the variables in the dataset. In other words, <code class="language-plaintext highlighter-rouge">var</code> is the dependent variable in a regression model and all the other variables are independent variables in the regression model. These regression models operate under the same assumptions that one would make when performing linear, logistic, or Poison regression models outside of the context of imputing missing data.</p>
+
+<p><u>Step 4:</u> The missing values for <code class="language-plaintext highlighter-rouge">var</code> are then replaced with predictions (imputations) from the regression model. When <code class="language-plaintext highlighter-rouge">var</code> is subsequently used as an independent variable in the regression models for other variables, both the observed and these imputed values will be used.</p>
+
+<p><u>Step 5:</u> Steps 2–4 are then repeated for each variable that has missing data. The cycling through each of the variables constitutes one iteration or <code class="language-plaintext highlighter-rouge">cycle</code>. At the end of one cycle all of the missing values have been replaced with predictions from regressions that reflect the relationships observed in the data.</p>
+
+<p><u>Step 6:</u> Steps 2–4 are repeated for a number of cycles, with the imputations being updated at each cycle.</p>
+
+<p>-</p>
+
+<p>One way to evaluate different techniques is to use a known column that has no missing values. Then, you are able to drop certain observations from this column, creating “<em>fake</em> missing values” that will be imputed by these techniques. Then, compare the distortion, precision, and errors of these known values to test accuracy.</p>
+
+<p>Although some models do not handle these types of imputation well – such as when working with timeseries which can create large assumptions that will affect the accuracy of the model. However, when working with quick predictive models like OLS, sometimes imputation with the mean might do the trick.</p>
+
+<p>Having a holistic understanding on why we impute can help you decide whether to choose a complex method or not to handle missing values.</p>
+
+<p>–</p>
+
+<p>For more resources, I suggest looking through these two articles:</p>
+
+<ol>
+  <li><a href="https://en.wikipedia.org/wiki/Missing_data">Wikipedia (missing data)</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Imputation_%28statistics%29">Wikipedia (imputation in statistics)</a></li>
+</ol>
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy; Ferdie Taruc - Reimagining Data
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

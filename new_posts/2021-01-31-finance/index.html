@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Understanding the Stock Market</title>
+  <meta name="description" content="Data Reimagined -- a personal portfolio of Ferdie Taruc.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://ftaruc.github.io/new_posts/2021-01-31-finance/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="ferdie" href="https://ftaruc.github.io/feed.xml">
+
+  
+
+  
+  <meta property="og:title" content="Understanding the Stock Market">
+  <meta property="og:site_name" content="ferdie">
+  <meta property="og:url" content="https://ftaruc.github.io/new_posts/2021-01-31-finance/">
+  <meta property="og:description" content="Data Reimagined -- a personal portfolio of Ferdie Taruc.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="Understanding the Stock Market">
+  <meta name="twitter:description" content="Data Reimagined -- a personal portfolio of Ferdie Taruc.">
+  
+  
+
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">ferdie</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/about/">About</a>
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="https://github.com/ftaruc">GitHub</a>
+      
+        
+        <a class="page-link" href="https://ftaruc.github.io/files/resume.pdf">Resume</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Understanding the Stock Market</h1>
+    
+    <p class="post-meta"><time datetime="2021-01-31T06:10:56+00:00" itemprop="datePublished">Jan 31, 2021</time> •
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/categories/notes/">notes</a>
+      
+    
+      
+    
+  
+
+
+ •
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Most traditional (i.e. boomer) investors usually try to make money by going long - i.e. “buy low and sell high”; this is when you buy a stock thinking it will go up in the future (bullish). Shorting is the opposite of this, you “sell high and buy low”, thinking the stock will go down in the future (bearish). This is usually done through the broker, where the prospective short seller would “borrow” the shares from them, and they would need to pay back these shares in some future date by “covering their shorts” - or buying back the exact same quantity of shares they owe the broker.</p>
+
+<p><strong>Short Squeezes</strong></p>
+
+<p>So when does a short seller need to cover their shorts? Well, either when a) The short seller wants to, either to take profit or to stop a loss, b) Their broker forces them to through a margin call, or c) The broker forces them to as the broker has recalled their loan, usually for a hard to borrow stock - they get “bought in”. Today, we’ll focus on C) because this is how short squeezes happen.</p>
+
+<!-- more -->
+
+<p><strong>What are Stock Options</strong></p>
+
+<p>A stock option is a contract between the writer and whoever holds it that gives the option holder the right to buy (call option) or sell (put option) 100 shares of the underlying stock on or before the expiry date at a specified strike price. So for example, buying a GME 1/29 $1000c gives whoever the holder of this contract is the option to buy from the writer of this contract 100 shares of GME at $1000 / share on or before 1/29. Obviously if GME is lower than $1000 before that date, the holder would be an idiot to exercise this option to buy GME shares for more than their current market value, so they expire worthless.</p>
+
+<p>This effectively provides the option holder an immense amount of leverage, and provides the opportunity for them to 10x or even 100x their original investment if the underlying asset moves the right way - for example because a subreddit declares war on a hedge fund and pumps up a stock to make them go bankrupt, while limiting their losses to the cost of the option. The option writer will in return receive a premium for the option, potentially risking an infinite amount of money, but with a high likelihood of making a small profit. These writers would either be</p>
+
+<ol>
+  <li>Theta gang - who are looking to generate a tidy income source from those option premiums and pray that the stock doesn’t move in the wrong direction too much</li>
+  <li>A market maker - who writes the contract when they see an arbitrage opportunity between the market value of an option and the theoretical value of it, and hedging their contract they wrote by buying / shorting the underlying assets so they effectively don’t actually take a position in the market.</li>
+</ol>
+
+<p>We’ll go over how 2) works and how this mechanism can be used as a financial nuclear bomb, but first you need to learn some greek.</p>
+
+<p><strong>The Greeks</strong></p>
+
+<p>The greeks in finance is a set of factors that can affect the price of a stock option / group of options</p>
+
+<p><u>Delta</u> - Change of the option price as the stock price changes</p>
+
+<p><u>Gamma</u> - Change in Delta as the stock price changes</p>
+
+<p><u>Vega</u> - Change in the option price as volatility of the stock changes</p>
+
+<p><u>Theta</u> - The decay in the option price as the expiration date gets nearer</p>
+
+<p><u>Rho</u> - Change of the option price as the interest rate changes; Most people ignore this</p>
+
+<p>Looking at the greeks of the gambling tickets you buy is very useful to analyzing the ways you can make or lose money on them. Think TSLA will go up a modest amount? Buy a high-Delta call. Think GME is going to 🚀🚀🚀 1000% more? Look for a high Gamma call so your Delta gains accelerate as GME 🚀🌕. Do you feel like a vampire and want to have a steady income source from degenerate <a href="https://www.reddit.com/r/wallstreetbet">r/wallstreetbet</a> gamblers on a stock you think will go flat (relative to historical volatility) over the next few months? Join theta gang and sell a high-Theta and high-Vega option!</p>
+
+<p><strong>Market Makers</strong></p>
+
+<p>The Black-Scholes model is a fancy mathematical model that describes a “perfect price” (a lot of caveats here) for a stock option. This is done by showing how every option written can theoretically be perfectly hedged by a series of purchases or short sells on the underlying stock. This means that theoretically, if there is a large gap between the theoretical price from Black Scholes and the actual price for an option, there is an “arbitrage” opportunity - this is where market makers come in.</p>
+
+<p>Market makers are companies that provide liquidity to a market by offering to be counterparty to trades. This is especially useful in stock options, where a single ticker can have thousands of options, and there might be someone who wants to buy a GME 1/29 $1000c but no one is actually actively selling it. However, this option might be listed anyways and Citadel will sell you the call if anyone tries to buy it and then immediately hedge it. In fact, when you buy an option chances are you’re not actually buying it from its previous owner selling an option they already own, but from a market maker like Citadel (who is responsible for over 99% of all options volume in 3000 stocks).</p>
+
+<p>So what happens when someone buys an option from a market maker? Since the market maker typically can’t (and probably don’t want to) take a position, meaning taking a directional bet if a stock goes up or down, they’ll immediately hedge the option they just conjured out of thin air by buying or shorting the equivalent number of shares such that the Delta of those shares is the same as the Delta of the option they wrote to remain Delta-neutral, so if the stock goes up or down their position value doesn’t change - this is called <strong>Delta hedging</strong>. Furthermore, as the stock price moves up (calls) or down (puts), they’ll need to buy or sell even more of those shares to remain Delta neutral since the Delta will change due to the option’s Gamma - this is called <strong>Gamma hedging</strong>.</p>
+
+<h3>Putting It All Together - How options can be used as weapons of mass destruction against short sellers</h3>
+
+<p>Now we have the tools to understand how these two financial concepts put together can make billion-dollar hedge funds go bankrupt. Through Delta and Gamma hedging of market makers, buyers can have the effect of buying shares dozens of times the value they actually spent buying their option; a XYZ 4/20 690c can cost only $100 in premiums but causes the market maker to buy $2000 in the underlying stock to hedge against it. If you get enough retail investors to do this, they’ll have the impact of billion-dollar whales on the market despite their small stimulus-check-funded portfolios.</p>
+
+<p>Now, you do this on a stock that is heavily shorted, and with very little institutions actually holding real shares of these - making it harder for brokers to find shares to borrow, and you have yourself a weapon of mass financial destruction capable of making billions of Melvin’s money disappear in a single day and potentially have GME 🚀🚀🚀 to a trillion dollar market cap.</p>
+
+<p>–</p>
+
+<p>For more resources:</p>
+
+<ol>
+  <li><a href="https://www.reddit.com/r/wallstreetbets/comments/l5ygab/dddd_how_rwallstreetbets_created_a_financial/">WSB</a></li>
+</ol>
+
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy; Ferdie Taruc - Reimagining Data
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

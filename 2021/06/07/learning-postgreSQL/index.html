@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Journey through PostgreSQL</title>
+  <meta name="description" content="This is a summary of notes for later reference as I learn the foundations of PostgreSQL (later abbreviated as Postgres), an open-source relational database system that supports both SQL and JSON querying. I thought it was fascinating that it started in 1986 in Berkeley’s CS department, my alma mater.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://ftaruc.github.io/2021/06/07/learning-postgreSQL/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="ferdie" href="https://ftaruc.github.io/feed.xml">
+
+  
+
+  
+  <meta property="og:title" content="Journey through PostgreSQL">
+  <meta property="og:site_name" content="ferdie">
+  <meta property="og:url" content="https://ftaruc.github.io/2021/06/07/learning-postgreSQL/">
+  <meta property="og:description" content="This is a summary of notes for later reference as I learn the foundations of PostgreSQL (later abbreviated as Postgres), an open-source relational database system that supports both SQL and JSON querying. I thought it was fascinating that it started in 1986 in Berkeley’s CS department, my alma mater.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="Journey through PostgreSQL">
+  <meta name="twitter:description" content="This is a summary of notes for later reference as I learn the foundations of PostgreSQL (later abbreviated as Postgres), an open-source relational database system that supports both SQL and JSON qu...">
+  
+  
+
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">ferdie</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/about/">About</a>
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="https://github.com/ftaruc">GitHub</a>
+      
+        
+        <a class="page-link" href="https://ftaruc.github.io/files/resume.pdf">Resume</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Journey through PostgreSQL</h1>
+    
+    <p class="post-meta"><time datetime="2021-06-07T06:10:56+00:00" itemprop="datePublished">Jun 7, 2021</time> •
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/categories/notes/">notes</a>
+      
+    
+      
+    
+  
+
+
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <center><img src="https://ferdie.org/images/postgresql.png" alt="main_photo" style="zoom: 80%;" /></center>
+
+<p>This is a summary of notes for later reference as I learn the foundations of PostgreSQL (later abbreviated as Postgres), an open-source relational database system that supports both SQL and JSON querying.</p>
+
+<blockquote>
+  <p>I thought it was fascinating that it started in 1986 in <a href="https://cs.berkeley.edu/">Berkeley’s CS department</a>, my alma mater.</p>
+</blockquote>
+
+<!-- more -->
+
+<p>–</p>
+
+<p><strong>Background</strong></p>
+
+<ul>
+  <li>
+    <p>supports many languages (Python, Java, C#, C/C+, Ruby, JavaScript (Node.js). Perl, Go, Tcl)</p>
+  </li>
+  <li>
+    <p>not just relational, but object-relational and passes <a href="https://en.wikipedia.org/wiki/ACID">ACID</a> and is transactional as well.</p>
+
+    <ul>
+      <li>leads to support for user-defined objects and their behaviors including data types, functions, operators, domains and indexes; one example is the use of arrays of values</li>
+      <li>makes it extremely flexible and robust. Complex data structures can be created, stored and retrieved.</li>
+      <li>Standard RDBMS’ don’t support nested and composite structures which this does</li>
+    </ul>
+  </li>
+  <li>
+    <p>supports many data-types:</p>
+
+    <ul>
+      <li>
+        <p>uuid, monetary, enumerated, geometric, binary, network address, bit string, text search, xml, json, array, composite and range types</p>
+      </li>
+      <li>
+        <p>as well as some internal types for object identification and log location</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">PATH</code> data: A path consists of multiple points in a sequence and can be open (the beginning and end points are not connected) or closed (the beginning and end points are connected); widely important for storing geometric data</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">CREATE TYPE</code> command to create new data types as composite, enumerated, range and base</p>
+
+        <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">-- create a new composite type called "wine"</span>
+<span class="k">CREATE</span> <span class="k">TYPE</span> <span class="n">wine</span> <span class="k">AS</span> <span class="p">(</span>  
+     <span class="n">wine_vineyard</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+     <span class="n">wine_type</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+     <span class="n">wine_year</span> <span class="nb">int</span>
+<span class="p">);</span>
+    
+ <span class="c1">-- create a table that uses the composite type "wine"</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">pairings</span> <span class="p">(</span>  
+     <span class="n">menu_entree</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+     <span class="n">wine_pairing</span> <span class="n">wine</span>
+<span class="p">);</span>
+    
+ <span class="c1">-- insert data into the table using the ROW expression</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">pairings</span> <span class="k">VALUES</span>  
+     <span class="p">(</span><span class="s1">'Lobster Tail'</span><span class="p">,</span><span class="k">ROW</span><span class="p">(</span><span class="s1">'Stag</span><span class="se">''</span><span class="s1">s Leap'</span><span class="p">,</span><span class="s1">'Chardonnay'</span><span class="p">,</span> <span class="mi">2012</span><span class="p">)),</span>
+     <span class="p">(</span><span class="s1">'Elk Medallions'</span><span class="p">,</span><span class="k">ROW</span><span class="p">(</span><span class="s1">'Rombauer'</span><span class="p">,</span><span class="s1">'Cabernet Sauvignon'</span><span class="p">,</span><span class="mi">2012</span><span class="p">));</span>
+    
+ <span class="cm">/*
+   query from the table using the table column name
+   (use parentheses followed by a period
+   then the name of the field from the composite type)
+ */</span>
+<span class="k">SELECT</span> <span class="p">(</span><span class="n">wine_pairing</span><span class="p">).</span><span class="n">wine_vineyard</span><span class="p">,</span> <span class="p">(</span><span class="n">wine_pairing</span><span class="p">).</span><span class="n">wine_type</span>  
+<span class="k">FROM</span> <span class="n">pairings</span>  
+<span class="k">WHERE</span> <span class="n">menu_entree</span> <span class="o">=</span> <span class="s1">'Elk Medallions'</span><span class="p">;</span>  
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Postgres can handle a lot of data. The current posted size limits are listed below:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th><strong>Limit</strong></th>
+          <th><strong>Value</strong></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Maximum Database Size</td>
+          <td>Unlimited</td>
+        </tr>
+        <tr>
+          <td>Maximum Table Size</td>
+          <td>32 TB</td>
+        </tr>
+        <tr>
+          <td>Maximum Row Size</td>
+          <td>1.6 TB</td>
+        </tr>
+        <tr>
+          <td>Maximum Field Size</td>
+          <td>1 GB</td>
+        </tr>
+        <tr>
+          <td>Maximum Rows per Table</td>
+          <td>Unlimited</td>
+        </tr>
+        <tr>
+          <td>Maximum Columns per Table</td>
+          <td>250 - 1600 depending on column types</td>
+        </tr>
+        <tr>
+          <td>Maximum Indexes per Table</td>
+          <td>Unlimited</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p><a href="https://www.compose.com/articles/what-postgresql-has-over-other-open-source-sql-databases-part-ii/">Other reasons that PostgreSQL &gt; other databases</a></p>
+  </li>
+</ul>
+
+<p>–</p>
+
+<p><strong>Loading a Database:</strong></p>
+
+<p>Installing Postgres comes with:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">psql</code>: terminal-based front-end to connect to Postgres database server</li>
+  <li><code class="language-plaintext highlighter-rouge">pgAdmin</code>: web-based front-end to ^</li>
+</ol>
+
+<p><strong>Operators</strong></p>
+
+<blockquote>
+  <p>The majority of operators are omitted, as they can be found in my SQL notes on my blog; no need to be redudant!</p>
+</blockquote>
+
+<ol>
+  <li>
+    <p>Concotaenation operator <code class="language-plaintext highlighter-rouge">||</code>:</p>
+
+    <pre><code class="language-SQL">SELECT 
+   first_name || ' ' || last_name,
+   email
+FROM 
+   customer;
+</code></pre>
+  </li>
+  <li>
+    <p>LENGTH(var) to determine length</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">DISTINCT ON</code>: sorts results by var and then for each group of var, keeps first row of the returned result set:</p>
+
+    <pre><code class="language-SQL">SELECT
+	DISTINCT ON (bcolor) bcolor,
+	fcolor
+FROM
+	distinct_demo 
+ORDER BY
+	bcolor,
+	fcolor;
+</code></pre>
+  </li>
+</ol>
+
+<p><img src="https://www.postgresqltutorial.com/wp-content/uploads/2020/07/PostgreSQL-Distinct-select-distinct-on.png" alt="PostgreSQL Distinct - select distinct on" /></p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">LIMIT var OFFSET row_to_skip</code>: can skip the first x rows before limiting</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">FETCH</code> which is basically LIMIT, but was a SQL-standard (LIMIT not compatible to some databases which follows standard SQL)</p>
+
+    <blockquote>
+      <p>the following is the syntax</p>
+    </blockquote>
+  </li>
+</ol>
+
+<pre><code class="language-SQL">OFFSET start { ROW | ROWS }
+FETCH { FIRST | NEXT } [ row_count ] { ROW | ROWS } ONLY
+
+#The start is an integer that must be zero or positive. By default, it is zero if the OFFSET clause is not specified. In case the start is greater than the number of rows in the result set, no rows are returned;
+
+#The row_count is 1 or greater. By default, the default value of row_count is 1 if you do not specify it explicitly.
+
+ex:
+SELECT
+    film_id,
+    title
+FROM
+    film
+ORDER BY
+    title 
+OFFSET 5 ROWS 
+FETCH FIRST 5 ROW ONLY; 
+</code></pre>
+
+<ul>
+  <li>Joins:</li>
+</ul>
+
+<p><img src="https://www.postgresqltutorial.com/wp-content/uploads/2018/12/PostgreSQL-Joins.png" alt="PostgreSQL Joins" /></p>
+
+<ul>
+  <li>
+    <p>natural join ^ is basically an implicit join for those with same column names in joined tables</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">&lt;&gt;</code> is basically !=</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">EXTRACT</code> basically extracts certain time variable from a date</p>
+
+    <ul>
+      <li>example: <code class="language-plaintext highlighter-rouge">EXTRACT (YEAR FROM rental_date)</code></li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">DATE</code> converts timestamps into dates that can be used</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">INTERSECT</code> operator returns any rows that are available in both result sets (appends both sets together, but checks for the intersection of two sets)</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">UNION</code> appends both together without checking for same rows; removes duplicate rows (keeps through <code class="language-plaintext highlighter-rouge">UNION ALL</code>)</li>
+      <li>while <code class="language-plaintext highlighter-rouge">EXCEPT</code> removes all of B and its intersection if A except B</li>
+    </ul>
+
+    <pre><code class="language-SQL">SELECT select_list
+FROM A
+INTERSECT
+SELECT select_list
+FROM B;
+</code></pre>
+  </li>
+  <li>
+    <p>Grouping sets are basically all subsets of the data that can result when you group by a variable:</p>
+
+    <pre><code class="language-SQL">SELECT
+    c1,
+    c2,
+    aggregate_function(c3)
+FROM
+    table_name
+GROUP BY
+    GROUPING SETS (
+        (c1, c2),
+        (c1),
+        (c2),
+        ()
+);
+  
+example:
+  
+SELECT
+    brand,
+    segment,
+    SUM (quantity)
+FROM
+    sales
+GROUP BY
+    GROUPING SETS (
+        (brand, segment),
+        (brand),
+        (segment),
+        ()
+    );
+</code></pre>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">GROUPING()</code> function returns bit 0 if the argument is a member of the current grouping set and 1 otherwise.</li>
+      <li><code class="language-plaintext highlighter-rouge">CUBE</code> simplfiies grouping sets by including all combinations of variables as a grouping set, if there are n columns specified, then there is 2^n combinations</li>
+      <li><code class="language-plaintext highlighter-rouge">ROLLUP</code> generates grouping sets based on hiearchy, based on the order of variables selected; useful for aggregating data by year,month, and date</li>
+    </ul>
+
+    <p><img src="https://www.postgresqltutorial.com/wp-content/uploads/2020/07/PostgreSQL-Grouping-Sets-Using-UNION-ALL.png" alt="img" /></p>
+  </li>
+  <li>
+    <p>A subquery can be an input of the <code class="language-plaintext highlighter-rouge">EXISTS</code> operator. If the subquery returns any row, the <code class="language-plaintext highlighter-rouge">EXISTS</code> operator returns true. If the subquery returns no row, the result of <code class="language-plaintext highlighter-rouge">EXISTS</code> operator is false</p>
+
+    <ul>
+      <li>think of it as a boolean list that acts like a conditional to filter out rows</li>
+      <li>If the subquery returns <code class="language-plaintext highlighter-rouge">NULL</code>, <code class="language-plaintext highlighter-rouge">EXISTS</code> returns true</li>
+    </ul>
+
+    <pre><code class="language-SQL">EXISTS (SELECT 1 FROM tbl WHERE condition);
+</code></pre>
+  </li>
+  <li>
+    <p>The PostgreSQL <code class="language-plaintext highlighter-rouge">ANY</code> operator compares a value to a set of values returned by a subquery.</p>
+
+    <ul>
+      <li>can also use <code class="language-plaintext highlighter-rouge">SOME</code> as a synonym</li>
+      <li>must be comparing only one column from subquery</li>
+      <li><code class="language-plaintext highlighter-rouge">= ANY </code> operator is equal to <code class="language-plaintext highlighter-rouge">IN</code></li>
+      <li>but <code class="language-plaintext highlighter-rouge">x &lt;&gt; ANY(abc)</code> is equals to <code class="language-plaintext highlighter-rouge">x &lt;&gt; a OR &lt;&gt; b OR x &lt;&gt; c</code>; not dthe same as <code class="language-plaintext highlighter-rouge">NOT IN</code></li>
+      <li>the use of <code class="language-plaintext highlighter-rouge">ALL</code> means that the conditon must be met for ALL conditions in the range, much stricter</li>
+    </ul>
+  </li>
+  <li>
+    <p>Recursive CTE’s:</p>
+
+    <pre><code class="language-SQL">WITH RECURSIVE subordinates AS (
+	SELECT
+		employee_id,
+		manager_id,
+		full_name
+	FROM
+		employees
+	WHERE
+		employee_id = 2
+	UNION
+  #recursive part to get suboordinates after #finding who manager 
+ #repeats for 3 iterations as it first starts at manager id =2, then filters out based on the different employee ids of the suboordinates
+		SELECT
+			e.employee_id,
+			e.manager_id,
+			e.full_name
+		FROM
+			employees e
+		INNER JOIN subordinates s ON s.employee_id = e.manager_id
+) SELECT
+	*
+FROM
+	subordinates;
+  
+</code></pre>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">INSERT</code>:</p>
+
+    <ul>
+      <li>
+        <p>INSERT INTO table_name(cols) VALUES (values)</p>
+      </li>
+      <li>
+        <p>can be multiple columns with multiple value lists:</p>
+      </li>
+      <li>
+        <pre><code class="language-SQL">INSERT INTO table_name (col_list)
+VALUES
+	(val_list1),
+	(val_list_n)
+RETURNING * | output_expression;
+</code></pre>
+      </li>
+      <li>
+        <p>returns <code class="language-plaintext highlighter-rouge">INSERT oid count</code> which oid is a object identifier as confirmation that it was successful</p>
+      </li>
+      <li>
+        <p>add <code class="language-plaintext highlighter-rouge">RETURNING</code> keyword, if you want to return all of the cols added of row as an output after adding:</p>
+
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">RETURNING output_expression AS output_name</code> at the end of the experssion</li>
+        </ul>
+      </li>
+      <li>
+        <p>omitting required columns will issue an error; will use default values for optional columns</p>
+      </li>
+      <li>optional columns contain <code class="language-plaintext highlighter-rouge">NOT NULL</code> when table is created, if doesn’t exist, then will default as NULL</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">UPDATE</code>: modifies existing data</p>
+
+    <ul>
+      <li>
+        <p>returns <code class="language-plaintext highlighter-rouge">UPDATE count</code> for the amount of updated rows</p>
+      </li>
+      <li>
+        <pre><code class="language-SQL">UPDATE table_name
+SET col1 = val1,
+		col2 = val2,
+	...
+WHERE condition
+RETURNING *| output_expressiona as output_name
+</code></pre>
+      </li>
+      <li>
+        <p>You can also merge this syntax to join two tables that has been updated to merge:</p>
+
+        <pre><code class="language-SQL">UPDATE t1
+SET t1.c1 = new_val
+FROM t2
+WHERE t1.c2 = t2.c2
+</code></pre>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">DELETE</code>: removes one or miltiple rows</p>
+
+    <pre><code class="language-SQL">DELETE from table_name
+WHERE condition
+RETURNING (select_list | *);
+</code></pre>
+
+    <ul>
+      <li>
+        <p>does not modify structure of the table, only removes data; use <code class="language-plaintext highlighter-rouge">ALTER TABLE</code> to alter structure</p>
+      </li>
+      <li>
+        <p>can use <code class="language-plaintext highlighter-rouge">DELETE FROM table</code> to delete all rows of a table</p>
+      </li>
+      <li>
+        <p>can do a similar thing to update join, with the <code class="language-plaintext highlighter-rouge">USING</code> operator:</p>
+
+        <pre><code class="language-SQL">DELETE from table_name1
+USING table_expression #can also be a table 
+WHERE condition #or use subquery
+RETURNING returning_columns;
+</code></pre>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">USING</code> may not be avaialble, thus use subquery in<code class="language-plaintext highlighter-rouge"> WHERE</code> clause</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">UPSERT</code> also known as merge, if you insert something and it already exists, it will update the row (else insert it); update + insert</p>
+
+    <ul>
+      <li>
+        <pre><code class="language-SQL">INSERT INTO tablename(col_list)
+VALUES(value_list)
+ON CONFLICT target action;
+</code></pre>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">ON CONFLICT target action</code> allows this merge if there is conflict (only exists in Postgres 9 and up)</p>
+      </li>
+      <li>
+        <p>where <code class="language-plaintext highlighter-rouge">target</code> is a col_name, <code class="language-plaintext highlighter-rouge">ON CONSTRAINT constraint_name</code>, <code class="language-plaintext highlighter-rouge">WHERE predicate</code></p>
+      </li>
+      <li>
+        <p>and action is <code class="language-plaintext highlighter-rouge">DO NOTHING</code> or <code class="language-plaintext highlighter-rouge">DO UPDATE SET col_1 = val_1 ... WHERE condition</code></p>
+
+        <ul>
+          <li>either update or do nothing if exists; refer to <code class="language-plaintext highlighter-rouge">EXCLUDED</code> when doing conditions on conflicted</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Creating a new table, usually does the following:</p>
+
+    <ul>
+      <li>
+        <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">DROP</span> <span class="k">TABLE</span> <span class="n">IF</span> <span class="k">EXISTS</span> <span class="n">tablename</span>
+    
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="k">table_name</span> <span class="p">(</span>
+				<span class="n">var1</span> <span class="nb">SERIAL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> 
+				<span class="n">var2</span> <span class="n">VAR_ATTR2</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+				<span class="n">etc</span><span class="p">...</span>
+<span class="p">);</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">SERIAL</code> = no need to supply a value, generates sequential number</p>
+      </li>
+      <li>
+        <p>USE <code class="language-plaintext highlighter-rouge">CREATE TEMPORARY TABLE</code> which drops it at the end of the session or a transaction</p>
+      </li>
+      <li>
+        <p>Use <code class="language-plaintext highlighter-rouge">CREATE TABLE IF NOT EXISTS table_name(cols)</code> to ensure it’s uniquea</p>
+      </li>
+      <li>
+        <p>can use <code class="language-plaintext highlighter-rouge">CREATE TABLE table_name (LIKE other_tablename)</code> to copy format of other table cols</p>
+      </li>
+      <li>
+        <p>Some column constraints:</p>
+
+        <ul>
+          <li>NOT NULL - ensures that the values cannot be NULL</li>
+          <li>UNIQUE - ensures values in a column are unique</li>
+          <li>PRIMARY KEY - unique identifier for rows (only one prim key)</li>
+          <li>CHECK - ensures that data satisfies a boolean expression</li>
+          <li>FOREIGN KEY - can have many, refers to other tables</li>
+        </ul>
+      </li>
+      <li>
+        <p>to escape <code class="language-plaintext highlighter-rouge">O'Riley Media'</code>, you need to use an additional signle quote (‘) to escape it:</p>
+
+        <ul>
+          <li>
+            <pre><code class="language-SQL">INSERT INTO links(url, name)
+VALUES('http:///www.oreiionslly.com', 'O''Reilly Media'); #notice the extra '
+</code></pre>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">SELECT INTO</code> creates new table based on select, type of subquery</p>
+
+        <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">select_list</span>
+<span class="k">INTO</span> <span class="p">[</span><span class="k">TEMPORARY</span> <span class="o">|</span> <span class="k">TEMP</span> <span class="o">|</span> <span class="n">UNLOGGED</span><span class="p">]</span> <span class="p">[</span><span class="k">TABLE</span><span class="p">]</span> <span class="n">new_table_name</span>
+<span class="k">FROM</span> <span class="k">table_name</span>
+<span class="k">WHERE</span> <span class="n">search_cond</span><span class="p">;</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">CREATE DOMAIN</code> create new data type constraints for future use, simplifies code:</p>
+
+    <pre><code class="language-SQL">CREATE DOMAIN name AS
+	DOMAIN_EXPRESSION;
+  	
+ex:
+CREATE DOMAIN contact_name AS
+	VARCHAR NOT NULL CHECK (value !~ \'s') #contact_name cannot include spaces
+  	
+#then you reference this new constraint when creating a new table
+</code></pre>
+
+    <ul>
+      <li>use <code class="language-plaintext highlighter-rouge">ALTER DOMAIN</code> or <code class="language-plaintext highlighter-rouge">DROP DOMAIN</code> to change or remove domains</li>
+      <li>view all domains in \dD</li>
+    </ul>
+  </li>
+  <li>
+    <p>You can also create functions using new datatypes: (\dT to view all in psql)</p>
+
+    <pre><code class="language-SQL">CREATE TYPE film_summary AS (
+    film_id INT,
+    title VARCHAR,
+    release_year SMALLINT
+); 
+  
+CREATE OR REPLACE FUNCTION get_film_summary (f_id INT) 
+    RETURNS film_summary AS 
+$$ 
+SELECT
+    film_id,
+    title,
+    release_year
+FROM
+    film
+WHERE
+    film_id = f_id ; 
+$$ 
+LANGUAGE SQL;
+  
+SELECT * FROM get_film_summary (40);
+  
+</code></pre>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Coalesce</code> helps choose the first non-null argument when trying to visualize something; ignores null arguments just in case they do not exist</p>
+
+    <ul>
+      <li>Takes as much arguments; same performance as using <code class="language-plaintext highlighter-rouge">CASE</code> just in shorter form</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">EXPLAIN</code> statement returns the execution plan which the planner generates for a given statement:</p>
+
+    <ul>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">EXPLAIN [ options] sql_statement</code></p>
+      </li>
+      <li>
+        <p>options: ( https://www.postgresqltutorial.com/postgresql-explain/)</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ANALYZE [ boolean ]
+VERBOSE [ boolean ]
+COSTS [ boolean ]
+BUFFERS [ boolean ]
+TIMING [ boolean ]  
+SUMMARY [ boolean ]
+FORMAT { TEXT | XML | JSON | YAML }
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>wrap Analyze with: <code class="language-plaintext highlighter-rouge">BEGIN;    EXPLAIN ANALYZE sql_statement; ROLLBACK;</code> so data isn’t affected</p>
+
+        <ul>
+          <li>analyze shows runtime and execution statistics</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Random facts</strong></p>
+
+<ul>
+  <li>
+    <p>Order-by sorts by <code class="language-plaintext highlighter-rouge">ASC</code> default</p>
+  </li>
+  <li>
+    <p>specify order of NULL with <code class="language-plaintext highlighter-rouge">NULLS FIRST</code> or <code class="language-plaintext highlighter-rouge">NULLS LAST</code>  with ORDER BY</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">NULLIF</code> function returns a null value if <code class="language-plaintext highlighter-rouge">argument_1</code> equals to <code class="language-plaintext highlighter-rouge">argument_2</code>, otherwise it returns <code class="language-plaintext highlighter-rouge">argument_1</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">CAST (expression AS target_type)</code>or use <code class="language-plaintext highlighter-rouge">expression::type</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">SELECT random();</code> to get a random number between 0 and 1, can define range</p>
+
+    <ul>
+      <li>
+        <p>can also use <code class="language-plaintext highlighter-rouge">SELECT random_between(a,b)</code></p>
+
+        <pre><code class="language-SQL">CREATE OR REPLACE FUNCTION random_between(low INT ,high INT) 
+   RETURNS INT AS
+$$
+BEGIN
+   RETURN floor(random()* (high-low + 1) + low);
+END;
+$$ language 'plpgsql' STRICT;
+    
+</code></pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Transactions</strong></p>
+
+<ul>
+  <li>
+    <p>single unit of work that consists of one or more operations</p>
+  </li>
+  <li>
+    <p>example: bank transfer of money to one account to another</p>
+
+    <ul>
+      <li>must ensure balance is consistent when receiving and sending X money.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Postgres follows ACID (atomic, consistent, isolated, and durable)</p>
+
+    <ul>
+      <li>Atomic: guarantees that transaction completes in all-or-nothing manner</li>
+      <li>Consistent: ensures that changes to data written to database must be avalid and follow predefiend rules</li>
+      <li>Isolation:  determines how transaction integreity is visible to other transactions</li>
+      <li>Durability; makes sure that transactions have been committed will be stored to database permanently (no matter if there’s power shortage, etc.)</li>
+    </ul>
+
+    <ol>
+      <li>Start a transaction:
+        <ul>
+          <li>Use <code class="language-plaintext highlighter-rouge">BEGIN TRANSACTION</code> OR <code class="language-plaintext highlighter-rouge">BEGIN WORK</code> OR <code class="language-plaintext highlighter-rouge">BEGIN</code></li>
+        </ul>
+      </li>
+      <li>Commit a transaction:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">COMMIT WORK</code> or <code class="language-plaintext highlighter-rouge">COMMIT TRANSACTION</code> or <code class="language-plaintext highlighter-rouge">COMMIT</code></li>
+        </ul>
+      </li>
+      <li>Rollback a transaction:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">ROLLBACK WORK</code> or <code class="language-plaintext highlighter-rouge">ROLLBACK TRANSACTION</code> or <code class="language-plaintext highlighter-rouge">ROLLBACK</code></li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ul>
+
+<p><strong>Importing CSV files into Postgres:</strong></p>
+
+<ul>
+  <li>
+    <p>use <code class="language-plaintext highlighter-rouge">COPY</code> statement:</p>
+
+    <pre><code class="language-SQL">COPY table(cols) #order must be same as csv file
+FROM DATAPATH
+DELIMITER ','
+CSV HEADER; #HEADER ensures that there is a HEADER in csv file
+</code></pre>
+
+    <ul>
+      <li>will return COPY X depending how much rows were succesfully imported</li>
+      <li>COPY usually ignores that ther eis a header unless specified</li>
+      <li>file must be read directly by Postgres server and not the client app</li>
+    </ul>
+  </li>
+  <li>
+    <p>Use <code class="language-plaintext highlighter-rouge">pgadmin</code>:</p>
+
+    <ul>
+      <li>refer to guide on postgresqltutorial.com</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Exporting CSV files from Postgres:</strong></p>
+
+<ul>
+  <li>
+    <p>In similar fashion, use <code class="language-plaintext highlighter-rouge">COPY</code>:</p>
+
+    <pre><code class="language-SQL">COPY table_name(cols) TO PATH DELIMITER ',' CSV HEADER;
+</code></pre>
+
+    <ul>
+      <li>don’t include HEADER if you don’t want the header of columns, and don’t specify columns if you want the whole table</li>
+    </ul>
+  </li>
+  <li>
+    <p>Can also write it in <code class="language-plaintext highlighter-rouge">psql</code> using \copy:</p>
+
+    <pre><code class="language-SQL">\copy (SELECT * FROM table_name) to PATH with csv
+</code></pre>
+  </li>
+</ul>
+
+<p><strong>Data Types:</strong></p>
+
+<ol>
+  <li>
+    <p>Character:</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">CHAR(n)</code> - fixed length, with space padded (when it does not fit n)</li>
+      <li><code class="language-plaintext highlighter-rouge">VARCHAR(n)</code> - variable-length, no space padding</li>
+      <li><code class="language-plaintext highlighter-rouge">TEXT</code> - unlimited length, variablelength character string</li>
+    </ul>
+  </li>
+  <li>
+    <p>Boolean/bool: supports T,F, Nulll; flexible in supporting<code class="language-plaintext highlighter-rouge">TRUE</code> and <code class="language-plaintext highlighter-rouge">FALSE</code> values</p>
+
+    <ul>
+      <li>use <code class="language-plaintext highlighter-rouge">SET DEFAULT</code> when altering table or <code class="language-plaintext highlighter-rouge">DEFAULT</code> when creating a table</li>
+    </ul>
+  </li>
+  <li>
+    <p>Integer:</p>
+
+    <ul>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">SMALLINT</code>: 2-byte signed integer (-32,768 to 32,767)</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">INT</code>: 4-byte integer (-2mil to 2,147,483,647)</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">SERIAL</code>: as mentioned before, generates and opulates values in increment</p>
+
+        <ul>
+          <li>
+            <p><code class="language-plaintext highlighter-rouge">UUID</code>: stores unique identifiers that guarantees better uniqueness than <code class="language-plaintext highlighter-rouge">SERIAL</code> (used to hide senisitve data)</p>
+          </li>
+          <li>
+            <p>to use, install <code class="language-plaintext highlighter-rouge">uuid-ossp</code> module using:</p>
+
+            <p><code class="language-plaintext highlighter-rouge"> CREATE EXTENSION IF NOT EXISTS "uuid-ossp"</code>;</p>
+          </li>
+          <li>
+            <p>then generate using <code class="language-plaintext highlighter-rouge">uuid_generate_v1();</code></p>
+
+            <ul>
+              <li>there’s different functions from v1 to v4 (look at documentation)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Float:</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">FLOAT(n)</code>: floating-point whose precision is at least n bytes up to maximum of 8 bytes</li>
+      <li><code class="language-plaintext highlighter-rouge">REAL</code> or <code class="language-plaintext highlighter-rouge">FLOAT8</code>: 4-byte floating-point number</li>
+      <li><code class="language-plaintext highlighter-rouge">NUMERIC(p,s)</code>: real number with p digits with s number after the decimal point</li>
+    </ul>
+  </li>
+  <li>
+    <p>Date:</p>
+
+    <ul>
+      <li>includes date, time, timestamp, timestampz (includes timezone), interval</li>
+    </ul>
+  </li>
+  <li>
+    <p>Arrays</p>
+  </li>
+  <li>
+    <p>Json/JsonB (stores json in binary format, faster to process slower to insert)</p>
+
+    <ul>
+      <li>can use JSON operators in WHERE clause to filter rows from json type (-&gt;)</li>
+      <li>Postgres also provides their own functions to help process json data (https://www.postgresql.org/docs/9.5/functions-json.html)</li>
+    </ul>
+  </li>
+  <li>
+    <p>Special Date types: box, line, point, lseg, polygon, inet (ip4 address), macadar (MAC address)</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">hstore</code>: use <code class="language-plaintext highlighter-rouge">CREATE EXTENSION hstore</code>;
+        <ul>
+          <li>stores key-value pairs in a single value</li>
+          <li>formatted as key =&gt; value pairs, and are quoted using (“”)</li>
+          <li>example: “paperback” =&gt; “5”,</li>
+          <li>select certain key: <code class="language-plaintext highlighter-rouge">SELECT attr -&gt; 'key_name' AS simplified_key_name</code>, similar to <code class="language-plaintext highlighter-rouge">WHERE</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p><strong>Sequences</strong>: refer to https://www.postgresqltutorial.com/postgresql-sequences/</p>
+
+<pre><code class="language-SQL">CREATE SEQUENCE [ IF NOT EXISTS ] sequence_name
+    [ AS { SMALLINT | INT | BIGINT } ]
+    [ INCREMENT [ BY ] increment ]
+    [ MINVALUE minvalue | NO MINVALUE ] 
+    [ MAXVALUE maxvalue | NO MAXVALUE ]
+    [ START [ WITH ] start ] 
+    [ CACHE cache ] 
+    [ [ NO ] CYCLE ]
+    [ OWNED BY { table_name.column_name | NONE } ]
+</code></pre>
+
+<ul>
+  <li>
+    <p>use <code class="language-plaintext highlighter-rouge">nextval(sequence_name)</code> to access next value in sequence for appending new values, etc.</p>
+  </li>
+  <li>
+    <p>to access all sequences</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+    <span class="n">relname</span> <span class="n">sequence_name</span>
+<span class="k">FROM</span> 
+    <span class="n">pg_class</span> 
+<span class="k">WHERE</span> 
+    <span class="n">relkind</span> <span class="o">=</span> <span class="s1">'S'</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Delete:</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">DROP</span> <span class="n">SEQUENCE</span> <span class="p">[</span> <span class="n">IF</span> <span class="k">EXISTS</span> <span class="p">]</span> <span class="n">sequence_name</span> <span class="p">[,</span> <span class="p">...]</span> 
+<span class="p">[</span> <span class="k">CASCADE</span> <span class="o">|</span> <span class="k">RESTRICT</span> <span class="p">];</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong>Psql commands</strong></p>
+
+<p>Connect to database <code class="language-plaintext highlighter-rouge">psql -d database -U user -W</code></p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">\d</code> table_name: shows structure of the table
+    <ol>
+      <li>\dD = custom domains</li>
+      <li>\dT = custom datatypes</li>
+      <li>\dn lists all schemas</li>
+      <li>\df all functions in current db</li>
+      <li>\dv all views</li>
+      <li>\du all users and their roles</li>
+    </ol>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">\c</code> table_name: connects to table; specify which user connect sby <code class="language-plaintext highlighter-rouge">\c database username</code></li>
+  <li><code class="language-plaintext highlighter-rouge">\l</code> lists all databases</li>
+  <li><code class="language-plaintext highlighter-rouge">\g</code> executes previous command</li>
+  <li><code class="language-plaintext highlighter-rouge">\s</code> displays command history; can save to filename by <code class="language-plaintext highlighter-rouge">\s filename</code></li>
+  <li><code class="language-plaintext highlighter-rouge">\?</code> for more information on avaiable commands</li>
+  <li><code class="language-plaintext highlighter-rouge">\h</code> learn more about a certain sql statement</li>
+  <li>`timing` enable query execution time on and off</li>
+  <li><code class="language-plaintext highlighter-rouge">\e</code> enables you to run commands in favorite editor, then save and close it to execute
+    <ul>
+      <li>can use <code class="language-plaintext highlighter-rouge">\ef</code> to edit functions in editors</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<p><strong>For more resources (that are take more digestion to learn):</strong></p>
+
+<ol>
+  <li>Everything was summarized from this <a href="https://www.postgresqltutorial.com/">repo</a>.</li>
+  <li>More Resources Here:
+    <ol>
+      <li><a href="https://www.tutorialspoint.com/postgresql/">Another Repo</a></li>
+      <li><a href="https://zaiste.net/posts/postgresql-primer-for-busy-people/">Initial Primer</a></li>
+      <li><a href="https://learn.crunchydata.com/postgresql-devel">Another Repo #3</a></li>
+      <li><a href="https://pgexercises.com/">Exercises</a></li>
+      <li><a href="https://www.postgresql.org/docs/online-resources/">Documentation</a></li>
+      <li><a href="https://github.com/dhamaniasad/awesome-postgres">Awesome Postgres</a></li>
+    </ol>
+  </li>
+</ol>
+
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy; Ferdie Taruc - Reimagining Data
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
