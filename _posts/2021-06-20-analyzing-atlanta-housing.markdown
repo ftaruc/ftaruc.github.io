@@ -19,6 +19,8 @@ According to [this article](https://www.noradarealestate.com/blog/atlanta-real-e
 
 ****
 
+<!-- more -->
+
 **Data Exploration**:
 
 * The original data was made up of 8,168 listings, with 23 initial main features + 37 extra features made of arrays of miscellaneous features that only some homes included.
@@ -94,15 +96,15 @@ Given that there seems to be high demand to live near the metropolis given that 
 * We can use a `correlation heatmap` to initially determine some features that correlate (if there a linear trend between two variables), to contextualize which features may impact `list_price`. Out of some features from the initial dataset, we find that `beds`, `baths_full`, `sq_ft`, ` baths_full` have the strongest correlations.
 * Given that we do not plan to use regression, but decision trees for our models, we do not have to worry about multicollinearity from this analysis.
 
-![image-20210620192258593](C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210620192258593.png)
+![image-20210620192258593](C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210620192258593.png
+
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620192258593.png" alt="corrmap" style="zoom: 100%;" /></center>
 
 **Segmenting the Datasets** : 
 
 * I filtered out any other category homes (townhouses and condos) out of the dataset. I will store these datasets for any future analysis. After including only SFR homes, there are now only **5,916 listings**.
 
-![image-20210620193126645](C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210620193126645.png)
-
-
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620193126645.png" alt="segment" style="zoom: 100%;" /></center>
 
 * Additionally, I filtered homes to only include Atlanta listings, which leaves us with a small sample of **916 listings** left to work with for modeling. Given the lack of data-points, I do not expect a model with a strong accuracy for predictions. This is something to be concerned about when actually putting something in production.
 * For future models, I did a 70/30 training to test split, which caused **642 listings as training data**, and **275 listings as test data**. Given the lack of data, I did not include another set of validation set to be more precise. If I had more time, I would attempt to use all of Georgia's dataset to create a general model for the housing market just to use more data points or even scrape more Atlanta listings instead. 
@@ -133,13 +135,15 @@ I engineered new features based on the features found in the dataset; for the sa
 
    The plan was to engineer new features from this list of descriptions. For example, some homes was marked having a "Split Bedroom Plan," "Oversized Master" or "Roommate Floor Plan". I created about 400+ new features to handle this for every listing.
 
-   ![image-20210620195350381](C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210620195350381.png)
+   <center><img src="https://ferdie.org/images/typora-user-images/image-20210620195350381.png" alt="bath_eng" style="zoom: 100%;" /></center>
 
 > The code format made it easy to modularize for other features:
 
-![image-20210620195621324](C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210620195621324.png)
+<center><img src="https://ferdie.org/images/typora-user-images\image-20210620195621324.png" alt="bed_eng" style="zoom: 100%;" /></center>
 
-2. <u>Extract listing month and year:</u> there might be seasonal effects that might affect how listing prices vary over time.![image-20210620195655132](C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210620195655132.png)
+2. <u>Extract listing month and year:</u> there might be seasonal effects that might affect how listing prices vary over time.
+
+   <center><img src="https://ferdie.org/images/typora-user-images\image-20210620195655132.png" alt="list_date_conv" style="zoom: 100%;" /></center>
 
 3. <u>Number of Photos:</u> Some listings might be more detailed with extra information like photos, which might affect the overall listing price. This was pulled from  `photo_urls`
 
@@ -150,49 +154,47 @@ I engineered new features based on the features found in the dataset; for the sa
 1. <u>Decision Tree:</u>  supervised learning method that can be used to predict listing price, maximizes information gain at each node split (which is powerful when inferring which variables could be important for the model).
    * We see that it initially does fairly well (despite RMSE being fairly high however this might be from house listings in the millions). We see that the score of our model is 84% (score is measured by how accurate the predictions are relative to the actual predictions). However, later we see that there was a flaw with this initial model. 
 
-![image-20210620214455616](C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210620214455616.png)
+<center><img src="https://ferdie.org/images/typora-user-images\image-20210620214455616.png" alt="model1" style="zoom: 100%;" /></center>
 
 * However, we see that by looking at the `SHAP values` (a metric for feature importance in a given model), that I accidently left in heavily correlated variables: `price_per_sqft`, `taxes_in_2020`, and `lot_price_per_sqft` which is scalars of the other two variables. 
 
-  ![image-20210620215418797](C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210620215418797.png)
-
-
+  <center><img src="https://ferdie.org/images/typora-user-images\image-20210620215418797.png" alt="shap1" style="zoom: 100%;" /></center>
 
 * What's interesting are some of the features that were found to be important for the model like `zip_30349`, which is an area located south of Atlanta.
 
-  ![image-20210620211444442](C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210620211444442.png)
+  <center><img src="https://ferdie.org/images/typora-user-images\image-20210620211444442.png" alt="map2" style="zoom: 100%;" /></center>
 
 * After removing variables that correlate heavily with `list_price` and limiting the amount of features used to only 15, we still see a decrease in performance for the model: 
 
-  ![image-20210620214714669](C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210620214714669.png)
+  <center><img src="https://ferdie.org/images/typora-user-images\image-20210620214714669.png" alt="score1" style="zoom: 100%;" /></center>
 
   * Now, the most important features are ones we expected, with some interesting ones now added: `num_photos` (number of photos in the listing) , `roof_composition `(if the room is made of composition shingles), `has_pantry` (if there is a kitchen pantry), `has_gasL` if there is a gas log for the fireplace, `has_famR` if there is a family room, and `pa_citystr` if there is city street parking.
 
-    ![image-20210620215636746](C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210620215636746.png)
+    <center><img src="https://ferdie.org/images/typora-user-images\image-20210620215636746.png" alt="shap2" style="zoom: 100%;" /></center>
 
 2. <u>Random Forest:</u> ensemble method bootstrapping multiple decisions trees, and as a result is less prone to over-fitting. 
    * Another adjustment made to improve performance was to predict the `log(listing_price)` to increase accuracy, as the scale of predictions was way too large, causing increased variance in predictions. We see that this is a steady improvement from the decision tree model despite removing  correlated variables: `taxes_in_2020`, `lot_price_per_sqft`, and `price_per_sqft`.
    * We see that performance greatly increased by using Random Forest, with the score boosting up to `81%`.
 
-![image-20210620214952695](C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210620214952695.png)
+<center><img src="https://ferdie.org/images/typora-user-images\image-20210620214952695.png" alt="model2" style="zoom: 100%;" /></center>
 
 * Additionally, the most important features have also changed: with having laundry and having stone kitchen counters as some important features that helped predict listing price.
 
-![image-20210620220524468](C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210620220524468.png)
+<center><img src="https://ferdie.org/images/typora-user-images\image-20210620220524468.png" alt="shap3" style="zoom: 100%;" /></center>
 
 3. <u>XGBoost:</u> uses gradient boosting instead of bootstrapping of decision trees.  One of the best models for maximizing performance.
 
    * Performance slightly increased through the use of XGBoost.
 
-     ![image-20210620224214395](C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210620224214395.png)
+     <center><img src="https://ferdie.org/images/typora-user-images\image-20210620224214395.png" alt="xgboost" style="zoom: 100%;" /></center>
 
    * We see that features surrounding region (zipcode and county) are more important now.
 
-     ![image-20210620224140314](C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210620224140314.png)
+     <center><img src="https://ferdie.org/images/typora-user-images\image-20210620224140314.png" alt="shap4" style="zoom: 100%;" /></center>
 
 >  **For the interest of my time and making this a concise report, I won't be exploring how we can use these models for finding under-priced assests**.
 
-### **Conclusion: **
+### Conclusion: 
 
 Despite the lack of data for the model, we were able to make a decent model that can predict the listing price of future houses in Atlanta. By using this model, we can find current listings and check if it should be priced much higher using our model, a potential way for investors to make profit. Additionally, we now have a general understanding of what features are important in determining house value depending on the model.  
 
