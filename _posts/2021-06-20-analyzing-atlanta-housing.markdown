@@ -152,7 +152,7 @@ I engineered new features based on the features found in the dataset; for the sa
 1. <u>Decision Tree:</u>  supervised learning method that can be used to predict listing price, maximizes information gain at each node split (which is powerful when inferring which variables could be important for the model).
    * We see that it initially does fairly well (despite RMSE being fairly high however this might be from house listings in the millions). We see that the score of our model is 84% (score is measured by how accurate the predictions are relative to the actual predictions). However, later we see that there was a flaw with this initial model. 
 
-<center><img src="https://ferdie.org/images/typora-user-images\image-20210620214455616.png" alt="model1" style="zoom: 160%;" /></center>
+<center><img src="https://ferdie.org/images/typora-user-images\image-20210620214455616.png" alt="model1" style="zoom: 200%;" /></center>
 
 * However, we see that by looking at the `SHAP values` (a metric for feature importance in a given model), that I accidently left in heavily correlated variables: `price_per_sqft`, `taxes_in_2020`, and `lot_price_per_sqft` which is scalars of the other two variables. 
 
@@ -174,21 +174,21 @@ I engineered new features based on the features found in the dataset; for the sa
    * Another adjustment made to improve performance was to predict the `log(listing_price)` to increase accuracy, as the scale of predictions was way too large, causing increased variance in predictions. We see that this is a steady improvement from the decision tree model despite removing  correlated variables: `taxes_in_2020`, `lot_price_per_sqft`, and `price_per_sqft`.
    * We see that performance greatly increased by using Random Forest, with the score boosting up to `81%`.
 
-<center><img src="https://ferdie.org/images/typora-user-images\image-20210620214952695.png" alt="model2" style="zoom: 150%;" /></center>
+<center><img src="https://ferdie.org/images/typora-user-images\image-20210620214952695.png" alt="model2" style="zoom: 180%;" /></center>
 
 * Additionally, the most important features have also changed: with having laundry and having stone kitchen counters as some important features that helped predict listing price.
 
-<center><img src="https://ferdie.org/images/typora-user-images\image-20210620220524468.png" alt="shap3" style="zoom: 100%;" /></center>
+<center><img src="https://ferdie.org/images/typora-user-images\image-20210620220524468.png" alt="shap3" style="zoom: 75%;" /></center>
 
 3. <u>XGBoost:</u> uses gradient boosting instead of bootstrapping of decision trees.  One of the best models for maximizing performance.
 
    * Performance slightly increased through the use of XGBoost.
 
-     <center><img src="https://ferdie.org/images/typora-user-images\image-20210620224214395.png" alt="xgboost" style="zoom: 100%;" /></center>
+     <center><img src="https://ferdie.org/images/typora-user-images\image-20210620224214395.png" alt="xgboost" style="zoom: 150%;" /></center>
 
    * We see that features surrounding region (zipcode and county) are more important now.
 
-     <center><img src="https://ferdie.org/images/typora-user-images\image-20210620224140314.png" alt="shap4" style="zoom: 100%;" /></center>
+     <center><img src="https://ferdie.org/images/typora-user-images\image-20210620224140314.png" alt="shap4" style="zoom: 80%;" /></center>
 
 >  For the interest of my time and making this a concise report, I won't be exploring how we can use these models for finding under-priced assests.
 
