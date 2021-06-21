@@ -35,9 +35,9 @@ It became immediately obvious that although the report stated that it included o
 
 > We find that some listings from Virginia and Alabama were included, and were removed for future analysis as we plan to focus on Atlanta.
 
-<center><img src="https://ferdie.org/images/typora-user-images/image-20210620181731058.png" alt="data2" style="zoom: 130%;" /></center>
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620181731058.png" alt="data2" style="zoom: 200%;" /></center>
 
-> Below maps the points into a Python package known as `folium`, showing that (lat/longitude coordinates need to be fixed for some listings)
+> Below maps the points into a Python package known as Folium; this image shows that current lat/longitude coordinates need to be fixed for some listings.
 
 <center><img src="https://ferdie.org/images/typora-user-images/image-20210620180713207.png" alt="folium" style="zoom: 100%;" /></center>
 
@@ -55,23 +55,27 @@ For the sake of time, I will not attempt to map listings to a GIS system to expl
 
 * I decided to also drop the 916 listings with null value for `lotsize_sqft`, as there is no correct value to impute these listings without increasing variance for our future models. 
 
-  > After removing some redundant features and unusable rows, this leaves us with a starting dataset of **7,252 listings** and **46 house features** to work with:
+  * After removing some redundant features and unusable rows, this leaves us with a starting dataset of **7,252 listings** and **46 house features** to work with:
 
   <center><img src="https://ferdie.org/images/typora-user-images/image-20210620182820629.png" alt="data4" style="zoom: 85%;" /></center>
 
-## Initial **Visualization**:
+## Initial Visualization:
 
 Since I do not plan to visualize these listings in a GIS system to infer geographic trends, I still think it's best to contextualize how well Atlanta's housing market is to other cities in Georgia.
 
 > The following boxplots were used using the python package `Seaborn` where the [15 most populated cities in Georgia](https://worldpopulationreview.com/states/cities/georgia) were selected as comparison. The graphs also include the 15 cities with the most listings from the dataset, as there might be bias from the lack of data from the other graphs.
 >
-> **Outliers have been removed for visual clarity**.
+> <u>Outliers have been removed for visual clarity.</u>
 
 --
 
 **Analyzing Price Listings: ** 
 
-As shown below, the cities are ordered based on the median house price-listings from this dataset. We find that Atlanta has the sixth-highest median compared to the top 15 populated cities in Georgia, and also has the highest peak if we count outliers. Additionally, we also see that Atlanta has the second highest median out of the top 15 cities with the most listings. However, due to bias that this dataset scraped more Atlanta listings compared to other cities, there may have been a selection bias. Still, we can get a rough estimate of Atlanta's housing interval through the boxplot, where at least 50% of housings remain between [$500,000, $1,500,000]. Still compared to other cities in Georgia, we find that Atlanta is doing relatively well.
+As shown below, the cities are ordered based on the median house price-listings from this dataset. 
+
+* We find that Atlanta has the sixth-highest median compared to the top 15 populated cities in Georgia, and also has the highest peak if we count outliers. 
+
+* Additionally, we also see that Atlanta has the second highest median out of the top 15 cities with the most listings. However, due to bias that this dataset scraped more Atlanta listings compared to other cities, there may have been a selection bias. Still, we can get a rough estimate of Atlanta's housing interval through the boxplot, where at least 50% of housings remain between [$500,000, $1,500,000]. Still compared to other cities in Georgia, we find that Atlanta is doing relatively well.
 
 <center><img src="https://ferdie.org/images/typora-user-images/image-20210620185809299.png" alt="viz1" style="zoom: 115%;" /></center>
 
@@ -108,7 +112,9 @@ Given that there seems to be high demand to live near the metropolis given that 
 
 * I filtered out any other category homes (townhouses and condos) out of the dataset. I will store these datasets for any future analysis. After including only SFR homes, there are now only **5,916 listings**.
 
-<center><img src="https://ferdie.org/images/typora-user-images/image-20210620193126645.png" alt="segment" style="zoom: 100%;" /></center>
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620193126645.png" alt="segment" style="zoom: 200%;" /></center>
+
+
 
 * Additionally, I filtered homes to only include Atlanta listings, which leaves us with a small sample of **916 listings** left to work with for modeling. Given the lack of data-points, I do not expect a model with a strong accuracy for predictions. This is something to be concerned about when actually putting something in production.
 * For future models, I did a 70/30 training to test split, which caused **642 listings as training data**, and **275 listings as test data**. Given the lack of data, I did not include another set of validation set to be more precise. If I had more time, I would attempt to use all of Georgia's dataset to create a general model for the housing market just to use more data points or even scrape more Atlanta listings instead. 
@@ -121,25 +127,13 @@ I engineered new features based on the features found in the dataset; for the sa
 
 1. <u>Creating Binary Variables from Features_X:</u> There were 30+ optional features included into the dataset that some homes used, where they included specific features for their household. This included the following:
 
-   > ['features_bathrooms', 'features_bedrooms', 'features_dining_room',
-   >
-   > 'features_fireplaces', 'features_fees', 'features_garage',
-   >
-   > 'features_heating', 'features_home_owners_association',
-   >
-   > 'features_house', 'features_interior_features', 'features_kitchen',
-   >
-   > 'features_laundry', 'features_location', 'features_lot',
-   >
-   > 'features_parking', 'features_property', 'features_property_access',
-   >
-   > 'features_roof', 'features_sewer', 'features_taxes', 'features_water',
-   >
-   > 'features_utilities']
+   ```python
+   ['features_bathrooms', 'features_bedrooms', 'features_dining_room', 'features_fireplaces', 'features_fees', 'features_garage', 'features_heating', 'features_home_owners_association', 'features_house', 'features_interior_features', 'features_kitchen', 'features_laundry', 'features_location', 'features_lot', 'features_parking', 'features_property', 'features_property_access', 'features_roof', 'features_sewer', 'features_taxes', 'features_water', 'features_utilities']
+   ```
 
-   The plan was to engineer new features from this list of descriptions. For example, some homes was marked having a "Split Bedroom Plan," "Oversized Master" or "Roommate Floor Plan". I created about 400+ new features to handle this for every listing.
+   * The plan was to engineer new features from the list of feature descriptions. For example, some homes were marked having a "Split Bedroom Plan", "Oversized Master", or "Roommate Floor Plan". I engineered individual binary values to handle these instances. And as a result,  400+ new features were created for future models.
 
-   <center><img src="https://ferdie.org/images/typora-user-images/image-20210620195350381.png" alt="bath_eng" style="zoom: 100%;" /></center>
+   <center><img src="https://ferdie.org/images/typora-user-images/image-20210620195350381.png" alt="bath_eng" style="zoom: 150%;" /></center>
 
 > The code format made it easy to modularize for other features:
 
@@ -158,15 +152,15 @@ I engineered new features based on the features found in the dataset; for the sa
 1. <u>Decision Tree:</u>  supervised learning method that can be used to predict listing price, maximizes information gain at each node split (which is powerful when inferring which variables could be important for the model).
    * We see that it initially does fairly well (despite RMSE being fairly high however this might be from house listings in the millions). We see that the score of our model is 84% (score is measured by how accurate the predictions are relative to the actual predictions). However, later we see that there was a flaw with this initial model. 
 
-<center><img src="https://ferdie.org/images/typora-user-images\image-20210620214455616.png" alt="model1" style="zoom: 100%;" /></center>
+<center><img src="https://ferdie.org/images/typora-user-images\image-20210620214455616.png" alt="model1" style="zoom: 160%;" /></center>
 
 * However, we see that by looking at the `SHAP values` (a metric for feature importance in a given model), that I accidently left in heavily correlated variables: `price_per_sqft`, `taxes_in_2020`, and `lot_price_per_sqft` which is scalars of the other two variables. 
 
-  <center><img src="https://ferdie.org/images/typora-user-images\image-20210620215418797.png" alt="shap1" style="zoom: 100%;" /></center>
+  <center><img src="https://ferdie.org/images/typora-user-images\image-20210620215418797.png" alt="shap1" style="zoom: 70%;" /></center>
 
 * What's interesting are some of the features that were found to be important for the model like `zip_30349`, which is an area located south of Atlanta.
 
-  <center><img src="https://ferdie.org/images/typora-user-images\image-20210620211444442.png" alt="map2" style="zoom: 100%;" /></center>
+  <center><img src="https://ferdie.org/images/typora-user-images\image-20210620211444442.png" alt="map2" style="zoom: 70%;" /></center>
 
 * After removing variables that correlate heavily with `list_price` and limiting the amount of features used to only 15, we still see a decrease in performance for the model: 
 
@@ -180,7 +174,7 @@ I engineered new features based on the features found in the dataset; for the sa
    * Another adjustment made to improve performance was to predict the `log(listing_price)` to increase accuracy, as the scale of predictions was way too large, causing increased variance in predictions. We see that this is a steady improvement from the decision tree model despite removing  correlated variables: `taxes_in_2020`, `lot_price_per_sqft`, and `price_per_sqft`.
    * We see that performance greatly increased by using Random Forest, with the score boosting up to `81%`.
 
-<center><img src="https://ferdie.org/images/typora-user-images\image-20210620214952695.png" alt="model2" style="zoom: 100%;" /></center>
+<center><img src="https://ferdie.org/images/typora-user-images\image-20210620214952695.png" alt="model2" style="zoom: 150%;" /></center>
 
 * Additionally, the most important features have also changed: with having laundry and having stone kitchen counters as some important features that helped predict listing price.
 
@@ -196,7 +190,7 @@ I engineered new features based on the features found in the dataset; for the sa
 
      <center><img src="https://ferdie.org/images/typora-user-images\image-20210620224140314.png" alt="shap4" style="zoom: 100%;" /></center>
 
->  **For the interest of my time and making this a concise report, I won't be exploring how we can use these models for finding under-priced assests**.
+>  For the interest of my time and making this a concise report, I won't be exploring how we can use these models for finding under-priced assests.
 
 ### Conclusion: 
 
