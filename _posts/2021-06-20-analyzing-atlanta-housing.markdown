@@ -5,7 +5,9 @@ date:   2021-06-20 15:10:56 +0900
 categories: projects
 ---
 
-<center><img src="https://ferdie.org/images/atlanta.jpg" alt="main_photo" style="zoom: 80%;" /></center>
+<center><img src="https://ferdie.org/images/atlanta.jpg" alt="main_photo" style="zoom: 60%;" /></center>
+
+_
 
 * <u>Note:</u> This report is written using markdown, and will reference source code written in the `raw.ipynb`. I decided to use this format so it's clearer for the reader, and will provide a .pdf for this report and a .pdf of the source code so you don't need to go into a .`ipynb reader` to look at the source code.
 
@@ -15,7 +17,9 @@ This report looks to analyze house listings sourced from MLS that were actively 
 
 According to [this article](https://www.noradarealestate.com/blog/atlanta-real-estate-market/), we see a rise of interest in investment in the Atlanta region, which makes this analysis relevant to today's demand.
 
->  **Listing Prices:** Realtor.com's April 2021 report shows Atlanta is a seller's real estate market, which means that more people are looking to buy than there are homes available. Home prices have been surging largely because of limited supply and fierce competition for available homes. The median list price of homes in Atlanta, GA was $379,900, trending up **16.9% year-over-year** while the median sale price was $345,500.
+>  **Listing Prices:** Realtor.com's April 2021 report shows Atlanta is a seller's real estate market, which means that more people are looking to buy than there are homes available. Home prices have been surging largely because of limited supply and fierce competition for available homes. 
+>
+>  The median list price of homes in Atlanta, GA was $379,900, trending up **16.9% year-over-year** while the median sale price was $345,500.
 
 ****
 
@@ -25,13 +29,13 @@ According to [this article](https://www.noradarealestate.com/blog/atlanta-real-e
 
 * The original data was made up of 8,168 listings, with 23 initial main features + 37 extra features made of arrays of miscellaneous features that only some homes included.
 
-<center><img src="https://ferdie.org/images/typora-user-images/image-20210620180156506.png" alt="data1" style="zoom: 100%;" /></center>
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620180156506.png" alt="data1" style="zoom: 85%;" /></center>
 
 It became immediately obvious that although the report stated that it included only homes in Atlanta, that other cities of Georgia was also included. Additionally,  many errors in how `(lat,long)` was scraped or sourced made it impossible to accurately map coordinates in a local GIS system. 
 
 > We find that some listings from Virginia and Alabama were included, and were removed for future analysis as we plan to focus on Atlanta.
 
-<center><img src="https://ferdie.org/images/typora-user-images/image-20210620181731058.png" alt="data2" style="zoom: 100%;" /></center>
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620181731058.png" alt="data2" style="zoom: 130%;" /></center>
 
 > Below maps the points into a Python package known as `folium`, showing that (lat/longitude coordinates need to be fixed for some listings)
 
@@ -43,17 +47,17 @@ For the sake of time, I will not attempt to map listings to a GIS system to expl
 
   > The picture below only shows a subset of columns with missing values
 
-  <center><img src="https://ferdie.org/images/typora-user-images/image-20210620182216801.png" alt="null" style="zoom: 100%;" /></center>
+  <center><img src="https://ferdie.org/images/typora-user-images/image-20210620182216801.png" alt="null" style="zoom: 80%;" /></center>
 
 * This is hard to impute given the nonsensical way it was coded, and without context it's best to leave these features out for the analysis *(below shows all unique values of school district)*:
 
-  <center><img src="https://ferdie.org/images/typora-user-images/image-20210620182400180.png" alt="school_dist" style="zoom: 100%;" /></center>
+  <center><img src="https://ferdie.org/images/typora-user-images/image-20210620182400180.png" alt="school_dist" style="zoom: 80%;" /></center>
 
 * I decided to also drop the 916 listings with null value for `lotsize_sqft`, as there is no correct value to impute these listings without increasing variance for our future models. 
 
   > After removing some redundant features and unusable rows, this leaves us with a starting dataset of **7,252 listings** and **46 house features** to work with:
 
-  <center><img src="https://ferdie.org/images/typora-user-images/image-20210620182820629.png" alt="data4" style="zoom: 100%;" /></center>
+  <center><img src="https://ferdie.org/images/typora-user-images/image-20210620182820629.png" alt="data4" style="zoom: 85%;" /></center>
 
 ## Initial **Visualization**:
 
@@ -69,25 +73,25 @@ Since I do not plan to visualize these listings in a GIS system to infer geograp
 
 As shown below, the cities are ordered based on the median house price-listings from this dataset. We find that Atlanta has the sixth-highest median compared to the top 15 populated cities in Georgia, and also has the highest peak if we count outliers. Additionally, we also see that Atlanta has the second highest median out of the top 15 cities with the most listings. However, due to bias that this dataset scraped more Atlanta listings compared to other cities, there may have been a selection bias. Still, we can get a rough estimate of Atlanta's housing interval through the boxplot, where at least 50% of housings remain between [$500,000, $1,500,000]. Still compared to other cities in Georgia, we find that Atlanta is doing relatively well.
 
-<center><img src="https://ferdie.org/images/typora-user-images/image-20210620185809299.png" alt="viz1" style="zoom: 100%;" /></center>
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620185809299.png" alt="viz1" style="zoom: 115%;" /></center>
 
 We find that our analysis is rather similar to the [actual cost of living](https://www.bestplaces.net/cost_of_living/city/georgia/brookhaven) of these locations :
 
 > source: https://www.bestplaces.net/cost_of_living/city/georgia/brookhaven
 
-<center><img src="https://ferdie.org/images/typora-user-images/image-20210620190311999.png" alt="cost_liv" style="zoom: 100%;" /></center>
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620190311999.png" alt="cost_liv" style="zoom: 80%;" /></center>
 
 **Analyzing Lot Price/Sqft**
 
 However, in terms of bang-for your buck, it's quite expensive living in Atlanta. For the amount of lot size you get per sqft, it's much more expensive to have more space living in Atlanta compared to other cities that are further from living in the capital. Only Brookhaven (which is known to be expensive to live in), and Savannah (which is possibly due to the lack of datapoints) beats Atlanta in the highest median lot price/sqft. 
 
-<center><img src="https://ferdie.org/images/typora-user-images/image-20210620190311999.png" alt="viz2" style="zoom: 100%;" /></center>
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620190039898.png" alt="viz2" style="zoom: 115%;" /></center>
 
 ---
 
 We see a similar conclusion when analyzing listing price/sqft (interior house space).  (Excuse the visual bug with Albany)
 
-<center><img src="https://ferdie.org/images/typora-user-images/image-20210620190558199.png" alt="viz3" style="zoom: 100%;" /></center>
+<center><img src="https://ferdie.org/images/typora-user-images/image-20210620190558199.png" alt="viz3" style="zoom: 115%;" /></center>
 
 ## Modeling:
 
