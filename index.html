@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>ferdie</title>
+  <meta name="description" content="Data Reimagined -- a personal portfolio of Ferdie Taruc.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://ftaruc.github.io/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="ferdie" href="https://ftaruc.github.io/feed.xml">
+
+  
+
+  
+  <meta property="og:title" content="ferdie">
+  <meta property="og:site_name" content="ferdie">
+  <meta property="og:url" content="https://ftaruc.github.io/">
+  <meta property="og:description" content="Data Reimagined -- a personal portfolio of Ferdie Taruc.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="ferdie">
+  <meta name="twitter:description" content="Data Reimagined -- a personal portfolio of Ferdie Taruc.">
+  
+  
+
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">ferdie</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/about/">About</a>
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="https://github.com/ftaruc">GitHub</a>
+      
+        
+        <a class="page-link" href="https://ftaruc.github.io/files/resume.pdf">Resume</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="home">
+
+  
+
+  
+
+  <ul class="post-list">
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/2021/09/05/mid-year-thoughts/">2021 (and beyond): reflecting on past expectations*</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Sep 5, 2021
+            
+               •
+  
+    
+    
+      
+    
+      
+        <a href="/categories/thoughts/">thoughts</a>
+      
+    
+      
+    
+      
+    
+  
+
+
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <p>I wanted  to write a mid-year update about the expectations I created earlier this year in reference to this <a href="https://ferdie.org/2021/01/09/thoughts-into-new-year/">post</a>.</p>
+
+<p>One thing I slowly realized is that it’s easy to set goals that will benefit you in the long run, but have them placed in the backburner since they seem daunting or even boring to start. This was the case when I wanted to find a job post-graduation as the main priority, leaving many of my expectations to die to fatigue of mentally burning out from one rejection letter after another.</p>
+
+<p>It made me realize that I should be more realistic about the amount of expectations placed in one time period, and to congratulate myself on the achievements (and even failures) during such time span.</p>
+
+<p>Here’s a refresher of the expectations I placed earlier this year:</p>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/2021/09/05/mid-year-thoughts/">Read on &rarr;</a>
+          </p>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/2021/06/20/analyzing-atlanta-housing/">Analyzing Atlanta&#39;s SFR Housing Market</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Jun 20, 2021
+            
+               •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/categories/projects/">projects</a>
+      
+    
+  
+
+
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <center><img src="https://ferdie.org/images/atlanta.jpg" alt="main_photo" style="zoom: 60%;" /></center>
+
+<p>_</p>
+
+<ul>
+  <li><u>Note:</u> This report is written using markdown, and will reference source code written in the <code class="language-plaintext highlighter-rouge">raw.ipynb</code>. I decided to use this format so it’s clearer for the reader, and will provide a .pdf for this report and a .pdf of the source code so you don’t need to go into a .<code class="language-plaintext highlighter-rouge">ipynb reader</code> to look at the source code.</li>
+</ul>
+
+<h2>Introduction</h2>
+
+<p>This report looks to analyze house listings sourced from MLS that were actively listed as of 4/29/2021. We hope to model Atlanta’s SFR (single-family housing) market by comparing different regression models to explore which various factors influence home prices in the Atlanta region, and potentially identify areas that might be good for investment if we can find under-priced homes using our model.</p>
+
+<p>According to <a href="https://www.noradarealestate.com/blog/atlanta-real-estate-market/">this article</a>, we see a rise of interest in investment in the Atlanta region, which makes this analysis relevant to today’s demand.</p>
+
+<blockquote>
+  <p><strong>Listing Prices:</strong> Realtor.com’s April 2021 report shows Atlanta is a seller’s real estate market, which means that more people are looking to buy than there are homes available. Home prices have been surging largely because of limited supply and fierce competition for available homes.</p>
+
+  <p>The median list price of homes in Atlanta, GA was $379,900, trending up <strong>16.9% year-over-year</strong> while the median sale price was $345,500.</p>
+</blockquote>
+
+<hr />
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/2021/06/20/analyzing-atlanta-housing/">Read on &rarr;</a>
+          </p>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/2021/06/07/learning-postgreSQL/">Journey through PostgreSQL</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Jun 7, 2021
+            
+               •
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/categories/notes/">notes</a>
+      
+    
+      
+    
+  
+
+
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <center><img src="https://ferdie.org/images/postgresql.png" alt="main_photo" style="zoom: 80%;" /></center>
+
+<p>This is a summary of notes for later reference as I learn the foundations of PostgreSQL (later abbreviated as Postgres), an open-source relational database system that supports both SQL and JSON querying.</p>
+
+<blockquote>
+  <p>I thought it was fascinating that it started in 1986 in <a href="https://cs.berkeley.edu/">Berkeley’s CS department</a>, my alma mater.</p>
+</blockquote>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/2021/06/07/learning-postgreSQL/">Read on &rarr;</a>
+          </p>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/2021/04/08/scraping-grailed/">Scraping Grailed</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Apr 8, 2021
+            
+               •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/categories/projects/">projects</a>
+      
+    
+  
+
+
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <center><img src="https://ferdie.org/images/grailed_banner.png" alt="title" style="zoom: 35%;" /></center>
+
+<hr />
+
+<blockquote>
+  <p>Recently, I have been selling a large portion of my closet to <strong>Grailed</strong>, a community marketplace for men’s clothing centered on streetwear &amp; designer.</p>
+</blockquote>
+
+<center><img src="https://ferdie.org/images/grailed1.jpg" alt="ex1" style="zoom: 50%;" /></center>
+
+<p>As an avid user of this platform, I find it hard to easily compare prices of current listings versus sold listings of the same item, as you would have to scan through all listings in attempt to capture an overlying trend over time. Thus, it was hard to extrapolate best prices and listing features to sell your item quicker. Unfortunately, Grailed does not have a public API, so I though this would be a perfect opportunity to attempt to scrape relevant features from each listing to visualize fashion trends through data.</p>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/2021/04/08/scraping-grailed/">Read on &rarr;</a>
+          </p>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/2021/02/12/relearning-R/">Relearning R</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Feb 12, 2021
+            
+               •
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/categories/notes/">notes</a>
+      
+    
+      
+    
+  
+
+
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <center><img src="https://ferdie.org/images/r.png" alt="title" style="zoom: 80%;" /></center>
+
+<p>A hodgepodge of notes for learning R for my reference, segmented so it is easy to read.</p>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/2021/02/12/relearning-R/">Read on &rarr;</a>
+          </p>
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="pagination">
+    
+      <a class="previous" href="/posts/2/">&laquo; Older</a>
+    
+
+    
+  </div>
+
+
+
+</div>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy; Ferdie Taruc - Reimagining Data
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

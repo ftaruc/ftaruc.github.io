@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Relearning SQL</title>
+  <meta name="description" content="There’s no argument that SQL is a must-learn language if you want to work with data. Like with any language, you need to keep notes to refresh yourself for future projects.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://ftaruc.github.io/2021/01/12/relearning-SQL/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="ferdie" href="https://ftaruc.github.io/feed.xml">
+
+  
+
+  
+  <meta property="og:title" content="Relearning SQL">
+  <meta property="og:site_name" content="ferdie">
+  <meta property="og:url" content="https://ftaruc.github.io/2021/01/12/relearning-SQL/">
+  <meta property="og:description" content="There’s no argument that SQL is a must-learn language if you want to work with data. Like with any language, you need to keep notes to refresh yourself for future projects.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="Relearning SQL">
+  <meta name="twitter:description" content="There’s no argument that SQL is a must-learn language if you want to work with data. Like with any language, you need to keep notes to refresh yourself for future projects.">
+  
+  
+
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">ferdie</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/about/">About</a>
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="https://github.com/ftaruc">GitHub</a>
+      
+        
+        <a class="page-link" href="https://ftaruc.github.io/files/resume.pdf">Resume</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Relearning SQL</h1>
+    
+    <p class="post-meta"><time datetime="2021-01-12T06:10:56+00:00" itemprop="datePublished">Jan 12, 2021</time> •
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/categories/notes/">notes</a>
+      
+    
+      
+    
+  
+
+
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <center><img src="https://ferdie.org/images/sql-illustration.png" alt="title" style="zoom: 60%;" /></center>
+
+<p>There’s no argument that SQL is a must-learn language if you want to work with data. Like with any language, you need to keep notes to refresh yourself for future projects.</p>
+
+<!-- more -->
+
+<p>–</p>
+
+<p><strong>A POTPOURRI OF SQL</strong></p>
+
+<ul>
+  <li>can use <code class="language-plaintext highlighter-rouge">WHERE NOT COL = VAL</code> for !=</li>
+  <li>Check if column is empty <code class="language-plaintext highlighter-rouge">WHERE COL IS (NOT) NULL</code></li>
+</ul>
+
+<p>–</p>
+
+<ol>
+  <li>Insert (into, values) – COLUMN FIRST THEN VALUES:</li>
+</ol>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Customers</span> <span class="p">(</span>
+   <span class="n">CustomerName</span><span class="p">,</span> 
+   <span class="n">Address</span><span class="p">,</span> 
+   <span class="n">City</span><span class="p">,</span> 
+   <span class="n">PostalCode</span><span class="p">,</span>
+   <span class="n">Country</span><span class="p">)</span>
+   <span class="k">VALUES</span><span class="p">(</span>
+   <span class="s1">'Hekkan Burger'</span><span class="p">,</span>
+   <span class="s1">'Gateveien 15'</span><span class="p">,</span>
+   <span class="s1">'Sandnes'</span><span class="p">,</span>
+   <span class="s1">'4306'</span><span class="p">,</span>
+   <span class="s1">'Norway'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>Update (include <code class="language-plaintext highlighter-rouge">SET</code> to change value)</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">UPDATE</span> <span class="n">Customers</span>
+ <span class="k">SET</span> <span class="n">City</span> <span class="o">=</span> <span class="s1">'Oslo'</span><span class="p">,</span> 
+ <span class="n">COUNTRY</span> <span class="o">=</span> <span class="s1">'Norway'</span>
+ <span class="k">WHERE</span> <span class="n">CustomerID</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Delete (Deletes all records from X – can be filtered)</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">Customers</span>
+ <span class="k">WHERE</span> <span class="n">Country</span> <span class="o">=</span> <span class="s1">'Norway'</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Like (can also use =  instead of LIKE I believe but no regex)</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">%</code> = includes anything after like <code class="language-plaintext highlighter-rouge">.*</code> for regex</li>
+      <li>example: so <code class="language-plaintext highlighter-rouge">%a</code> = ends with a; while<code class="language-plaintext highlighter-rouge">%a%</code> contains letter a</li>
+      <li>can also do NOT LIKE</li>
+    </ul>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Customers</span>
+<span class="k">WHERE</span> <span class="n">City</span> <span class="k">LIKE</span> <span class="s1">'a%'</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Other wildcards with <code class="language-plaintext highlighter-rouge">LIKE</code> similar to regex:</p>
+  </li>
+</ol>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">LIKE '_a%' </code> where second letter is an “a”</li>
+  <li><code class="language-plaintext highlighter-rouge">LIKE '[acs]%'</code>  where the first letter is an “a” or a “c” or an “s”.</li>
+  <li><code class="language-plaintext highlighter-rouge">[a-f]</code> anything betwen a and f</li>
+  <li><code class="language-plaintext highlighter-rouge">[^b-x]</code>anything not between b and x</li>
+</ul>
+
+<ol>
+  <li>boolean conditions:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">WHERE COUNTY IN ('NORWAY', ' FRANCE')</code> using <code class="language-plaintext highlighter-rouge">IN</code></li>
+      <li><code class="language-plaintext highlighter-rouge">WHERE PRICE NOT BETWEEN 10 and 20</code> using <code class="language-plaintext highlighter-rouge">BETWEEN</code>
+        <ul>
+          <li>can use letters as alphabetically be between</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">CREATE VIEW</code>, virtual table that is stored as a variable in a database</p>
+  </li>
+  <li>Distinctively, a <strong>view</strong> is saved in the database <strong>and</strong> can be reused by any query, whereas a <code class="language-plaintext highlighter-rouge">WITH</code> clause (or Common Table Expression) is tied to one specific query.
+    <ul>
+      <li>In tandem, they can be used together in the following query:</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">VIEW</span> <span class="n">q4iv</span><span class="p">(</span><span class="n">playerid</span><span class="p">,</span> <span class="n">namefirst</span><span class="p">,</span> <span class="n">namelast</span><span class="p">,</span> <span class="n">salary</span><span class="p">,</span> <span class="n">yearid</span><span class="p">)</span>
+<span class="k">AS</span>
+  <span class="k">WITH</span> <span class="n">st</span><span class="p">(</span><span class="n">m00</span><span class="p">)</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="k">MAX</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span>
+    <span class="k">FROM</span> <span class="n">salaries</span>
+    <span class="k">WHERE</span> <span class="n">yearid</span> <span class="o">=</span> <span class="mi">2000</span>
+    <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">yearid</span><span class="p">),</span>
+  <span class="n">sh</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="k">MAX</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">as</span> <span class="n">m01</span>
+    <span class="k">FROM</span> <span class="n">salaries</span>
+    <span class="k">WHERE</span> <span class="n">yearid</span> <span class="o">=</span> <span class="mi">2001</span>
+    <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">yearid</span><span class="p">)</span>
+
+  <span class="k">SELECT</span> <span class="n">s</span><span class="p">.</span><span class="n">playerid</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">namefirst</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">namelast</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">salary</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">yearid</span>
+  <span class="k">FROM</span> <span class="n">people</span> <span class="n">p</span><span class="p">,</span> <span class="n">salaries</span> <span class="n">s</span><span class="p">,</span> <span class="n">st</span> <span class="n">a</span><span class="p">,</span> <span class="n">sh</span> <span class="n">b</span>
+  <span class="k">WHERE</span> <span class="n">s</span><span class="p">.</span><span class="n">playerid</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">playerid</span> <span class="k">AND</span> <span class="p">(</span>
+  <span class="p">(</span><span class="n">yearid</span> <span class="o">=</span> <span class="mi">2000</span> <span class="k">and</span> <span class="n">salary</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">m00</span><span class="p">)</span>
+  <span class="k">OR</span> <span class="p">(</span><span class="n">yearid</span> <span class="o">=</span> <span class="mi">2001</span> <span class="k">and</span> <span class="n">salary</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">m01</span><span class="p">))</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>when using <code class="language-plaintext highlighter-rouge">WITH</code> or <code class="language-plaintext highlighter-rouge">VIEW</code> you can order and name the variables of the table that is selected from <code class="language-plaintext highlighter-rouge">SELECT</code> inside a parantheses, so you do not have to use <code class="language-plaintext highlighter-rouge">AS</code> inside the <code class="language-plaintext highlighter-rouge">SELECT</code> statement.</p>
+
+    <ul>
+      <li>example:</li>
+    </ul>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">WITH</span> <span class="n">st</span><span class="p">(</span><span class="n">m00</span><span class="p">)</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="k">MAX</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span>
+      
+<span class="o">#</span><span class="n">VS</span><span class="p">:</span> 
+  
+<span class="k">WITH</span> <span class="n">sh</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="k">MAX</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">as</span> <span class="n">m00</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">HAVING</code> or <code class="language-plaintext highlighter-rouge">WHERE</code> can have boolean conditions that include subqueries:</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">HAVING</span> <span class="n">s</span><span class="p">.</span><span class="n">yearid</span> <span class="o">&gt;</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">yearid</span>
+                  <span class="k">FROM</span> <span class="n">salaries</span>
+                  <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">yearid</span> <span class="k">asc</span>
+                  <span class="k">LIMIT</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="o">#</span><span class="n">FILTERS</span> <span class="n">GROUPS</span> <span class="k">WITH</span> <span class="n">YEARID</span> <span class="o">&gt;</span> <span class="n">THE</span> <span class="n">SMALLEST</span><span class="p">,</span> 
+  <span class="o">#</span><span class="n">AKA</span> <span class="n">INCLUDE</span> <span class="n">EVERYTHING</span> <span class="n">BUT</span> <span class="n">THE</span> <span class="n">SMALLEST</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>OR:</p>
+
+        <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">#</span><span class="n">EXAMPLE</span> <span class="k">OF</span> <span class="n">CASTING</span> <span class="k">TO</span> <span class="n">A</span> <span class="nb">FLOAT</span>
+<span class="k">HAVING</span> <span class="k">SUM</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">AB</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">50</span> <span class="k">and</span> <span class="n">lslg</span> <span class="o">&gt;</span>  <span class="p">(</span>
+    
+    <span class="k">SELECT</span> <span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">H</span><span class="p">)</span> <span class="o">-</span> <span class="k">SUM</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">H2B</span><span class="p">)</span> <span class="o">-</span> <span class="k">SUM</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">H3B</span><span class="p">)</span> <span class="o">-</span> <span class="k">SUM</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">HR</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="k">SUM</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">H2B</span><span class="p">)</span>
+     <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="k">SUM</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">H3B</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="k">SUM</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">HR</span><span class="p">)</span> <span class="k">AS</span> <span class="nb">float</span><span class="p">)</span><span class="o">/</span><span class="k">CAST</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">AB</span><span class="p">)</span> <span class="k">AS</span> <span class="nb">float</span><span class="p">))</span> <span class="k">AS</span> <span class="n">lslg</span>
+     <span class="k">FROM</span> <span class="n">batting</span> <span class="n">b</span>
+     <span class="k">JOIN</span> <span class="n">people</span> <span class="n">p</span> <span class="k">ON</span> <span class="n">b</span><span class="p">.</span><span class="n">playerid</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">playerid</span>
+     <span class="k">WHERE</span> <span class="n">b</span><span class="p">.</span><span class="n">playerid</span> <span class="o">=</span> <span class="s1">'mayswi01'</span>
+     <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">b</span><span class="p">.</span><span class="n">playerid</span>
+  <span class="p">)</span>
+</code></pre></div>        </div>
+
+        <p>–</p>
+
+        <p><strong>Some Examples:</strong></p>
+
+        <ul>
+          <li>Getting the first or last value for each user in a table, we will use <code class="language-plaintext highlighter-rouge">transactions as an example</code>, inner join on the id’s that were filtered out so it includes additional variables that were removed from groupby:</li>
+        </ul>
+
+        <pre><code class="language-SQL">      SELECT t.user_id, t.created_at, t.product
+      FROM transactions AS t
+      INNER JOIN (
+          SELECT user_id, MIN(created_at) AS min_created_at
+          FROM transactions
+          GROUP BY 1
+      ) AS t1
+          ON t.user_id = t1.user_id
+            t.created_at = t1.min_created_at
+                
+ =========================================================================
+#Initial:
+         user_id | created_at | product  
+       --------+------------+--------
+        123    | 2019-01-01 | apple    
+        456    | 2019-01-02 | banana   
+        123    | 2019-01-05 | pear    
+        456    | 2019-01-10 | apple   
+        789    | 2019-01-11 | banana  
+    
+#Solution:
+       user_id | created_at | product   
+      ---------+------------+--------
+       123     | 2019-01-01 | apple      
+       456     | 2019-01-02 | banana     
+       789     | 2019-01-11 | banana   
+</code></pre>
+
+        <ul>
+          <li>
+            <p>Reminder, left join allows null values to exist for variables (so not omitted from inner joins):</p>
+
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      INNER JOIN: returns rows when there is a match in both tables. 
+      LEFT JOIN: returns all rows from the left table, even if there are no matches in the right table.
+            
+      cities.name  | users.id
+      _____________|__________
+      seattle      | 123
+      seattle      | 124
+      portland     | null #no users in users table that live in portland, but still included
+      san diego    | 534
+      san diego    | 564
+</code></pre></div>            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<p><strong>For more resources (that are take more digestion to learn):</strong></p>
+
+<ol>
+  <li>Recursive CTE or <code class="language-plaintext highlighter-rouge">WITH</code> statements: <a href="https://www.sqlservertutorial.net/sql-server-basics/sql-server-recursive-cte/">here</a></li>
+  <li>Create grouping sets through <code class="language-plaintext highlighter-rouge">CUBE</code>: <a href="https://www.sqlservertutorial.net/sql-server-basics/sql-server-cube/">here</a></li>
+  <li><code class="language-plaintext highlighter-rouge">COALESCE</code>: <a href="https://www.sqlservertutorial.net/sql-server-basics/sql-server-coalesce/">here</a></li>
+  <li>Create grouping sets with assumed hiearchy through <code class="language-plaintext highlighter-rouge">ROLLUP</code>: <a href="https://www.sqlservertutorial.net/sql-server-basics/sql-server-rollup/">here</a></li>
+  <li>Future notes here</li>
+</ol>
+
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy; Ferdie Taruc - Reimagining Data
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

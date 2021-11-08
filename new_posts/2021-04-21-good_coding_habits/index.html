@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>ferdie</title>
+  <meta name="description" content="Data Reimagined -- a personal portfolio of Ferdie Taruc.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://ftaruc.github.io/new_posts/2021-04-21-good_coding_habits/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="ferdie" href="https://ftaruc.github.io/feed.xml">
+
+  
+
+  
+  <meta property="og:title" content="ferdie">
+  <meta property="og:site_name" content="ferdie">
+  <meta property="og:url" content="https://ftaruc.github.io/new_posts/2021-04-21-good_coding_habits/">
+  <meta property="og:description" content="Data Reimagined -- a personal portfolio of Ferdie Taruc.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="ferdie">
+  <meta name="twitter:description" content="Data Reimagined -- a personal portfolio of Ferdie Taruc.">
+  
+  
+
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">ferdie</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/about/">About</a>
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="https://github.com/ftaruc">GitHub</a>
+      
+        
+        <a class="page-link" href="https://ftaruc.github.io/files/resume.pdf">Resume</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline"></h1>
+    
+    <p class="post-meta"><time datetime="2021-04-18T06:10:56+00:00" itemprop="datePublished">Apr 18, 2021</time> •
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/categories/notes/">notes</a>
+      
+    
+      
+    
+  
+
+
+ •
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p><code class="language-plaintext highlighter-rouge">tqdm</code> allows for progress bars when testing out code, good for determining length of runtime.</p>
+
+<hr />
+
+<p>This article is to determine the best practices for project structure, environments &amp; reproducibility, coding for reusability, testing, and collaborating.</p>
+
+<p><strong>Project Structure</strong></p>
+
+<blockquote>
+  <p>defined by Cookie Cutter DS:</p>
+</blockquote>
+
+<pre><code class="language-nohighlight">├── LICENSE
+├── Makefile           &lt;- Makefile with commands like `make data` or `make train`
+├── README.md          &lt;- The top-level README for developers using this project.
+├── data
+│   ├── external       &lt;- Data from third party sources.
+│   ├── interim        &lt;- Intermediate data that has been transformed.
+│   ├── processed      &lt;- The final, canonical data sets for modeling.
+│   └── raw            &lt;- The original, immutable data dump.
+│
+├── docs               &lt;- A default Sphinx project; see sphinx-doc.org for details
+│
+├── models             &lt;- Trained and serialized models, model predictions, or model summaries
+│
+├── notebooks          &lt;- Jupyter notebooks. Naming convention is a number (for ordering),
+│                         the creator's initials, and a short `-` delimited description, e.g.
+│                         `1.0-jqp-initial-data-exploration`.
+│
+├── references         &lt;- Data dictionaries, manuals, and all other explanatory materials.
+│
+├── reports            &lt;- Generated analysis as HTML, PDF, LaTeX, etc.
+│   └── figures        &lt;- Generated graphics and figures to be used in reporting
+│
+├── requirements.txt   &lt;- The requirements file for reproducing the analysis environment, e.g.
+│                         generated with `pip freeze &gt; requirements.txt`
+│
+├── setup.py           &lt;- Make this project pip installable with `pip install -e`
+├── src                &lt;- Source code for use in this project.
+│   ├── __init__.py    &lt;- Makes src a Python module
+│   │
+│   ├── data           &lt;- Scripts to download or generate data
+│   │   └── make_dataset.py
+│   │
+│   ├── features       &lt;- Scripts to turn raw data into features for modeling
+│   │   └── build_features.py
+│   │
+│   ├── models         &lt;- Scripts to train models and then use trained models to make
+│   │   │                 predictions
+│   │   ├── predict_model.py
+│   │   └── train_model.py
+│   │
+│   └── visualization  &lt;- Scripts to create exploratory and results oriented visualizations
+│       └── visualize.py
+│
+└── tox.ini            &lt;- tox file with settings for running tox; see tox.readthedocs.io
+</code></pre>
+
+<p><img src="C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210421111208208.png" alt="image-20210421111208208" /></p>
+
+<p><img src="C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210421111347967.png" alt="image-20210421111347967" /></p>
+
+<p><strong>Environment:</strong></p>
+
+<ul>
+  <li>Try to create the minimum reproducible environment so there is less dependencies so the project can be run locally by anyone.
+    <ul>
+      <li>docker/vagrant (for complex environments for virtual machines)</li>
+    </ul>
+  </li>
+  <li><img src="C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210421111831828.png" alt="image-20210421111831828" /></li>
+  <li><code class="language-plaintext highlighter-rouge">watermark</code> allows people to know what version certain things are</li>
+  <li>
+    <p><img src="C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210421111906858.png" alt="image-20210421111906858" /></p>
+  </li>
+  <li>
+    <p>to create isolated environments: <code class="language-plaintext highlighter-rouge">conda env</code> to create an environment on your machine</p>
+
+    <p><code class="language-plaintext highlighter-rouge">conda create -n &lt;name&gt; python =3</code></p>
+
+    <ul>
+      <li>venv, pyenv are alternatives</li>
+      <li>name environment as project root</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">conda env list</code> to see all environments</p>
+  </li>
+  <li>
+    <p>include a <code class="language-plaintext highlighter-rouge">requirements.txt</code> to include dependancies where:</p>
+
+    <p><img src="C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210422111206331.png" alt="image-20210422111206331" /></p>
+
+    <ul>
+      <li>to install all requirements, go into the directory of this file and do <code class="language-plaintext highlighter-rouge">pip install -r requirements.txt</code></li>
+      <li><code class="language-plaintext highlighter-rouge">pip freeze &gt; requirements.txt</code> to create</li>
+    </ul>
+  </li>
+  <li>
+    <p>so activate environment, install necessary dependencies, then deactivate when necessary</p>
+  </li>
+  <li>
+    <p>create pip project:</p>
+
+    <p><img src="C:\Users\ferdi\AppData\Roaming\Typora\typora-user-images\image-20210422112312200.png" alt="image-20210422112312200" /></p>
+  </li>
+  <li>%debug in jupyter notebooks as a magic tool to debug code
+    <ul>
+      <li>use <code class="language-plaintext highlighter-rouge">u</code> to go up the error code, can use functions inside</li>
+      <li>use <code class="language-plaintext highlighter-rouge">q</code> to quit the debugger</li>
+    </ul>
+  </li>
+  <li>%prun to find computational inefficiencies for memory and runtime</li>
+</ul>
+
+<p><strong>Testing</strong></p>
+
+<ul>
+  <li>use <code class="language-plaintext highlighter-rouge">pytest</code> and assertions to see and test code</li>
+  <li>use @pytest.fixture for static data referencing</li>
+</ul>
+
+<p>–</p>
+
+<p>More resources:</p>
+
+<ol>
+  <li><a href="https://www.youtube.com/watch?v=EKUy0TSLg04">Video where notes are taken from</a></li>
+  <li><a href="https://drivendata.github.io/cookiecutter-data-science/">Cookie Cutter DS Structure</a></li>
+  <li><a href="https://github.com/dslp/dslp">DSLP Structure</a></li>
+  <li><a href="https://github.com/drivendata/data-science-is-software">Labs</a></li>
+</ol>
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy; Ferdie Taruc - Reimagining Data
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

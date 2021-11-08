@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>ferdie</title>
+  <meta name="description" content="Data Reimagined -- a personal portfolio of Ferdie Taruc.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://ftaruc.github.io/posts/2/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="ferdie" href="https://ftaruc.github.io/feed.xml">
+
+  
+
+  
+  <meta property="og:title" content="ferdie">
+  <meta property="og:site_name" content="ferdie">
+  <meta property="og:url" content="https://ftaruc.github.io/posts/2/">
+  <meta property="og:description" content="Data Reimagined -- a personal portfolio of Ferdie Taruc.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="ferdie">
+  <meta name="twitter:description" content="Data Reimagined -- a personal portfolio of Ferdie Taruc.">
+  
+  
+
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">ferdie</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/about/">About</a>
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="https://github.com/ftaruc">GitHub</a>
+      
+        
+        <a class="page-link" href="https://ftaruc.github.io/files/resume.pdf">Resume</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="home">
+
+  
+
+  
+
+  <ul class="post-list">
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/2021/01/20/python-in-r/">Python Integration in RStudio?</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Jan 20, 2021
+            
+               •
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/categories/notes/">notes</a>
+      
+    
+      
+    
+  
+
+
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <center><img src="https://ferdie.org/images/python.jpg" alt="title" style="zoom: 60%;" /></center>
+
+<p>It’s finally here! <em>Well,</em> it has been here actually. The <code class="language-plaintext highlighter-rouge">reticulate</code> package has provided tools for interoperability between Python and R; it allows:</p>
+
+<ul>
+  <li>Calling Python from R in a variety of ways including R Markdown, sourcing Python scripts, importing Python modules, and using Python interactively within an R session.</li>
+  <li>Translation between R and Python objects (for example, between R and Pandas data frames, or between R-matrices and NumPy arrays).</li>
+  <li>Flexible binding to different versions of Python including virtual environments and Conda environments.</li>
+</ul>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/2021/01/20/python-in-r/">Read on &rarr;</a>
+          </p>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/2021/01/15/on-missing-values/">On Missing Values</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Jan 15, 2021
+            
+               •
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/categories/notes/">notes</a>
+      
+    
+      
+    
+  
+
+
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <center><img src="https://ferdie.org/images/missing_values.png" alt="title" style="zoom: 25%;" /></center>
+
+<p>Missing values – <code class="language-plaintext highlighter-rouge">nan</code>, <code class="language-plaintext highlighter-rouge">n/a</code>, or just empty observations – have a significant effect on conclusions that can be made from data.</p>
+
+<p>They can occur <u>systematically</u>:</p>
+
+<ul>
+  <li>as a <strong>nonresponse</strong>: no information is provided for one or more items or for a whole unit; private subjects like income can push people to not answer</li>
+  <li>from <strong>attrition</strong> in longitudinal studies, where participants drop out before the experiment or test ends</li>
+  <li>on <strong>purpose</strong>  – entities choose not to, or fail to, report critical statistics, such as through governments or private entities; or because the information is not available</li>
+</ul>
+
+<p>Or at <u>random</u>:</p>
+
+<ul>
+  <li><strong>missing completely at random (MCAR)</strong>: if the events that lead to any particular data-item being missing are independent both of observable variables and of unobservable parameters of interest, and occur entirely at random – causes the dataset to be unbiased</li>
+  <li><strong>missing at random (MAR)</strong>: missingness is not random, but where missingness can be fully accounted for by variables where there is complete information – for example, knowing that some employee forgot to input certain observations on a certain day for a study on accident (reason has to be unrelated to the variable)</li>
+  <li><strong>missing not at random (MNAR):</strong> neither MCAR or MAR, one example is if users fail to fill in a depression survey <em>because</em> of their level of depression</li>
+</ul>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/2021/01/15/on-missing-values/">Read on &rarr;</a>
+          </p>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/2021/01/12/relearning-SQL/">Relearning SQL</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Jan 12, 2021
+            
+               •
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/categories/notes/">notes</a>
+      
+    
+      
+    
+  
+
+
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <center><img src="https://ferdie.org/images/sql-illustration.png" alt="title" style="zoom: 60%;" /></center>
+
+<p>There’s no argument that SQL is a must-learn language if you want to work with data. Like with any language, you need to keep notes to refresh yourself for future projects.</p>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/2021/01/12/relearning-SQL/">Read on &rarr;</a>
+          </p>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/2021/01/09/thoughts-into-new-year/">2021 and Expectations</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Jan 9, 2021
+            
+               •
+  
+    
+    
+      
+    
+      
+        <a href="/categories/thoughts/">thoughts</a>
+      
+    
+      
+    
+      
+    
+  
+
+
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <p>According to Google, an <code class="language-plaintext highlighter-rouge">expectation</code> is</p>
+
+<blockquote>
+  <p>a strong belief that something will happen or be the case in the future.</p>
+</blockquote>
+
+<p>We set resolutions in a new year hoping that our behavior will change in accordance with them. Whether it’s fitness goals or exploring new hobbies, inconsistencies after the ‘honeymoon’ phase will revert people’s behaviors back to what is comfortable.</p>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/2021/01/09/thoughts-into-new-year/">Read on &rarr;</a>
+          </p>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/2021/01/01/playlists/">Playlists of the Year</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Jan 1, 2021
+            
+               •
+  
+    
+    
+      
+        <a href="/categories/music/">music</a>
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <p>Music has always been an important aspect in my life.</p>
+
+<p>Here you can find some highlights of the year: sounds that make me dance at 1am in my garage, lyrics that make me want to sing like a hooligan trying to sound like Mariah Carey, and nostalgic waveforms that make me cry during the hours you realize that memories remain in the past.</p>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/2021/01/01/playlists/">Read on &rarr;</a>
+          </p>
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="pagination">
+    
+
+    
+      <a class="next" href="/">Newer &raquo;</a>
+    
+  </div>
+
+
+
+</div>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy; Ferdie Taruc - Reimagining Data
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

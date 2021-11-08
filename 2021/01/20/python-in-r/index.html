@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Python Integration in RStudio?</title>
+  <meta name="description" content="It’s finally here! Well, it has been here actually. The reticulate package has provided tools for interoperability between Python and R; it allows: Calling Python from R in a variety of ways including R Markdown, sourcing Python scripts, importing Python modules, and using Python interactively within an R session. Translation between R and Python objects (for example, between R and Pandas data frames, or between R-matrices and NumPy arrays). Flexible binding to different versions of Python including virtual environments and Conda environments.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://ftaruc.github.io/2021/01/20/python-in-r/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="ferdie" href="https://ftaruc.github.io/feed.xml">
+
+  
+
+  
+  <meta property="og:title" content="Python Integration in RStudio?">
+  <meta property="og:site_name" content="ferdie">
+  <meta property="og:url" content="https://ftaruc.github.io/2021/01/20/python-in-r/">
+  <meta property="og:description" content="It’s finally here! Well, it has been here actually. The reticulate package has provided tools for interoperability between Python and R; it allows: Calling Python from R in a variety of ways including R Markdown, sourcing Python scripts, importing Python modules, and using Python interactively within an R session. Translation between R and Python objects (for example, between R and Pandas data frames, or between R-matrices and NumPy arrays). Flexible binding to different versions of Python including virtual environments and Conda environments.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="Python Integration in RStudio?">
+  <meta name="twitter:description" content="It’s finally here! Well, it has been here actually. The reticulate package has provided tools for interoperability between Python and R; it allows: Calling Python from R in a variety of ways includ...">
+  
+  
+
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">ferdie</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/about/">About</a>
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="https://github.com/ftaruc">GitHub</a>
+      
+        
+        <a class="page-link" href="https://ftaruc.github.io/files/resume.pdf">Resume</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Python Integration in RStudio?</h1>
+    
+    <p class="post-meta"><time datetime="2021-01-20T06:10:56+00:00" itemprop="datePublished">Jan 20, 2021</time> •
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/categories/notes/">notes</a>
+      
+    
+      
+    
+  
+
+
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <center><img src="https://ferdie.org/images/python.jpg" alt="title" style="zoom: 60%;" /></center>
+
+<p>It’s finally here! <em>Well,</em> it has been here actually. The <code class="language-plaintext highlighter-rouge">reticulate</code> package has provided tools for interoperability between Python and R; it allows:</p>
+
+<ul>
+  <li>Calling Python from R in a variety of ways including R Markdown, sourcing Python scripts, importing Python modules, and using Python interactively within an R session.</li>
+  <li>Translation between R and Python objects (for example, between R and Pandas data frames, or between R-matrices and NumPy arrays).</li>
+  <li>Flexible binding to different versions of Python including virtual environments and Conda environments.</li>
+</ul>
+
+<!-- more -->
+
+<h4><strong>So What Changed?</strong></h4>
+
+<p>Through the new <a href="https://blog.rstudio.com/2021/01/19/announcing-rstudio-1-4/">update</a> for RStudio 1.4, the Python editing experience has been improved even further:</p>
+
+<ul>
+  <li>The default Python interpreter to be used by RStudio / <code class="language-plaintext highlighter-rouge">reticulate</code> can now be customized in the Global Options pane.</li>
+  <li>The Environment pane now displays a summary of Python objects available in the main module when the <code class="language-plaintext highlighter-rouge">reticulate</code> REPL is active.</li>
+  <li>Python objects can now be viewed and explored within the RStudio data viewer and object explorer.</li>
+</ul>
+
+<p>Currently, only static plots are supported, and dynamic plots may be implemented by future updates. This still means however that RStudio can render plots generated by both <code class="language-plaintext highlighter-rouge">seaborn</code> and <code class="language-plaintext highlighter-rouge">matplotlib</code> for visualizations.  Additionally,<code class="language-plaintext highlighter-rouge">matplotlib</code> plots can now be displayed within the Plots pane when <code class="language-plaintext highlighter-rouge">show()</code> is called.</p>
+
+<center><img src="https://ferdie.org/images/seaborn.png" alt="seaborn" style="zoom: 100%;" /></center>
+
+<p>–</p>
+
+<h4><strong>So <em>Why</em> Integrate?</strong></h4>
+
+<p>Data scientists no longer have to choose between R or Python – especially when data science teams today have the ability to leverage both R and Python in their projects.</p>
+
+<p>Under the same platform there is:</p>
+
+<ol>
+  <li>Easier collaboration and sharing work among teams</li>
+  <li>Less cost on a project for organization and maintenance of projects with the elimination of additional overhead</li>
+  <li>Less effort for the maintenance, management, and scale of projects that use separate environments of different languages.</li>
+</ol>
+
+<p>Like Anaconda, the data science ecosystem can be readily accessible by one platform.</p>
+
+<h4><strong>Configuring Python in RStudio:</strong></h4>
+
+<p>So to configure python with RStudio, make sure to first install a base version of Python.</p>
+
+<p>Then install the <code class="language-plaintext highlighter-rouge">reticulate</code> package from CRAN:</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"reticulate"</span><span class="p">)</span><span class="w">
+</span><span class="n">reticulate</span><span class="o">::</span><span class="n">py_config</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">reticulate</code> uses the Python version from your PATH which can be checked through:</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Sys.which</span><span class="p">(</span><span class="s2">"python"</span><span class="p">))</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"C:\Users\ferdi\AppData\Local\Programs\Python\PYTHON~1\python.exe"</span><span class="w"> 
+</span></code></pre></div></div>
+
+<p>You can also enable virtual/conda environments:</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">reticulate</span><span class="p">)</span><span class="w">
+</span><span class="n">use_virtualenv</span><span class="p">(</span><span class="s2">"myenv"</span><span class="p">)</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">use_condaenv</span><span class="p">(</span><span class="s2">"myenv"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Now, you can run different chunks using both python and R:</p>
+</blockquote>
+
+<center><img src="https://ferdie.org/images/chunks.png" alt="chunks" style="zoom: 100%;" /></center>
+
+<p>–</p>
+
+<p>For more resources:</p>
+
+<ol>
+  <li><a href="https://rstudio.github.io/reticulate/">Reticulate Documentation</a></li>
+  <li><a href="https://blog.rstudio.com/2020/10/30/why-rstudio-supports-python/">Why RStudio Supports Python for Data Science</a></li>
+  <li><a href="https://support.rstudio.com/hc/en-us/articles/360023654474-Installing-and-Configuring-Python-with-RStudio">Configuring RStudio with Python</a></li>
+</ol>
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy; Ferdie Taruc - Reimagining Data
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
