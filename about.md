@@ -12,15 +12,12 @@ Read about my updated thoughts for the rest of 2021 [here](https://ferdie.org/20
 `favorite articles/videos from this year`
 
 1. [Hanakotoba (花言葉)](https://en.wikipedia.org/wiki/Hanakotoba)
-2. [How Spotify's Shuffle Algo. Works](https://medium.com/immensity/how-spotifys-shuffle-algorithm-works-19e963e75171)
 3. [Hiroo Onoda - What is a Right Goal?](https://en.wikipedia.org/wiki/Hiroo_Onoda)
 4. [MY FAVORITE PHOTOGRAPHER: RINKO KAWAUCHI (川内 倫子)](https://www.youtube.com/watch?v=8bKy_MR_G80)
-5. [【Park Live】青葉市子｜Ichiko Aoba 2020.7.3（fri） 20:00〜](https://www.youtube.com/watch?v=p3zsx13sd0A)
-6. [GENESIS 2](https://www.youtube.com/watch?v=VQbcEF_3pEQ)/[GODSPEED](https://www.youtube.com/watch?v=ZYAzo5OdqHM)
 
 --
 
-I am **Ferdie Taruc**, a recent U.C. Berkeley graduate in Economics and Data Science. I currently work as a Product Research & Development Analyst at Geico.
+I am **Ferdie Taruc**, a recent U.C. Berkeley graduate in Economics and Data Science. I currently work as a Product R&D Analyst at GEICO.
 
 For inquiries, reach me through my email : `ferdie@berkeley.edu`
 
