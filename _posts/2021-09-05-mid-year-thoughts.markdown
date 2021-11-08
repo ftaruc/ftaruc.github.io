@@ -18,27 +18,27 @@ Here's a refresher of the expectations I placed earlier this year:
 
 * <s>Learn how to create interactive dashboards through Shiny (R*) or Bokeh (Python), and learn which KPI's are important to convey to certain stakeholders (such as: focusing on sales, margins, volumes and conversions -- or the performance of a products in different regions). </s>
 
-  ***Although I did not learn the fundamentals of Shiny or Bokeh, I did learn Streamlit and created a personal project that displayed a dashboard about Grailed. This project can be found [here](https://ferdie.org/2021/04/08/scraping-grailed/).**
+  **Although I did not learn the fundamentals of Shiny or Bokeh, I did learn Streamlit and created a personal project that displayed a dashboard about Grailed. This project can be found [here](https://ferdie.org/2021/04/08/scraping-grailed/).**
 
   * <s>Learn and deploy a personal project through [StreamLit](https://docs.streamlit.io/en/stable/). </s>
 
 * <S>Be employed as a data analyst, and continue to grow in my free time to transition into a career as a data scientist.</S>
 
-  ***My biggest accomplishment! Although it took me 6 months (and 150+ applications to data analyst/data scientist relevant roles, I finally landed a job. I still plan to make a future post (the failures & success) and general overview and overall reflection about the whole process. **
+  **My biggest accomplishment! Although it took me 6 months (and 150+ applications to data analyst/data scientist relevant roles, I finally landed a job. I still plan to make a future post (the failures & success) and general overview and overall reflection about the whole process. **
 
 > Here's what I **did not complete:**
 
 * Re-learn statistical, ML, and AI theory  for interviews.
 
-  ***Unfortunately, I was completely burnt out from learning Data Science through college; and every attempt to re-learn the material was almost impossible. I decided to focus on potential questions that were relevant to each interview instead. **
+  **Unfortunately, I was completely burnt out from learning Data Science through college; and every attempt to re-learn the material was almost impossible. I decided to focus on potential questions that were relevant to each interview instead. **
   
 * Learn Docker containerization and its relation to deployment, AWS services like Redshift, Azure, or GCP.
 
-  ***I was really sad that I did not take the time to learn this. Cloud services sound fascinating to me, and is relevant to my current job. This will be a priority for the future if I decide to learn something new.**
+  **I was really sad that I did not take the time to learn this. Cloud services sound fascinating to me, and is relevant to my current job. This will be a priority for the future if I decide to learn something new.**
 
 * Become a [full-stack python](https://www.fullstackpython.com/) developer, namely to learn [web development](https://www.fullstackpython.com/web-development.html) and then learn how to [deploy web applications](https://www.fullstackpython.com/deployment.html) to present models I built through projects.
 
-  ***This was completely expected as this is more of a pipe-dream. However, I would still love to learn more about web-development so I can create a personal website (that's not a blog) for myself to express my creativity. **
+  **This was completely expected as this is more of a pipe-dream. However, I would still love to learn more about web-development so I can create a personal website (that's not a blog) for myself to express my creativity. **
 
 ---
 

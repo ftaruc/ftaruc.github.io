@@ -7,14 +7,7 @@ permalink: /about/
 
 `Reimagining data` -- this website is dedicated to transparent discussions on the broad field of data science and analytics in today's data bubble. I'll be sharing my own personal projects and will be blogging about new topics I have learned throughout the year.  
 
-Read about my thoughts for 2021 [here](https://ferdie.org/2021/01/09/thoughts-into-new-year/).
-
-`some research papers that i plan to read`
-
-1. [Machine Learning Methods Economists Should Know About](https://arxiv.org/pdf/1903.10075.pdf?fbclid=IwAR3myRPQgNZaYOsvbGeG5LIXtyIpFU-fZ5P1AizjpEV2mtA4tzQ8yfLlU1c)
-2. [Why do Nigerian Scammers Say They are from Nigeria? - Microsoft](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/WhyFromNigeria.pdf)
-3. [Machine Learning: An Applied Econometric Approach](https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.31.2.87)
-4. [The case of the disappearing teaspoons: longitudinal cohort study of the displacement of teaspoons in an Australian research institute](https://www.bmj.com/content/bmj/331/7531/1498.full.pdf)
+Read about my updated thoughts for the rest of 2021 [here](https://ferdie.org/2021/01/09/thoughts-into-new-year/).
 
 `favorite articles/videos from this year`
 
@@ -27,7 +20,7 @@ Read about my thoughts for 2021 [here](https://ferdie.org/2021/01/09/thoughts-in
 
 --
 
-I am **Ferdie Taruc**, a recent U.C. Berkeley graduate in Economics and Data Science.
+I am **Ferdie Taruc**, a recent U.C. Berkeley graduate in Economics and Data Science. I currently work as a Product Research & Development Analyst at Geico.
 
 For inquiries, reach me through my email : `ferdie@berkeley.edu`
 
