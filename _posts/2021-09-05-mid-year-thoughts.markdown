@@ -32,7 +32,7 @@ Here's a refresher of the expectations I placed earlier this year:
 
 * Re-learn statistical, ML, and AI theory  for interviews.
 
-  **Unfortunately, I was completely burnt out from learning Data Science through college; and every attempt to re-learn the material was almost impossible. I decided to focus on potential questions that were relevant to each interview instead. **
+  **Unfortunately, I was completely burnt out from learning Data Science through college; and every attempt to re-learn the material was almost impossible. I decided to focus on potential questions that were relevant to each interview instead.**
   
   
   
@@ -44,7 +44,7 @@ Here's a refresher of the expectations I placed earlier this year:
 
 * Become a [full-stack python](https://www.fullstackpython.com/) developer, namely to learn [web development](https://www.fullstackpython.com/web-development.html) and then learn how to [deploy web applications](https://www.fullstackpython.com/deployment.html) to present models I built through projects.
 
-  **This was completely expected as this is more of a pipe-dream. However, I would still love to learn more about web-development so I can create a personal website (that's not a blog) for myself to express my creativity. **
+  **This was completely expected as this is more of a pipe-dream. However, I would still love to learn more about web-development so I can create a personal website (that's not a blog) for myself to express my creativity.**
 
 ---
 
