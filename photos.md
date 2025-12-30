@@ -342,17 +342,24 @@ body .wrapper {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
+  /* Explicitly disable transitions on position properties */
+  transition-property: opacity !important;
   z-index: 9999;
   background: transparent;
   box-shadow: none;
   border-radius: 0;
   overflow: hidden;
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
   transform: none !important;
   /* Position will be set by JavaScript at cursor */
-  /* Ensure no parent transforms affect this */
+  /* Ensure no parent transforms affect this - fixed positioning relative to viewport */
   isolation: isolate;
+  /* Force positioning relative to viewport, not any parent */
+  inset: unset !important; /* Remove inset to allow left/top to work */
+  /* left and top will be set dynamically by JavaScript */
+  right: auto !important;
+  bottom: auto !important;
 }
 
 .image-preview.active {
@@ -605,6 +612,20 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Get preview elements first
   const preview = document.getElementById('imagePreview');
+  
+  // Immediately move preview to html (not body) to avoid body's position:relative creating containing block
+  // body has position:relative from head_custom.html which breaks fixed positioning
+  if (preview && preview.parentElement !== document.documentElement) {
+    document.documentElement.appendChild(preview);
+  }
+  
+  // Initialize preview position off-screen to prevent it from appearing at top
+  // But don't override opacity - let CSS handle that
+  if (preview) {
+    preview.style.setProperty('position', 'fixed', 'important');
+    preview.style.setProperty('left', '-9999px', 'important');
+    preview.style.setProperty('top', '-9999px', 'important');
+  }
   const carousel = document.getElementById('imageCarousel');
   const previewCaption = document.getElementById('previewCaption');
   
@@ -641,54 +662,76 @@ document.addEventListener('DOMContentLoaded', function() {
   ];
   
   let currentPhotoIndex = -1;
-  let hoverTimeout = null;
   let isScrolling = false;
   let scrollTimeout = null;
   
   // Create a map of photo indices to rows (used for reference)
   const photoIndexToRowMap = new Map();
   
-  // Function to update preview position at cursor
+  // Function to update preview position at cursor (viewport coordinates)
   function updatePreviewPosition(x, y) {
-    // Validate coordinates
-    if (!x || !y || x <= 0 || y <= 0) {
-      console.warn('Invalid coordinates for updatePreviewPosition:', x, y);
+    // Validate coordinates (viewport coordinates)
+    if (typeof x !== 'number' || typeof y !== 'number' || x < 0 || y < 0) {
       return;
+    }
+    
+    // Ensure preview is in html (not body) to avoid body's position:relative creating containing block
+    // body has position:relative from head_custom.html which breaks fixed positioning
+    if (preview.parentElement !== document.documentElement) {
+      document.documentElement.appendChild(preview);
     }
     
     const previewWidth = 450;
     const previewHeight = 450;
     const offset = 20; // Offset from cursor
     
-    // Calculate position - center preview vertically on cursor
-    let left = x - previewWidth - offset;
-    let top = y - previewHeight / 2;
+    // Get viewport dimensions (what's actually visible)
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
     
-    // Keep preview within viewport bounds, but prioritize cursor alignment
+    // Calculate position - place preview above and to the right of cursor
+    let left = x + 200; // Offset to the right by 250px
+    let top = y - 250; // Offset upward by 250px so preview appears above cursor
+    
+    // Keep preview within visible viewport bounds horizontally
+    if (left + previewWidth > viewportWidth) {
+      left = viewportWidth - previewWidth - 10; // Shift left if it would overflow right
+    }
     if (left < 0) {
-      left = x + offset; // Place to the right if not enough space on left
-    }
-    // Only clamp top if preview would be completely off-screen (more than 90% off)
-    if (top < -previewHeight * 0.9) {
-      top = y - previewHeight * 0.1; // Show bottom 10% of preview
-    }
-    // Only clamp bottom if preview would be completely off-screen (more than 90% off)
-    // This allows the preview to extend below viewport for better cursor alignment
-    const bottomEdge = top + previewHeight;
-    if (bottomEdge > window.innerHeight + previewHeight * 0.9) {
-      top = y - previewHeight * 0.9; // Show top 90% of preview
-    }
-    if (left + previewWidth > window.innerWidth) {
-      left = window.innerWidth - previewWidth - 10; // Keep within right edge
+      left = 10; // Keep within left edge
     }
     
-    preview.style.position = 'fixed';
-    preview.style.left = Math.round(left) + 'px';
-    preview.style.top = Math.round(top) + 'px';
-    preview.style.right = 'auto';
-    preview.style.margin = '0';
-    preview.style.padding = '0';
-    preview.style.transform = 'none';
+    // For vertical positioning, prioritize cursor position
+    // Only adjust if preview would be completely off-screen (more than 90% off)
+    if (top < -previewHeight * 0.9) {
+      top = 10; // Show from top if mostly above viewport
+    }
+    // Allow preview to extend below viewport - only clamp if more than 90% is off-screen
+    if (top + previewHeight > viewportHeight + previewHeight * 0.9) {
+      top = viewportHeight - previewHeight * 0.1; // Show top 10% if mostly below viewport
+    }
+    
+    // Set position using fixed positioning (relative to viewport, not page)
+    // Fixed positioning is relative to the viewport, not any parent container
+    // Use setProperty with !important to override any CSS that might interfere
+    preview.style.setProperty('position', 'fixed', 'important');
+    preview.style.removeProperty('inset'); // Remove inset completely
+    preview.style.setProperty('left', Math.round(left) + 'px', 'important');
+    preview.style.setProperty('top', Math.round(top) + 'px', 'important');
+    preview.style.removeProperty('right'); // Remove right completely
+    preview.style.removeProperty('bottom'); // Remove bottom completely
+    preview.style.setProperty('margin', '0', 'important');
+    preview.style.setProperty('padding', '0', 'important');
+    preview.style.setProperty('transform', 'none', 'important');
+    
+    // Force a reflow to ensure the position is applied
+    void preview.offsetHeight;
+    
+    // Ensure position persists - set it again in next frame to override any transitions
+    requestAnimationFrame(function() {
+      preview.style.setProperty('left', Math.round(left) + 'px', 'important');
+      preview.style.setProperty('top', Math.round(top) + 'px', 'important');
+    });
   }
   
   // Track mouse position globally for preview positioning
@@ -703,24 +746,18 @@ document.addEventListener('DOMContentLoaded', function() {
     lastX = e.clientX;
     lastY = e.clientY;
     
-    // Update preview position if active
-    if (preview.classList.contains('active')) {
+    // Update preview position if active, but not immediately after a click
+    if (preview.classList.contains('active') && !justClicked) {
       updatePreviewPosition(lastX, lastY);
     }
   }, true);
   
-  // Update preview position during scroll to ensure it stays aligned with cursor
+  // Update preview position during scroll - fixed positioning is viewport-relative,
+  // so we just need to ensure it stays at the cursor position (which is viewport-relative)
   window.addEventListener('scroll', function() {
-    if (preview.classList.contains('active')) {
-      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-      
-      // Adjust Y position based on scroll delta (for fixed positioning, clientY stays same)
-      // But we ensure the preview stays at the cursor position
-      if (lastScrolled !== currentScroll) {
-        lastScrolled = currentScroll;
-      }
-      
-      // Update preview position to stay at cursor (clientX/clientY are viewport-relative)
+    if (preview.classList.contains('active') && lastX > 0 && lastY > 0) {
+      // clientX/clientY are viewport-relative, so fixed positioning naturally stays aligned
+      // Just ensure the preview position is updated to current cursor (viewport coordinates)
       updatePreviewPosition(lastX, lastY);
     }
   }, { passive: true });
@@ -989,65 +1026,48 @@ document.addEventListener('DOMContentLoaded', function() {
       photoIndexToRowMap.set(photoIndex, row);
       
       row.addEventListener('mouseenter', function(e) {
-        if (hoverTimeout) {
-          clearTimeout(hoverTimeout);
-        }
-        
-        hoverTimeout = setTimeout(function() {
-          if (photoIndex >= 0 && photoIndex < allPhotos.length) {
-            const previousIndex = currentPhotoIndex;
-            let direction = null;
-            if (previousIndex !== -1 && previousIndex !== photoIndex && previousIndex >= 0 && previousIndex < allPhotos.length) {
-              direction = photoIndex < previousIndex ? 'right' : 'left';
-            }
-            currentPhotoIndex = photoIndex;
-            
-            // Ensure preview is in body (not nested in containers)
-            if (preview.parentElement !== document.body) {
-              document.body.appendChild(preview);
-            }
-            
-            // Position at cursor - always use the event coordinates
-            const mouseX = e.clientX || lastX;
-            const mouseY = e.clientY || lastY;
-            lastX = mouseX;
-            lastY = mouseY;
-            updatePreviewPosition(mouseX, mouseY);
-            
-            // Load image and update carousel BEFORE showing preview
-            loadImage(photoIndex);
-            updateCarousel(currentPhotoIndex, previousIndex, direction);
-            
-            // Show preview after a tiny delay to ensure image is set up
-            requestAnimationFrame(function() {
-              preview.classList.add('active');
-            });
+        if (photoIndex >= 0 && photoIndex < allPhotos.length) {
+          const previousIndex = currentPhotoIndex;
+          let direction = null;
+          if (previousIndex !== -1 && previousIndex !== photoIndex && previousIndex >= 0 && previousIndex < allPhotos.length) {
+            direction = photoIndex < previousIndex ? 'right' : 'left';
           }
-          hoverTimeout = null;
-        }, 0);
-      });
-      
-      // Update preview position as mouse moves over row
-      row.addEventListener('mousemove', function(e) {
-        // Always update stored mouse position
-        lastX = e.clientX;
-        lastY = e.clientY;
-        
-        if (preview.classList.contains('active') && currentPhotoIndex === photoIndex) {
-          updatePreviewPosition(e.clientX, e.clientY);
+          currentPhotoIndex = photoIndex;
+          
+          // Ensure preview is in html (not body) to avoid containing block issues
+          if (preview.parentElement !== document.documentElement) {
+            document.documentElement.appendChild(preview);
+          }
+          
+          // Position at cursor coordinates (viewport-relative)
+          const mouseX = e.clientX; // Viewport X coordinate
+          const mouseY = e.clientY; // Viewport Y coordinate
+          
+          // Update stored position
+          lastX = mouseX;
+          lastY = mouseY;
+          
+          // Set position immediately
+          updatePreviewPosition(mouseX, mouseY);
+          
+          // Load image and update carousel BEFORE showing preview
+          loadImage(photoIndex);
+          updateCarousel(currentPhotoIndex, previousIndex, direction);
+          
+          // Show preview
+          requestAnimationFrame(function() {
+            preview.classList.add('active');
+            preview.style.setProperty('opacity', '1', 'important');
+          });
         }
       });
       
       row.addEventListener('mouseleave', function() {
-        if (hoverTimeout) {
-          clearTimeout(hoverTimeout);
-        }
-        if (currentHoveredRow === row) {
-          currentHoveredRow = null;
-        }
         preview.classList.remove('active');
+        preview.style.setProperty('opacity', '0', 'important');
       });
     });
+    
   }
 });
 </script>
