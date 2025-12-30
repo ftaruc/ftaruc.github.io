@@ -20,7 +20,7 @@ permalink: /photos/
         <h2 class="project-title">{{ project_name }}</h2>
         <button class="project-toggle" data-project="{{ project_name }}">{{ project_name }}</button>
       </div>
-      <div class="project-container" data-project="{{ project_name }}" style="display: none;">
+      <div class="project-container" data-project="{{ project_name }}">
         <table class="presentation-table">
         <thead>
           <tr>
@@ -211,6 +211,11 @@ body .wrapper {
 
 .project-container {
   margin-bottom: 0;
+  display: block; /* Show all containers by default */
+  visibility: visible;
+  opacity: 1;
+  height: auto;
+  min-height: 0;
 }
 
 .project-header {
@@ -331,22 +336,23 @@ body .wrapper {
 }
 
 .image-preview {
-  position: fixed;
-  right: 100px;
+  position: fixed !important;
   width: 450px;
   max-height: 80vh;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease, top 0.2s ease;
-  z-index: 10;
+  transition: opacity 0.4s ease;
+  z-index: 9999;
   background: transparent;
   box-shadow: none;
   border-radius: 0;
   overflow: hidden;
   margin: 0;
   padding: 0;
-  transform: none;
-  /* Top position will be set by JavaScript */
+  transform: none !important;
+  /* Position will be set by JavaScript at cursor */
+  /* Ensure no parent transforms affect this */
+  isolation: isolate;
 }
 
 .image-preview.active {
@@ -360,7 +366,7 @@ body .wrapper {
   height: 450px;
   min-height: 450px;
   transform-style: preserve-3d;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
 
@@ -373,7 +379,7 @@ body .wrapper {
   backface-visibility: visible;
   opacity: 0;
   transform: rotateY(90deg) translateZ(250px);
-  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   transform-style: preserve-3d;
   transform-origin: center center;
   display: block;
@@ -534,10 +540,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const projectContainers = document.querySelectorAll('.project-container');
   const projectButtons = {};
   
-  // Show first project by default
-  if (projectContainers.length > 0) {
-    projectContainers[0].style.display = 'block';
-  }
+  // Show all projects by default (CSS handles this, but ensure it's set)
+  // Don't set inline styles here - let CSS handle it, JavaScript will override when needed
   
   // Create filter buttons for each project (hidden, not used)
   projectContainers.forEach(container => {
@@ -570,23 +574,36 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Toggle button functionality
   document.querySelectorAll('.project-toggle').forEach(toggleBtn => {
-    toggleBtn.addEventListener('click', function() {
+    toggleBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
       const projectName = this.dataset.project;
       const container = document.querySelector(`.project-container[data-project="${projectName}"]`);
       const filterBtn = projectButtons[projectName];
       
-      if (container.style.display !== 'none') {
-        container.style.display = 'none';
+      if (!container) {
+        console.error('Container not found for project:', projectName);
+        return;
+      }
+      
+      // Toggle visibility - check current state
+      const currentDisplay = container.style.getPropertyValue('display');
+      const computedDisplay = window.getComputedStyle(container).display;
+      const isVisible = computedDisplay !== 'none' && currentDisplay !== 'none';
+      
+      console.log('Toggle clicked for', projectName, '- Current display:', computedDisplay, '- Will toggle to:', isVisible ? 'hidden' : 'visible');
+      
+      if (isVisible) {
+        container.style.setProperty('display', 'none', 'important');
         if (filterBtn) filterBtn.classList.remove('active');
       } else {
-        container.style.display = 'block';
+        container.style.removeProperty('display'); // Remove inline style to use CSS default
         if (filterBtn) filterBtn.classList.add('active');
       }
     });
   });
   
-  // Get elements - query rows from all containers (including hidden ones)
-  const rows = document.querySelectorAll('.presentation-row');
+  // Get preview elements first
   const preview = document.getElementById('imagePreview');
   const carousel = document.getElementById('imageCarousel');
   const previewCaption = document.getElementById('previewCaption');
@@ -597,9 +614,20 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
   
-  if (rows.length === 0) {
-    console.warn('No presentation rows found');
-  }
+  // Query rows AFTER ensuring containers are visible - use a small delay to ensure DOM is ready
+  setTimeout(function() {
+    const rows = document.querySelectorAll('.presentation-row');
+    
+    if (rows.length === 0) {
+      console.error('No presentation rows found - check if containers are visible');
+      return;
+    }
+    
+    console.log('Found', rows.length, 'presentation rows');
+    
+    // Setup photo preview handlers - rows are now available
+    setupPhotoPreviewHandlers(rows);
+  }, 100);
   
   // Get all photos from data
   const allPhotos = [
@@ -617,34 +645,86 @@ document.addEventListener('DOMContentLoaded', function() {
   let isScrolling = false;
   let scrollTimeout = null;
   
-  // Create a map of photo indices to rows for scroll tracking (initialize early)
+  // Create a map of photo indices to rows (used for reference)
   const photoIndexToRowMap = new Map();
   
-  // Track if we're currently hovering (to prevent scroll handler from interfering)
-  let isHovering = false;
+  // Function to update preview position at cursor
+  function updatePreviewPosition(x, y) {
+    // Validate coordinates
+    if (!x || !y || x <= 0 || y <= 0) {
+      console.warn('Invalid coordinates for updatePreviewPosition:', x, y);
+      return;
+    }
+    
+    const previewWidth = 450;
+    const previewHeight = 450;
+    const offset = 20; // Offset from cursor
+    
+    // Calculate position - center preview vertically on cursor
+    let left = x - previewWidth - offset;
+    let top = y - previewHeight / 2;
+    
+    // Keep preview within viewport bounds, but prioritize cursor alignment
+    if (left < 0) {
+      left = x + offset; // Place to the right if not enough space on left
+    }
+    // Only clamp top if preview would be completely off-screen (more than 90% off)
+    if (top < -previewHeight * 0.9) {
+      top = y - previewHeight * 0.1; // Show bottom 10% of preview
+    }
+    // Only clamp bottom if preview would be completely off-screen (more than 90% off)
+    // This allows the preview to extend below viewport for better cursor alignment
+    const bottomEdge = top + previewHeight;
+    if (bottomEdge > window.innerHeight + previewHeight * 0.9) {
+      top = y - previewHeight * 0.9; // Show top 90% of preview
+    }
+    if (left + previewWidth > window.innerWidth) {
+      left = window.innerWidth - previewWidth - 10; // Keep within right edge
+    }
+    
+    preview.style.position = 'fixed';
+    preview.style.left = Math.round(left) + 'px';
+    preview.style.top = Math.round(top) + 'px';
+    preview.style.right = 'auto';
+    preview.style.margin = '0';
+    preview.style.padding = '0';
+    preview.style.transform = 'none';
+  }
   
-  // Scroll handler - update preview position when scrolling
-  let scrollRAF = null;
+  // Track mouse position globally for preview positioning
+  let lastX = window.innerWidth / 2; // Last mouse X position
+  let lastY = window.innerHeight / 2; // Last mouse Y position  
+  let lastScrolled = 0; // Last scroll position
+  let currentHoveredRow = null;
+  
+  // Track mouse position globally - use capture phase to catch all mouse movements
+  document.addEventListener('mousemove', function(e) {
+    // Update last position (using viewport coordinates for fixed positioning)
+    lastX = e.clientX;
+    lastY = e.clientY;
+    
+    // Update preview position if active
+    if (preview.classList.contains('active')) {
+      updatePreviewPosition(lastX, lastY);
+    }
+  }, true);
+  
+  // Update preview position during scroll to ensure it stays aligned with cursor
   window.addEventListener('scroll', function() {
-    if (preview.classList.contains('active') && currentPhotoIndex >= 0) {
-      const hoveredRow = photoIndexToRowMap.get(currentPhotoIndex);
-      if (hoveredRow) {
-        if (scrollRAF) cancelAnimationFrame(scrollRAF);
-        scrollRAF = requestAnimationFrame(function() {
-          const rowRect = hoveredRow.getBoundingClientRect();
-          const topValue = Math.round(rowRect.top);
-          preview.style.position = 'fixed';
-          preview.style.top = topValue + 'px';
-          preview.style.right = '100px';
-          preview.style.left = 'auto';
-          preview.style.margin = '0';
-          preview.style.padding = '0';
-          preview.style.transform = 'none';
-          scrollRAF = null;
-        });
+    if (preview.classList.contains('active')) {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Adjust Y position based on scroll delta (for fixed positioning, clientY stays same)
+      // But we ensure the preview stays at the cursor position
+      if (lastScrolled !== currentScroll) {
+        lastScrolled = currentScroll;
       }
+      
+      // Update preview position to stay at cursor (clientX/clientY are viewport-relative)
+      updatePreviewPosition(lastX, lastY);
     }
   }, { passive: true });
+  
   
   // Create image elements for carousel (lazy loading - don't set src until needed)
   const imageElements = [];
@@ -661,37 +741,56 @@ document.addEventListener('DOMContentLoaded', function() {
     img.alt = photo.title;
     img.loading = 'lazy'; // Native lazy loading
     img.dataset.src = photo.image; // Store source in data attribute
-    img.style.display = 'none'; // Hide until loaded
+    img.style.display = 'block'; // Display block but opacity 0 via CSS
+    img.style.opacity = '0'; // Start hidden
     carousel.appendChild(img);
     imageElements.push(img);
   });
   
   console.log('Created', imageElements.length, 'image elements for', allPhotos.length, 'photos');
+  console.log('Preview element:', preview);
+  console.log('Carousel element:', carousel);
+  console.log('First few photos:', allPhotos.slice(0, 3));
   
   // Function to load an image when needed
   function loadImage(index) {
-    if (index < 0 || index >= imageElements.length) return;
+    if (index < 0 || index >= imageElements.length) {
+      console.warn('loadImage: Invalid index', index, 'out of', imageElements.length);
+      return;
+    }
     const img = imageElements[index];
+    if (!img) {
+      console.warn('loadImage: No image element at index', index);
+      return;
+    }
+    
     if (!img.src && img.dataset.src) {
       // Check if image is already cached
       if (imageCache.has(img.dataset.src)) {
         img.src = img.dataset.src;
         img.style.display = 'block';
+        img.style.opacity = '1';
         return;
       }
       
+      console.log('Loading image:', img.dataset.src);
       img.src = img.dataset.src;
       img.style.display = 'block';
+      img.style.opacity = '1';
       // Cache the image once loaded
       img.onload = function() {
+        console.log('Image loaded:', img.src);
         img.style.display = 'block';
+        img.style.opacity = '1';
         imageCache.set(img.dataset.src, true);
       };
       img.onerror = function() {
         console.error('Failed to load image:', img.dataset.src);
+        img.style.display = 'none';
       };
     } else if (img.src) {
       img.style.display = 'block';
+      img.style.opacity = '1';
     }
   }
   
@@ -866,72 +965,89 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 50);
   }
   
-  // Create a map of image URLs to photo indices for fast lookup
-  const photoIndexMap = new Map();
-  allPhotos.forEach((photo, index) => {
-    photoIndexMap.set(photo.image, index);
-  });
-  
-  console.log('Setting up hover handlers for', rows.length, 'rows');
-  
-  rows.forEach((row, rowIndex) => {
-    const imageUrl = row.getAttribute('data-image');
-    // Get photo index from cached map
-    const photoIndex = photoIndexMap.get(imageUrl);
+  // Function to setup photo preview handlers (called after rows are found)
+  function setupPhotoPreviewHandlers(rows) {
+    // Create a map of image URLs to photo indices for fast lookup
+    const photoIndexMap = new Map();
+    allPhotos.forEach((photo, index) => {
+      photoIndexMap.set(photo.image, index);
+    });
     
-    if (photoIndex === undefined) {
-      console.warn('Photo not found for URL:', imageUrl);
-      return;
-    }
+    console.log('Setting up hover handlers for', rows.length, 'rows');
     
-    // Store row reference for this photo index
-    photoIndexToRowMap.set(photoIndex, row);
-    
-    row.addEventListener('mouseenter', function() {
-      if (hoverTimeout) {
-        clearTimeout(hoverTimeout);
+    rows.forEach((row, rowIndex) => {
+      const imageUrl = row.getAttribute('data-image');
+      // Get photo index from cached map
+      const photoIndex = photoIndexMap.get(imageUrl);
+      
+      if (photoIndex === undefined) {
+        console.warn('Photo not found for URL:', imageUrl);
+        return;
       }
       
-      hoverTimeout = setTimeout(function() {
-        if (photoIndex >= 0 && photoIndex < allPhotos.length) {
-          const previousIndex = currentPhotoIndex;
-          let direction = null;
-          if (previousIndex !== -1 && previousIndex !== photoIndex && previousIndex >= 0 && previousIndex < allPhotos.length) {
-            direction = photoIndex < previousIndex ? 'right' : 'left';
-          }
-          currentPhotoIndex = photoIndex;
-          
-          // Ensure preview is in body (not nested in containers)
-          if (preview.parentElement !== document.body) {
-            document.body.appendChild(preview);
-          }
-          
-          // Get row position immediately for faster response
-          const rowRect = row.getBoundingClientRect();
-          const topValue = Math.round(rowRect.top);
-          preview.style.position = 'fixed';
-          preview.style.top = topValue + 'px';
-          preview.style.right = '100px';
-          preview.style.left = 'auto';
-          preview.style.margin = '0';
-          preview.style.padding = '0';
-          preview.style.transform = 'none';
-          
-          loadImage(photoIndex);
-          updateCarousel(currentPhotoIndex, previousIndex, direction);
-          preview.classList.add('active');
+      // Store row reference for this photo index
+      photoIndexToRowMap.set(photoIndex, row);
+      
+      row.addEventListener('mouseenter', function(e) {
+        if (hoverTimeout) {
+          clearTimeout(hoverTimeout);
         }
-        hoverTimeout = null;
-      }, 0);
+        
+        hoverTimeout = setTimeout(function() {
+          if (photoIndex >= 0 && photoIndex < allPhotos.length) {
+            const previousIndex = currentPhotoIndex;
+            let direction = null;
+            if (previousIndex !== -1 && previousIndex !== photoIndex && previousIndex >= 0 && previousIndex < allPhotos.length) {
+              direction = photoIndex < previousIndex ? 'right' : 'left';
+            }
+            currentPhotoIndex = photoIndex;
+            
+            // Ensure preview is in body (not nested in containers)
+            if (preview.parentElement !== document.body) {
+              document.body.appendChild(preview);
+            }
+            
+            // Position at cursor - always use the event coordinates
+            const mouseX = e.clientX || lastX;
+            const mouseY = e.clientY || lastY;
+            lastX = mouseX;
+            lastY = mouseY;
+            updatePreviewPosition(mouseX, mouseY);
+            
+            // Load image and update carousel BEFORE showing preview
+            loadImage(photoIndex);
+            updateCarousel(currentPhotoIndex, previousIndex, direction);
+            
+            // Show preview after a tiny delay to ensure image is set up
+            requestAnimationFrame(function() {
+              preview.classList.add('active');
+            });
+          }
+          hoverTimeout = null;
+        }, 0);
+      });
+      
+      // Update preview position as mouse moves over row
+      row.addEventListener('mousemove', function(e) {
+        // Always update stored mouse position
+        lastX = e.clientX;
+        lastY = e.clientY;
+        
+        if (preview.classList.contains('active') && currentPhotoIndex === photoIndex) {
+          updatePreviewPosition(e.clientX, e.clientY);
+        }
+      });
+      
+      row.addEventListener('mouseleave', function() {
+        if (hoverTimeout) {
+          clearTimeout(hoverTimeout);
+        }
+        if (currentHoveredRow === row) {
+          currentHoveredRow = null;
+        }
+        preview.classList.remove('active');
+      });
     });
-    
-    row.addEventListener('mouseleave', function() {
-      if (hoverTimeout) {
-        clearTimeout(hoverTimeout);
-      }
-      preview.classList.remove('active');
-    });
-  });
-  
+  }
 });
 </script>

@@ -148,6 +148,7 @@ GEM
     unicode-display_width (2.6.0)
     wdm (0.1.1)
     webrick (1.9.2)
+    exifr (1.5.1)
 
 PLATFORMS
   aarch64-linux-android
@@ -171,6 +172,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  exifr
   jekyll (~> 4.1)
   jekyll-whiteglass
   tzinfo (~> 1.2)
@@ -252,6 +254,7 @@ CHECKSUMS
   unicode-display_width (2.6.0) sha256=12279874bba6d5e4d2728cef814b19197dbb10d7a7837a869bab65da943b7f5a
   wdm (0.1.1) sha256=28406f5f236796019bea5b2a85e37cbcd229ec928c8b68261947a44eec15b474
   webrick (1.9.2) sha256=beb4a15fc474defed24a3bda4ffd88a490d517c9e4e6118c3edce59e45864131
+  exifr (1.5.1) sha256=8b3605271e660628c443db470616edf8000975f8c2deedf73e81433958fc4f26
 
 BUNDLED WITH
   4.0.2
