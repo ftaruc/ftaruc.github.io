@@ -29,6 +29,8 @@ permalink: /about/
       <p><strong>For inquiries</strong>, reach me through my email: <a href="mailto:ferdie@berkeley.edu">ferdie@berkeley.edu</a></p>
       
       <p><strong>GitHub</strong>: <a href="https://github.com/ftaruc" target="_blank">@ftaruc</a></p>
+
+      <p><strong>Youtube</strong>: <a href="https://youtube.com/morimentos" target="_blank">@morimentos</a></p>
     </div>
     
     <div class="about-divider"></div>

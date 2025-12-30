@@ -4,8 +4,33 @@
 require 'yaml'
 require 'fileutils'
 
+# Try to load exifr for EXIF data extraction
+begin
+  require 'exifr/jpeg'
+  EXIFR_AVAILABLE = true
+rescue LoadError
+  EXIFR_AVAILABLE = false
+  puts "Warning: exifr gem not available. Using file modification time for timestamps."
+end
+
 photos_dir = File.join(__dir__, 'images', 'photos page')
 photos_data = []
+
+# Load existing photos.yml to preserve manual notes
+existing_photos = {}
+existing_file = File.join(__dir__, '_data', 'photos.yml')
+if File.exist?(existing_file)
+  begin
+    existing_data = YAML.load_file(existing_file)
+    if existing_data.is_a?(Array)
+      existing_data.each do |photo|
+        existing_photos[photo['code']] = photo['notes'] if photo['code'] && photo['notes'] && !photo['notes'].empty?
+      end
+    end
+  rescue => e
+    puts "Warning: Could not load existing photos.yml: #{e.message}"
+  end
+end
 
 # Get all project folders
 if Dir.exist?(photos_dir)
@@ -23,10 +48,31 @@ if Dir.exist?(photos_dir)
       filename = File.basename(image_path)
       filename_no_ext = File.basename(image_path, File.extname(image_path))
       
+      # Extract timestamp from EXIF or file modification time
+      timestamp = nil
+      if EXIFR_AVAILABLE && (filename.downcase.end_with?('.jpg') || filename.downcase.end_with?('.jpeg'))
+        begin
+          exif = EXIFR::JPEG.new(image_path)
+          timestamp = exif.date_time_original || exif.date_time || exif.modify_date
+        rescue => e
+          # Fall back to file modification time if EXIF fails
+          timestamp = File.mtime(image_path)
+        end
+      else
+        # Use file modification time
+        timestamp = File.mtime(image_path)
+      end
+      
+      # Format timestamp as string (YYYY-MM-DD HH:MM:SS)
+      timestamp_str = timestamp ? timestamp.strftime('%Y-%m-%d %H:%M:%S') : ''
+      
+      photo_code = "#{project_name}-#{sprintf('%04d', index + 1)}"
+      
       photo_entry = {
-        'code' => "#{project_name}-#{sprintf('%04d', index + 1)}",
+        'code' => photo_code,
         'title' => filename_no_ext,
-        'notes' => '',
+        'timestamp' => timestamp_str,
+        'notes' => existing_photos[photo_code] || '',
         'image' => "/images/photos page/#{project_name}/#{filename}"
       }
       

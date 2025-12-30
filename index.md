@@ -19,7 +19,7 @@ title:
     <div class="about-content">
       <p>first generation filipino-american economics/data science graduate from uc berkeley; in search to understand the intersection of behavioral decisions and data.</p>
       
-      <p>* prior work experience: product analytics rooted in insurance: namely <em>Geico</em>, <em>Metromile</em> and <em>Lemonade</em>.</p>
+      <p>* prior work experience: product analytics rooted in insurance: namely <em>Geico</em>, <em>Metromile</em>, and <em>Lemonade</em>.</p>
     </div>
     
     <div class="about-divider"></div>
@@ -28,12 +28,14 @@ title:
       <p><strong>For inquiries</strong>, reach me through my email: <a href="mailto:ferdie@berkeley.edu">ferdie@berkeley.edu</a></p>
       
       <p><strong>GitHub</strong>: <a href="https://github.com/ftaruc" target="_blank">@ftaruc</a></p>
+
+      <p><strong>Youtube</strong>: <a href="https://youtube.com/morimentos" target="_blank">@morimentos</a> *new series soon</p>
     </div>
     
     <div class="about-divider"></div>
     
     <div class="about-section hoverable-section" data-content="playlist">
-      <p><strong>2025 playlist</strong>: <a href="/2021/01/01/playlists/">click here for the full list</a></p>
+      <p><strong>2025 playlist</strong>: <a href="/2021/01/01/playlists/">archive here</a></p>
     </div>
     
     <div class="about-divider"></div>
@@ -43,20 +45,11 @@ title:
     </div>
     
     <div class="about-section hoverable-section" data-content="films">
-      <p><strong>films</strong>: <a href="https://letterboxd.com/ferdie/" target="_blank">find me on letterbox</a></p>
+      <p><strong>films</strong>: <a href="https://letterboxd.com/ferdie/" target="_blank">find me on letterboxd</a></p>
     </div>
     
     <div class="about-section hoverable-section" data-content="albums">
-      <p><strong>albums</strong>: <a href="https://ferdie.org/images/archive%20photos/final_albums.jpg" target="_blank">high resolution</a></p>
-    </div>
-    
-    <div class="about-section hoverable-section" data-content="articles">
-      <p><strong>favorite articles/videos from this year</strong></p>
-      <ol>
-        <li><a href="https://en.wikipedia.org/wiki/Hanakotoba" target="_blank">Hanakotoba (花言葉)</a></li>
-        <li><a href="https://en.wikipedia.org/wiki/Hiroo_Onoda" target="_blank">Hiroo Onoda - What is a Right Goal?</a></li>
-        <li><a href="https://www.youtube.com/watch?v=8bKy_MR_G80" target="_blank">MY FAVORITE PHOTOGRAPHER: RINKO KAWAUCHI (川内 倫子)</a></li>
-      </ol>
+      <p><strong>albums</strong>: <a href="https://ferdie.org/images/archive%20photos/final_albums.jpg" target="_blank">old list - need to update</a></p>
     </div>
   </div>
   
@@ -104,6 +97,8 @@ body {
   background-color: #000000 !important;
   margin: 0 !important;
   padding: 0 !important;
+  overflow: hidden !important;
+  height: 100vh !important;
 }
 
 body .page-content {
@@ -116,6 +111,8 @@ html {
   background-color: #000000 !important;
   margin: 0 !important;
   padding: 0 !important;
+  overflow: hidden !important;
+  height: 100vh !important;
 }
 
 
@@ -199,7 +196,7 @@ main {
 
 .about-container {
   display: flex !important;
-  min-height: 100vh;
+  height: 100vh;
   max-width: 100%;
   margin: 0;
   padding: 0 10px;
@@ -208,11 +205,12 @@ main {
   box-sizing: border-box;
   visibility: visible !important;
   opacity: 1 !important;
+  overflow: hidden;
 }
 
 .about-sidebar {
   width: 25%;
-  padding: 5px 40px 100px 10px;
+  padding: 5px 40px 30px 10px;
   font-size: 13px;
   line-height: 1.3;
   color: #000000;
@@ -220,6 +218,8 @@ main {
   font-family: "Arial-LC", sans-serif;
   font-weight: 400;
   letter-spacing: 0.02em;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .about-header {
@@ -342,11 +342,13 @@ main {
 .about-preview {
   width: 75%;
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
   perspective: 1500px;
   perspective-origin: center center;
   background-color: #000000 !important;
-  padding: 5px 10px 100px 30px;
+  padding: 5px 10px 30px 30px;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .content-carousel {
@@ -496,7 +498,7 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     playlist: {
       type: 'spotify',
-      embed: '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4lDl97fws5cTzmqXvkKaIy?utm_source=generator" width="100%" height="600" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
+      embed: '<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2JoQqTsk7xUxln6nSgo26F?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
     },
     films: {
       type: 'image',
@@ -505,19 +507,6 @@ document.addEventListener('DOMContentLoaded', function() {
     albums: {
       type: 'image',
       src: '{{ "/images/archive photos/final_albums.jpg" | relative_url }}'
-    },
-    articles: {
-      type: 'articles',
-      content: `
-        <div class="articles-list">
-          <h3>favorite articles/videos from this year</h3>
-          <ol>
-            <li><a href="https://en.wikipedia.org/wiki/Hanakotoba" target="_blank">Hanakotoba (花言葉)</a></li>
-            <li><a href="https://en.wikipedia.org/wiki/Hiroo_Onoda" target="_blank">Hiroo Onoda - What is a Right Goal?</a></li>
-            <li><a href="https://www.youtube.com/watch?v=8bKy_MR_G80" target="_blank">MY FAVORITE PHOTOGRAPHER: RINKO KAWAUCHI (川内 倫子)</a></li>
-          </ol>
-        </div>
-      `
     }
   };
   
@@ -525,7 +514,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let hoverTimeout = null;
   let isScrolling = false;
   let scrollTimeout = null;
-  const contentOrder = ['home', 'playlist', 'films', 'albums', 'articles'];
+  const contentOrder = ['home', 'playlist', 'films', 'albums'];
   
   // Track scrolling
   window.addEventListener('scroll', function() {
@@ -554,8 +543,6 @@ document.addEventListener('DOMContentLoaded', function() {
       item.appendChild(img);
     } else if (data.type === 'spotify') {
       item.innerHTML = data.embed;
-    } else if (data.type === 'articles') {
-      item.innerHTML = data.content;
     }
     
     carousel.appendChild(item);
