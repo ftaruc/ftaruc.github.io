@@ -3,6 +3,7 @@ layout: post
 title:  "2021 and Expectations"
 date:   2021-01-9 15:10:56 +0900
 categories: thoughts
+published: false
 ---
 According to Google, an `expectation` is
 

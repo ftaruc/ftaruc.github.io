@@ -1,7 +1,6 @@
 ---
 layout: page
 title: 
-permalink: /about/
 ---
 
 <div class="about-container">
@@ -246,8 +245,8 @@ main {
   font-size: 13px;
   color: #000000;
   text-transform: none;
-  letter-spacing: 0;
-  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-bottom: 0;
 }
 
 .about-content {
@@ -272,6 +271,14 @@ main {
   color: #000000;
 }
 
+.about-divider {
+  height: 1px;
+  background: #000000;
+  margin: 20px 0;
+  border: none;
+  width: 100%;
+}
+
 .about-section {
   margin-bottom: 0;
 }
@@ -284,6 +291,7 @@ main {
   margin-inline-end: 0px;
   unicode-bidi: isolate;
   color: #000000;
+  margin-bottom: 0;
   font-size: 13px;
   line-height: 1.3;
   letter-spacing: 0.02em;
@@ -331,14 +339,6 @@ main {
   opacity: 0.7;
 }
 
-.about-divider {
-  height: 1px;
-  background: #000000;
-  margin: 20px 0;
-  border: none;
-  width: 100%;
-}
-
 .about-preview {
   width: 75%;
   position: relative;
@@ -354,10 +354,7 @@ main {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-}
-
-.content-carousel {
-  overflow: hidden;
+  overflow: hidden; /* Clip content at edges */
 }
 
 .content-carousel .content-item {
@@ -366,54 +363,51 @@ main {
   height: 100%;
   opacity: 0;
   transform: rotateY(90deg) translateZ(250px);
-  transition: opacity 0.8s ease, transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0s linear 1.5s;
+  transition: opacity 0.8s ease 0.7s, transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Delay opacity */
   transform-style: preserve-3d;
   transform-origin: center center;
-  backface-visibility: hidden;
-  visibility: hidden;
+  backface-visibility: hidden; /* Hide back of rotated items */
   display: flex;
   align-items: center;
   justify-content: center;
+  visibility: hidden; /* Hidden by default */
 }
 
 .content-carousel .content-item.active {
   opacity: 1;
   transform: rotateY(0deg) translateZ(0px);
   z-index: 2;
-  visibility: visible;
-  transition-delay: 0s;
+  visibility: visible; /* Show active item */
 }
 
+/* Transitioning out (previous item) */
 .content-carousel .content-item.transitioning-out-left {
   opacity: 0;
   transform: rotateY(-90deg) translateZ(250px);
   z-index: 1;
-  visibility: visible;
-  transition-delay: 0s;
+  visibility: visible; /* Keep visible during transition */
 }
 
 .content-carousel .content-item.transitioning-out-right {
   opacity: 0;
   transform: rotateY(90deg) translateZ(250px);
   z-index: 1;
-  visibility: visible;
-  transition-delay: 0s;
+  visibility: visible; /* Keep visible during transition */
 }
 
+/* Transitioning in (new item) */
 .content-carousel .content-item.transitioning-in-left {
   opacity: 1;
   transform: rotateY(90deg) translateZ(250px);
   z-index: 3;
-  visibility: visible;
-  transition-delay: 0s;
+  visibility: visible; /* Keep visible during transition */
 }
 
 .content-carousel .content-item.transitioning-in-right {
   opacity: 1;
   transform: rotateY(-90deg) translateZ(250px);
   z-index: 3;
-  visibility: visible;
-  transition-delay: 0s;
+  visibility: visible; /* Keep visible during transition */
 }
 
 .content-item img {
@@ -421,7 +415,6 @@ main {
   max-height: 100%;
   object-fit: contain;
   filter: grayscale(100%);
-  opacity: 0.9;
 }
 
 .content-item iframe {
@@ -433,32 +426,32 @@ main {
 
 .content-item .articles-list {
   width: 100%;
-  max-width: 700px;
-  padding: 0;
+  max-width: 600px;
+  padding: 40px;
 }
 
 .content-item .articles-list h3 {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   margin-bottom: 40px;
-  letter-spacing: 0;
+  letter-spacing: 0.02em;
   color: #ffffff;
   font-family: "Arial-LC", sans-serif;
-  line-height: 1.5;
+  line-height: 1.3;
 }
 
 .content-item .articles-list ol {
   list-style: decimal;
   padding-left: 20px;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.3;
   color: #ffffff;
 }
 
 .content-item .articles-list li {
   margin-bottom: 20px;
-  line-height: 1.5;
-  letter-spacing: 0;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
 }
 
 .content-item .articles-list a {
@@ -484,7 +477,7 @@ main {
   .about-preview {
     width: 100%;
     min-height: 500px;
-    padding: 60px 40px;
+    padding: 60px 40px !important;
     background-color: #000000 !important;
   }
 }
@@ -581,7 +574,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let rotationDirection = direction;
     if (previousIndex !== undefined && previousIndex !== -1 && previousIndex !== index && !isScrolling) {
       if (!rotationDirection) {
-        rotationDirection = index < previousIndex ? 'right' : 'left';
+        rotationDirection = index < previousIndex ? 'right' : 'left'; // Reversed directions
       }
       
       // Animate out the previous item
@@ -589,22 +582,19 @@ document.addEventListener('DOMContentLoaded', function() {
       if (prevItem && prevItem.classList.contains('active')) {
         prevItem.classList.remove('active');
         prevItem.classList.add(rotationDirection === 'left' ? 'transitioning-out-left' : 'transitioning-out-right');
-        
-        // Hide the previous item after transition completes
-        setTimeout(() => {
-          if (prevItem && !prevItem.classList.contains('active')) {
-            prevItem.style.visibility = 'hidden';
-            prevItem.classList.remove('transitioning-out-left', 'transitioning-out-right');
-          }
-        }, 1500);
+        // Hide after transition
+        prevItem.addEventListener('transitionend', function handler() {
+          prevItem.style.visibility = 'hidden';
+          prevItem.removeEventListener('transitionend', handler);
+        }, { once: true });
       }
       
       // Animate in the new item
       const newItem = items[index];
       if (newItem) {
-        newItem.style.visibility = 'visible';
         newItem.classList.remove('active', 'transitioning-out-left', 'transitioning-out-right', 'transitioning-in-left', 'transitioning-in-right');
         newItem.classList.add(rotationDirection === 'left' ? 'transitioning-in-left' : 'transitioning-in-right');
+        newItem.style.visibility = 'visible'; // Make visible for transition
         
         setTimeout(() => {
           if (currentContentIndex === index && newItem) {
@@ -617,12 +607,12 @@ document.addEventListener('DOMContentLoaded', function() {
       // First item or no previous
       items.forEach((item, i) => {
         if (i === index) {
-          item.style.visibility = 'visible';
           item.classList.remove('transitioning-out-left', 'transitioning-out-right', 'transitioning-in-left', 'transitioning-in-right');
           item.classList.add('active');
+          item.style.visibility = 'visible';
         } else {
-          item.style.visibility = 'hidden';
           item.classList.remove('active', 'transitioning-out-left', 'transitioning-out-right', 'transitioning-in-left', 'transitioning-in-right');
+          item.style.visibility = 'hidden';
         }
       });
     }
@@ -649,7 +639,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const previousIndex = currentContentIndex;
         let direction = null;
         if (previousIndex !== -1 && previousIndex !== contentIndex && previousIndex >= 0 && previousIndex < contentOrder.length) {
-          direction = contentIndex < previousIndex ? 'right' : 'left';
+          direction = contentIndex < previousIndex ? 'right' : 'left'; // Reversed directions
         }
         currentContentIndex = contentIndex;
         updateCarousel(currentContentIndex, previousIndex, direction);

@@ -5,7 +5,7 @@ date:   2021-01-15 15:10:56 +0900
 categories: notes
 ---
 
-<center><img src="https://ferdie.org/images/missing_values.png" alt="title" style="zoom: 25%;" /></center>
+<center><img src="https://ferdie.org/images/archive%20photos/missing_values.png" alt="title" style="zoom: 25%;" /></center>
 
 
 
@@ -51,7 +51,7 @@ Using different models for more accurate imputation, you can use the following:
 
 #### **Explaining MICE:**
 
-![MICE-explained](https://ferdie.org/images/MICE.jpg)
+![MICE-explained](https://ferdie.org/images/archive%20photos/MICE.jpg)
 
 The procedure imputes missing data through an iterative series of predictive models. The model in practice is through `regression`.
 

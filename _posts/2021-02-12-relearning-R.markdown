@@ -3,11 +3,12 @@ layout: post
 title:  "Relearning R"
 date:   2021-02-12 15:10:56 +0900
 categories: notes
+published: false
 ---
 
 
 
-<center><img src="https://ferdie.org/images/r.png" alt="title" style="zoom: 80%;" /></center> 
+<center><img src="https://ferdie.org/images/archive%20photos/r.png" alt="title" style="zoom: 80%;" /></center> 
 
 A hodgepodge of notes for learning R for my reference, segmented so it is easy to read.
 

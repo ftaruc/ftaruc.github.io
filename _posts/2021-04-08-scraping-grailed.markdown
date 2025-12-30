@@ -5,7 +5,7 @@ date:   2021-04-8 15:10:56 +0900
 categories: projects
 ---
 
-<center><img src="https://ferdie.org/images/grailed_banner.png" alt="title" style="zoom: 35%;" /></center>
+<center><img src="{{ '/images/archive photos/grailed_banner.png' | relative_url }}" alt="title" style="zoom: 35%;" /></center>
 
 ---
 
@@ -13,7 +13,7 @@ categories: projects
 
 
 
-<center><img src="https://ferdie.org/images/grailed1.jpg" alt="ex1" style="zoom: 50%;" /></center>
+<center><img src="{{ '/images/archive photos/grailed1.jpg' | relative_url }}" alt="ex1" style="zoom: 50%;" /></center>
 
 
 
@@ -44,7 +44,7 @@ There are many [resources](https://www.selenium.dev/) to get started with Seleni
 
   
 
-<center><img src="https://ferdie.org/images/grailed_login.jpg" alt="login" style="zoom: 50%;" /></center>
+<center><img src="{{ '/images/archive photos/grailed_login.jpg' | relative_url }}" alt="login" style="zoom: 50%;" /></center>
 
 
 
@@ -157,15 +157,15 @@ numPics = len(bs.find_all("img", class_="PhotoGallery--Thumbnail"))
 
 Here are .gif's that shows the process in action:
 
-<center><img src="https://ferdie.org/images/terminal1.jpg" alt="terminal" style="zoom: 80%;" /></center>
+<center><img src="{{ '/images/archive photos/terminal1.jpg' | relative_url }}" alt="terminal" style="zoom: 80%;" /></center>
 
 **For unsold listings:**
 
-<center><img src="https://ferdie.org/images/part1.gif" alt="part1" style="zoom: 105%;" /></center>
+<center><img src="{{ '/images/archive photos/part1.gif' | relative_url }}" alt="part1" style="zoom: 105%;" /></center>
 
 **For sold listings:** (note that a filter must be applied before cycling through each listing)
 
-<center><img src="https://ferdie.org/images/part2.gif" alt="part2" style="zoom: 105%;" /></center>
+<center><img src="{{ '/images/archive photos/part2.gif' | relative_url }}" alt="part2" style="zoom: 105%;" /></center>
 
 
 
@@ -263,17 +263,17 @@ As described by the creators:
 
 I wanted to finally implement Streamlit on a personal project, and thought this would be a perfect opportunity. I didn't want the user to have to use a terminal to run the code locally, so I thought [Streamlit Sharing](https://streamlit.io/sharing) would be a great way that doesn't use Docker to upload my app online for others to use. 
 
-<center><img src="https://ferdie.org/images/grailed_desc.gif" alt="desc" style="zoom: 105%;" /></center>
+<center><img src="{{ '/images/archive photos/grailed_desc.gif' | relative_url }}" alt="desc" style="zoom: 105%;" /></center>
 
 So here is a demo of what the dashboard when it's run locally in bash through `streamlit run "st-app.py"`
 
 **Demo Videos (Two parts since skipped waiting):**
 
-<center><video width="750" height="500" controls> <source src="https://ferdie.org/images/load_pt1.mp4" type="video/mp4"> </video></center>
+<center><video width="750" height="500" controls> <source src="{{ '/images/archive photos/load_pt1.mp4' | relative_url }}" type="video/mp4"> </video></center>
 
 *Ignore the sound (was in a call with friends):*
 
-<center><video width="750" height="500" controls> <source src="https://ferdie.org/images/load_pt2.mp4" type="video/mp4"> </video></center>
+<center><video width="750" height="500" controls> <source src="{{ '/images/archive photos/load_pt2.mp4' | relative_url }}" type="video/mp4"> </video></center>
 
 >  The dashboard is like **30% done** as I need to include visualizations and more features, but the scraping portion of it is done as users can download the output as a .csv file. Expect more things soon!
 
@@ -285,7 +285,7 @@ Unfortunately, the way I scraped sold listings are based on the most recent (wil
 
 
 
-<center><img src="https://ferdie.org/images/grailed_graph.jpg" alt="graph1" style="zoom: 100%;" /></center>
+<center><img src="{{ '/images/archive photos/grailed_graph.jpg' | relative_url }}" alt="graph1" style="zoom: 100%;" /></center>
 
 ####  **Future Applications:**
 

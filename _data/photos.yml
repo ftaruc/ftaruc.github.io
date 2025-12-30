@@ -1,0 +1,277 @@
+# Photo gallery data
+# Auto-generated from images/photos page/{project} folders
+# Run: ruby generate_photos_data.rb
+
+---
+- code: coney-0001
+  title: DSCF3568
+  notes: ''
+  image: "/images/photos page/coney/DSCF3568.JPG"
+- code: coney-0002
+  title: DSCF3569
+  notes: ''
+  image: "/images/photos page/coney/DSCF3569.JPG"
+- code: coney-0003
+  title: DSCF3574
+  notes: ''
+  image: "/images/photos page/coney/DSCF3574.JPG"
+- code: coney-0004
+  title: DSCF3579
+  notes: ''
+  image: "/images/photos page/coney/DSCF3579.JPG"
+- code: coney-0005
+  title: DSCF3580
+  notes: ''
+  image: "/images/photos page/coney/DSCF3580.JPG"
+- code: coney-0006
+  title: DSCF3581
+  notes: ''
+  image: "/images/photos page/coney/DSCF3581.JPG"
+- code: coney-0007
+  title: DSCF3582
+  notes: ''
+  image: "/images/photos page/coney/DSCF3582.JPG"
+- code: coney-0008
+  title: DSCF3583
+  notes: ''
+  image: "/images/photos page/coney/DSCF3583.JPG"
+- code: coney-0009
+  title: DSCF3584
+  notes: ''
+  image: "/images/photos page/coney/DSCF3584.JPG"
+- code: coney-0010
+  title: DSCF3585
+  notes: ''
+  image: "/images/photos page/coney/DSCF3585.JPG"
+- code: coney-0011
+  title: DSCF3586
+  notes: ''
+  image: "/images/photos page/coney/DSCF3586.JPG"
+- code: coney-0012
+  title: DSCF3587
+  notes: ''
+  image: "/images/photos page/coney/DSCF3587.JPG"
+- code: coney-0013
+  title: DSCF3588
+  notes: ''
+  image: "/images/photos page/coney/DSCF3588.JPG"
+- code: coney-0014
+  title: DSCF3589
+  notes: ''
+  image: "/images/photos page/coney/DSCF3589.JPG"
+- code: coney-0015
+  title: DSCF3590
+  notes: ''
+  image: "/images/photos page/coney/DSCF3590.JPG"
+- code: coney-0016
+  title: DSCF3591
+  notes: ''
+  image: "/images/photos page/coney/DSCF3591.JPG"
+- code: coney-0017
+  title: DSCF3592
+  notes: ''
+  image: "/images/photos page/coney/DSCF3592.JPG"
+- code: coney-0018
+  title: DSCF3593
+  notes: ''
+  image: "/images/photos page/coney/DSCF3593.JPG"
+- code: coney-0019
+  title: DSCF3594
+  notes: ''
+  image: "/images/photos page/coney/DSCF3594.JPG"
+- code: coney-0020
+  title: DSCF3595
+  notes: ''
+  image: "/images/photos page/coney/DSCF3595.JPG"
+- code: coney-0021
+  title: DSCF3596
+  notes: ''
+  image: "/images/photos page/coney/DSCF3596.JPG"
+- code: coney-0022
+  title: DSCF3597
+  notes: ''
+  image: "/images/photos page/coney/DSCF3597.JPG"
+- code: coney-0023
+  title: DSCF3598
+  notes: ''
+  image: "/images/photos page/coney/DSCF3598.JPG"
+- code: coney-0024
+  title: DSCF3599
+  notes: ''
+  image: "/images/photos page/coney/DSCF3599.JPG"
+- code: coney-0025
+  title: DSCF3600
+  notes: ''
+  image: "/images/photos page/coney/DSCF3600.JPG"
+- code: coney-0026
+  title: DSCF3601
+  notes: ''
+  image: "/images/photos page/coney/DSCF3601.JPG"
+- code: coney-0027
+  title: DSCF3602
+  notes: ''
+  image: "/images/photos page/coney/DSCF3602.JPG"
+- code: coney-0028
+  title: DSCF3604
+  notes: ''
+  image: "/images/photos page/coney/DSCF3604.JPG"
+- code: coney-0029
+  title: DSCF3605
+  notes: ''
+  image: "/images/photos page/coney/DSCF3605.JPG"
+- code: coney-0030
+  title: DSCF3606
+  notes: ''
+  image: "/images/photos page/coney/DSCF3606.JPG"
+- code: coney-0031
+  title: DSCF3607
+  notes: ''
+  image: "/images/photos page/coney/DSCF3607.JPG"
+- code: coney-0032
+  title: DSCF3608
+  notes: ''
+  image: "/images/photos page/coney/DSCF3608.JPG"
+- code: coney-0033
+  title: DSCF3609
+  notes: ''
+  image: "/images/photos page/coney/DSCF3609.JPG"
+- code: coney-0034
+  title: DSCF3610
+  notes: ''
+  image: "/images/photos page/coney/DSCF3610.JPG"
+- code: coney-0035
+  title: DSCF3611
+  notes: ''
+  image: "/images/photos page/coney/DSCF3611.JPG"
+- code: coney-0036
+  title: DSCF3612
+  notes: ''
+  image: "/images/photos page/coney/DSCF3612.JPG"
+- code: coney-0037
+  title: DSCF3613
+  notes: ''
+  image: "/images/photos page/coney/DSCF3613.JPG"
+- code: coney-0038
+  title: DSCF3614
+  notes: ''
+  image: "/images/photos page/coney/DSCF3614.JPG"
+- code: coney-0039
+  title: DSCF3615
+  notes: ''
+  image: "/images/photos page/coney/DSCF3615.JPG"
+- code: coney-0040
+  title: DSCF3616
+  notes: ''
+  image: "/images/photos page/coney/DSCF3616.JPG"
+- code: coney-0041
+  title: DSCF3617
+  notes: ''
+  image: "/images/photos page/coney/DSCF3617.JPG"
+- code: coney-0042
+  title: DSCF3618
+  notes: ''
+  image: "/images/photos page/coney/DSCF3618.JPG"
+- code: coney-0043
+  title: DSCF3619
+  notes: ''
+  image: "/images/photos page/coney/DSCF3619.JPG"
+- code: coney-0044
+  title: DSCF3620
+  notes: ''
+  image: "/images/photos page/coney/DSCF3620.JPG"
+- code: coney-0045
+  title: DSCF3621
+  notes: ''
+  image: "/images/photos page/coney/DSCF3621.JPG"
+- code: coney-0046
+  title: DSCF3622
+  notes: ''
+  image: "/images/photos page/coney/DSCF3622.JPG"
+- code: coney-0047
+  title: DSCF3623
+  notes: ''
+  image: "/images/photos page/coney/DSCF3623.JPG"
+- code: coney-0048
+  title: DSCF3624 copy
+  notes: ''
+  image: "/images/photos page/coney/DSCF3624 copy.JPG"
+- code: coney-0049
+  title: DSCF3624
+  notes: ''
+  image: "/images/photos page/coney/DSCF3624.JPG"
+- code: coney-0050
+  title: DSCF3625
+  notes: ''
+  image: "/images/photos page/coney/DSCF3625.JPG"
+- code: coney-0051
+  title: DSCF3626
+  notes: ''
+  image: "/images/photos page/coney/DSCF3626.JPG"
+- code: coney-0052
+  title: DSCF3627
+  notes: ''
+  image: "/images/photos page/coney/DSCF3627.JPG"
+- code: coney-0053
+  title: DSCF3628
+  notes: ''
+  image: "/images/photos page/coney/DSCF3628.JPG"
+- code: coney-0054
+  title: DSCF3629
+  notes: ''
+  image: "/images/photos page/coney/DSCF3629.JPG"
+- code: coney-0055
+  title: DSCF3630
+  notes: ''
+  image: "/images/photos page/coney/DSCF3630.JPG"
+- code: coney-0056
+  title: DSCF3631
+  notes: ''
+  image: "/images/photos page/coney/DSCF3631.JPG"
+- code: coney-0057
+  title: DSCF3632
+  notes: ''
+  image: "/images/photos page/coney/DSCF3632.JPG"
+- code: coney-0058
+  title: DSCF3633
+  notes: ''
+  image: "/images/photos page/coney/DSCF3633.JPG"
+- code: coney-0059
+  title: DSCF3634
+  notes: ''
+  image: "/images/photos page/coney/DSCF3634.JPG"
+- code: coney-0060
+  title: DSCF3635
+  notes: ''
+  image: "/images/photos page/coney/DSCF3635.JPG"
+- code: coney-0061
+  title: DSCF3637
+  notes: ''
+  image: "/images/photos page/coney/DSCF3637.JPG"
+- code: coney-0062
+  title: DSCF3638
+  notes: ''
+  image: "/images/photos page/coney/DSCF3638.JPG"
+- code: coney-0063
+  title: DSCF3639
+  notes: ''
+  image: "/images/photos page/coney/DSCF3639.JPG"
+- code: coney-0064
+  title: DSCF3640
+  notes: ''
+  image: "/images/photos page/coney/DSCF3640.JPG"
+- code: coney-0065
+  title: DSCF3641
+  notes: ''
+  image: "/images/photos page/coney/DSCF3641.JPG"
+- code: coney-0066
+  title: DSCF3642
+  notes: ''
+  image: "/images/photos page/coney/DSCF3642.JPG"
+- code: coney-0067
+  title: DSCF3643
+  notes: ''
+  image: "/images/photos page/coney/DSCF3643.JPG"
+- code: coney-0068
+  title: DSCF3644
+  notes: ''
+  image: "/images/photos page/coney/DSCF3644.JPG"

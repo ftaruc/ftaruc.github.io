@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Playlists of the Year"
+title:  "Playlists of 2021"
 date:   2021-01-01 15:10:56 +0900
 categories: music
 ---
@@ -12,7 +12,7 @@ Here you can find some highlights of the year: sounds that make me dance at 1am 
 
 --
 
-`Current Playlist (May)`: 
+`Favorite Playlist`: 
 
 {% include spotifyplaylist.html id="4lDl97fws5cTzmqXvkKaIy" %}
 
@@ -48,16 +48,14 @@ Here you can find some highlights of the year: sounds that make me dance at 1am 
 
 <center><iframe src="https://open.spotify.com/embed/playlist/6I1JPsSlDINiDk4FW557uQ?utm_source=generator" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
 
-`Aug:`
+`August:`
 
 <center><iframe src="https://open.spotify.com/embed/playlist/38WEOzTjiLI8hPbGzDYu0d?utm_source=generator"" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
 
-`Sep:`
+`September:`
 
 <center><iframe src="https://open.spotify.com/embed/playlist/74eFe5aKfP1V4V5FIJwqz8?utm_source=generator" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
 
-`Oct:`
+`October:`
 
 <center><iframe src="https://open.spotify.com/embed/playlist/26ci11lHVIvOOq8wuOtIg2?utm_source=generato" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
-
-`Nov:`

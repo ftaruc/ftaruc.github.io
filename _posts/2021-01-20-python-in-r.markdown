@@ -3,9 +3,10 @@ layout: post
 title:  "Python Integration in RStudio?"
 date:   2021-01-20 15:10:56 +0900
 categories: notes
+published: false
 ---
 
-<center><img src="https://ferdie.org/images/python.jpg" alt="title" style="zoom: 60%;" /></center>
+<center><img src="https://ferdie.org/images/archive%20photos/python.jpg" alt="title" style="zoom: 60%;" /></center>
 
 
 
@@ -29,7 +30,7 @@ Currently, only static plots are supported, and dynamic plots may be implemented
 
 
 
-<center><img src="https://ferdie.org/images/seaborn.png" alt="seaborn" style="zoom: 100%;" /></center>
+<center><img src="https://ferdie.org/images/archive%20photos/seaborn.png" alt="seaborn" style="zoom: 100%;" /></center>
 
 --
 
@@ -71,7 +72,7 @@ use_virtualenv("myenv") or use_condaenv("myenv")
 
 >  Now, you can run different chunks using both python and R:
 
-<center><img src="https://ferdie.org/images/chunks.png" alt="chunks" style="zoom: 100%;" /></center>
+<center><img src="https://ferdie.org/images/archive%20photos/chunks.png" alt="chunks" style="zoom: 100%;" /></center>
 
 --
 

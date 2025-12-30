@@ -3,9 +3,10 @@ layout: post
 title:  "Journey through PostgreSQL"
 date:   2021-06-07 15:10:56 +0900
 categories: notes
+published: false
 ---
 
-<center><img src="https://ferdie.org/images/postgresql.png" alt="main_photo" style="zoom: 80%;" /></center>
+<center><img src="https://ferdie.org/images/archive%20photos/postgresql.png" alt="main_photo" style="zoom: 80%;" /></center>
 
 
 

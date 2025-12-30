@@ -3,6 +3,7 @@ layout: post
 title:  "2021 (and beyond): reflecting on past expectations*"
 date:   2021-09-5 15:10:56 +0900
 categories: thoughts
+published: false
 ---
 I wanted  to write a mid-year update about the expectations I created earlier this year in reference to this [post](https://ferdie.org/2021/01/09/thoughts-into-new-year/). 
 
