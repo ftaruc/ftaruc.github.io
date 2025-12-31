@@ -17,7 +17,7 @@ title:
     <div class="about-divider"></div>
     
     <div class="about-content">
-      <p>first generation filipino-american economics & data science graduate from uc berkeley, searching for the intersection between behavioral decisions and data.</p>
+      <p>first-gen filipino-american econ & data-science graduate from uc berkeley, fascinated with the intersection between behavioral decisions and data.</p>
       
       <p>* prior work experience: product analytics rooted in insurance: namely <em>Geico</em>, <em>Metromile</em>, and <em>Lemonade</em>.</p>
     </div>
