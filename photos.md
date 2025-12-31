@@ -8,6 +8,64 @@ permalink: /photos/
   <div class="photos-nav">
     <a href="{{ '/' | relative_url }}" class="home-button">home</a>
   </div>
+  <!-- Instagram-style random photo display -->
+  <div class="instagram-photo-container" id="instagramPhotoContainer">
+    <div class="instagram-photo-box">
+      <!-- Instagram-style header -->
+      <div class="instagram-header">
+        <div class="instagram-profile">
+          <div class="instagram-avatar">
+            <img src="{{ '/images/archive photos/ig.jpg' | relative_url }}" alt="Profile" id="instagramAvatar">
+          </div>
+          <a href="https://www.instagram.com/ferdie.jpg/" target="_blank" rel="noopener noreferrer" class="instagram-username">ferdie.jpeg</a>
+        </div>
+        <div class="instagram-menu">
+          <span class="instagram-menu-dots">⋯</span>
+        </div>
+      </div>
+      
+      <!-- Photo section -->
+      <div class="instagram-photo-section">
+        <div class="instagram-photo-wrapper" id="instagramPhotoWrapper">
+          <img class="instagram-photo" id="instagramPhoto" src="" alt="Random photo">
+          <div class="instagram-photo-overlay">
+            <div class="instagram-photo-info">
+              <span class="instagram-photo-code" id="instagramPhotoCode"></span>
+              <span class="instagram-photo-timestamp" id="instagramPhotoTimestamp"></span>
+            </div>
+          </div>
+        </div>
+        <div class="instagram-photo-next" id="instagramPhotoNext">
+          <img class="instagram-photo" src="" alt="Next photo">
+        </div>
+      </div>
+      
+      <!-- Instagram-style actions (optional, for future use) -->
+      <div class="instagram-actions">
+        <div class="instagram-action-icons">
+          <svg class="instagram-icon" aria-label="Like" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" height="24" role="img" viewBox="0 0 24 24" width="24">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <svg class="instagram-icon" aria-label="Comment" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
+            <path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+          <svg class="instagram-icon" aria-label="Share" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
+            <line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.082"></line>
+            <polygon fill="none" points="11.698 20.334 22 3 2 3 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon>
+          </svg>
+        </div>
+        <div class="instagram-nav-dots" id="instagramNavDots">
+          <!-- Navigation dots will be dynamically inserted here -->
+        </div>
+        <div class="instagram-action-save">
+          <svg class="instagram-icon" aria-label="Save" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
+            <polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <div class="project-filters" id="projectFilters" style="display: none;">
     <!-- Project buttons will be dynamically inserted here -->
   </div>
@@ -56,6 +114,15 @@ permalink: /photos/
     <!-- Images will be dynamically inserted here -->
   </div>
   <div class="image-caption" id="previewCaption"></div>
+</div>
+
+<!-- Full-size image modal -->
+<div class="instagram-fullsize-modal" id="instagramFullsizeModal">
+  <div class="instagram-fullsize-overlay"></div>
+  <div class="instagram-fullsize-container">
+    <img class="instagram-fullsize-image" id="instagramFullsizeImage" src="" alt="Full size photo">
+    <button class="instagram-fullsize-close" id="instagramFullsizeClose">×</button>
+  </div>
 </div>
 
 <style>
@@ -144,13 +211,475 @@ body .wrapper {
 .presentation-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 20px 300px 20px; /* Add more bottom padding to push footer further down */
   position: relative;
+}
+
+/* Fixed footer at bottom of viewport */
+.site-footer {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 1000 !important;
+  background-color: #f5f5f5 !important;
+  border-top: none !important; /* Removed line break */
+  padding: 10px 0 !important;
+  margin: 0 !important;
+  margin-bottom: 100px !important; /* Move footer further down */
+}
+
+.site-footer .wrapper {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+  text-align: center !important;
+}
+
+.site-footer p {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 12px !important;
+  color: #666666 !important;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif !important;
 }
 
 .photos-nav {
   margin-bottom: 20px;
   padding: 0;
+}
+
+/* Instagram-style random photo display */
+.instagram-photo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto 45px auto;
+  width: 100%;
+  max-width: 525px; /* Reduced size (75% of 700px) */
+}
+
+.instagram-photo-box {
+  position: relative;
+  width: 100%;
+  max-width: 525px; /* Reduced size (75% of 700px) */
+  background-color: #f5f5f5; /* Match page background */
+  border: none; /* Removed border for seamless blending */
+  border-radius: 0; /* Removed border radius */
+  overflow: hidden;
+  box-shadow: none; /* Removed shadow for seamless blending */
+}
+
+/* Instagram header */
+.instagram-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 15px; /* Reduced padding (75%) */
+  border-bottom: none; /* Removed border for seamless blending */
+  background-color: #f5f5f5; /* Match page background */
+}
+
+.instagram-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Reduced gap (75%) */
+}
+
+.instagram-avatar {
+  width: 32px; /* Reduced size (75% of 42px) */
+  height: 32px; /* Reduced size (75% of 42px) */
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid #dbdbdb;
+  flex-shrink: 0;
+}
+
+.instagram-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.instagram-username {
+  font-size: 12px; /* Reduced font size (75% of 16px) */
+  font-weight: 600;
+  color: #262626 !important; /* Keep original color */
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  letter-spacing: -0.01em;
+  user-select: none;
+  -webkit-user-select: none;
+  text-decoration: none !important; /* Remove underline */
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.instagram-username:hover {
+  opacity: 0.6;
+  color: #262626 !important; /* Keep original color on hover */
+}
+
+.instagram-username:visited {
+  color: #262626 !important; /* Keep original color when visited */
+}
+
+.instagram-username:active {
+  color: #262626 !important; /* Keep original color when clicked */
+}
+
+.instagram-menu {
+  cursor: pointer;
+  padding: 4.5px; /* Reduced padding (75%) */
+}
+
+.instagram-menu-dots {
+  font-size: 18px; /* Reduced size (75% of 24px) */
+  color: #262626;
+  line-height: 1;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.instagram-menu-dots:hover {
+  opacity: 0.7;
+}
+
+/* Photo section */
+.instagram-photo-section {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10; /* Slightly taller rectangular format (landscape) */
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.instagram-photo-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.instagram-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none;
+}
+
+.instagram-photo-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+  padding: 20px 15px 15px 15px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.instagram-photo-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Instagram actions bar */
+.instagram-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 15px; /* Reduced padding (75%) */
+  border-top: none; /* Removed border for seamless blending */
+  background-color: #f5f5f5; /* Match page background */
+}
+
+.instagram-action-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Reduced gap (75%) */
+}
+
+.instagram-nav-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 1;
+  position: relative;
+  overflow: hidden; /* Hide dots that shift outside */
+}
+
+.instagram-nav-dots-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* Swiping animation classes for dots - matches photo animation timing */
+.instagram-nav-dots-wrapper.swiping-forward {
+  animation: swipeDotsLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.instagram-nav-dots-wrapper.swiping-backward {
+  animation: swipeDotsRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes swipeDotsLeft {
+  0% {
+    transform: translateX(12px); /* Start shifted right (one dot width + gap) */
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes swipeDotsRight {
+  0% {
+    transform: translateX(-12px); /* Start shifted left (one dot width + gap) */
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.instagram-nav-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #8e8e8e;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  transition: background-color 0.3s ease;
+}
+
+.instagram-nav-dot.active {
+  opacity: 0; /* Completely hide active dot to prevent double dot appearance */
+  pointer-events: none; /* Disable clicks on hidden dot */
+  background-color: transparent; /* Make sure no background shows */
+}
+
+/* Full-size image modal */
+.instagram-fullsize-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.instagram-fullsize-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.instagram-fullsize-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+}
+
+.instagram-fullsize-container {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.instagram-fullsize-image {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  display: block;
+}
+
+.instagram-fullsize-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 40px;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  line-height: 1;
+  z-index: 10002;
+  transition: opacity 0.2s ease;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+.instagram-fullsize-close:hover {
+  opacity: 0.7;
+}
+
+.instagram-nav-dot-indicator {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #0095f6;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  transform-origin: center center;
+  z-index: 10; /* Higher z-index to ensure it's above dots */
+  transition: none; /* Instant transition, no animation */
+  pointer-events: none;
+}
+
+.instagram-action-save {
+  display: flex;
+  align-items: center;
+}
+
+.instagram-icon {
+  width: 21px; /* Reduced icon size (75% of 28px) */
+  height: 21px; /* Reduced icon size (75% of 28px) */
+  color: #262626;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  line-height: 1;
+  transition: opacity 0.2s ease;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.instagram-icon:hover {
+  opacity: 0.6;
+}
+
+.instagram-photo-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.instagram-photo-code {
+  color: #ffffff;
+  font-size: 10px; /* Reduced font size (75% of 13px) */
+  font-weight: 500;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  letter-spacing: 0.4px; /* Reduced letter spacing */
+}
+
+.instagram-photo-timestamp {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 8px; /* Reduced font size (75% of 11px) */
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+.instagram-photo-next {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.instagram-photo-next img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Swipe animation classes */
+.instagram-photo-wrapper.swiping-left {
+  animation: swipeLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.instagram-photo-wrapper.swiping-right {
+  animation: swipeRight 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.instagram-photo-next.swiping-in-left {
+  animation: swipeInLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.instagram-photo-next.swiping-in-right {
+  animation: swipeInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes swipeLeft {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes swipeRight {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes swipeInLeft {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes swipeInRight {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .home-button {
@@ -211,7 +740,7 @@ body .wrapper {
 
 .project-container {
   margin-bottom: 0;
-  display: block; /* Show all containers by default */
+  display: none; /* Hide all containers by default */
   visibility: visible;
   opacity: 1;
   height: auto;
@@ -224,7 +753,7 @@ body .wrapper {
   align-items: center;
   margin-bottom: 10px;
   padding-bottom: 0;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #666666; /* Slightly lighter black for line break */
 }
 
 .project-title {
@@ -234,8 +763,8 @@ body .wrapper {
 .project-toggle {
   padding: 5px 15px;
   background-color: #f5f5f5;
-  color: #000000;
-  border: 1px solid #000000;
+  color: #666666; /* Slightly lighter black for button text */
+  border: 1px solid #666666; /* Slightly lighter black for button border */
   cursor: pointer;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 12px;
@@ -456,6 +985,41 @@ body .wrapper {
     display: block;
   }
   
+  .instagram-photo-container {
+    margin: 30px auto 40px auto;
+    max-width: 90%;
+  }
+  
+  .instagram-photo-box {
+    max-width: 100%;
+  }
+  
+  .instagram-header {
+    padding: 8px 10px; /* Reduced for mobile */
+  }
+  
+  .instagram-avatar {
+    width: 24px; /* Reduced for mobile */
+    height: 24px; /* Reduced for mobile */
+  }
+  
+  .instagram-username {
+    font-size: 10px; /* Reduced for mobile */
+  }
+  
+  .instagram-menu-dots {
+    font-size: 14px; /* Reduced for mobile */
+  }
+  
+  .instagram-actions {
+    padding: 8px 10px; /* Reduced for mobile */
+  }
+  
+  .instagram-icon {
+    width: 17px; /* Reduced for mobile */
+    height: 17px; /* Reduced for mobile */
+  }
+  
   .presentation-table {
     font-size: 12px;
   }
@@ -476,12 +1040,75 @@ body .wrapper {
   .col-notes {
     width: 50%;
   }
+  
+  .site-footer {
+    padding: 8px 0 !important;
+  }
+  
+  .site-footer .wrapper {
+    padding: 0 10px !important;
+  }
+  
+  .site-footer p {
+    font-size: 11px !important;
+  }
+  
+  .presentation-container {
+    padding-bottom: 50px !important; /* Reduce bottom padding on mobile */
+  }
 }
 
 @media (max-width: 600px) {
   .presentation-container {
-    padding: 0 10px;
+    padding: 0 10px 300px 10px; /* Add more bottom padding to push footer further down */
     margin: 20px auto;
+  }
+  
+  .instagram-photo-container {
+    margin: 20px auto 30px auto;
+    max-width: 95%;
+  }
+  
+  .instagram-header {
+    padding: 8px 10px;
+  }
+  
+  .instagram-avatar {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .instagram-username {
+    font-size: 9px; /* Further reduced for small mobile */
+  }
+  
+  .instagram-menu-dots {
+    font-size: 14px; /* Further reduced for small mobile */
+  }
+  
+  .instagram-actions {
+    padding: 6px 8px; /* Further reduced for small mobile */
+  }
+  
+  .instagram-icon {
+    width: 15px; /* Further reduced for small mobile */
+    height: 15px; /* Further reduced for small mobile */
+  }
+  
+  .instagram-action-icons {
+    gap: 12px;
+  }
+  
+  .instagram-photo-overlay {
+    padding: 15px 10px 10px 10px;
+  }
+  
+  .instagram-photo-code {
+    font-size: 9px; /* Reduced for mobile */
+  }
+  
+  .instagram-photo-timestamp {
+    font-size: 8px; /* Reduced for mobile */
   }
   
   .presentation-table {
@@ -503,6 +1130,14 @@ body .wrapper {
   
   .col-notes {
     display: none;
+  }
+  
+  .site-footer {
+    padding: 6px 0 !important;
+  }
+  
+  .site-footer p {
+    font-size: 10px !important;
   }
 }
 </style>
@@ -526,6 +1161,418 @@ document.addEventListener('DOMContentLoaded', function() {
   const siteTitle = document.querySelector('.site-header .site-title');
   if (siteTitle) {
     siteTitle.textContent = "ferdie jay's photos";
+  }
+  
+  // Instagram-style random photo display
+  const instagramContainer = document.getElementById('instagramPhotoContainer');
+  const instagramWrapper = document.getElementById('instagramPhotoWrapper');
+  const instagramPhoto = document.getElementById('instagramPhoto');
+  const instagramPhotoNext = document.getElementById('instagramPhotoNext');
+  const instagramPhotoCode = document.getElementById('instagramPhotoCode');
+  const instagramPhotoTimestamp = document.getElementById('instagramPhotoTimestamp');
+  const instagramPhotoSection = instagramContainer ? instagramContainer.querySelector('.instagram-photo-section') : null;
+  const instagramPhotoOverlay = instagramContainer ? instagramContainer.querySelector('.instagram-photo-overlay') : null;
+  const instagramFullsizeModal = document.getElementById('instagramFullsizeModal');
+  const instagramFullsizeImage = document.getElementById('instagramFullsizeImage');
+  const instagramFullsizeClose = document.getElementById('instagramFullsizeClose');
+  const instagramMenuDots = instagramContainer ? instagramContainer.querySelector('.instagram-menu-dots') : null;
+  
+  if (instagramContainer && instagramPhoto) {
+    // Get all photos from data
+    const allPhotosRaw = [
+      {% for photo in site.data.photos %}
+        {
+          image: "{{ photo.image | relative_url }}",
+          code: "{{ photo.code }}",
+          timestamp: "{{ photo.timestamp | default: '' }}",
+          title: "{{ photo.title | default: 'Untitled' }}"
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ];
+    
+    // Create randomized carousel array (different order each page load)
+    const photoCarousel = [...allPhotosRaw].sort(() => Math.random() - 0.5);
+    
+    let currentCarouselPosition = 0; // Position in the carousel (0-indexed)
+    let isAnimating = false;
+    const navDots = document.getElementById('instagramNavDots');
+    
+    // Function to get number of dots based on position
+    function getDotCount(position) {
+      if (position === 0) return 3; // First photo: 3 dots
+      if (position === 1) return 4; // Second photo: 4 dots
+      return 5; // Third and beyond: 5 dots
+    }
+    
+    // Function to get active dot index based on position
+    function getActiveDotIndex(position) {
+      if (position === 0) return 0; // First dot for first photo
+      if (position === 1) return 1; // Second dot for second photo
+      return 2; // Third dot for positions 3+
+    }
+    
+    // Store previous position and active index for animation
+    let previousCarouselPosition = 0;
+    let previousActiveIndex = 0;
+    let currentIndicatorPosition = null; // Store current indicator position
+    
+    // Function to update navigation dots
+    function updateNavDots(direction) {
+      if (!navDots) return;
+      
+      const dotCount = getDotCount(currentCarouselPosition);
+      const activeIndex = getActiveDotIndex(currentCarouselPosition);
+      
+      // Check if we need to animate (position changed)
+      const needsAnimation = previousCarouselPosition !== currentCarouselPosition;
+      const previousDotCount = getDotCount(previousCarouselPosition);
+      const previousActiveIndex = getActiveDotIndex(previousCarouselPosition);
+      
+      // Get or create wrapper
+      let wrapper = navDots.querySelector('.instagram-nav-dots-wrapper');
+      if (!wrapper) {
+        wrapper = document.createElement('div');
+        wrapper.className = 'instagram-nav-dots-wrapper';
+        navDots.innerHTML = '';
+        navDots.appendChild(wrapper);
+      }
+      
+      // Add swiping animation class immediately (before clearing dots) to sync with photo animation
+      if (needsAnimation && direction) {
+        // Remove any existing animation classes
+        wrapper.classList.remove('swiping-forward', 'swiping-backward');
+        
+        // Force reflow to ensure classes are applied
+        void wrapper.offsetWidth;
+        
+        // Add the appropriate swiping class immediately
+        if (direction === 'forward') {
+          wrapper.classList.add('swiping-forward');
+        } else if (direction === 'backward') {
+          wrapper.classList.add('swiping-backward');
+        }
+        
+        // Remove animation class after animation completes (matches photo animation duration)
+        setTimeout(function() {
+          wrapper.classList.remove('swiping-forward', 'swiping-backward');
+        }, 500);
+      }
+      
+      // Clear existing dots
+      wrapper.innerHTML = '';
+      
+      // Create sliding indicator (outside wrapper so it stays fixed)
+      let indicator = navDots.querySelector('.instagram-nav-dot-indicator');
+      if (!indicator) {
+        indicator = document.createElement('div');
+        indicator.className = 'instagram-nav-dot-indicator';
+        navDots.appendChild(indicator);
+      }
+      
+      // Create all dots inside wrapper (skip the active one - blue indicator will be there instead)
+      for (let i = 0; i < dotCount; i++) {
+        // Skip creating the active dot - the blue indicator will be in its place
+        if (i === activeIndex) {
+          // Create a placeholder spacer to maintain layout (invisible, no click handler)
+          const spacer = document.createElement('div');
+          spacer.className = 'instagram-nav-dot';
+          spacer.style.opacity = '0';
+          spacer.style.pointerEvents = 'none';
+          spacer.style.width = '6px';
+          spacer.style.height = '6px';
+          wrapper.appendChild(spacer);
+          continue;
+        }
+        
+        const dot = document.createElement('div');
+        dot.className = 'instagram-nav-dot';
+        
+        // Calculate target position based on dot index
+        let targetPosition = currentCarouselPosition;
+        if (i < activeIndex) {
+          // Clicking a dot to the left - go backward
+          targetPosition = currentCarouselPosition - (activeIndex - i);
+        } else if (i > activeIndex) {
+          // Clicking a dot to the right - go forward
+          targetPosition = currentCarouselPosition + (i - activeIndex);
+        }
+        
+        dot.addEventListener('click', function(e) {
+          e.stopPropagation(); // Prevent photo click
+          // Prevent going backward from first position
+          if (targetPosition !== currentCarouselPosition && targetPosition >= 0 && targetPosition < photoCarousel.length) {
+            // Don't allow backward navigation from position 0
+            if (currentCarouselPosition === 0 && targetPosition < currentCarouselPosition) {
+              return;
+            }
+            const navDirection = targetPosition > currentCarouselPosition ? 'forward' : 'backward';
+            navigateToPosition(targetPosition, navDirection);
+          }
+        });
+        wrapper.appendChild(dot);
+      }
+      
+      // Calculate pixel positions
+      const dotSize = 6;
+      const gap = 6;
+      const totalDotWidth = dotSize + gap;
+      
+      // Wait for DOM to update, then calculate positions
+      setTimeout(function() {
+        const containerWidth = navDots.offsetWidth;
+        const dotsWidth = (dotCount * dotSize) + ((dotCount - 1) * gap);
+        const startOffset = (containerWidth - dotsWidth) / 2;
+        
+        // Calculate center position of the active dot
+        const dotCenterPosition = startOffset + (activeIndex * totalDotWidth) + (dotSize / 2);
+        // Adjust to center the indicator (indicator is 6px wide, so shift left by 3px to center)
+        const indicatorPosition = dotCenterPosition - 3;
+        
+        // Calculate shift amount for wrapper based on direction
+        let shiftAmount = 0;
+        if (needsAnimation && direction && previousCarouselPosition >= 0) {
+          // Calculate the shift needed to keep active dot centered
+          const previousDotCount = getDotCount(previousCarouselPosition);
+          const previousActiveIndex = getActiveDotIndex(previousCarouselPosition);
+          const previousDotsWidth = (previousDotCount * dotSize) + ((previousDotCount - 1) * gap);
+          const previousStartOffset = (containerWidth - previousDotsWidth) / 2;
+          const previousDotCenter = previousStartOffset + (previousActiveIndex * totalDotWidth) + (dotSize / 2);
+          
+          // Calculate shift: positive = right, negative = left
+          // When going forward: new dot is to the right, shift left (negative) to center it
+          // When going backward: new dot is to the left, shift right (positive) to center it
+          shiftAmount = previousDotCenter - dotCenterPosition;
+        }
+        
+        // Animation class is added before setTimeout to sync with photo animation
+        
+        // Set wrapper position (centered)
+        wrapper.style.transition = 'none';
+        wrapper.style.transform = 'translateX(0)';
+        
+        // Set indicator position instantly (no scale to match dot size exactly)
+        indicator.style.transition = 'none';
+        indicator.style.transform = `translateX(${indicatorPosition}px) translateY(-50%)`;
+        // Update stored position
+        currentIndicatorPosition = dotCenterPosition;
+      }, 0);
+      
+      // Update previous values
+      previousCarouselPosition = currentCarouselPosition;
+    }
+    
+    // Function to navigate to a specific position
+    function navigateToPosition(newPosition, direction) {
+      if (isAnimating || newPosition < 0 || newPosition >= photoCarousel.length) return;
+      
+      // Prevent backward navigation from first position
+      if (currentCarouselPosition === 0 && newPosition < currentCarouselPosition) {
+        return;
+      }
+      
+      // Determine direction if not provided
+      if (!direction) {
+        direction = newPosition > currentCarouselPosition ? 'forward' : 'backward';
+      }
+      
+      currentCarouselPosition = newPosition;
+      const photo = photoCarousel[currentCarouselPosition];
+      
+      // Preload next photo
+      const nextImg = new Image();
+      nextImg.src = photo.image;
+      
+      nextImg.onload = function() {
+        // Set next photo in the hidden container
+        const nextImgElement = instagramPhotoNext.querySelector('img');
+        nextImgElement.src = photo.image;
+        
+        // Determine animation classes based on direction
+        const isForward = direction === 'forward';
+        const wrapperClass = isForward ? 'swiping-left' : 'swiping-right';
+        const nextClass = isForward ? 'swiping-in-left' : 'swiping-in-right';
+        
+        // Reset any previous animation classes
+        instagramWrapper.classList.remove('swiping-left', 'swiping-right');
+        instagramPhotoNext.classList.remove('swiping-in-left', 'swiping-in-right');
+        
+        // Set initial position for next photo based on direction
+        if (isForward) {
+          instagramPhotoNext.style.transform = 'translateX(100%)';
+        } else {
+          instagramPhotoNext.style.transform = 'translateX(-100%)';
+        }
+        instagramPhotoNext.style.opacity = '1';
+        
+        // Start animation
+        isAnimating = true;
+        
+        // Update navigation dots immediately to sync animation with photo
+        updateNavDots(direction);
+        
+        instagramWrapper.classList.add(wrapperClass);
+        instagramPhotoNext.classList.add(nextClass);
+        
+        // After animation completes, swap the images
+        setTimeout(function() {
+          // Update current photo
+          instagramPhoto.src = photo.image;
+          instagramPhotoCode.textContent = photo.code || '';
+          instagramPhotoTimestamp.textContent = photo.timestamp || '';
+          
+          // Reset animation classes
+          instagramWrapper.classList.remove('swiping-left', 'swiping-right');
+          instagramWrapper.style.transform = '';
+          instagramPhotoNext.classList.remove('swiping-in-left', 'swiping-in-right');
+          instagramPhotoNext.style.transform = 'translateX(100%)';
+          instagramPhotoNext.style.opacity = '0';
+          
+          // Navigation dots already updated before animation started
+          isAnimating = false;
+        }, 500);
+      };
+      
+      nextImg.onerror = function() {
+        console.error('Failed to load photo:', photo.image);
+        isAnimating = false;
+      };
+    }
+    
+    // Function to navigate forward
+    function navigateForward() {
+      if (currentCarouselPosition < photoCarousel.length - 1) {
+        navigateToPosition(currentCarouselPosition + 1, 'forward');
+      }
+    }
+    
+    // Function to navigate backward
+    function navigateBackward() {
+      if (currentCarouselPosition > 0) {
+        navigateToPosition(currentCarouselPosition - 1, 'backward');
+      }
+    }
+    
+    // Initialize with first photo in carousel
+    if (photoCarousel.length > 0) {
+      const initialPhoto = photoCarousel[0];
+      
+      // Preload image before setting it
+      const img = new Image();
+      img.onload = function() {
+        instagramPhoto.src = initialPhoto.image;
+        instagramPhotoCode.textContent = initialPhoto.code || '';
+        instagramPhotoTimestamp.textContent = initialPhoto.timestamp || '';
+        
+        // Update navigation dots (no animation on initial load)
+        updateNavDots();
+      };
+      img.onerror = function() {
+        console.error('Failed to load photo:', initialPhoto.image);
+      };
+      img.src = initialPhoto.image;
+      
+      // Avatar is now set to fixed image in HTML, no need to change it
+      
+      // Comment button click handler to toggle metadata
+      const commentButton = instagramContainer.querySelector('svg[aria-label="Comment"]');
+      if (commentButton && instagramPhotoOverlay) {
+        commentButton.addEventListener('click', function(e) {
+          e.stopPropagation(); // Prevent photo click
+          instagramPhotoOverlay.classList.toggle('show');
+        });
+      }
+      
+      // Menu dots click handler to show full-size image
+      if (instagramMenuDots && instagramFullsizeModal && instagramFullsizeImage) {
+        instagramMenuDots.addEventListener('click', function(e) {
+          e.stopPropagation(); // Prevent photo click
+          if (photoCarousel.length > 0 && currentCarouselPosition >= 0) {
+            const currentPhoto = photoCarousel[currentCarouselPosition];
+            instagramFullsizeImage.src = currentPhoto.image;
+            instagramFullsizeModal.classList.add('active');
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      }
+      
+      // Close full-size modal
+      if (instagramFullsizeModal && instagramFullsizeClose) {
+        // Close button
+        instagramFullsizeClose.addEventListener('click', function(e) {
+          e.stopPropagation();
+          instagramFullsizeModal.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+        
+        // Click overlay to close
+        const overlay = instagramFullsizeModal.querySelector('.instagram-fullsize-overlay');
+        if (overlay) {
+          overlay.addEventListener('click', function() {
+            instagramFullsizeModal.classList.remove('active');
+            document.body.style.overflow = '';
+          });
+        }
+        
+        // ESC key to close
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && instagramFullsizeModal.classList.contains('active')) {
+            instagramFullsizeModal.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+    }
+    
+    // Click handler for navigating left/right through carousel
+    if (instagramPhotoSection) {
+      instagramPhotoSection.addEventListener('click', function(e) {
+        if (isAnimating || photoCarousel.length === 0) return;
+        
+        // Get the click position relative to the photo section
+        const rect = instagramPhotoSection.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const photoWidth = rect.width;
+        const middleX = photoWidth / 2;
+        
+        // Determine if click was on left or right side
+        if (clickX < middleX) {
+          // Left side - navigate backward (only if not at first position)
+          if (currentCarouselPosition > 0) {
+            navigateBackward();
+          }
+          // Don't allow going backward from first position - do nothing
+        } else {
+          // Right side - navigate forward
+          if (currentCarouselPosition < photoCarousel.length - 1) {
+            navigateForward();
+          } else {
+            // Wrap around to beginning
+            navigateToPosition(0, 'forward');
+          }
+        }
+      });
+    }
+    
+    // Add keyboard navigation (optional)
+    document.addEventListener('keydown', function(e) {
+      if (isAnimating || !instagramContainer || !instagramContainer.contains(document.activeElement)) return;
+      
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (currentCarouselPosition < photoCarousel.length - 1) {
+          navigateForward();
+        } else {
+          navigateToPosition(0, 'forward');
+        }
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        // Don't allow going backward from first position
+        if (currentCarouselPosition > 0) {
+          navigateBackward();
+        }
+      }
+    });
   }
   
   // Add grey borders around each bracketed element in table cells
@@ -560,20 +1607,19 @@ document.addEventListener('DOMContentLoaded', function() {
     projectFilters.appendChild(button);
     projectButtons[projectName] = button;
     
-    if (projectContainers[0] === container) {
-      button.classList.add('active');
-    }
+    // Don't set any project as active by default - all are hidden initially
     
     // Toggle project on button click
     button.addEventListener('click', function() {
-      const isVisible = container.style.display !== 'none';
-      const toggleBtn = container.querySelector('.project-toggle');
+      const currentDisplay = container.style.getPropertyValue('display');
+      const computedDisplay = window.getComputedStyle(container).display;
+      const isVisible = computedDisplay !== 'none' && currentDisplay !== 'none';
       
       if (isVisible) {
-        container.style.display = 'none';
+        container.style.setProperty('display', 'none', 'important');
         button.classList.remove('active');
       } else {
-        container.style.display = 'block';
+        container.style.setProperty('display', 'block', 'important');
         button.classList.add('active');
       }
     });
@@ -604,7 +1650,7 @@ document.addEventListener('DOMContentLoaded', function() {
         container.style.setProperty('display', 'none', 'important');
         if (filterBtn) filterBtn.classList.remove('active');
       } else {
-        container.style.removeProperty('display'); // Remove inline style to use CSS default
+        container.style.setProperty('display', 'block', 'important'); // Explicitly set to block to show
         if (filterBtn) filterBtn.classList.add('active');
       }
     });
@@ -776,7 +1822,7 @@ document.addEventListener('DOMContentLoaded', function() {
   allPhotos.forEach((photo, index) => {
     const img = document.createElement('img');
     img.alt = photo.title;
-    img.loading = 'lazy'; // Native lazy loading
+    img.loading = 'eager'; // Eager loading for preloading/caching
     img.dataset.src = photo.image; // Store source in data attribute
     img.style.display = 'block'; // Display block but opacity 0 via CSS
     img.style.opacity = '0'; // Start hidden
@@ -837,7 +1883,7 @@ document.addEventListener('DOMContentLoaded', function() {
     isPreloading = true;
     
     // Preload images in batches to avoid overwhelming the browser
-    const batchSize = 3; // Load 3 images at a time
+    const batchSize = 5; // Load 5 images at a time (increased for faster caching)
     let loadedInBatch = 0;
     
     function preloadNext() {
@@ -887,8 +1933,8 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
           loadedInBatch = 0;
           if (preloadIndex < imageElements.length) {
-            // Small delay between batches to avoid blocking
-            setTimeout(preloadNext, 100);
+            // Reduced delay between batches for faster caching
+            setTimeout(preloadNext, 50);
           } else {
             isPreloading = false;
           }
@@ -909,17 +1955,23 @@ document.addEventListener('DOMContentLoaded', function() {
       };
     }
     
-    // Start preloading after a short delay to let page render first
+    // Start preloading immediately (reduced delay for faster caching)
     setTimeout(() => {
       preloadNext();
-    }, 500);
+    }, 100);
   }
   
-  // Start background preloading after page is fully loaded
-  if (document.readyState === 'complete') {
+  // Start background preloading immediately when DOM is ready (don't wait for all assets)
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
     preloadImages();
   } else {
-    window.addEventListener('load', preloadImages);
+    document.addEventListener('DOMContentLoaded', preloadImages);
+    // Also try on load as fallback
+    window.addEventListener('load', function() {
+      if (!isPreloading || preloadIndex < imageElements.length) {
+        preloadImages();
+      }
+    });
   }
   
   function updateCarousel(index, previousIndex, direction) {
