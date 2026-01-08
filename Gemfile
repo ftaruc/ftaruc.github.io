@@ -30,3 +30,6 @@ gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
 
 # EXIF data extraction for photos
 gem "exifr"
+
+# CSV library (required for Ruby 3.4+)
+gem "csv"
