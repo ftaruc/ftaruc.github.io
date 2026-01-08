@@ -37,10 +37,14 @@ jobs:
           publish_dir: ./_site
           publish_branch: master
           destination_dir: ./
-          force_orphan: true
+          force_orphan: false
           full_commit_message: "Deploy site"
           disable_nojekyll: false
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
         env:
           GIT_LFS_SKIP_SMUDGE: 1
           GIT_HTTP_LOW_SPEED_LIMIT: 0
           GIT_HTTP_LOW_SPEED_TIME: 999999
+          GIT_TRACE: 1
+          GIT_CURL_VERBOSE: 1
