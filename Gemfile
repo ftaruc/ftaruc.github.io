@@ -34,3 +34,4 @@ gem "exifr"
 # Standard library gems required for Ruby 3.4+ (removed from stdlib)
 gem "csv"
 gem "base64"
+gem "bigdecimal"
