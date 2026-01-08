@@ -30,3 +30,6 @@ jobs:
           publish_branch: master
           destination_dir: ./
           force_orphan: true
+          full_commit_message: "Deploy site"
+        env:
+          GIT_LFS_SKIP_SMUDGE: 1
