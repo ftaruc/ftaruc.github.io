@@ -31,5 +31,8 @@ jobs:
           destination_dir: ./
           force_orphan: true
           full_commit_message: "Deploy site"
+          disable_nojekyll: false
         env:
           GIT_LFS_SKIP_SMUDGE: 1
+          GIT_HTTP_LOW_SPEED_LIMIT: 0
+          GIT_HTTP_LOW_SPEED_TIME: 999999
