@@ -21,6 +21,14 @@ jobs:
       - name: Build Jekyll site
         run: bundle exec jekyll build
       
+      - name: Clean up large unnecessary files
+        run: |
+          # Remove vendor bundle if it was copied
+          rm -rf _site/vendor _site/.jekyll-cache _site/.sass-cache 2>/dev/null || true
+          # Keep only essential files
+          find _site -type f -name "*.log" -delete 2>/dev/null || true
+          find _site -type f -name ".DS_Store" -delete 2>/dev/null || true
+      
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/source'
