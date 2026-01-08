@@ -3,330 +3,744 @@
 # Run: ruby generate_photos_data.rb
 
 ---
+- code: korea'23-0001
+  title: DSCF1700
+  timestamp: '2023-12-20 17:21:29'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1700.JPG"
+- code: korea'23-0002
+  title: DSCF1702
+  timestamp: '2023-12-20 17:22:08'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1702.JPG"
+- code: korea'23-0003
+  title: DSCF1705
+  timestamp: '2023-12-20 17:24:08'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1705.JPG"
+- code: korea'23-0004
+  title: DSCF1706
+  timestamp: '2023-12-20 22:21:05'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1706.JPG"
+- code: korea'23-0005
+  title: DSCF1712
+  timestamp: '2023-12-20 22:21:58'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1712.JPG"
+- code: korea'23-0006
+  title: DSCF1720
+  timestamp: '2023-12-20 22:23:02'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1720.JPG"
+- code: korea'23-0007
+  title: DSCF1737
+  timestamp: '2023-12-20 22:44:03'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1737.JPG"
+- code: korea'23-0008
+  title: DSCF1816
+  timestamp: '2023-12-21 20:16:43'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1816.JPG"
+- code: korea'23-0009
+  title: DSCF1818
+  timestamp: '2023-12-21 20:36:02'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1818.JPG"
+- code: korea'23-0010
+  title: DSCF1821
+  timestamp: '2023-12-21 20:37:11'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1821.JPG"
+- code: korea'23-0011
+  title: DSCF1823
+  timestamp: '2023-12-21 20:37:41'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1823.JPG"
+- code: korea'23-0012
+  title: DSCF1828
+  timestamp: '2023-12-21 22:25:35'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1828.JPG"
+- code: korea'23-0013
+  title: DSCF1832
+  timestamp: '2023-12-21 22:29:25'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1832.JPG"
+- code: korea'23-0014
+  title: DSCF1835
+  timestamp: '2023-12-21 22:30:23'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1835.JPG"
+- code: korea'23-0015
+  title: DSCF1839
+  timestamp: '2023-12-21 22:31:56'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1839.JPG"
+- code: korea'23-0016
+  title: DSCF1842
+  timestamp: '2023-12-21 22:34:57'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1842.JPG"
+- code: korea'23-0017
+  title: DSCF1843
+  timestamp: '2023-12-21 22:35:11'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1843.JPG"
+- code: korea'23-0018
+  title: DSCF1860
+  timestamp: '2023-12-21 22:40:35'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1860.JPG"
+- code: korea'23-0019
+  title: DSCF1862
+  timestamp: '2023-12-21 22:41:05'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1862.JPG"
+- code: korea'23-0020
+  title: DSCF1863
+  timestamp: '2023-12-21 22:41:09'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1863.JPG"
+- code: korea'23-0021
+  title: DSCF1875
+  timestamp: '2023-12-21 22:52:17'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1875.JPG"
+- code: korea'23-0022
+  title: DSCF1879
+  timestamp: '2023-12-21 22:53:01'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1879.JPG"
+- code: korea'23-0023
+  title: DSCF1883
+  timestamp: '2023-12-21 22:53:37'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1883.JPG"
+- code: korea'23-0024
+  title: DSCF1887
+  timestamp: '2023-12-21 22:53:59'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1887.JPG"
+- code: korea'23-0025
+  title: DSCF1888
+  timestamp: '2023-12-21 22:54:44'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1888.JPG"
+- code: korea'23-0026
+  title: DSCF1900
+  timestamp: '2023-12-21 22:59:22'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1900.JPG"
+- code: korea'23-0027
+  title: DSCF1903
+  timestamp: '2023-12-21 22:59:36'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1903.JPG"
+- code: korea'23-0028
+  title: DSCF1905
+  timestamp: '2023-12-21 23:00:29'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1905.JPG"
+- code: korea'23-0029
+  title: DSCF1911
+  timestamp: '2023-12-21 23:01:31'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1911.JPG"
+- code: korea'23-0030
+  title: DSCF1914
+  timestamp: '2023-12-22 16:10:30'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1914.JPG"
+- code: korea'23-0031
+  title: DSCF1915
+  timestamp: '2023-12-22 17:43:35'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1915.JPG"
+- code: korea'23-0032
+  title: DSCF1916
+  timestamp: '2023-12-22 17:44:34'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1916.JPG"
+- code: korea'23-0033
+  title: DSCF1917
+  timestamp: '2023-12-22 17:48:37'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1917.JPG"
+- code: korea'23-0034
+  title: DSCF1921
+  timestamp: '2023-12-22 17:51:20'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1921.JPG"
+- code: korea'23-0035
+  title: DSCF1923
+  timestamp: '2023-12-22 17:52:11'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1923.JPG"
+- code: korea'23-0036
+  title: DSCF1934
+  timestamp: '2023-12-22 19:05:16'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1934.JPG"
+- code: korea'23-0037
+  title: DSCF1935
+  timestamp: '2023-12-22 19:05:28'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1935.JPG"
+- code: korea'23-0038
+  title: DSCF1937
+  timestamp: '2023-12-22 19:06:11'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1937.JPG"
+- code: korea'23-0039
+  title: DSCF1941
+  timestamp: '2023-12-22 19:06:52'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1941.JPG"
+- code: korea'23-0040
+  title: DSCF1944
+  timestamp: '2023-12-22 19:07:49'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1944.JPG"
+- code: korea'23-0041
+  title: DSCF1948
+  timestamp: '2023-12-22 19:08:28'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1948.JPG"
+- code: korea'23-0042
+  title: DSCF1956
+  timestamp: '2023-12-22 19:09:54'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1956.JPG"
+- code: korea'23-0043
+  title: DSCF1969
+  timestamp: '2023-12-22 19:26:37'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1969.JPG"
+- code: korea'23-0044
+  title: DSCF1973
+  timestamp: '2023-12-22 19:39:50'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1973.JPG"
+- code: korea'23-0045
+  title: DSCF1980
+  timestamp: '2023-12-22 20:44:47'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1980.JPG"
+- code: korea'23-0046
+  title: DSCF1982
+  timestamp: '2023-12-22 20:46:28'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1982.JPG"
+- code: korea'23-0047
+  title: DSCF1983
+  timestamp: '2023-12-22 20:47:04'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1983.JPG"
+- code: korea'23-0048
+  title: DSCF1984
+  timestamp: '2023-12-22 20:47:50'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1984.JPG"
+- code: korea'23-0049
+  title: DSCF1985
+  timestamp: '2023-12-22 20:48:22'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1985.JPG"
+- code: korea'23-0050
+  title: DSCF1988
+  timestamp: '2023-12-22 20:50:55'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1988.JPG"
+- code: korea'23-0051
+  title: DSCF1990
+  timestamp: '2023-12-22 20:52:41'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1990.JPG"
+- code: korea'23-0052
+  title: DSCF1997
+  timestamp: '2023-12-22 20:53:57'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1997.JPG"
+- code: korea'23-0053
+  title: DSCF1999
+  timestamp: '2023-12-22 20:56:41'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF1999.JPG"
+- code: korea'23-0054
+  title: DSCF2001
+  timestamp: '2023-12-22 20:57:23'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2001.JPG"
+- code: korea'23-0055
+  title: DSCF2004
+  timestamp: '2023-12-22 22:08:21'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2004.JPG"
+- code: korea'23-0056
+  title: DSCF2008
+  timestamp: '2023-12-22 22:09:12'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2008.JPG"
+- code: korea'23-0057
+  title: DSCF2011
+  timestamp: '2023-12-22 22:11:11'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2011.JPG"
+- code: korea'23-0058
+  title: DSCF2014
+  timestamp: '2023-12-22 22:12:54'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2014.JPG"
+- code: korea'23-0059
+  title: DSCF2016
+  timestamp: '2023-12-22 22:14:05'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2016.JPG"
+- code: korea'23-0060
+  title: DSCF2019
+  timestamp: '2023-12-23 00:00:04'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2019.JPG"
+- code: korea'23-0061
+  title: DSCF2021
+  timestamp: '2023-12-23 00:00:20'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2021.JPG"
+- code: korea'23-0062
+  title: DSCF2023
+  timestamp: '2023-12-23 00:00:39'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2023.JPG"
+- code: korea'23-0063
+  title: DSCF2025
+  timestamp: '2023-12-23 00:00:58'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2025.JPG"
+- code: korea'23-0064
+  title: DSCF2027
+  timestamp: '2023-12-23 00:01:48'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2027.JPG"
+- code: korea'23-0065
+  title: DSCF2029
+  timestamp: '2023-12-23 00:02:33'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2029.JPG"
+- code: korea'23-0066
+  title: DSCF2032
+  timestamp: '2023-12-23 00:03:44'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2032.JPG"
+- code: korea'23-0067
+  title: DSCF2039
+  timestamp: '2023-12-23 00:08:44'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2039.JPG"
+- code: korea'23-0068
+  title: DSCF2043
+  timestamp: '2023-12-23 00:09:00'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2043.JPG"
+- code: korea'23-0069
+  title: DSCF2046
+  timestamp: '2023-12-23 00:16:28'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2046.JPG"
+- code: korea'23-0070
+  title: DSCF2050
+  timestamp: '2023-12-23 00:17:08'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2050.JPG"
+- code: korea'23-0071
+  title: DSCF2053
+  timestamp: '2023-12-23 00:17:54'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2053.JPG"
+- code: korea'23-0072
+  title: DSCF2054
+  timestamp: '2023-12-23 00:18:29'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2054.JPG"
+- code: korea'23-0073
+  title: DSCF2062
+  timestamp: '2023-12-23 18:10:08'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2062.JPG"
+- code: korea'23-0074
+  title: DSCF2066
+  timestamp: '2023-12-23 18:11:31'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2066.JPG"
+- code: korea'23-0075
+  title: DSCF2075
+  timestamp: '2023-12-23 18:13:01'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2075.JPG"
+- code: korea'23-0076
+  title: DSCF2083
+  timestamp: '2023-12-23 18:17:33'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2083.JPG"
+- code: korea'23-0077
+  title: DSCF2089
+  timestamp: '2023-12-23 18:20:09'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2089.JPG"
+- code: korea'23-0078
+  title: DSCF2110
+  timestamp: '2023-12-24 00:17:32'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2110.JPG"
+- code: korea'23-0079
+  title: DSCF2114
+  timestamp: '2023-12-24 00:20:42'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2114.JPG"
+- code: korea'23-0080
+  title: DSCF2115
+  timestamp: '2023-12-24 00:21:00'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2115.JPG"
+- code: korea'23-0081
+  title: DSCF2117
+  timestamp: '2023-12-24 00:22:32'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2117.JPG"
+- code: korea'23-0082
+  title: DSCF2118
+  timestamp: '2023-12-24 00:23:44'
+  notes: ''
+  image: "/images/photos page/korea'23/DSCF2118.JPG"
 - code: taiwan'23-0001
   title: DSCF2140
   timestamp: '2023-12-26 20:35:55'
-  notes: ''
+  notes: on top of tokyo sky tree
   image: "/images/photos page/taiwan'23/DSCF2140.JPG"
 - code: taiwan'23-0002
   title: DSCF2146
   timestamp: '2023-12-26 20:37:24'
-  notes: ''
+  notes: 'family photo #1 - tokyo sky tree'
   image: "/images/photos page/taiwan'23/DSCF2146.JPG"
 - code: taiwan'23-0003
   title: DSCF2148
   timestamp: '2023-12-26 20:37:29'
-  notes: ''
+  notes: 'family photo #2 - tokyo sky tree'
   image: "/images/photos page/taiwan'23/DSCF2148.JPG"
 - code: taiwan'23-0004
   title: DSCF2177
   timestamp: '2023-12-29 00:09:49'
-  notes: ''
+  notes: waterfall at random temple
   image: "/images/photos page/taiwan'23/DSCF2177.JPG"
 - code: taiwan'23-0005
   title: DSCF2199
   timestamp: '2023-12-29 00:16:47'
-  notes: ''
+  notes: street vendors have my respect
   image: "/images/photos page/taiwan'23/DSCF2199.JPG"
 - code: taiwan'23-0006
   title: DSCF2201
   timestamp: '2023-12-29 00:17:05'
-  notes: ''
+  notes: one of my favess - motortcyclist, was able to capture motion blur
   image: "/images/photos page/taiwan'23/DSCF2201.JPG"
 - code: taiwan'23-0007
   title: DSCF2212
   timestamp: '2023-12-29 00:37:38'
-  notes: ''
+  notes: i think we stumbled upon this field after a hour of walking, we were trying
+    to get to a beach
   image: "/images/photos page/taiwan'23/DSCF2212.JPG"
 - code: taiwan'23-0008
   title: DSCF2235
   timestamp: '2023-12-29 22:50:13'
-  notes: ''
+  notes: rando bicyclist
   image: "/images/photos page/taiwan'23/DSCF2235.JPG"
 - code: taiwan'23-0009
   title: DSCF2237
   timestamp: '2023-12-29 22:50:41'
-  notes: ''
+  notes: loved the colors of the builings
   image: "/images/photos page/taiwan'23/DSCF2237.JPG"
 - code: taiwan'23-0010
   title: DSCF2241
   timestamp: '2023-12-30 00:00:04'
-  notes: ''
+  notes: jiufen iconic stairs
   image: "/images/photos page/taiwan'23/DSCF2241.JPG"
 - code: taiwan'23-0011
   title: DSCF2243
   timestamp: '2023-12-30 00:00:55'
-  notes: ''
+  notes: this looked like some kdrama happening
   image: "/images/photos page/taiwan'23/DSCF2243.JPG"
 - code: taiwan'23-0012
   title: DSCF2244
   timestamp: '2023-12-30 00:01:00'
-  notes: ''
+  notes: i liked the framing, the people noticed me eventually
   image: "/images/photos page/taiwan'23/DSCF2244.JPG"
 - code: taiwan'23-0013
   title: DSCF2246
   timestamp: '2023-12-30 00:01:11'
-  notes: ''
+  notes: another angle of that tree
   image: "/images/photos page/taiwan'23/DSCF2246.JPG"
 - code: taiwan'23-0014
   title: DSCF2247
   timestamp: '2023-12-30 00:01:32'
-  notes: ''
+  notes: catssss in jiufen
   image: "/images/photos page/taiwan'23/DSCF2247.JPG"
 - code: taiwan'23-0015
   title: DSCF2249
   timestamp: '2023-12-30 00:01:45'
-  notes: ''
+  notes: cats in jifuen pt2 (butt ed.)
   image: "/images/photos page/taiwan'23/DSCF2249.JPG"
 - code: taiwan'23-0016
   title: DSCF2255
   timestamp: '2023-12-30 00:03:53'
-  notes: ''
+  notes: more of those stairs
   image: "/images/photos page/taiwan'23/DSCF2255.JPG"
 - code: taiwan'23-0017
   title: DSCF2257
   timestamp: '2023-12-30 00:05:17'
-  notes: ''
+  notes: crazy how tall some of these buildings are
   image: "/images/photos page/taiwan'23/DSCF2257.JPG"
 - code: taiwan'23-0018
   title: DSCF2260
   timestamp: '2023-12-30 00:06:28'
-  notes: ''
+  notes: barbershop in jiufen
   image: "/images/photos page/taiwan'23/DSCF2260.JPG"
 - code: taiwan'23-0019
   title: DSCF2262
   timestamp: '2023-12-30 00:06:38'
-  notes: ''
+  notes: cool knick-knacks
   image: "/images/photos page/taiwan'23/DSCF2262.JPG"
 - code: taiwan'23-0020
   title: DSCF2267
   timestamp: '2023-12-30 00:07:45'
-  notes: ''
+  notes: cat on cycle
   image: "/images/photos page/taiwan'23/DSCF2267.JPG"
 - code: taiwan'23-0021
   title: DSCF2277
   timestamp: '2023-12-30 00:10:04'
-  notes: ''
+  notes: edited this eventually one to bring out the colors (this is raw), but coolio
+    frame
   image: "/images/photos page/taiwan'23/DSCF2277.JPG"
 - code: taiwan'23-0022
   title: DSCF2282
   timestamp: '2023-12-30 00:11:29'
-  notes: ''
+  notes: daniel
   image: "/images/photos page/taiwan'23/DSCF2282.JPG"
 - code: taiwan'23-0023
   title: DSCF2291
   timestamp: '2023-12-30 00:13:18'
-  notes: ''
+  notes: pretty landscape
   image: "/images/photos page/taiwan'23/DSCF2291.JPG"
 - code: taiwan'23-0024
   title: DSCF2308 copy
   timestamp: '2023-12-30 00:16:06'
-  notes: ''
+  notes: distortion on mirror pt1
   image: "/images/photos page/taiwan'23/DSCF2308 copy.JPG"
 - code: taiwan'23-0025
   title: DSCF2312
   timestamp: '2023-12-30 00:16:24'
-  notes: ''
+  notes: distortion on mirror pt2
   image: "/images/photos page/taiwan'23/DSCF2312.JPG"
 - code: taiwan'23-0026
   title: DSCF2315
   timestamp: '2023-12-30 00:17:17'
-  notes: ''
+  notes: this face figure was iconic
   image: "/images/photos page/taiwan'23/DSCF2315.JPG"
 - code: taiwan'23-0027
   title: DSCF2316
   timestamp: '2023-12-30 00:17:24'
-  notes: ''
+  notes: iconic face figure (zoomed in)
   image: "/images/photos page/taiwan'23/DSCF2316.JPG"
 - code: taiwan'23-0028
   title: DSCF2330
   timestamp: '2023-12-30 00:23:33'
-  notes: ''
+  notes: probably my favorite shot of the bunch - love the framing and how it ended
+    up**
   image: "/images/photos page/taiwan'23/DSCF2330.JPG"
 - code: taiwan'23-0029
   title: DSCF2331
   timestamp: '2023-12-30 00:23:47'
-  notes: ''
+  notes: crazy how the mountains are here
   image: "/images/photos page/taiwan'23/DSCF2331.JPG"
 - code: taiwan'23-0030
   title: DSCF2333
   timestamp: '2023-12-30 00:24:06'
-  notes: ''
+  notes: interesting frame before the iconic santa
   image: "/images/photos page/taiwan'23/DSCF2333.JPG"
 - code: taiwan'23-0031
   title: DSCF2337
   timestamp: '2023-12-30 00:24:33'
-  notes: ''
+  notes: more of those mountains
   image: "/images/photos page/taiwan'23/DSCF2337.JPG"
 - code: taiwan'23-0032
   title: DSCF2342
   timestamp: '2023-12-30 00:25:33'
-  notes: ''
+  notes: daniel again
   image: "/images/photos page/taiwan'23/DSCF2342.JPG"
 - code: taiwan'23-0033
   title: DSCF2351
   timestamp: '2023-12-30 00:26:19'
-  notes: ''
+  notes: my thumb caught the bottom left, caused interesting vignetting
   image: "/images/photos page/taiwan'23/DSCF2351.JPG"
 - code: taiwan'23-0034
   title: DSCF2353
   timestamp: '2023-12-30 00:27:41'
-  notes: ''
+  notes: strangers smoking can cause interesting shadowing
   image: "/images/photos page/taiwan'23/DSCF2353.JPG"
 - code: taiwan'23-0035
   title: DSCF2361
   timestamp: '2023-12-30 00:28:48'
-  notes: ''
+  notes: another favorite shot of mind, specifically for the santa hanging :-)
   image: "/images/photos page/taiwan'23/DSCF2361.JPG"
 - code: taiwan'23-0036
   title: DSCF2374
   timestamp: '2023-12-30 00:31:29'
-  notes: ''
+  notes: jiufen market
   image: "/images/photos page/taiwan'23/DSCF2374.JPG"
 - code: taiwan'23-0037
   title: DSCF2384
   timestamp: '2023-12-30 00:35:00'
-  notes: ''
+  notes: loved the lanterns in the ceilings
   image: "/images/photos page/taiwan'23/DSCF2384.JPG"
 - code: taiwan'23-0038
   title: DSCF2388
   timestamp: '2023-12-30 00:36:09'
-  notes: ''
+  notes: and there was this bar shot
   image: "/images/photos page/taiwan'23/DSCF2388.JPG"
 - code: taiwan'23-0039
   title: DSCF2392
   timestamp: '2023-12-30 00:37:25'
-  notes: ''
+  notes: the green and orange tints really stand out here
   image: "/images/photos page/taiwan'23/DSCF2392.JPG"
 - code: taiwan'23-0040
   title: DSCF2394
   timestamp: '2023-12-30 00:37:49'
-  notes: ''
+  notes: same shot but pt 2
   image: "/images/photos page/taiwan'23/DSCF2394.JPG"
 - code: taiwan'23-0041
   title: DSCF2398 copy
   timestamp: '2023-12-30 00:39:12'
-  notes: ''
+  notes: box inn jiufen
   image: "/images/photos page/taiwan'23/DSCF2398 copy.JPG"
 - code: taiwan'23-0042
   title: DSCF2402
   timestamp: '2023-12-30 00:40:05'
-  notes: ''
+  notes: magnet store!!
   image: "/images/photos page/taiwan'23/DSCF2402.JPG"
 - code: taiwan'23-0043
   title: DSCF2410
   timestamp: '2023-12-30 00:41:01'
-  notes: ''
+  notes: octopi?
   image: "/images/photos page/taiwan'23/DSCF2410.JPG"
 - code: taiwan'23-0044
   title: DSCF2413
   timestamp: '2023-12-30 00:41:49'
-  notes: ''
+  notes: ko-hi
   image: "/images/photos page/taiwan'23/DSCF2413.JPG"
 - code: taiwan'23-0045
   title: DSCF2429
   timestamp: '2023-12-30 00:45:48'
-  notes: ''
+  notes: loved how the shadows created natural vignetting
   image: "/images/photos page/taiwan'23/DSCF2429.JPG"
 - code: taiwan'23-0046
   title: DSCF2446
   timestamp: '2023-12-30 00:49:26'
-  notes: ''
+  notes: cool neon sign
   image: "/images/photos page/taiwan'23/DSCF2446.JPG"
 - code: taiwan'23-0047
   title: DSCF2452
   timestamp: '2023-12-30 00:52:00'
-  notes: ''
+  notes: did someone order dumplings?
   image: "/images/photos page/taiwan'23/DSCF2452.JPG"
 - code: taiwan'23-0048
   title: DSCF2465
   timestamp: '2023-12-30 00:54:19'
-  notes: ''
+  notes: reminded me of a ghibli scene for some reason...
   image: "/images/photos page/taiwan'23/DSCF2465.JPG"
 - code: taiwan'23-0049
   title: DSCF2475
   timestamp: '2023-12-30 00:56:07'
-  notes: ''
+  notes: all about following the lines...
   image: "/images/photos page/taiwan'23/DSCF2475.JPG"
 - code: taiwan'23-0050
   title: DSCF2494
   timestamp: '2023-12-30 01:00:40'
-  notes: ''
+  notes: probably my third favorite shot - just look how the tree and motorcycles
+    interact in this shot
   image: "/images/photos page/taiwan'23/DSCF2494.JPG"
 - code: taiwan'23-0051
   title: DSCF2497
   timestamp: '2023-12-30 01:00:57'
-  notes: ''
+  notes: rando truck in the fog
   image: "/images/photos page/taiwan'23/DSCF2497.JPG"
 - code: taiwan'23-0052
   title: DSCF2500
   timestamp: '2023-12-30 01:01:24'
-  notes: ''
+  notes: fog pt 2
   image: "/images/photos page/taiwan'23/DSCF2500.JPG"
 - code: taiwan'23-0053
   title: DSCF2511
   timestamp: '2023-12-30 01:03:24'
-  notes: ''
+  notes: fog pt 3, but color change
   image: "/images/photos page/taiwan'23/DSCF2511.JPG"
 - code: taiwan'23-0054
   title: DSCF2516
   timestamp: '2023-12-30 01:04:03'
-  notes: ''
+  notes: from the distance
   image: "/images/photos page/taiwan'23/DSCF2516.JPG"
 - code: taiwan'23-0055
   title: DSCF2525
   timestamp: '2023-12-30 01:05:04'
-  notes: ''
+  notes: kebin
   image: "/images/photos page/taiwan'23/DSCF2525.JPG"
 - code: taiwan'23-0056
   title: DSCF2528
   timestamp: '2023-12-30 01:05:49'
-  notes: ''
+  notes: cool frame, yellow pops
   image: "/images/photos page/taiwan'23/DSCF2528.JPG"
 - code: taiwan'23-0057
   title: DSCF2532
   timestamp: '2023-12-30 01:06:04'
-  notes: ''
+  notes: wonder what these two were talkinga bout
   image: "/images/photos page/taiwan'23/DSCF2532.JPG"
 - code: taiwan'23-0058
   title: DSCF2534
   timestamp: '2023-12-30 01:06:20'
-  notes: ''
+  notes: cant imagine living in these homes...
   image: "/images/photos page/taiwan'23/DSCF2534.JPG"
 - code: taiwan'23-0059
   title: DSCF2538
   timestamp: '2023-12-30 01:07:01'
-  notes: ''
+  notes: outside bathroom stall
   image: "/images/photos page/taiwan'23/DSCF2538.JPG"
 - code: taiwan'23-0060
   title: DSCF2542
   timestamp: '2023-12-30 01:09:16'
-  notes: ''
+  notes: loads more of walking
   image: "/images/photos page/taiwan'23/DSCF2542.JPG"
 - code: taiwan'23-0061
   title: DSCF2558
   timestamp: '2023-12-30 01:11:01'
-  notes: ''
+  notes: interesting colors on this one
   image: "/images/photos page/taiwan'23/DSCF2558.JPG"
 - code: taiwan'23-0062
   title: DSCF2560
   timestamp: '2023-12-30 01:11:43'
-  notes: ''
+  notes: the iconic graveyard shot
   image: "/images/photos page/taiwan'23/DSCF2560.JPG"
 - code: taiwan'23-0063
   title: DSCF2582
   timestamp: '2023-12-30 01:14:38'
-  notes: ''
+  notes: taxi taxi
   image: "/images/photos page/taiwan'23/DSCF2582.JPG"
 - code: taiwan'23-0064
   title: DSCF2587
   timestamp: '2023-12-30 01:15:37'
-  notes: ''
+  notes: more bystanders
   image: "/images/photos page/taiwan'23/DSCF2587.JPG"
 - code: taiwan'23-0065
   title: DSCF2600
   timestamp: '2023-12-30 01:17:27'
-  notes: ''
+  notes: the stairs especially were beautiful
   image: "/images/photos page/taiwan'23/DSCF2600.JPG"
 - code: taiwan'23-0066
   title: DSCF2608
@@ -336,62 +750,63 @@
 - code: taiwan'23-0067
   title: DSCF2613
   timestamp: '2023-12-30 01:18:58'
-  notes: ''
+  notes: idk why but this building reminds me of nara
   image: "/images/photos page/taiwan'23/DSCF2613.JPG"
 - code: taiwan'23-0068
   title: DSCF2629
   timestamp: '2023-12-30 01:23:28'
-  notes: ''
+  notes: ghibli key chains!
   image: "/images/photos page/taiwan'23/DSCF2629.JPG"
 - code: taiwan'23-0069
   title: DSCF2661
   timestamp: '2023-12-30 01:50:12'
-  notes: ''
+  notes: oh how the light shines through
   image: "/images/photos page/taiwan'23/DSCF2661.JPG"
 - code: taiwan'23-0070
   title: DSCF2671
   timestamp: '2023-12-31 02:22:46'
-  notes: ''
+  notes: professor e has their own outside patio area where it links to a cafe/plant
+    area
   image: "/images/photos page/taiwan'23/DSCF2671.JPG"
 - code: taiwan'23-0071
   title: DSCF2673
   timestamp: '2023-12-31 02:23:20'
-  notes: ''
+  notes: prof e pt. 2
   image: "/images/photos page/taiwan'23/DSCF2673.JPG"
 - code: coney'25-0001
   title: DSCF3568
   timestamp: '2025-07-03 16:21:02'
-  notes: ''
+  notes: linen sheets, testing the camera
   image: "/images/photos page/coney'25/DSCF3568.JPG"
 - code: coney'25-0002
   title: DSCF3569
   timestamp: '2025-07-03 16:21:17'
-  notes: ''
+  notes: chesssss
   image: "/images/photos page/coney'25/DSCF3569.JPG"
 - code: coney'25-0003
   title: DSCF3574
   timestamp: '2025-07-04 08:47:16'
-  notes: ''
+  notes: on the bus, saw this artwork
   image: "/images/photos page/coney'25/DSCF3574.JPG"
 - code: coney'25-0004
   title: DSCF3579
   timestamp: '2025-07-04 09:57:59'
-  notes: ''
+  notes: brighton beach otw to coney
   image: "/images/photos page/coney'25/DSCF3579.JPG"
 - code: coney'25-0005
   title: DSCF3580
   timestamp: '2025-07-04 09:59:27'
-  notes: ''
+  notes: thumb smudge
   image: "/images/photos page/coney'25/DSCF3580.JPG"
 - code: coney'25-0006
   title: DSCF3581
   timestamp: '2025-07-04 09:59:39'
-  notes: ''
+  notes: ish also took photos
   image: "/images/photos page/coney'25/DSCF3581.JPG"
 - code: coney'25-0007
   title: DSCF3583
   timestamp: '2025-07-04 10:01:20'
-  notes: ''
+  notes: cool persian rug we saw
   image: "/images/photos page/coney'25/DSCF3583.JPG"
 - code: coney'25-0008
   title: DSCF3584
@@ -401,22 +816,22 @@
 - code: coney'25-0009
   title: DSCF3586
   timestamp: '2025-07-04 10:02:15'
-  notes: ''
+  notes: the towers here had bathrooms that created interesting frames
   image: "/images/photos page/coney'25/DSCF3586.JPG"
 - code: coney'25-0010
   title: DSCF3590
   timestamp: '2025-07-04 10:02:53'
-  notes: ''
+  notes: like this one is iconic - balance with the person and the red cross
   image: "/images/photos page/coney'25/DSCF3590.JPG"
 - code: coney'25-0011
   title: DSCF3591
   timestamp: '2025-07-04 10:03:33'
-  notes: ''
+  notes: i suck at volleyball...
   image: "/images/photos page/coney'25/DSCF3591.JPG"
 - code: coney'25-0012
   title: DSCF3592
   timestamp: '2025-07-04 10:04:28'
-  notes: ''
+  notes: gotta head back for the uzbke hotdogs
   image: "/images/photos page/coney'25/DSCF3592.JPG"
 - code: coney'25-0013
   title: DSCF3594
@@ -436,77 +851,78 @@
 - code: coney'25-0016
   title: DSCF3602
   timestamp: '2025-07-04 10:08:32'
-  notes: ''
+  notes: random performer at coney
   image: "/images/photos page/coney'25/DSCF3602.JPG"
 - code: coney'25-0017
   title: DSCF3605
   timestamp: '2025-07-04 10:16:48'
-  notes: ''
+  notes: ny aquarium
   image: "/images/photos page/coney'25/DSCF3605.JPG"
 - code: coney'25-0018
   title: DSCF3607
   timestamp: '2025-07-04 10:17:39'
-  notes: ''
+  notes: coney bystanders pt1
   image: "/images/photos page/coney'25/DSCF3607.JPG"
 - code: coney'25-0019
   title: DSCF3608
   timestamp: '2025-07-04 10:17:53'
-  notes: ''
+  notes: coney bystanders pt2
   image: "/images/photos page/coney'25/DSCF3608.JPG"
 - code: coney'25-0020
   title: DSCF3609
   timestamp: '2025-07-04 10:18:35'
-  notes: ''
+  notes: coney aquarium pt 2
   image: "/images/photos page/coney'25/DSCF3609.JPG"
 - code: coney'25-0021
   title: DSCF3611
   timestamp: '2025-07-04 10:18:50'
-  notes: ''
+  notes: ferris wheel
   image: "/images/photos page/coney'25/DSCF3611.JPG"
 - code: coney'25-0022
   title: DSCF3613
   timestamp: '2025-07-04 10:19:15'
-  notes: ''
+  notes: pauls daughter
   image: "/images/photos page/coney'25/DSCF3613.JPG"
 - code: coney'25-0023
   title: DSCF3616
   timestamp: '2025-07-04 10:21:06'
-  notes: ''
+  notes: coneys cones
   image: "/images/photos page/coney'25/DSCF3616.JPG"
 - code: coney'25-0024
   title: DSCF3617
   timestamp: '2025-07-04 10:21:34'
-  notes: ''
+  notes: snacks bar - famglia
   image: "/images/photos page/coney'25/DSCF3617.JPG"
 - code: coney'25-0025
   title: DSCF3618
   timestamp: '2025-07-04 10:21:43'
-  notes: ''
+  notes: coney bystanders pt3
   image: "/images/photos page/coney'25/DSCF3618.JPG"
 - code: coney'25-0026
   title: DSCF3620
   timestamp: '2025-07-04 10:22:30'
-  notes: ''
+  notes: happy fishing!
   image: "/images/photos page/coney'25/DSCF3620.JPG"
 - code: coney'25-0027
   title: DSCF3621
   timestamp: '2025-07-04 10:23:06'
-  notes: ''
+  notes: backside of nathasns building
   image: "/images/photos page/coney'25/DSCF3621.JPG"
 - code: coney'25-0028
   title: DSCF3622
   timestamp: '2025-07-04 10:23:39'
-  notes: ''
+  notes: coney bystanders pt4
   image: "/images/photos page/coney'25/DSCF3622.JPG"
 - code: coney'25-0029
   title: DSCF3623
   timestamp: '2025-07-04 10:24:03'
-  notes: ''
+  notes: what was iconic was that this was on 4th of july - aka the hotdog eating
+    contest at nathans
   image: "/images/photos page/coney'25/DSCF3623.JPG"
 - code: coney'25-0030
   title: DSCF3624 copy
   timestamp: '2025-07-04 10:24:09'
-  notes: ''
+  notes: news outlet covering this event
   image: "/images/photos page/coney'25/DSCF3624 copy.JPG"
 - code: coney'25-0031
   title: DSCF3626
@@ -541,7 +957,7 @@
 - code: coney'25-0037
   title: DSCF3634
   timestamp: '2025-07-04 10:26:29'
-  notes: ''
+  notes: seagulls are iconic.
   image: "/images/photos page/coney'25/DSCF3634.JPG"
 - code: coney'25-0038
   title: DSCF3635
@@ -561,7 +977,7 @@
 - code: coney'25-0041
   title: DSCF3640
   timestamp: '2025-07-04 10:28:28'
-  notes: ''
+  notes: no way will i ride that spinny one
   image: "/images/photos page/coney'25/DSCF3640.JPG"
 - code: coney'25-0042
   title: DSCF3641
@@ -571,10 +987,10 @@
 - code: coney'25-0043
   title: DSCF3642
   timestamp: '2025-07-04 10:29:11'
-  notes: ''
+  notes: ROOUSE
   image: "/images/photos page/coney'25/DSCF3642.JPG"
 - code: coney'25-0044
   title: DSCF3643
   timestamp: '2025-07-04 10:29:17'
-  notes: ''
+  notes: little fade away
   image: "/images/photos page/coney'25/DSCF3643.JPG"
