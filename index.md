@@ -49,7 +49,7 @@ title:
     </div>
     
     <div class="about-section hoverable-section" data-content="albums">
-      <p><strong>albums</strong>: <a href="https://ferdie.org/images/archive%20photos/final_albums.jpg" target="_blank">old list - need to update</a></p>
+      <p><strong>albums</strong>: <a href="https://ferdie.org/images/archive%20photos/chart.png" target="_blank">2025 list</a></p>
     </div>
   </div>
   
@@ -356,16 +356,18 @@ main {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  overflow: hidden; /* Clip content at edges */
+  overflow: visible; /* Allow content to be visible during rotation to prevent clipping */
+  perspective: 1000px; /* Add perspective for smoother 3D effect */
 }
 
 .content-carousel .content-item {
   position: absolute;
   width: 100%;
   height: 100%;
+  min-height: 400px; /* Ensure consistent minimum height to prevent layout shifts */
   opacity: 0;
-  transform: rotateY(90deg) translateZ(250px);
-  transition: opacity 0.8s ease 0.7s, transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Delay opacity */
+  transform: rotateY(180deg) translateZ(250px);
+  transition: opacity 1.3s ease 0.3s, transform 2s cubic-bezier(0.4, 0, 0.2, .8); /* Even slower, smoother transition */
   transform-style: preserve-3d;
   transform-origin: center center;
   backface-visibility: hidden; /* Hide back of rotated items */
@@ -385,29 +387,29 @@ main {
 /* Transitioning out (previous item) */
 .content-carousel .content-item.transitioning-out-left {
   opacity: 0;
-  transform: rotateY(-90deg) translateZ(250px);
+  transform: rotateY(-180deg) translateZ(250px);
   z-index: 1;
   visibility: visible; /* Keep visible during transition */
 }
 
 .content-carousel .content-item.transitioning-out-right {
   opacity: 0;
-  transform: rotateY(90deg) translateZ(250px);
+  transform: rotateY(180deg) translateZ(250px);
   z-index: 1;
   visibility: visible; /* Keep visible during transition */
 }
 
 /* Transitioning in (new item) */
 .content-carousel .content-item.transitioning-in-left {
-  opacity: 1;
-  transform: rotateY(90deg) translateZ(250px);
+  opacity: 1 !important; /* Ensure it's visible from the start */
+  transform: rotateY(180deg) translateZ(250px);
   z-index: 3;
   visibility: visible; /* Keep visible during transition */
 }
 
 .content-carousel .content-item.transitioning-in-right {
-  opacity: 1;
-  transform: rotateY(-90deg) translateZ(250px);
+  opacity: 1 !important; /* Ensure it's visible from the start */
+  transform: rotateY(-180deg) translateZ(250px);
   z-index: 3;
   visibility: visible; /* Keep visible during transition */
 }
@@ -498,15 +500,15 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     playlist: {
       type: 'spotify',
-      embed: '<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2JoQqTsk7xUxln6nSgo26F?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
+      embed: '<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2JoQqTsk7xUxln6nSgo26F?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager"></iframe>'
     },
     films: {
       type: 'image',
-      src: '{{ "/images/archive photos/movies.png" | relative_url }}'
+      src: '{{ "/images/archive photos/movies.png" | relative_url }}?v={{ site.time | date: "%s" }}'
     },
     albums: {
       type: 'image',
-      src: '{{ "/images/archive photos/final_albums.jpg" | relative_url }}'
+      src: '{{ "/images/archive photos/chart.png" | relative_url }}'
     }
   };
   
@@ -540,13 +542,47 @@ document.addEventListener('DOMContentLoaded', function() {
       const img = document.createElement('img');
       img.src = data.src;
       img.alt = key;
+      // Preload images for smoother transitions
+      img.loading = 'eager';
       item.appendChild(img);
     } else if (data.type === 'spotify') {
       item.innerHTML = data.embed;
+      // Ensure Spotify iframe loads immediately
+      const iframe = item.querySelector('iframe');
+      if (iframe) {
+        iframe.loading = 'eager';
+        // Force iframe to start loading by accessing its contentWindow
+        // This helps preload the iframe content
+        try {
+          // Trigger load by setting src again (browsers cache this)
+          const originalSrc = iframe.src;
+          iframe.src = originalSrc;
+        } catch (e) {
+          // Cross-origin restrictions may prevent access, that's okay
+        }
+      }
     }
     
     carousel.appendChild(item);
   });
+  
+  // Preload all iframes on page load to prevent stuttering
+  setTimeout(function() {
+    const allIframes = carousel.querySelectorAll('iframe');
+    allIframes.forEach(function(iframe) {
+      if (iframe.loading === 'lazy') {
+        iframe.loading = 'eager';
+      }
+      // Force iframe to start loading
+      try {
+        const src = iframe.src;
+        iframe.src = '';
+        iframe.src = src;
+      } catch (e) {
+        // Ignore cross-origin errors
+      }
+    });
+  }, 100);
   
   function updateCarousel(index, previousIndex, direction) {
     const items = carousel.querySelectorAll('.content-item');
@@ -557,38 +593,50 @@ document.addEventListener('DOMContentLoaded', function() {
       previousIndex = -1;
     }
     
-    // Determine rotation direction
-    let rotationDirection = direction;
+    // Always rotate left regardless of position
+    let rotationDirection = 'left';
     if (previousIndex !== undefined && previousIndex !== -1 && previousIndex !== index && !isScrolling) {
-      if (!rotationDirection) {
-        rotationDirection = index < previousIndex ? 'right' : 'left'; // Reversed directions
-      }
       
-      // Animate out the previous item
-      const prevItem = items[previousIndex];
-      if (prevItem && prevItem.classList.contains('active')) {
-        prevItem.classList.remove('active');
-        prevItem.classList.add(rotationDirection === 'left' ? 'transitioning-out-left' : 'transitioning-out-right');
-        // Hide after transition
-        prevItem.addEventListener('transitionend', function handler() {
-          prevItem.style.visibility = 'hidden';
-          prevItem.removeEventListener('transitionend', handler);
-        }, { once: true });
-      }
+      // Force left rotation always
+      rotationDirection = 'left';
       
-      // Animate in the new item
+      // Animate in the new item FIRST to ensure something is always visible
       const newItem = items[index];
       if (newItem) {
+        // Make new item visible immediately before starting animation
+        newItem.style.visibility = 'visible';
+        newItem.style.opacity = '1';
+        newItem.style.zIndex = '3';
         newItem.classList.remove('active', 'transitioning-out-left', 'transitioning-out-right', 'transitioning-in-left', 'transitioning-in-right');
+        
+        // Force reflow to ensure styles are applied
+        void newItem.offsetWidth;
+        
+        // Now start the transition animation
         newItem.classList.add(rotationDirection === 'left' ? 'transitioning-in-left' : 'transitioning-in-right');
-        newItem.style.visibility = 'visible'; // Make visible for transition
         
         setTimeout(() => {
           if (currentContentIndex === index && newItem) {
             newItem.classList.remove('transitioning-in-left', 'transitioning-in-right');
             newItem.classList.add('active');
           }
-        }, 50);
+        }, 100);
+      }
+      
+      // Animate out the previous item AFTER new item is visible (small delay)
+      const prevItem = items[previousIndex];
+      if (prevItem && prevItem.classList.contains('active')) {
+        // Small delay to ensure new item is visible first
+        setTimeout(() => {
+          prevItem.classList.remove('active');
+          prevItem.classList.add(rotationDirection === 'left' ? 'transitioning-out-left' : 'transitioning-out-right');
+          prevItem.style.zIndex = '1'; // Move behind new item
+          // Hide after transition completes
+          prevItem.addEventListener('transitionend', function handler() {
+            prevItem.style.visibility = 'hidden';
+            prevItem.removeEventListener('transitionend', handler);
+          }, { once: true });
+        }, 100); // Small delay to ensure new item appears first
       }
     } else {
       // First item or no previous
@@ -629,6 +677,31 @@ document.addEventListener('DOMContentLoaded', function() {
           direction = contentIndex < previousIndex ? 'right' : 'left'; // Reversed directions
         }
         currentContentIndex = contentIndex;
+        updateCarousel(currentContentIndex, previousIndex, direction);
+        hoverTimeout = null;
+      }, 150);
+    });
+    
+    section.addEventListener('mouseleave', function() {
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout);
+        hoverTimeout = null;
+      }
+      
+      hoverTimeout = setTimeout(function() {
+        if (isScrolling) {
+          hoverTimeout = null;
+          return;
+        }
+        
+        // Return to default (home) content
+        // If mouse moved to another hoverable section, its mouseenter will override this
+        const previousIndex = currentContentIndex;
+        let direction = null;
+        if (previousIndex !== -1 && previousIndex !== 0 && previousIndex >= 0 && previousIndex < contentOrder.length) {
+          direction = 0 < previousIndex ? 'right' : 'left'; // Reversed directions
+        }
+        currentContentIndex = 0;
         updateCarousel(currentContentIndex, previousIndex, direction);
         hoverTimeout = null;
       }, 150);

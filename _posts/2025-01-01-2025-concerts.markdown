@@ -1,0 +1,90 @@
+---
+layout: post
+title: "Concerts in 2025"
+date: 2026-01-03
+---
+
+
+I've experienced *many* concerts in college... and I mean a lot. 
+
+Although the number of shows have slowed down, there were must-go's I had this year with albums that recently dropped. 
+
+---
+
+**1. Fine, Smerz, Urika's Bedroom (Outline Festival)**
+
+**Date:** Friday, 10/24/25 <br>
+**Venue:** Knockdown Center <br>
+**Location:** Brooklyn, NY <br>
+
+
+*in progress thoughts
+
+`Fine`:
+<video width="100%" controls style="max-width: 800px; margin: 20px 0;">
+  <source src="{{ '/videos/fine.mov' | relative_url }}" type="video/quicktime">
+  Your browser does not support the video tag.
+</video>    
+
+
+`Smerz`:
+<video width="100%" controls style="max-width: 800px; margin: 20px 0;">
+  <source src="{{ '/videos/smerz.mov' | relative_url }}" type="video/quicktime">
+  Your browser does not support the video tag.
+</video>
+
+
+
+---
+
+**2. DERBY**
+
+**Date:** thursday, 10/30/25 <br>
+**Venue:** baby's all right <br>
+**Location:** brooklyn, nyc <br>
+
+
+*in progress thoughts
+
+<video width="100%" controls style="max-width: 800px; margin: 20px 0;">
+  <source src="{{ '/videos/derby.mov' | relative_url }}" type="video/quicktime">
+  Your browser does not support the video tag.
+</video>    
+
+---
+
+**3. boylife**
+
+**Date:** monday, 11/1/2025 <br>
+**Venue:** nightclub 101 <br>
+**Location:** nyc, ny <br>
+
+[Your thoughts/description about the concert here]
+
+<video width="100%" controls style="max-width: 800px; margin: 20px 0;">
+  <source src="{{ '/videos/boylife.mov' | relative_url }}" type="video/quicktime">
+  Your browser does not support the video tag.
+</video>    
+
+
+
+---
+
+**4. Dijon**
+
+**Date:** monday, 12/1/2025 <br>
+**Venue:** brooklyn paramount <br>
+**Location:** brooklyn, nyc <br>
+
+*in progress thoughts
+
+<video width="100%" controls preload="metadata" style="max-width: 800px; margin: 20px 0;">
+    <source src="{{ '/videos/dijon.mov' | relative_url }}" type="video/quicktime">
+  Your browser does not support the video tag.
+</video>
+
+
+---
+
+test video for sizing:
+<center><video width="750" height="500" controls> <source src="{{ '/videos/fine.mp4' | relative_url }}" type="video/mp4"> </video></center>

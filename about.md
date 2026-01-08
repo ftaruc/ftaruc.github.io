@@ -50,7 +50,7 @@ permalink: /about/
     </div>
     
     <div class="about-section hoverable-section" data-content="albums">
-      <p><strong>albums</strong>: <a href="https://ferdie.org/images/archive%20photos/final_albums.jpg" target="_blank">high resolution</a></p>
+      <p><strong>albums</strong>: <a href="https://ferdie.org/images/archive%20photos/chart.png" target="_blank">high resolution</a></p>
     </div>
     
     <div class="about-section hoverable-section" data-content="articles">
@@ -505,15 +505,15 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     playlist: {
       type: 'spotify',
-      embed: '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4lDl97fws5cTzmqXvkKaIy?utm_source=generator" width="100%" height="600" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
+      embed: '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4lDl97fws5cTzmqXvkKaIy?utm_source=generator" width="100%" height="1250" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
     },
     films: {
       type: 'image',
-      src: '{{ "/images/archive photos/movies.png" | relative_url }}'
+      src: '{{ "/images/archive photos/movies.png" | relative_url }}?v={{ site.time | date: "%s" }}'
     },
     albums: {
       type: 'image',
-      src: '{{ "/images/archive photos/final_albums.jpg" | relative_url }}'
+      src: '{{ "/images/archive photos/chart.png" | relative_url }}'
     },
     articles: {
       type: 'articles',
