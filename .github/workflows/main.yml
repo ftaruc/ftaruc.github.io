@@ -31,7 +31,7 @@ jobs:
           find _site -type f -name ".DS_Store" -delete 2>/dev/null || true
       
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/source'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -43,6 +43,7 @@ jobs:
           disable_nojekyll: false
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
+          keep_files: false
         env:
           GIT_HTTP_LOW_SPEED_LIMIT: 0
           GIT_HTTP_LOW_SPEED_TIME: 999999
