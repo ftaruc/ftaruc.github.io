@@ -13,6 +13,15 @@ jobs:
           fetch-depth: 0
           lfs: true
       
+      - name: Clean up disk space
+        run: |
+          # Clean up system files
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          # Clean up git objects
+          git gc --prune=now
+      
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -29,6 +38,11 @@ jobs:
           # Keep only essential files
           find _site -type f -name "*.log" -delete 2>/dev/null || true
           find _site -type f -name ".DS_Store" -delete 2>/dev/null || true
+          # Clean up Git LFS cache after build
+          git lfs prune --force 2>/dev/null || true
+          # Clean up git objects
+          rm -rf .git/objects/pack/*.keep 2>/dev/null || true
+          git gc --prune=now --aggressive 2>/dev/null || true
       
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
