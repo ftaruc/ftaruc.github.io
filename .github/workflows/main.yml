@@ -28,8 +28,18 @@ jobs:
           ruby-version: '3.3'
           bundler-cache: true
       
-      - name: Build Jekyll site
-        run: bundle exec jekyll build
+      - name: Cache Jekyll build artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            .jekyll-cache
+            .sass-cache
+          key: ${{ runner.os }}-jekyll-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-jekyll-
+      
+      - name: Build Jekyll site (incremental)
+        run: bundle exec jekyll build --incremental --trace
       
       - name: Clean up large unnecessary files
         run: |
@@ -38,6 +48,8 @@ jobs:
           # Keep only essential files
           find _site -type f -name "*.log" -delete 2>/dev/null || true
           find _site -type f -name ".DS_Store" -delete 2>/dev/null || true
+          # Remove cache directories after build (they're already cached)
+          rm -rf .jekyll-cache .sass-cache 2>/dev/null || true
           # Clean up Git LFS cache after build
           git lfs prune --force 2>/dev/null || true
           # Clean up git objects
