@@ -34,12 +34,15 @@ jobs:
           path: |
             .jekyll-cache
             .sass-cache
-          key: ${{ runner.os }}-jekyll-${{ github.sha }}
+            _site
+          key: ${{ runner.os }}-jekyll-${{ hashFiles('**/*.md', '**/*.html', '**/*.yml', '**/*.yaml', '_config.yml', '**/_posts/**', '**/_data/**') }}
           restore-keys: |
             ${{ runner.os }}-jekyll-
       
       - name: Build Jekyll site (incremental)
         run: bundle exec jekyll build --incremental --trace
+        env:
+          JEKYLL_ENV: production
       
       - name: Clean up large unnecessary files
         run: |
