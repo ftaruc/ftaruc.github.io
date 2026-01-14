@@ -34,8 +34,7 @@ jobs:
           path: |
             .jekyll-cache
             .sass-cache
-            _site
-          key: ${{ runner.os }}-jekyll-${{ hashFiles('**/*.md', '**/*.html', '**/*.yml', '**/*.yaml', '_config.yml', '**/_posts/**', '**/_data/**') }}
+          key: ${{ runner.os }}-jekyll-${{ hashFiles('_config.yml', '**/_posts/**', '**/_data/**', '**/_layouts/**', '**/_includes/**', 'Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-jekyll-
       
