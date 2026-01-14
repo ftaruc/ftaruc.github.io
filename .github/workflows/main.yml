@@ -64,12 +64,12 @@ jobs:
           publish_dir: ./_site
           publish_branch: master
           destination_dir: ./
-          force_orphan: false
-          full_commit_message: "Deploy site"
+          force_orphan: true
+          full_commit_message: "Deploy site from source branch"
           disable_nojekyll: false
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
-          keep_files: false
+          allow_empty_commit: false
         env:
           GIT_HTTP_LOW_SPEED_LIMIT: 0
           GIT_HTTP_LOW_SPEED_TIME: 999999

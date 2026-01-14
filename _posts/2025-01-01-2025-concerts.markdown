@@ -5,9 +5,9 @@ date: 2026-01-03
 ---
 
 
-I've experienced *many* concerts in college... and I mean a lot. 
+I've experienced *many* concerts in my lifetime... 
 
-Although the number of shows have slowed down, there were must-go's I had this year with albums that recently dropped. 
+Although the quantity of shows I've been to have slowed down, I went to a couple memorable ones that accompanied albums that dropped this year. 
 
 ---
 
@@ -17,23 +17,29 @@ Although the number of shows have slowed down, there were must-go's I had this y
 **Venue:** Knockdown Center <br>
 **Location:** Brooklyn, NY <br>
 
+Outline's fifth-annual festival focused on the underground Danish pop scene that has been slowly creeping into the mainstream-- catering to the Bushwick natives to which I was part of. Centered around the dreamy sounds made by former students of Copenhagen’s Rhythmic Music Conservatory: *Erika*, *Fine*, and Henriette Motzfeldt from *Smerz*. *Clara La San* (U.K) and *urika’s bedroom* (L.A) as additions broadened the context beyond one art school campus, connecting it to a wider indie-pop scene. 
+<br>
 
-*in progress thoughts
+I was stoked to finally hear *urika's bedroom's "big smile, black mire"* live for the first time, their music as wide-eyed and intimate, repurposing the tonal fabric of communication breakdown, through drum loop in warped grooves and collapsed textures between their slowed-down trip-hop beats against acoustic guitars. They’ve toured with all recent favorites: *Chanel Beads*, *Nourished by Time*, and *Youth Lagoon*, in between producing and writing songs for fellow California up-and-comers *untitled (halo)* and Ded Hyatt. I decided on not recording the set to experience their music without distratction, a true treat for the opening set.
 
 `Fine`:
-<video width="100%" controls style="max-width: 800px; margin: 20px 0;">
+
+Following them was Danish singer-songwriter Fine Glindvad Jensen-- who recently debuted their 2024 album *"rocky top ballads"*, which combines organic instrumentation on alt-country-folk fusion to tell a story of a love affair that's hard to understand. The soundscape is a homage to hearing her bluegrass musician father play his banjo through the wall: “You can hear it,” she recalled in an interview this year, “but you can’t really hear it.” Really dissapointed she skipped playing "I could" though.
+
+<video width="100%" controls style="max-width: 800px; margin: 20px 0;">ß
   <source src="{{ '/videos/fine.mov' | relative_url }}" type="video/quicktime">
   Your browser does not support the video tag.
 </video>    
 
 
 `Smerz`:
+
+Another act that caught my attention was Norwegion duo, *Smerz*. With their 2025 release of *"big city life"*, the album describes the intoxicating and rich feelings of a night out in a big city like nyc. Favorites like "you got time and i got money" was recently remixed by *MIKE*... an insane collaboration toward the end of the year.
+
 <video width="100%" controls style="max-width: 800px; margin: 20px 0;">
   <source src="{{ '/videos/smerz.mov' | relative_url }}" type="video/quicktime">
   Your browser does not support the video tag.
 </video>
-
-
 
 ---
 
@@ -44,7 +50,22 @@ Although the number of shows have slowed down, there were must-go's I had this y
 **Location:** brooklyn, nyc <br>
 
 
-*in progress thoughts
+If not for a later mentioned artist, *DERBY's freshman album *"slugger"* takes the cake as my second favorite album of the year. A lot of influences bleed through this album: Alex G, Frank Ocean, or even Dijon seem as obvious inspirations but don't feel  derivative. Most of the album has pitch-shifted vocals that might steer as off-putting; but his buttery melodies, off-kilter sonic palate, and quixotic romanticism carry through with a touch of dirty realism.
+
+"Move like that" or "Money fight" really stood out as highlights when experiencing the album live, with the audience raging through raw emotions through the rising intensity of melody: disorenting, climax building, sloping and stampeding toward irresolution. It was a two man show: warbly guitars and dry drum kits carrying the whole set, but the venue at Baby's really made the event authentically intimate. 
+
+Sedated loosies like "ultraviolet" (one of my faves) carries one of my favorite lyrical moments:
+
+<i>"Or we could go riding <br>
+I look in your eyes and I see it <br>
+Ultraviolet <br>
+Don’t ever let me go <br>
+I already know what your fight is <br>
+Make it pure baby, make it pious <br>
+Make it kind or make it cruel <br>
+As long as you’re trying" <br></i>
+
+It was one of the few moments where the crowd unfortunately didn't sing along despite its magical lyrical power, with *DERBY* saying "don't worry, we'll get there eventually".
 
 <video width="100%" controls style="max-width: 800px; margin: 20px 0;">
   <source src="{{ '/videos/derby.mov' | relative_url }}" type="video/quicktime">
@@ -59,7 +80,18 @@ Although the number of shows have slowed down, there were must-go's I had this y
 **Venue:** nightclub 101 <br>
 **Location:** nyc, ny <br>
 
-[Your thoughts/description about the concert here]
+I've been following *boylife* since their *Common Souls* day, which felt like a fitting reunion since producer Nick Velez played drums in this small venue. Vocalist Ryan Yoo (boylife) originally pushed out layered & heartfelt eletronic-tinged ballads through classics like "Roots//Habit" or "Arizona".
+
+Since college, the duo transitioned into solo outfit *boylife* (despite Nick still producing for him on the side) where in the peak of covid dropped "peas" -- possibly my most played song that year. In the song, boylife details the pain of losing a close friend and choosing to move back home as a result. Writing from his parent’s perspective, he attempts to sort out his experience through the eyes of his family, who wanted to help him despite their knowledge of how to do so. 
+
+<i>"Where do you go when you close yours eyes? And <br>
+Who are you aching for when you dream? <br>
+I could peel peaches for when you wake up <br>
+No rush, no rush no"</i>
+
+*"You must believe in something..."*
+
+Although this concert had pretty off-putting audio issues, it was a good reflection on how some of your favorite songs still hit you the same way years later.
 
 <video width="100%" controls style="max-width: 800px; margin: 20px 0;">
   <source src="{{ '/videos/boylife.mov' | relative_url }}" type="video/quicktime">
@@ -76,15 +108,16 @@ Although the number of shows have slowed down, there were must-go's I had this y
 **Venue:** brooklyn paramount <br>
 **Location:** brooklyn, nyc <br>
 
-*in progress thoughts
+I'll make this rather brief since *Dijon* is still my favorite artist (and has been for the past 6 years)-- I still can't find the words why.
+
+This would mark my fifth time seeing him (I went to see him twice this year in Dallas and Brooklyn), and despite the 10/10 experience, nothing will top the *Absolutely* journey of 2022 in the jewish synagogue @ Sixth and I in Washington DC.
+
+*Dijon* is finally getting the mainstream praise he deserves with recent success as co-star to Leo in *One Battle After Another*, nominated for Producer of the Year for the Grammys, and being Pitchfork Artist of the Year accompanying his sophmore album "Baby".
+
+The Brooklyn Paramount was the ideal venue for the set: intimate, yet architecturally intricate. Defined by its high ceilings, chandeliers, and spiral staircases, the iconic venue evokes a refined sense of classic NYC theater. What will always remain true with any Dijon set is that in the short hour, nothing else matters but the music.
 
 <video width="100%" controls preload="metadata" style="max-width: 800px; margin: 20px 0;">
     <source src="{{ '/videos/dijon.mov' | relative_url }}" type="video/quicktime">
   Your browser does not support the video tag.
 </video>
 
-
----
-
-test video for sizing:
-<center><video width="750" height="500" controls> <source src="{{ '/videos/fine.mp4' | relative_url }}" type="video/mp4"> </video></center>
