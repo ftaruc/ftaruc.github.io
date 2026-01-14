@@ -1,17 +1,13 @@
-# Git LFS configuration for large files
+# Git LFS configuration for large files - VIDEOS ONLY
+# Keep videos in LFS (they're large and needed)
 *.mov filter=lfs diff=lfs merge=lfs -text
 *.mp4 filter=lfs diff=lfs merge=lfs -text
 *.MOV filter=lfs diff=lfs merge=lfs -text
 *.MP4 filter=lfs diff=lfs merge=lfs -text
-
-# Track large images (over 1MB typically benefit from LFS)
-images/**/*.{jpg,jpeg,png,JPG,JPEG,PNG} filter=lfs diff=lfs merge=lfs -text
-images/photos/**/*.{jpg,jpeg,png,JPG,JPEG,PNG} filter=lfs diff=lfs merge=lfs -text
 videos/*.mov filter=lfs diff=lfs merge=lfs -text
-images/**/*.jpg filter=lfs diff=lfs merge=lfs -text
-images/**/*.JPG filter=lfs diff=lfs merge=lfs -text
-images/**/*.png filter=lfs diff=lfs merge=lfs -text
-images/**/*.PNG filter=lfs diff=lfs merge=lfs -text
+
+# Images are NOT in LFS - they're stored directly in git
+# (Production already has them working, no need for LFS)
 images/**/*.jpg !text !filter !merge !diff
 images/**/*.JPG !text !filter !merge !diff
 images/**/*.png !text !filter !merge !diff
