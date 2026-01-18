@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>ferdie jay taruc</title>
+  <meta name="description" content="standing still in a moving scene.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://ftaruc.github.io/archives/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="ferdie jay taruc" href="https://ftaruc.github.io/feed.xml">
+
+  <style>
+/* Page transition styles */
+html {
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  transition: filter 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+  will-change: filter;
+}
+
+body.page-transitioning {
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.page-transition-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.page-transition-container.active {
+  pointer-events: auto;
+}
+
+.page-transition-new {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  transform: translateX(-100%);
+  filter: blur(2px);
+  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1),
+              filter 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+  overflow-y: auto;
+  will-change: transform, filter;
+}
+
+.page-transition-new.reverse {
+  transform: translateX(100%);
+}
+
+.page-transition-new.loaded {
+  transform: translateX(0);
+  filter: blur(0px);
+}
+
+.page-transition-new iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* 3D Loading Screen */
+.loading-screen-3d {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(245, 245, 245, 0.95);
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  perspective-origin: center center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  transform: none !important;
+  will-change: opacity;
+}
+
+.loading-screen-3d.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.loading-screen-3d.hiding {
+  opacity: 0;
+}
+
+.loader-3d-container {
+  position: relative;
+  width: 150px;
+  height: 200px;
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-text {
+  font-family: "Arial-LC", sans-serif;
+  font-size: 13px;
+  color: #000000;
+  letter-spacing: 0.02em;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-left: 8px;
+  font-weight: 400;
+  text-align: center;
+  width: 100%;
+}
+
+/* 3D Moon Sphere */
+.moon-sphere {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  left: 50%;
+  top: 50%;
+  margin-left: -60px;
+  margin-top: -60px;
+  transform-style: preserve-3d;
+  animation: rotateMoon 8s infinite linear;
+}
+
+@keyframes rotateMoon {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+/* Moon rings (latitudes) */
+.moon-ring {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 2px solid rgba(60, 70, 97, 0.2);
+  border-radius: 50%;
+  left: 0;
+  top: 0;
+}
+
+.moon-ring.ring1 {
+  transform: rotateX(0deg);
+}
+
+.moon-ring.ring2 {
+  transform: rotateX(30deg);
+}
+
+.moon-ring.ring3 {
+  transform: rotateX(60deg);
+}
+
+.moon-ring.ring4 {
+  transform: rotateX(90deg);
+}
+
+.moon-ring.ring5 {
+  transform: rotateX(120deg);
+}
+
+.moon-ring.ring6 {
+  transform: rotateX(150deg);
+}
+
+/* Moon meridians (longitudes) */
+.moon-meridian {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 2px solid rgba(60, 70, 97, 0.15);
+  border-radius: 50%;
+  left: 0;
+  top: 0;
+}
+
+.moon-meridian.meridian1 {
+  transform: rotateY(0deg);
+}
+
+.moon-meridian.meridian2 {
+  transform: rotateY(45deg);
+}
+
+.moon-meridian.meridian3 {
+  transform: rotateY(90deg);
+}
+
+.moon-meridian.meridian4 {
+  transform: rotateY(135deg);
+}
+
+
+/* Moon surface texture */
+.moon-surface {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(200, 200, 200, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 60% 70%, rgba(190, 190, 190, 0.2) 1px, transparent 1px),
+    radial-gradient(circle at 80% 20%, rgba(210, 210, 210, 0.25) 1px, transparent 1px),
+    radial-gradient(circle at 40% 80%, rgba(195, 195, 195, 0.2) 1px, transparent 1px);
+  background-size: 30% 30%, 25% 25%, 20% 20%, 35% 35%;
+  background-position: 0% 0%, 100% 100%, 50% 50%, 0% 100%;
+  opacity: 0.6;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+</style>
+
+<script>
+(function() {
+  'use strict';
+  
+  let isTransitioning = false;
+  
+  // Only run on same-origin links
+  function isSameOrigin(href) {
+    try {
+      const url = new URL(href, window.location.href);
+      return url.origin === window.location.origin;
+    } catch (e) {
+      return false;
+    }
+  }
+  
+  // Intercept link clicks
+  document.addEventListener('click', function(e) {
+    if (isTransitioning) {
+      e.preventDefault();
+      return;
+    }
+    
+    // Check if target is an Element and has closest method
+    const target = e.target;
+    if (!target || typeof target.closest !== 'function') return;
+    
+    const link = target.closest('a');
+    if (!link) return;
+    
+    const href = link.getAttribute('href');
+    if (!href) return;
+    
+    // Skip if external link, mailto, tel, or anchor link
+    if (href.startsWith('#') || 
+        href.startsWith('mailto:') || 
+        href.startsWith('tel:') ||
+        href.startsWith('javascript:') ||
+        link.hasAttribute('target') ||
+        !isSameOrigin(href)) {
+      return;
+    }
+    
+    // Skip if it's a download link
+    if (link.hasAttribute('download')) {
+      return;
+    }
+    
+    // Skip transition for photos page - it has complex JavaScript that needs to run properly
+    if (href.includes('/photos/') || href.includes('/photos')) {
+      return;
+    }
+    
+    // Skip transition for archive page - it has complex JavaScript that causes double-loading
+    if (href.includes('/archives/') || href.includes('/archives')) {
+      return;
+    }
+    
+    e.preventDefault();
+    isTransitioning = true;
+    
+    // Create and show 3D loading screen
+    const loadingScreen = document.createElement('div');
+    loadingScreen.className = 'loading-screen-3d';
+    loadingScreen.innerHTML = `
+      <div class="loader-3d-container">
+        <div class="loading-text">loading...</div>
+        <div class="moon-sphere">
+          <div class="moon-ring ring1"></div>
+          <div class="moon-ring ring2"></div>
+          <div class="moon-ring ring3"></div>
+          <div class="moon-ring ring4"></div>
+          <div class="moon-ring ring5"></div>
+          <div class="moon-ring ring6"></div>
+          <div class="moon-meridian meridian1"></div>
+          <div class="moon-meridian meridian2"></div>
+          <div class="moon-meridian meridian3"></div>
+          <div class="moon-meridian meridian4"></div>
+          <div class="moon-surface"></div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(loadingScreen);
+    
+    // Show loading screen
+    requestAnimationFrame(function() {
+      loadingScreen.classList.add('active');
+    });
+    
+    // Add blur transition to current page (old page goes underneath)
+    document.body.classList.add('page-transitioning');
+    
+    // Create container for new page
+    const container = document.createElement('div');
+    container.className = 'page-transition-container';
+    
+    const newPage = document.createElement('div');
+    // Check if going back home - reverse the direction
+    // Normalize href to check if it's the home page
+    const url = new URL(href, window.location.origin);
+    const isGoingHome = url.pathname === '/' || url.pathname === '';
+    newPage.className = isGoingHome ? 'page-transition-new reverse' : 'page-transition-new';
+    
+    // Start transition immediately for smoother feel
+    requestAnimationFrame(function() {
+      container.appendChild(newPage);
+      document.body.appendChild(container);
+      
+      // Activate container immediately
+      container.classList.add('active');
+      
+      // Use fetch to load the new page content
+      fetch(href)
+        .then(response => response.text())
+        .then(html => {
+          // Parse the HTML
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          
+          // Get the body content
+          const bodyContent = doc.body || doc.querySelector('body');
+          if (bodyContent) {
+            newPage.innerHTML = bodyContent.innerHTML;
+            
+            // Copy styles
+            const styles = doc.querySelectorAll('style');
+            styles.forEach(style => {
+              const newStyle = document.createElement('style');
+              newStyle.textContent = style.textContent;
+              document.head.appendChild(newStyle);
+            });
+            
+            // Wait for DOM to be ready before executing scripts
+            // Use setTimeout to ensure DOM is fully parsed
+            setTimeout(() => {
+              // Copy and execute scripts after DOM is ready
+              const scripts = doc.querySelectorAll('script');
+              scripts.forEach(script => {
+                if (script.src) {
+                  // External scripts
+                  const newScript = document.createElement('script');
+                  newScript.src = script.src;
+                  newScript.async = false;
+                  document.head.appendChild(newScript);
+                } else if (script.textContent.trim()) {
+                  // Inline scripts - handle DOMContentLoaded case
+                  let scriptContent = script.textContent;
+                  
+                  // If script uses DOMContentLoaded, replace it with immediate execution
+                  // since DOM is already ready when we inject
+                  if (scriptContent.includes('DOMContentLoaded')) {
+                    // Replace DOMContentLoaded with immediate execution
+                    scriptContent = scriptContent.replace(
+                      /document\.addEventListener\(['"]DOMContentLoaded['"],\s*function\(\)\s*\{/g,
+                      '(function() {'
+                    );
+                    // Close the wrapper function at the end
+                    scriptContent = scriptContent.replace(
+                      /\}\);?\s*$/,
+                      '})();'
+                    );
+                  }
+                  
+                  const newScript = document.createElement('script');
+                  newScript.textContent = scriptContent;
+                  newPage.appendChild(newScript);
+                }
+              });
+            }, 150);
+          }
+          
+          // Wait for content to cache and show moon animation
+          setTimeout(function() {
+            // Start wipe animation immediately
+            requestAnimationFrame(function() {
+              newPage.classList.add('loaded');
+              
+              // Hide loading screen smoothly as wipe completes (at 80% of transition)
+              setTimeout(function() {
+                loadingScreen.classList.add('hiding');
+                setTimeout(function() {
+                  loadingScreen.remove();
+                }, 300);
+              }, 480); // 80% of 600ms transition
+            });
+            
+            // Navigate after transition completes smoothly
+            setTimeout(function() {
+              window.location.href = href;
+            }, 650); // Slightly after 600ms transition completes
+          }, 100); // Delay to show moon and cache content
+        })
+        .catch(function(error) {
+          console.error('Transition error:', error);
+          // Remove loading screen on error
+          const loadingScreen = document.querySelector('.loading-screen-3d');
+          if (loadingScreen) {
+            loadingScreen.remove();
+          }
+          // Fallback to normal navigation
+          document.body.classList.remove('page-transitioning');
+          window.location.href = href;
+          isTransitioning = false;
+        });
+    });
+  });
+  
+  // Prefetch links on hover for faster transitions
+  document.addEventListener('mouseenter', function(e) {
+    // Check if target is an Element and has closest method
+    const target = e.target;
+    if (!target || typeof target.closest !== 'function') return;
+    
+    const link = target.closest('a');
+    if (link && link.href && isSameOrigin(link.href) && !link.href.startsWith('#')) {
+      const linkElement = document.createElement('link');
+      linkElement.rel = 'prefetch';
+      linkElement.href = link.href;
+      document.head.appendChild(linkElement);
+    }
+  }, true);
+  
+  // Remove transition class when page loads
+  window.addEventListener('load', function() {
+    document.body.classList.remove('page-transitioning');
+    isTransitioning = false;
+  });
+  
+  // Also handle browser back/forward buttons
+  window.addEventListener('pageshow', function(e) {
+    if (e.persisted) {
+      document.body.classList.remove('page-transitioning');
+      isTransitioning = false;
+    }
+  });
+})();
+</script>
+
+
+
+  
+  <meta property="og:title" content="ferdie jay taruc">
+  <meta property="og:site_name" content="ferdie jay taruc">
+  <meta property="og:url" content="https://ftaruc.github.io/archives/">
+  <meta property="og:description" content="standing still in a moving scene.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="ferdie jay taruc">
+  <meta name="twitter:description" content="standing still in a moving scene.">
+  
+  
+
+  <!-- Using system fonts - no external font loading needed -->
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">ferdie jay taruc</a>
+
+    <nav class="site-nav">
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title"></h1>
+  </header>
+
+  <div class="post-content">
+    <div class="archive-container">
+  <div class="archive-sidebar">
+    <div class="archive-header">
+      <a href="/" class="home-button">home</a>
+    </div>
+    
+    <div class="archive-divider"></div>
+    
+    <div class="archive-posts-list">
+      
+      
+        
+          <div class="archive-post-item hoverable-post" data-post-index="0">
+            <div class="archive-post-title">Concerts in 2025</div>
+            <div class="archive-post-meta">
+              
+                <span class="archive-post-date">January 03, 2026</span>
+              
+              
+              
+            </div>
+          </div>
+          <div class="archive-divider"></div>
+          
+        
+      
+        
+          <div class="archive-post-item hoverable-post" data-post-index="1">
+            <div class="archive-post-title">Scraping Grailed</div>
+            <div class="archive-post-meta">
+              
+                <span class="archive-post-date">April 08, 2021</span>
+              
+              
+                <span class="archive-post-categories">
+                  
+                    projects
+                  
+                </span>
+              
+              
+            </div>
+          </div>
+          <div class="archive-divider"></div>
+          
+        
+      
+        
+          <div class="archive-post-item hoverable-post" data-post-index="2">
+            <div class="archive-post-title">Playlists of 2021</div>
+            <div class="archive-post-meta">
+              
+                <span class="archive-post-date">January 01, 2021</span>
+              
+              
+                <span class="archive-post-categories">
+                  
+                    music
+                  
+                </span>
+              
+              
+            </div>
+          </div>
+          <div class="archive-divider"></div>
+          
+        
+      
+    </div>
+  </div>
+  
+  <div class="archive-preview">
+    <div class="archive-content-carousel" id="archiveContentCarousel">
+      
+        
+          <div class="archive-content-item" data-post-index="0">
+            <div class="post-content">
+              <h1>Concerts in 2025</h1>
+              
+                <p class="post-meta">January 03, 2026</p>
+              
+              
+              
+              <div class="post-body">
+                <p>I’ve experienced <em>many</em> concerts in my lifetime…</p>
+
+<p>Although the quantity of shows I’ve been to have slowed down, I went to a couple memorable ones that accompanied albums that dropped this year.</p>
+
+<hr />
+
+<p><strong>1. Fine, Smerz, Urika’s Bedroom (Outline Festival)</strong></p>
+
+<p><strong>Date:</strong> Friday, 10/24/25 <br />
+<strong>Venue:</strong> Knockdown Center <br />
+<strong>Location:</strong> Brooklyn, NY <br /></p>
+
+<p>Outline’s fifth-annual festival focused on the underground Danish pop scene that has been slowly creeping into the mainstream– catering to the Bushwick natives to which I was part of. Centered around the dreamy sounds made by former students of Copenhagen’s Rhythmic Music Conservatory: <em>Erika</em>, <em>Fine</em>, and Henriette Motzfeldt from <em>Smerz</em>. <em>Clara La San</em> (U.K) and <em>urika’s bedroom</em> (L.A) as additions broadened the context beyond one art school campus, connecting it to a wider indie-pop scene. 
+<br /></p>
+
+<p>I was stoked to finally hear <em>urika’s bedroom’s “big smile, black mire”</em> live for the first time, their music as wide-eyed and intimate, repurposing the tonal fabric of communication breakdown, through drum loop in warped grooves and collapsed textures between their slowed-down trip-hop beats against acoustic guitars. They’ve toured with all recent favorites: <em>Chanel Beads</em>, <em>Nourished by Time</em>, and <em>Youth Lagoon</em>, in between producing and writing songs for fellow California up-and-comers <em>untitled (halo)</em> and Ded Hyatt. I decided on not recording the set to experience their music without distratction, a true treat for the opening set.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Fine</code>:</p>
+
+<p>Following them was Danish singer-songwriter Fine Glindvad Jensen– who recently debuted their 2024 album <em>“rocky top ballads”</em>, which combines organic instrumentation on alt-country-folk fusion to tell a story of a love affair that’s hard to understand. The soundscape is a homage to hearing her bluegrass musician father play his banjo through the wall: “You can hear it,” she recalled in an interview this year, “but you can’t really hear it.” Really dissapointed she skipped playing “I could” though.</p>
+
+<video width="100%" controls="" style="max-width: 800px; margin: 20px 0;">ß
+  <source src="/videos/fine.mov" type="video/quicktime" />
+  Your browser does not support the video tag.
+</video>
+
+<p><code class="language-plaintext highlighter-rouge">Smerz</code>:</p>
+
+<p>Another act that caught my attention was Norwegion duo, <em>Smerz</em>. With their 2025 release of <em>“big city life”</em>, the album describes the intoxicating and rich feelings of a night out in a big city like nyc. Favorites like “you got time and i got money” was recently remixed by <em>MIKE</em>… an insane collaboration toward the end of the year.</p>
+
+<video width="100%" controls="" style="max-width: 800px; margin: 20px 0;">
+  <source src="/videos/smerz.mov" type="video/quicktime" />
+  Your browser does not support the video tag.
+</video>
+
+<hr />
+
+<p><strong>2. DERBY</strong></p>
+
+<p><strong>Date:</strong> thursday, 10/30/25 <br />
+<strong>Venue:</strong> baby’s all right <br />
+<strong>Location:</strong> brooklyn, nyc <br /></p>
+
+<p>If not for a later mentioned artist, <em>DERBY’s freshman album *“slugger”</em> takes the cake as my second favorite album of the year. A lot of influences bleed through this album: Alex G, Frank Ocean, or even Dijon seem as obvious inspirations but don’t feel  derivative. Most of the album has pitch-shifted vocals that might steer as off-putting; but his buttery melodies, off-kilter sonic palate, and quixotic romanticism carry through with a touch of dirty realism.</p>
+
+<p>“Move like that” or “Money fight” really stood out as highlights when experiencing the album live, with the audience raging through raw emotions through the rising intensity of melody: disorenting, climax building, sloping and stampeding toward irresolution. It was a two man show: warbly guitars and dry drum kits carrying the whole set, but the venue at Baby’s really made the event authentically intimate.</p>
+
+<p>Sedated loosies like “ultraviolet” (one of my faves) carries one of my favorite lyrical moments:</p>
+
+<p><i>“Or we could go riding <br />
+I look in your eyes and I see it <br />
+Ultraviolet <br />
+Don’t ever let me go <br />
+I already know what your fight is <br />
+Make it pure baby, make it pious <br />
+Make it kind or make it cruel <br />
+As long as you’re trying” <br /></i></p>
+
+<p>It was one of the few moments where the crowd unfortunately didn’t sing along despite its magical lyrical power, with <em>DERBY</em> saying “don’t worry, we’ll get there eventually”.</p>
+
+<video width="100%" controls="" style="max-width: 800px; margin: 20px 0;">
+  <source src="/videos/derby.mov" type="video/quicktime" />
+  Your browser does not support the video tag.
+</video>
+
+<hr />
+
+<p><strong>3. boylife</strong></p>
+
+<p><strong>Date:</strong> monday, 11/1/2025 <br />
+<strong>Venue:</strong> nightclub 101 <br />
+<strong>Location:</strong> nyc, ny <br /></p>
+
+<p>I’ve been following <em>boylife</em> since their <em>Common Souls</em> day, which felt like a fitting reunion since producer Nick Velez played drums in this small venue. Vocalist Ryan Yoo (boylife) originally pushed out layered &amp; heartfelt eletronic-tinged ballads through classics like “Roots//Habit” or “Arizona”.</p>
+
+<p>Since college, the duo transitioned into solo outfit <em>boylife</em> (despite Nick still producing for him on the side) where in the peak of covid dropped “peas” – possibly my most played song that year. In the song, boylife details the pain of losing a close friend and choosing to move back home as a result. Writing from his parent’s perspective, he attempts to sort out his experience through the eyes of his family, who wanted to help him despite their knowledge of how to do so.</p>
+
+<p><i>“Where do you go when you close yours eyes? And <br />
+Who are you aching for when you dream? <br />
+I could peel peaches for when you wake up <br />
+No rush, no rush no”</i></p>
+
+<p><em>“You must believe in something…”</em></p>
+
+<p>Although this concert had pretty off-putting audio issues, it was a good reflection on how some of your favorite songs still hit you the same way years later.</p>
+
+<video width="100%" controls="" style="max-width: 800px; margin: 20px 0;">
+  <source src="/videos/boylife.mov" type="video/quicktime" />
+  Your browser does not support the video tag.
+</video>
+
+<hr />
+
+<p><strong>4. Dijon</strong></p>
+
+<p><strong>Date:</strong> monday, 12/1/2025 <br />
+<strong>Venue:</strong> brooklyn paramount <br />
+<strong>Location:</strong> brooklyn, nyc <br /></p>
+
+<p>I’ll make this rather brief since <em>Dijon</em> is still my favorite artist (and has been for the past 6 years)– I still can’t find the words why.</p>
+
+<p>This would mark my fifth time seeing him (I went to see him twice this year in Dallas and Brooklyn), and despite the 10/10 experience, nothing will top the <em>Absolutely</em> journey of 2022 in the jewish synagogue @ Sixth and I in Washington DC.</p>
+
+<p><em>Dijon</em> is finally getting the mainstream praise he deserves with recent success as co-star to Leo in <em>One Battle After Another</em>, nominated for Producer of the Year for the Grammys, and being Pitchfork Artist of the Year accompanying his sophmore album “Baby”.</p>
+
+<p>The Brooklyn Paramount was the ideal venue for the set: intimate, yet architecturally intricate. Defined by its high ceilings, chandeliers, and spiral staircases, the iconic venue evokes a refined sense of classic NYC theater. What will always remain true with any Dijon set is that in the short hour, nothing else matters but the music.</p>
+
+<video width="100%" controls="" preload="metadata" style="max-width: 800px; margin: 20px 0;">
+    <source src="/videos/dijon.mov" type="video/quicktime" />
+  Your browser does not support the video tag.
+</video>
+
+
+              </div>
+            </div>
+          </div>
+        
+      
+        
+          <div class="archive-content-item" data-post-index="1">
+            <div class="post-content">
+              <h1>Scraping Grailed</h1>
+              
+                <p class="post-meta">April 08, 2021</p>
+              
+              
+                <p class="post-meta">
+                  Categories: projects
+                </p>
+              
+              
+              <div class="post-body">
+                <center><img src="/images/archive%20photos/grailed_banner.png" alt="title" style="zoom: 35%;" /></center>
+
+<hr />
+
+<blockquote>
+  <p>Recently, I have been selling a large portion of my closet to <strong>Grailed</strong>, a community marketplace for men’s clothing centered on streetwear &amp; designer.</p>
+</blockquote>
+
+<center><img src="/images/archive%20photos/grailed1.jpg" alt="ex1" style="zoom: 50%;" /></center>
+
+<p>As an avid user of this platform, I find it hard to easily compare prices of current listings versus sold listings of the same item, as you would have to scan through all listings in attempt to capture an overlying trend over time. Thus, it was hard to extrapolate best prices and listing features to sell your item quicker. Unfortunately, Grailed does not have a public API, so I though this would be a perfect opportunity to attempt to scrape relevant features from each listing to visualize fashion trends through data.</p>
+
+<!-- more -->
+
+<p><strong>Disclaimer:</strong> The acceptable use policy for <code class="language-plaintext highlighter-rouge">grailed.com</code> <a href="https://www.grailed.com/acceptable">does not officially allow for web scrapers or automated processes to gather their data</a>. This project is purely for educational purposes to learn about underlying trends surrounding clothes.</p>
+
+<p>Code can be found on my <a href="https://github.com/ftaruc/projects/tree/main/grailed">GitHub</a>.</p>
+
+<h4><strong>Selenium &amp; BeautifulSoup:</strong></h4>
+
+<p>There are many python packages suitable for web scraping:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">BeautifulSoup</code> (will be referred as bs4 for now on )</li>
+  <li><code class="language-plaintext highlighter-rouge">Scrapy</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Requests</code> or <code class="language-plaintext highlighter-rouge">LXML</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Selenium</code> and a wrapper that makes it easier, <a href="https://github.com/mherrmann/selenium-python-helium">Helium</a>.</li>
+</ul>
+
+<p>As a static scraper, Python often requires no more than the use of the Beautiful Soup by traversing the <code class="language-plaintext highlighter-rouge">DOM </code>(document object model) to reach its goal. However, static scraping ignores JavaScript and does not really capture other dynamic elements. Thus, automation through Selenium allows these dynamic elements to be clicked on, updating the static page so new information can be scraped.</p>
+
+<p>There are many <a href="https://www.selenium.dev/">resources</a> to get started with Selenium and bs4, but I will omit the majority of the set-up and include what was implemented in my code in my GitHub <code class="language-plaintext highlighter-rouge">readme</code>. However, I would like to detail some things before getting started:</p>
+
+<ul>
+  <li>
+    <p><strong>Chrome Webdriver is used</strong>: different OS can be used with different browsers for automation through Selenium</p>
+  </li>
+  <li>
+    <p><strong>The first run creates cookies to ignore the log-in element:</strong> we use pickle to dump and get previous cookies so Selenium remembers our log-in information for future sessions. Each session on grailed will start at this create account screen that will prevent us from filtering listings, so to avoid this we must remember previous cookies.</p>
+  </li>
+</ul>
+
+<center><img src="/images/archive%20photos/grailed_login.jpg" alt="login" style="zoom: 50%;" /></center>
+
+<blockquote>
+  <p>And you can refer to the code here:</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">first_run</span><span class="p">():</span>
+    <span class="c1">##Initialize Selenium
+</span>    <span class="n">options</span> <span class="o">=</span> <span class="n">Options</span><span class="p">()</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"user-data-dir=selenium"</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s">"https://www.grailed.com/users/sign_up"</span>
+    <span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="p">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">WEBDRIVER_PATH</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+    <span class="n">driver</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1">#Login to account
+</span>    <span class="n">email</span> <span class="o">=</span> <span class="s">"PUT GRAILED EMAIL HERE"</span>
+    <span class="n">pw</span> <span class="o">=</span> <span class="s">"PUT GRAILED PWORD HERE"</span>
+
+    <span class="n">og_logxpath</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[2]/div/div/p[2]/a"</span>
+    <span class="n">login_xpath</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[2]/div/div/button[4]"</span>
+    <span class="n">driver</span><span class="p">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="n">og_logxpath</span><span class="p">).</span><span class="n">click</span><span class="p">()</span>
+    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#adds delay
+</span>    <span class="n">driver</span><span class="p">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="n">login_xpath</span><span class="p">).</span><span class="n">click</span><span class="p">()</span>
+    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">email_xpath</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[2]/div/div/form/div[1]/input"</span>
+    <span class="n">pw_xpath</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[2]/div/div/form/div[2]/input"</span>
+    <span class="n">driver</span><span class="p">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="n">email_xpath</span><span class="p">).</span><span class="n">send_keys</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+    <span class="n">driver</span><span class="p">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="n">pw_xpath</span><span class="p">).</span><span class="n">send_keys</span><span class="p">(</span><span class="n">pw</span><span class="p">)</span>
+    <span class="n">final_login_xpath</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[2]/div/div/form/button"</span>
+    <span class="n">driver</span><span class="p">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="n">final_login_xpath</span><span class="p">).</span><span class="n">click</span><span class="p">()</span>
+
+    <span class="c1">#uses pickle to save cookies
+</span>    <span class="c1">#time.sleep(5)
+</span>    <span class="n">pickle</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">driver</span><span class="p">.</span><span class="n">get_cookies</span><span class="p">()</span> <span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">COOKIES_PATH</span><span class="p">,</span><span class="s">"wb"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>Used package <code class="language-plaintext highlighter-rouge">fake_useragent</code>:</strong> sometimes, cloud security services like CloudFlare prevents web-scraping due to bot-like behavior. To prevent this, we need to use this package and cycle through different user-agents to not look like a bot when using Selenium.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">fake_useragent</span> <span class="kn">import</span> <span class="n">UserAgent</span>
+<span class="n">ua</span> <span class="o">=</span> <span class="n">UserAgent</span><span class="p">()</span>
+<span class="n">userAgent</span> <span class="o">=</span> <span class="n">ua</span><span class="p">.</span><span class="n">random</span>
+<span class="c1">#print(str(userAgent)) to see which agent is used
+</span><span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="sa">f</span><span class="s">'user-agent=</span><span class="si">{</span><span class="n">userAgent</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://www.grailed.com/"</span>
+<span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="p">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">WEBDRIVER_PATH</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+<span class="n">driver</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p><strong>Runs the following arguments</strong> (optimizes performance and ignores anything that is unnecessary):</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">options</span> <span class="o">=</span> <span class="n">webdriver</span><span class="p">.</span><span class="n">ChromeOptions</span><span class="p">()</span>
+<span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"--start-maximized"</span><span class="p">)</span>
+<span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"--window-size=1920,1080"</span><span class="p">)</span>
+<span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"disable-infobars"</span><span class="p">);</span> <span class="c1"># disabling infobars
+</span><span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"--disable-extensions"</span><span class="p">);</span> <span class="c1"># disabling extensions
+</span><span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"--disable-gpu"</span><span class="p">);</span> <span class="c1"># applicable to windows os only
+</span><span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"--proxy-server='direct://'"</span><span class="p">)</span>
+<span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"--proxy-bypass-list=*"</span><span class="p">)</span>
+<span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--ignore-certificate-errors'</span><span class="p">)</span>
+<span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--allow-running-insecure-content'</span><span class="p">)</span>
+<span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"--disable-dev-shm-usage"</span><span class="p">);</span> <span class="c1"># overcome limited resource problems
+</span><span class="n">options</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--headless'</span><span class="p">)</span> <span class="c1">#browsers runs hidden locally
+</span></code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4><strong>Data Collection Steps:</strong></h4>
+
+<p>I want to thank <a href="https://medium.com/@mike_liu/scraping-grailed-8501eef914a8">Mike Liu</a> for his initial help from his article to help me get started as his code acted as the foundation for mine. You can check out his Medium article which shows how he scraped Grailed. Unfortunately, some of the identifiers he used for some features are outdated as the website changed, so I updated them accordingly and added more features to be scraped in my version, as well as including filters for listings.</p>
+
+<blockquote>
+  <p>To highlight the scraping process after doing the first “set-up” run (I am omitting what each section of code in <code class="language-plaintext highlighter-rouge">sel.py</code> does, there is some comments on some lines, but please email me for questions).</p>
+</blockquote>
+
+<p><u>Step 1:</u> Given user input (item name and amount to scrape), Selenium goes to the search page of the item.</p>
+
+<p><u>Step 2:</u> Apply the filters placed by the user, filter first if you want items that are sold only, unsold only, or include both. Then locate all containers (which is each listing) on the page using bs4. We will have to scroll to the amount of listings that the user wants to scrape (using a function that Mike created). There are also containers that are empty, so we have to also track this amount for future functions.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">driver</span><span class="p">,</span> <span class="n">display_amount</span> <span class="o">=</span> <span class="n">check_unlimited_scroll</span><span class="p">(</span><span class="n">display_amount</span><span class="p">,</span> <span class="n">driver</span><span class="p">)</span>
+<span class="n">bs</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">driver</span><span class="p">.</span><span class="n">page_source</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+<span class="n">containers</span> <span class="o">=</span> <span class="n">bs</span><span class="p">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">"div"</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s">"feed-item"</span><span class="p">)</span>
+<span class="n">num_empty</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bs</span><span class="p">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">"div"</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s">"feed-item empty-item"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p><u>Step 3:</u> For each container which has information for every listing, we can generalize to scrape the following attributes (Refer to the data dictionary from my GitHub for a definition of each feature). There are helper functions that do the scraping for us.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'pid'</span><span class="p">,</span> <span class="s">'b_name'</span><span class="p">,</span> <span class="s">'title'</span><span class="p">,</span> <span class="s">'size'</span><span class="p">,</span> <span class="s">'og_price'</span><span class="p">,</span> <span class="s">'new_price'</span><span class="p">,</span> <span class="s">'sold_price'</span><span class="p">,</span> <span class="s">'is_sold'</span><span class="p">,</span> <span class="s">'old_date'</span><span class="p">,</span> <span class="s">'new_date'</span><span class="p">,</span> <span class="s">'%p_change'</span><span class="p">,</span> <span class="s">'Link'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p><u>Step 4:</u>  From <code class="language-plaintext highlighter-rouge">step3</code>, we also stored the website link to the listing as it contains a lot more features that we can extract. These features include: listing description, the amount of pictures in the listing, and user-based features (how much feedback seller received, their average feedback, amount of items sold, etc.) We can then also create user dataframes and append any new sellers if we truly wanted to (and update new information on previous sellers), however for the sake of time I have ignored this.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'uname'</span><span class="p">,</span> <span class="s">'ship_cost'</span><span class="p">,</span> <span class="s">'amt_sold'</span><span class="p">,</span> <span class="s">'amt_feedback'</span><span class="p">,</span> <span class="s">'amt_listings'</span><span class="p">,</span> <span class="s">'desc'</span><span class="p">,</span> <span class="s">'amt_likes'</span><span class="p">,</span> <span class="s">'prf_link'</span><span class="p">,</span> <span class="s">'feed_link'</span><span class="p">,</span> <span class="s">'size_desc'</span><span class="p">,</span> <span class="s">'loc'</span><span class="p">,</span> <span class="s">'amt_pics'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>For future reference for myself, if you would like to track amount of images from a container, use the <code class="language-plaintext highlighter-rouge">img</code> tag:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">numPics</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bs</span><span class="p">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">"img"</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s">"PhotoGallery--Thumbnail"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p><u>Step 5:</u>  Then, we merge both dataframes using variable <code class="language-plaintext highlighter-rouge">Link</code> as the common key.</p>
+
+<p><u>Step 6:</u>  If including both sold or unsold items, merge both append dataframes together, and if necessary export the data to a .csv file so the user can use for future analysis.</p>
+
+<p>Here are .gif’s that shows the process in action:</p>
+
+<center><img src="/images/archive%20photos/terminal1.jpg" alt="terminal" style="zoom: 80%;" /></center>
+
+<p><strong>For unsold listings:</strong></p>
+
+<center><img src="/images/archive%20photos/part1.gif" alt="part1" style="zoom: 105%;" /></center>
+
+<p><strong>For sold listings:</strong> (note that a filter must be applied before cycling through each listing)</p>
+
+<center><img src="/images/archive%20photos/part2.gif" alt="part2" style="zoom: 105%;" /></center>
+
+<p>–</p>
+
+<h4><strong>Prior Issues Handled:</strong></h4>
+
+<blockquote>
+  <p>Unfortunately, there were some problems I ran into during this project:</p>
+</blockquote>
+
+<ol>
+  <li>Some listings had different amount of filters when trying to filter out <code class="language-plaintext highlighter-rouge">"Sold only"</code>, so it was hard to locate that element by PATH as it could be in different locations. I had to hard-code to include each edge-case:</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">check_sold</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[3]/div[1]/div/div[8]/div[2]/div/div/ul/li/label/div/input"</span>
+<span class="n">check_sold_2</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[3]/div[1]/div/div[8]/div[2]/div/div/ul/li[2]/label/div/input"</span>
+<span class="n">check_sold_3</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[3]/div[1]/div/div[8]/div[2]/div/div/ul/li[3]/label/div/input"</span>
+<span class="n">check_sold_4</span> <span class="o">=</span> <span class="s">"/html/body/div[3]/div[7]/div/div/div[3]/div[1]/div/div[8]/div[2]/div/div/ul/li[4]/label/div/input"</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">driver</span><span class="p">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="n">check_sold</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">driver</span><span class="p">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="n">check_sold</span><span class="p">).</span><span class="n">click</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">driver</span><span class="p">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="n">check_sold_2</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">driver</span><span class="p">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="n">check_sold_2</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="n">click</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">driver</span><span class="p">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="n">check_sold_3</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">driver</span><span class="p">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="n">check_sold_3</span><span class="p">).</span><span class="n">click</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">driver</span><span class="p">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="n">check_sold_4</span><span class="p">).</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Dates were extracted as <code class="language-plaintext highlighter-rouge">'x time ago'</code>.  In order to normalize it to one date, I used <code class="language-plaintext highlighter-rouge">relativedeltas</code> from <code class="language-plaintext highlighter-rouge">datetime</code> to normalize it based on today’s date:</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""
+returns datetime with "X ... Ago" to relative date from a string
+org_date: original date to be converted (str)
+"""</span>
+<span class="k">def</span> <span class="nf">get_past_date</span><span class="p">(</span><span class="n">org_date</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">org_date</span> <span class="o">==</span> <span class="s">"na"</span> <span class="ow">or</span> <span class="n">org_date</span> <span class="o">==</span> <span class="s">"nan"</span> <span class="ow">or</span> <span class="n">pd</span><span class="p">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">org_date</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">org_date</span><span class="p">.</span><span class="n">split</span><span class="p">())</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1">#handles edge cases
+</span>        <span class="k">return</span> <span class="s">"nan"</span>
+
+    <span class="n">fixed</span> <span class="o">=</span> <span class="n">org_date</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"Sold"</span><span class="p">,</span> <span class="s">""</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">"almost"</span><span class="p">,</span> <span class="s">""</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">"over"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+    <span class="n">splitted</span> <span class="o">=</span> <span class="n">fixed</span><span class="p">.</span><span class="n">split</span><span class="p">()</span>
+
+    <span class="n">TODAY</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">date</span><span class="p">.</span><span class="n">today</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">splitted</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s">'today'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">TODAY</span><span class="p">.</span><span class="n">isoformat</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">splitted</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s">'yesterday'</span><span class="p">:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">TODAY</span> <span class="o">-</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="n">isoformat</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'hour'</span><span class="p">,</span> <span class="s">'hours'</span><span class="p">,</span> <span class="s">'hr'</span><span class="p">,</span> <span class="s">'hrs'</span><span class="p">,</span> <span class="s">'h'</span><span class="p">]:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="n">date</span><span class="p">().</span><span class="n">isoformat</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'minute'</span><span class="p">,</span> <span class="s">'minutes'</span><span class="p">,</span> <span class="s">'m'</span><span class="p">,</span> <span class="s">'min'</span><span class="p">]:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="n">date</span><span class="p">().</span><span class="n">isoformat</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'day'</span><span class="p">,</span> <span class="s">'days'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">]:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">TODAY</span> <span class="o">-</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="n">isoformat</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'wk'</span><span class="p">,</span> <span class="s">'wks'</span><span class="p">,</span> <span class="s">'week'</span><span class="p">,</span> <span class="s">'weeks'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">]:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">TODAY</span> <span class="o">-</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">weeks</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="n">isoformat</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'mon'</span><span class="p">,</span> <span class="s">'mons'</span><span class="p">,</span> <span class="s">'month'</span><span class="p">,</span> <span class="s">'months'</span><span class="p">,</span> <span class="s">'m'</span><span class="p">]:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">TODAY</span> <span class="o">-</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="n">isoformat</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'yrs'</span><span class="p">,</span> <span class="s">'yr'</span><span class="p">,</span> <span class="s">'years'</span><span class="p">,</span> <span class="s">'year'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">]:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">TODAY</span> <span class="o">-</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="n">isoformat</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">"Wrong Argument format"</span>
+</code></pre></div></div>
+
+<ol>
+  <li>I also needed to normalize a <code class="language-plaintext highlighter-rouge">final_price</code> given that there were three prices to choose from (the initial old price, the newest adjusted price, or the sold price). This was necessary for further visualizations.</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""
+adds "final_price" variable, which does the following:
+1. keeps org_price if listing not sold or updated price
+2. keeps new_price if listing not sold
+3. keeps sold_price if listing sold
+"""</span>
+<span class="k">def</span> <span class="nf">fix_new_price</span><span class="p">(</span><span class="n">sold_prices</span><span class="p">,</span> <span class="n">new_prices</span><span class="p">,</span> <span class="n">is_sold</span><span class="p">,</span> <span class="n">og_price</span><span class="p">):</span>
+    <span class="n">fixed</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">if</span> <span class="p">(</span><span class="n">z</span> <span class="o">==</span> <span class="bp">True</span><span class="p">)</span> <span class="k">else</span> <span class="n">y</span> <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sold_prices</span><span class="p">,</span> <span class="n">new_prices</span><span class="p">,</span> <span class="n">is_sold</span><span class="p">)</span> <span class="p">]</span>
+    <span class="c1">#now add final_price if only has original_price (not sold and price hasn't changed)
+</span>    <span class="n">final_price</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="k">if</span> <span class="p">(</span><span class="n">pd</span><span class="p">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">or</span> <span class="n">pd</span><span class="p">.</span><span class="n">isna</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">==</span> <span class="s">"NA"</span><span class="p">)</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fixed</span><span class="p">,</span> <span class="n">og_price</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">final_price</span>
+</code></pre></div></div>
+
+<h4><strong>Implementing a Dashboard in Streamlit:</strong></h4>
+
+<p>As described by the creators:</p>
+
+<blockquote>
+  <p>Streamlit turns data scripts into shareable web apps in minutes. All in Python. All for free. No front‑end experience required.</p>
+</blockquote>
+
+<p>I wanted to finally implement Streamlit on a personal project, and thought this would be a perfect opportunity. I didn’t want the user to have to use a terminal to run the code locally, so I thought <a href="https://streamlit.io/sharing">Streamlit Sharing</a> would be a great way that doesn’t use Docker to upload my app online for others to use.</p>
+
+<center><img src="/images/archive%20photos/grailed_desc.gif" alt="desc" style="zoom: 105%;" /></center>
+
+<p>So here is a demo of what the dashboard when it’s run locally in bash through <code class="language-plaintext highlighter-rouge">streamlit run "st-app.py"</code></p>
+
+<p><strong>Demo Videos (Two parts since skipped waiting):</strong></p>
+
+<center><video width="750" height="500" controls=""> <source src="/images/archive%20photos/load_pt1.mp4" type="video/mp4" /> </video></center>
+
+<p><em>Ignore the sound (was in a call with friends):</em></p>
+
+<center><video width="750" height="500" controls=""> <source src="/images/archive%20photos/load_pt2.mp4" type="video/mp4" /> </video></center>
+
+<blockquote>
+  <p>The dashboard is like <strong>30% done</strong> as I need to include visualizations and more features, but the scraping portion of it is done as users can download the output as a .csv file. Expect more things soon!</p>
+</blockquote>
+
+<p>You can download the code to run this application locally! <u>Unfortunately,</u> I was not able to deploy this app through Streamlit sharing as it requires a browser to be installed on their server, so Selenium can not be properly run server-side without a browser to use the webdriver.</p>
+
+<p><strong>Update</strong>: I just added interactive graphs with tooltips as seen below. You can adjust the x-domain to exclude outliers.</p>
+
+<p>Unfortunately, the way I scraped sold listings are based on the most recent (will randomize in the future), so if you scraped few points the graph will be very biased to recent sold listings.</p>
+
+<center><img src="/images/archive%20photos/grailed_graph.jpg" alt="graph1" style="zoom: 100%;" /></center>
+
+<h4><strong>Future Applications:</strong></h4>
+
+<p>Using different models for more accurate imputation, you can use the following:</p>
+
+<ul>
+  <li>Use listing descriptions to capture sentiment for further analysis, can also apply <code class="language-plaintext highlighter-rouge">NLP</code> to create the ‘perfect description’ for that item</li>
+  <li>Create a <code class="language-plaintext highlighter-rouge">binary classifier</code> to figure out which features are the best to predict which listings will sell for a certain item (we have both sold and unsold listings for each item, can find an item with a lot of listings)</li>
+  <li><code class="language-plaintext highlighter-rouge">Regression model</code> on price, predict which price is optimal to sell given the features of the item.</li>
+</ul>
+
+<p>–</p>
+
+<p>For more resources, I suggest looking through relevant articles on Grailed Scraping:</p>
+
+<ol>
+  <li><a href="https://github.com/KwhoaKai/Grailed-Scraper">For Scraping Grailed Images</a></li>
+  <li><a href="https://github.com/jamiejann/grailed-scraper">Another Grailed Scraper</a></li>
+  <li><a href="https://docs.streamlit.io/en/stable/api.html">Streamlit API Documentation</a></li>
+</ol>
+
+              </div>
+            </div>
+          </div>
+        
+      
+        
+          <div class="archive-content-item" data-post-index="2">
+            <div class="post-content">
+              <h1>Playlists of 2021</h1>
+              
+                <p class="post-meta">January 01, 2021</p>
+              
+              
+                <p class="post-meta">
+                  Categories: music
+                </p>
+              
+              
+              <div class="post-body">
+                <p>Music has always been an important aspect in my life.</p>
+
+<p>Here you can find some highlights of the year: sounds that make me dance at 1am in my garage, lyrics that make me want to sing like a hooligan trying to sound like Mariah Carey, and nostalgic waveforms that make me cry during the hours you realize that memories remain in the past.</p>
+
+<!-- more -->
+
+<p>–</p>
+
+<p><code class="language-plaintext highlighter-rouge">Favorite Playlist</code>:</p>
+
+<div class="embed-spotify-playlist">
+ <iframe src="https://open.spotify.com/embed/playlist/4lDl97fws5cTzmqXvkKaIy" width="480" height="350" frameborder="0" allowtransparency="true" allow="encrypted-media">
+</iframe>
+</div>
+
+<hr />
+
+<p><code class="language-plaintext highlighter-rouge">January</code>:</p>
+
+<center><iframe src="https://open.spotify.com/embed/playlist/2IRhy7qwUArIQgqWbYZntv" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
+
+<p><code class="language-plaintext highlighter-rouge">February</code>:</p>
+
+<center><iframe src="https://open.spotify.com/embed/playlist/2f05BsGICIClV9pI0qLbuD" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
+
+<p><code class="language-plaintext highlighter-rouge">March:</code></p>
+
+<center><iframe src="https://open.spotify.com/embed/playlist/1uaEumdPBKS5DbV8Dzv8hv" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
+
+<p><code class="language-plaintext highlighter-rouge">April:</code></p>
+
+<center><iframe src="https://open.spotify.com/embed/playlist/07BBEm8xUcAjjYHmwsol3h" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
+
+<p><code class="language-plaintext highlighter-rouge">May:</code></p>
+
+<center><iframe src="https://open.spotify.com/embed/playlist/5UNwpXFmg6m1PMnlh1kM2d?utm_source=generator" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
+
+<p><code class="language-plaintext highlighter-rouge">June:</code></p>
+
+<center><iframe src="https://open.spotify.com/embed/playlist/3dnyQzV0takNdVnTYV1XrW?utm_source=generator" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
+
+<p><code class="language-plaintext highlighter-rouge">July:</code></p>
+
+<center><iframe src="https://open.spotify.com/embed/playlist/6I1JPsSlDINiDk4FW557uQ?utm_source=generator" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
+
+<p><code class="language-plaintext highlighter-rouge">August:</code></p>
+
+<center>&lt;iframe src="https://open.spotify.com/embed/playlist/38WEOzTjiLI8hPbGzDYu0d?utm_source=generator"" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"&gt;&lt;/iframe&gt;</center>
+
+<p><code class="language-plaintext highlighter-rouge">September:</code></p>
+
+<center><iframe src="https://open.spotify.com/embed/playlist/74eFe5aKfP1V4V5FIJwqz8?utm_source=generator" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
+
+<p><code class="language-plaintext highlighter-rouge">October:</code></p>
+
+<center><iframe src="https://open.spotify.com/embed/playlist/26ci11lHVIvOOq8wuOtIg2?utm_source=generato" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>
+
+              </div>
+            </div>
+          </div>
+        
+      
+    </div>
+  </div>
+</div>
+
+<style>
+/* Override Jekyll wrapper constraints for full-width layout */
+body .page-content {
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body .wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body .page-content .wrapper {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body {
+  background-color: #000000 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body .page-content {
+  background-color: #000000 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html {
+  background-color: #000000 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body .page-content {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Hide header on archive page only */
+body .site-header {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  visibility: hidden !important;
+}
+
+body .site-header .wrapper {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Hide footer on archive page only */
+body .site-footer {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  visibility: hidden !important;
+}
+
+body .page-content {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+body .wrapper {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+main {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Hide page heading and any title elements */
+.page-heading,
+h1.page-heading,
+.page-content h1,
+.page-content h2.page-heading,
+.page-content .page-heading {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+}
+
+/* Hide any h1 or h2 that might be showing the page title */
+.page-content > h1:first-child,
+.page-content > h2:first-child,
+main h1:first-child,
+main h2:first-child,
+.wrapper h1:first-child,
+.wrapper h2:first-child,
+article h1:first-child,
+article h2:first-child {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.archive-container {
+  display: flex !important;
+  min-height: 100vh;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 10px;
+  background-color: #000000;
+  width: 100%;
+  box-sizing: border-box;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.archive-sidebar {
+  width: 25%;
+  padding: 5px 40px 100px 10px;
+  font-size: 13px;
+  line-height: 1.3;
+  color: #000000;
+  background-color: #ffffff;
+  font-family: "Arial-LC", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  border-right: 1.5px solid #000000;
+}
+
+.archive-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.archive-name {
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: #000000;
+  line-height: 1.3;
+  margin-bottom: 0;
+  font-family: "Arial-LC", sans-serif;
+}
+
+.home-button {
+  color: #000000 !important;
+  text-decoration: none;
+  font-size: 13px;
+  font-family: "Arial-LC", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  transition: opacity 0.2s ease;
+}
+
+.home-button:hover {
+  opacity: 0.6;
+  color: #000000 !important;
+}
+
+.home-button:visited {
+  color: #000000 !important;
+}
+
+.archive-divider {
+  height: 1px;
+  background: #000000;
+  margin: 20px 0;
+  border: none;
+  width: 100%;
+}
+
+.archive-posts-list {
+  margin-bottom: 0;
+}
+
+.archive-post-item {
+  margin-bottom: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.archive-post-item:hover {
+  opacity: 0.7;
+}
+
+.archive-post-title {
+  font-size: 13px;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: #000000;
+  margin-bottom: 5px;
+  font-family: "Arial-LC", sans-serif;
+  font-weight: 400;
+}
+
+.archive-post-meta {
+  font-size: 11px;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: #666;
+  font-family: "Arial-LC", sans-serif;
+}
+
+.archive-post-date,
+.archive-post-categories,
+.archive-post-tags {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.archive-preview {
+  width: 75%;
+  position: relative;
+  min-height: 100vh;
+  perspective: 1500px;
+  perspective-origin: center center;
+  background-color: #ffffff !important;
+  padding: 0 10px 100px 30px;
+}
+
+.archive-content-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+
+.archive-content-carousel .archive-content-item {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: rotateY(90deg) translateZ(250px);
+  transition: opacity 0.8s ease, transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0s linear 1.5s;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  visibility: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow-y: auto;
+  padding: 40px;
+}
+
+.archive-content-carousel .archive-content-item.active {
+  opacity: 1;
+  transform: rotateY(0deg) translateZ(0px);
+  z-index: 2;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.archive-content-carousel .archive-content-item.transitioning-out-left {
+  opacity: 0;
+  transform: rotateY(-90deg) translateZ(250px);
+  z-index: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.archive-content-carousel .archive-content-item.transitioning-out-right {
+  opacity: 0;
+  transform: rotateY(90deg) translateZ(250px);
+  z-index: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.archive-content-carousel .archive-content-item.transitioning-in-left {
+  opacity: 1;
+  transform: rotateY(90deg) translateZ(250px);
+  z-index: 3;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.archive-content-carousel .archive-content-item.transitioning-in-right {
+  opacity: 1;
+  transform: rotateY(-90deg) translateZ(250px);
+  z-index: 3;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.archive-content-item .post-content {
+  width: 100%;
+  max-width: 800px;
+  color: #000000;
+  font-family: "Arial-LC", sans-serif;
+  font-size: 13px;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+.archive-content-item .post-content h1 {
+  color: #000000;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 15px;
+  font-family: "Arial-LC", sans-serif;
+}
+
+.archive-content-item .post-content h2,
+.archive-content-item .post-content h3,
+.archive-content-item .post-content h4 {
+  color: #000000;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  font-family: "Arial-LC", sans-serif;
+}
+
+.archive-content-item .post-content p {
+  margin-bottom: 15px;
+  color: #000000;
+}
+
+.archive-content-item .post-content .post-meta {
+  color: #666;
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+
+.archive-content-item .post-content .post-body {
+  margin-top: 20px;
+}
+
+.archive-content-item .post-content .post-body p {
+  margin-bottom: 15px;
+  color: #000000;
+}
+
+.archive-content-item .post-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+}
+
+.archive-content-item .post-content a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.archive-content-item .post-content a:hover {
+  opacity: 0.6;
+}
+
+.archive-content-item .post-content ul,
+.archive-content-item .post-content ol {
+  color: #000000;
+  margin-bottom: 15px;
+  padding-left: 20px;
+}
+
+.archive-content-item .post-content li {
+  margin-bottom: 8px;
+  color: #000000;
+}
+
+.archive-content-item .post-content blockquote {
+  color: #000000;
+  border-left: 4px solid #000000;
+  padding-left: 15px;
+  margin: 20px 0;
+}
+
+.archive-content-item .post-content code {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 2px 5px;
+  color: #000000;
+}
+
+.archive-content-item .post-content pre {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+.archive-content-item .post-content pre code {
+  background-color: transparent;
+  padding: 0;
+  color: #000000;
+}
+
+@media (max-width: 968px) {
+  .archive-container {
+    flex-direction: column;
+  }
+  
+  .archive-sidebar {
+    width: 100%;
+    padding: 60px 40px;
+  }
+  
+  .archive-preview {
+    width: 100%;
+    min-height: 500px;
+    padding: 60px 40px !important;
+    background-color: #ffffff !important;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const carousel = document.getElementById('archiveContentCarousel');
+  const hoverablePosts = document.querySelectorAll('.hoverable-post');
+  const contentItems = carousel.querySelectorAll('.archive-content-item');
+  
+  let currentPostIndex = -1;
+  let hoverTimeout = null;
+  let isScrolling = false;
+  let scrollTimeout = null;
+  
+  // Track scrolling
+  window.addEventListener('scroll', function() {
+    isScrolling = true;
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      hoverTimeout = null;
+    }
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(function() {
+      isScrolling = false;
+    }, 150);
+  }, { passive: true });
+  
+  function updateCarousel(index, previousIndex, direction) {
+    // Validate indices
+    if (index < 0 || index >= contentItems.length) return;
+    if (previousIndex !== undefined && previousIndex !== -1 && (previousIndex < 0 || previousIndex >= contentItems.length)) {
+      previousIndex = -1;
+    }
+    
+    // Determine rotation direction
+    let rotationDirection = direction;
+    if (previousIndex !== undefined && previousIndex !== -1 && previousIndex !== index && !isScrolling) {
+      if (!rotationDirection) {
+        rotationDirection = index < previousIndex ? 'right' : 'left';
+      }
+      
+      // Animate out the previous item
+      const prevItem = contentItems[previousIndex];
+      if (prevItem && prevItem.classList.contains('active')) {
+        prevItem.classList.remove('active');
+        prevItem.classList.add(rotationDirection === 'left' ? 'transitioning-out-left' : 'transitioning-out-right');
+        
+        setTimeout(() => {
+          if (prevItem && !prevItem.classList.contains('active')) {
+            prevItem.style.visibility = 'hidden';
+            prevItem.classList.remove('transitioning-out-left', 'transitioning-out-right');
+          }
+        }, 1500);
+      }
+      
+      // Animate in the new item
+      const newItem = contentItems[index];
+      if (newItem) {
+        newItem.style.visibility = 'visible';
+        newItem.classList.remove('transitioning-out-left', 'transitioning-out-right', 'transitioning-in-left', 'transitioning-in-right');
+        newItem.classList.add(rotationDirection === 'left' ? 'transitioning-in-left' : 'transitioning-in-right');
+        
+        setTimeout(() => {
+          if (currentPostIndex === index && newItem) {
+            newItem.classList.remove('transitioning-in-left', 'transitioning-in-right');
+            newItem.classList.add('active');
+          }
+        }, 50);
+      }
+    } else {
+      // First item or no previous
+      contentItems.forEach((item, i) => {
+        if (i === index) {
+          item.style.visibility = 'visible';
+          item.classList.remove('transitioning-out-left', 'transitioning-out-right', 'transitioning-in-left', 'transitioning-in-right');
+          item.classList.add('active');
+        } else {
+          item.style.visibility = 'hidden';
+          item.classList.remove('active', 'transitioning-out-left', 'transitioning-out-right', 'transitioning-in-left', 'transitioning-in-right');
+        }
+      });
+    }
+  }
+  
+  hoverablePosts.forEach((postItem) => {
+    const postIndex = parseInt(postItem.dataset.postIndex);
+    
+    postItem.addEventListener('mouseenter', function() {
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout);
+        hoverTimeout = null;
+      }
+      
+      hoverTimeout = setTimeout(function() {
+        if (isScrolling) {
+          hoverTimeout = null;
+          return;
+        }
+        
+        const previousIndex = currentPostIndex;
+        let direction = null;
+        if (previousIndex !== -1 && previousIndex !== postIndex && previousIndex >= 0 && previousIndex < contentItems.length) {
+          direction = postIndex < previousIndex ? 'right' : 'left';
+        }
+        currentPostIndex = postIndex;
+        updateCarousel(currentPostIndex, previousIndex, direction);
+        hoverTimeout = null;
+      }, 150);
+    });
+    
+    postItem.addEventListener('click', function() {
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout);
+        hoverTimeout = null;
+      }
+      
+      const previousIndex = currentPostIndex;
+      let direction = null;
+      if (previousIndex !== -1 && previousIndex !== postIndex && previousIndex >= 0 && previousIndex < contentItems.length) {
+        direction = postIndex < previousIndex ? 'right' : 'left';
+      }
+      currentPostIndex = postIndex;
+      updateCarousel(currentPostIndex, previousIndex, direction);
+    });
+  });
+  
+  // Initialize with first post if available
+  if (contentItems.length > 0) {
+    currentPostIndex = 0;
+    updateCarousel(0, -1, null);
+  }
+});
+</script>
+
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+© ferdie is standing still in a moving scene
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

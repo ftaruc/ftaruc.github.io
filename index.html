@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>ferdie jay taruc</title>
+  <meta name="description" content="standing still in a moving scene.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://ftaruc.github.io/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="ferdie jay taruc" href="https://ftaruc.github.io/feed.xml">
+
+  <style>
+/* Page transition styles */
+html {
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  transition: filter 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+  will-change: filter;
+}
+
+body.page-transitioning {
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.page-transition-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.page-transition-container.active {
+  pointer-events: auto;
+}
+
+.page-transition-new {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  transform: translateX(-100%);
+  filter: blur(2px);
+  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1),
+              filter 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+  overflow-y: auto;
+  will-change: transform, filter;
+}
+
+.page-transition-new.reverse {
+  transform: translateX(100%);
+}
+
+.page-transition-new.loaded {
+  transform: translateX(0);
+  filter: blur(0px);
+}
+
+.page-transition-new iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* 3D Loading Screen */
+.loading-screen-3d {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(245, 245, 245, 0.95);
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  perspective-origin: center center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  transform: none !important;
+  will-change: opacity;
+}
+
+.loading-screen-3d.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.loading-screen-3d.hiding {
+  opacity: 0;
+}
+
+.loader-3d-container {
+  position: relative;
+  width: 150px;
+  height: 200px;
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-text {
+  font-family: "Arial-LC", sans-serif;
+  font-size: 13px;
+  color: #000000;
+  letter-spacing: 0.02em;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-left: 8px;
+  font-weight: 400;
+  text-align: center;
+  width: 100%;
+}
+
+/* 3D Moon Sphere */
+.moon-sphere {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  left: 50%;
+  top: 50%;
+  margin-left: -60px;
+  margin-top: -60px;
+  transform-style: preserve-3d;
+  animation: rotateMoon 8s infinite linear;
+}
+
+@keyframes rotateMoon {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+/* Moon rings (latitudes) */
+.moon-ring {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 2px solid rgba(60, 70, 97, 0.2);
+  border-radius: 50%;
+  left: 0;
+  top: 0;
+}
+
+.moon-ring.ring1 {
+  transform: rotateX(0deg);
+}
+
+.moon-ring.ring2 {
+  transform: rotateX(30deg);
+}
+
+.moon-ring.ring3 {
+  transform: rotateX(60deg);
+}
+
+.moon-ring.ring4 {
+  transform: rotateX(90deg);
+}
+
+.moon-ring.ring5 {
+  transform: rotateX(120deg);
+}
+
+.moon-ring.ring6 {
+  transform: rotateX(150deg);
+}
+
+/* Moon meridians (longitudes) */
+.moon-meridian {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 2px solid rgba(60, 70, 97, 0.15);
+  border-radius: 50%;
+  left: 0;
+  top: 0;
+}
+
+.moon-meridian.meridian1 {
+  transform: rotateY(0deg);
+}
+
+.moon-meridian.meridian2 {
+  transform: rotateY(45deg);
+}
+
+.moon-meridian.meridian3 {
+  transform: rotateY(90deg);
+}
+
+.moon-meridian.meridian4 {
+  transform: rotateY(135deg);
+}
+
+
+/* Moon surface texture */
+.moon-surface {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(200, 200, 200, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 60% 70%, rgba(190, 190, 190, 0.2) 1px, transparent 1px),
+    radial-gradient(circle at 80% 20%, rgba(210, 210, 210, 0.25) 1px, transparent 1px),
+    radial-gradient(circle at 40% 80%, rgba(195, 195, 195, 0.2) 1px, transparent 1px);
+  background-size: 30% 30%, 25% 25%, 20% 20%, 35% 35%;
+  background-position: 0% 0%, 100% 100%, 50% 50%, 0% 100%;
+  opacity: 0.6;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+</style>
+
+<script>
+(function() {
+  'use strict';
+  
+  let isTransitioning = false;
+  
+  // Only run on same-origin links
+  function isSameOrigin(href) {
+    try {
+      const url = new URL(href, window.location.href);
+      return url.origin === window.location.origin;
+    } catch (e) {
+      return false;
+    }
+  }
+  
+  // Intercept link clicks
+  document.addEventListener('click', function(e) {
+    if (isTransitioning) {
+      e.preventDefault();
+      return;
+    }
+    
+    // Check if target is an Element and has closest method
+    const target = e.target;
+    if (!target || typeof target.closest !== 'function') return;
+    
+    const link = target.closest('a');
+    if (!link) return;
+    
+    const href = link.getAttribute('href');
+    if (!href) return;
+    
+    // Skip if external link, mailto, tel, or anchor link
+    if (href.startsWith('#') || 
+        href.startsWith('mailto:') || 
+        href.startsWith('tel:') ||
+        href.startsWith('javascript:') ||
+        link.hasAttribute('target') ||
+        !isSameOrigin(href)) {
+      return;
+    }
+    
+    // Skip if it's a download link
+    if (link.hasAttribute('download')) {
+      return;
+    }
+    
+    // Skip transition for photos page - it has complex JavaScript that needs to run properly
+    if (href.includes('/photos/') || href.includes('/photos')) {
+      return;
+    }
+    
+    // Skip transition for archive page - it has complex JavaScript that causes double-loading
+    if (href.includes('/archives/') || href.includes('/archives')) {
+      return;
+    }
+    
+    e.preventDefault();
+    isTransitioning = true;
+    
+    // Create and show 3D loading screen
+    const loadingScreen = document.createElement('div');
+    loadingScreen.className = 'loading-screen-3d';
+    loadingScreen.innerHTML = `
+      <div class="loader-3d-container">
+        <div class="loading-text">loading...</div>
+        <div class="moon-sphere">
+          <div class="moon-ring ring1"></div>
+          <div class="moon-ring ring2"></div>
+          <div class="moon-ring ring3"></div>
+          <div class="moon-ring ring4"></div>
+          <div class="moon-ring ring5"></div>
+          <div class="moon-ring ring6"></div>
+          <div class="moon-meridian meridian1"></div>
+          <div class="moon-meridian meridian2"></div>
+          <div class="moon-meridian meridian3"></div>
+          <div class="moon-meridian meridian4"></div>
+          <div class="moon-surface"></div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(loadingScreen);
+    
+    // Show loading screen
+    requestAnimationFrame(function() {
+      loadingScreen.classList.add('active');
+    });
+    
+    // Add blur transition to current page (old page goes underneath)
+    document.body.classList.add('page-transitioning');
+    
+    // Create container for new page
+    const container = document.createElement('div');
+    container.className = 'page-transition-container';
+    
+    const newPage = document.createElement('div');
+    // Check if going back home - reverse the direction
+    // Normalize href to check if it's the home page
+    const url = new URL(href, window.location.origin);
+    const isGoingHome = url.pathname === '/' || url.pathname === '';
+    newPage.className = isGoingHome ? 'page-transition-new reverse' : 'page-transition-new';
+    
+    // Start transition immediately for smoother feel
+    requestAnimationFrame(function() {
+      container.appendChild(newPage);
+      document.body.appendChild(container);
+      
+      // Activate container immediately
+      container.classList.add('active');
+      
+      // Use fetch to load the new page content
+      fetch(href)
+        .then(response => response.text())
+        .then(html => {
+          // Parse the HTML
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          
+          // Get the body content
+          const bodyContent = doc.body || doc.querySelector('body');
+          if (bodyContent) {
+            newPage.innerHTML = bodyContent.innerHTML;
+            
+            // Copy styles
+            const styles = doc.querySelectorAll('style');
+            styles.forEach(style => {
+              const newStyle = document.createElement('style');
+              newStyle.textContent = style.textContent;
+              document.head.appendChild(newStyle);
+            });
+            
+            // Wait for DOM to be ready before executing scripts
+            // Use setTimeout to ensure DOM is fully parsed
+            setTimeout(() => {
+              // Copy and execute scripts after DOM is ready
+              const scripts = doc.querySelectorAll('script');
+              scripts.forEach(script => {
+                if (script.src) {
+                  // External scripts
+                  const newScript = document.createElement('script');
+                  newScript.src = script.src;
+                  newScript.async = false;
+                  document.head.appendChild(newScript);
+                } else if (script.textContent.trim()) {
+                  // Inline scripts - handle DOMContentLoaded case
+                  let scriptContent = script.textContent;
+                  
+                  // If script uses DOMContentLoaded, replace it with immediate execution
+                  // since DOM is already ready when we inject
+                  if (scriptContent.includes('DOMContentLoaded')) {
+                    // Replace DOMContentLoaded with immediate execution
+                    scriptContent = scriptContent.replace(
+                      /document\.addEventListener\(['"]DOMContentLoaded['"],\s*function\(\)\s*\{/g,
+                      '(function() {'
+                    );
+                    // Close the wrapper function at the end
+                    scriptContent = scriptContent.replace(
+                      /\}\);?\s*$/,
+                      '})();'
+                    );
+                  }
+                  
+                  const newScript = document.createElement('script');
+                  newScript.textContent = scriptContent;
+                  newPage.appendChild(newScript);
+                }
+              });
+            }, 150);
+          }
+          
+          // Wait for content to cache and show moon animation
+          setTimeout(function() {
+            // Start wipe animation immediately
+            requestAnimationFrame(function() {
+              newPage.classList.add('loaded');
+              
+              // Hide loading screen smoothly as wipe completes (at 80% of transition)
+              setTimeout(function() {
+                loadingScreen.classList.add('hiding');
+                setTimeout(function() {
+                  loadingScreen.remove();
+                }, 300);
+              }, 480); // 80% of 600ms transition
+            });
+            
+            // Navigate after transition completes smoothly
+            setTimeout(function() {
+              window.location.href = href;
+            }, 650); // Slightly after 600ms transition completes
+          }, 100); // Delay to show moon and cache content
+        })
+        .catch(function(error) {
+          console.error('Transition error:', error);
+          // Remove loading screen on error
+          const loadingScreen = document.querySelector('.loading-screen-3d');
+          if (loadingScreen) {
+            loadingScreen.remove();
+          }
+          // Fallback to normal navigation
+          document.body.classList.remove('page-transitioning');
+          window.location.href = href;
+          isTransitioning = false;
+        });
+    });
+  });
+  
+  // Prefetch links on hover for faster transitions
+  document.addEventListener('mouseenter', function(e) {
+    // Check if target is an Element and has closest method
+    const target = e.target;
+    if (!target || typeof target.closest !== 'function') return;
+    
+    const link = target.closest('a');
+    if (link && link.href && isSameOrigin(link.href) && !link.href.startsWith('#')) {
+      const linkElement = document.createElement('link');
+      linkElement.rel = 'prefetch';
+      linkElement.href = link.href;
+      document.head.appendChild(linkElement);
+    }
+  }, true);
+  
+  // Remove transition class when page loads
+  window.addEventListener('load', function() {
+    document.body.classList.remove('page-transitioning');
+    isTransitioning = false;
+  });
+  
+  // Also handle browser back/forward buttons
+  window.addEventListener('pageshow', function(e) {
+    if (e.persisted) {
+      document.body.classList.remove('page-transitioning');
+      isTransitioning = false;
+    }
+  });
+})();
+</script>
+
+
+
+  
+  <meta property="og:title" content="ferdie jay taruc">
+  <meta property="og:site_name" content="ferdie jay taruc">
+  <meta property="og:url" content="https://ftaruc.github.io/">
+  <meta property="og:description" content="standing still in a moving scene.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="ferdie jay taruc">
+  <meta name="twitter:description" content="standing still in a moving scene.">
+  
+  
+
+  <!-- Using system fonts - no external font loading needed -->
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">ferdie jay taruc</a>
+
+    <nav class="site-nav">
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title"></h1>
+  </header>
+
+  <div class="post-content">
+    <div class="about-container">
+  <div class="about-sidebar">
+    <div class="about-header">
+      <div class="about-name">Ferdie Taruc</div>
+      <div class="about-header-links">
+        <a href="/archives/" class="archive-button">archive</a>
+        <a href="/photos/" class="photos-button">photos</a>
+        <a href="/files/resume.pdf" class="resume-button">resume</a>
+      </div>
+    </div>
+    
+    <div class="about-divider"></div>
+    
+    <div class="about-content">
+      <p>first-gen filipino-american econ &amp; data-science graduate from uc berkeley, fascinated with the intersection between behavioral decisions and data.</p>
+      
+      <p>* prior work experience: product analytics rooted in insurance: namely <em>Geico</em>, <em>Metromile</em>, and <em>Lemonade</em>.</p>
+    </div>
+    
+    <div class="about-divider"></div>
+    
+    <div class="about-section">
+      <p><strong>For inquiries</strong>, reach me through my email: <a href="mailto:ferdie@berkeley.edu">ferdie@berkeley.edu</a></p>
+      
+      <p><strong>GitHub</strong>: <a href="https://github.com/ftaruc" target="_blank">@ftaruc</a></p>
+
+      <p><strong>Youtube</strong>: <a href="https://youtube.com/morimentos" target="_blank">@morimentos</a> *new series soon</p>
+    </div>
+    
+    <div class="about-divider"></div>
+    
+    <div class="about-section hoverable-section" data-content="playlist">
+      <p><strong>2025 playlist</strong>: <a href="/2021/01/01/playlists/">archive here</a></p>
+    </div>
+    
+    <div class="about-divider"></div>
+    
+    <div class="about-section">
+      <p><strong>Favorites:</strong></p>
+    </div>
+    
+    <div class="about-section hoverable-section" data-content="films">
+      <p><strong>films</strong>: <a href="https://letterboxd.com/ferdie/" target="_blank">find me on letterboxd</a></p>
+    </div>
+    
+    <div class="about-section hoverable-section" data-content="albums">
+      <p><strong>albums</strong>: <a href="https://ferdie.org/images/archive%20photos/chart.png" target="_blank">2025 list</a></p>
+    </div>
+  </div>
+  
+  <div class="about-preview">
+    <div class="content-carousel" id="contentCarousel">
+      <!-- Content will be dynamically inserted here -->
+    </div>
+  </div>
+</div>
+
+<style>
+/* CSS Variables from reference site */
+:root {
+  --pure-white: #ffffff;
+  --primary-color: #b9c6d2;
+  --secondary-color: #d0dde9;
+  --tertiary-color: #edf0f8;
+  --accent-color: #ff3e00;
+  --heading-color: rgba(0, 0, 0, .7);
+  --text-color: #444444;
+  --background-without-opacity: rgba(255, 255, 255, .7);
+  --column-width: 42rem;
+  --column-margin-top: 4rem;
+}
+
+/* Override Jekyll wrapper constraints for full-width layout */
+body .page-content {
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body .wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body .page-content .wrapper {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body {
+  background-color: #000000 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+
+body .page-content {
+  background-color: #000000 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html {
+  background-color: #000000 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+
+
+body .page-content {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Hide header on about page only */
+body .site-header {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  visibility: hidden !important;
+}
+
+body .site-header .wrapper {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Hide footer on about page only */
+body .site-footer {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  visibility: hidden !important;
+}
+
+body .page-content {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+body .wrapper {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+main {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Header links */
+.about-header-links {
+  display: flex;
+  gap: 20px;
+}
+
+.about-header .archive-button,
+.about-header .photos-button,
+.about-header .resume-button {
+  color: #000000 !important;
+  text-decoration: none;
+  font-size: 13px;
+  font-family: "Arial-LC", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  transition: opacity 0.2s ease;
+}
+
+.about-header .archive-button:hover,
+.about-header .photos-button:hover,
+.about-header .resume-button:hover {
+  opacity: 0.6;
+  color: #000000 !important;
+}
+
+.about-header .archive-button:visited,
+.about-header .photos-button:visited,
+.about-header .resume-button:visited {
+  color: #000000 !important;
+}
+
+.about-container {
+  display: flex !important;
+  height: 100vh;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 10px;
+  background-color: #000000;
+  width: 100%;
+  box-sizing: border-box;
+  visibility: visible !important;
+  opacity: 1 !important;
+  overflow: hidden;
+}
+
+.about-sidebar {
+  width: 25%;
+  padding: 5px 40px 30px 10px;
+  font-size: 13px;
+  line-height: 1.3;
+  color: #000000;
+  background-color: #ffffff;
+  font-family: "Arial-LC", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.about-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.about-name {
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: #000000;
+  line-height: 1.3;
+  margin-bottom: 0;
+  font-family: "Arial-LC", sans-serif;
+}
+
+.about-label {
+  font-size: 13px;
+  color: #000000;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  margin-bottom: 0;
+}
+
+.about-content {
+  margin-bottom: 0;
+}
+
+.about-content p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  unicode-bidi: isolate;
+  color: #000000;
+  font-size: 13px;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+.about-content em {
+  font-style: normal;
+  color: #000000;
+}
+
+.about-divider {
+  height: 1px;
+  background: #000000;
+  margin: 20px 0;
+  border: none;
+  width: 100%;
+}
+
+.about-section {
+  margin-bottom: 0;
+}
+
+.about-section p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  unicode-bidi: isolate;
+  color: #000000;
+  margin-bottom: 0;
+  font-size: 13px;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+.about-section p:first-of-type {
+  margin-bottom: 1.2em;
+}
+
+.about-section strong {
+  font-weight: 400;
+  color: #000000;
+}
+
+.about-section a {
+  color: #000000;
+  text-decoration: underline;
+  transition: opacity 0.2s ease;
+}
+
+.about-section a:hover {
+  opacity: 0.6;
+}
+
+.about-section ol {
+  margin-top: 0;
+  padding-left: 20px;
+  color: #000000;
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.about-section ol li {
+  margin-bottom: 0;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+.hoverable-section {
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.hoverable-section:hover {
+  opacity: 0.7;
+}
+
+.about-preview {
+  width: 75%;
+  position: relative;
+  height: 100vh;
+  perspective: 1500px;
+  perspective-origin: center center;
+  background-color: #000000 !important;
+  padding: 5px 10px 30px 30px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.content-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  overflow: visible; /* Allow content to be visible during rotation to prevent clipping */
+  perspective: 1000px; /* Add perspective for smoother 3D effect */
+}
+
+.content-carousel .content-item {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  min-height: 400px; /* Ensure consistent minimum height to prevent layout shifts */
+  opacity: 0;
+  transform: rotateY(180deg) translateZ(250px);
+  transition: opacity 1.3s ease 0.3s, transform 2s cubic-bezier(0.4, 0, 0.2, .8); /* Even slower, smoother transition */
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  backface-visibility: hidden; /* Hide back of rotated items */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden; /* Hidden by default */
+}
+
+.content-carousel .content-item.active {
+  opacity: 1;
+  transform: rotateY(0deg) translateZ(0px);
+  z-index: 2;
+  visibility: visible; /* Show active item */
+}
+
+/* Transitioning out (previous item) */
+.content-carousel .content-item.transitioning-out-left {
+  opacity: 0;
+  transform: rotateY(-180deg) translateZ(250px);
+  z-index: 1;
+  visibility: visible; /* Keep visible during transition */
+}
+
+.content-carousel .content-item.transitioning-out-right {
+  opacity: 0;
+  transform: rotateY(180deg) translateZ(250px);
+  z-index: 1;
+  visibility: visible; /* Keep visible during transition */
+}
+
+/* Transitioning in (new item) */
+.content-carousel .content-item.transitioning-in-left {
+  opacity: 1 !important; /* Ensure it's visible from the start */
+  transform: rotateY(180deg) translateZ(250px);
+  z-index: 3;
+  visibility: visible; /* Keep visible during transition */
+}
+
+.content-carousel .content-item.transitioning-in-right {
+  opacity: 1 !important; /* Ensure it's visible from the start */
+  transform: rotateY(-180deg) translateZ(250px);
+  z-index: 3;
+  visibility: visible; /* Keep visible during transition */
+}
+
+.content-item img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%);
+}
+
+.content-item iframe {
+  width: 100%;
+  max-width: 100%;
+  height: 600px;
+  border: none;
+}
+
+.content-item .articles-list {
+  width: 100%;
+  max-width: 600px;
+  padding: 40px;
+}
+
+.content-item .articles-list h3 {
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 40px;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  font-family: "Arial-LC", sans-serif;
+  line-height: 1.3;
+}
+
+.content-item .articles-list ol {
+  list-style: decimal;
+  padding-left: 20px;
+  font-size: 13px;
+  line-height: 1.3;
+  color: #ffffff;
+}
+
+.content-item .articles-list li {
+  margin-bottom: 20px;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+.content-item .articles-list a {
+  color: #ffffff;
+  text-decoration: underline;
+  transition: opacity 0.2s ease;
+}
+
+.content-item .articles-list a:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 968px) {
+  .about-container {
+    flex-direction: column;
+  }
+  
+  .about-sidebar {
+    width: 100%;
+    padding: 60px 40px;
+  }
+  
+  .about-preview {
+    width: 100%;
+    min-height: 500px;
+    padding: 60px 40px !important;
+    background-color: #000000 !important;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const carousel = document.getElementById('contentCarousel');
+  const hoverableSections = document.querySelectorAll('.hoverable-section');
+  
+  // Content data
+  const contentData = {
+    home: {
+      type: 'image',
+      src: '/images/archive%20photos/home_test.png'
+    },
+    playlist: {
+      type: 'spotify',
+      embed: '<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2JoQqTsk7xUxln6nSgo26F?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager"></iframe>'
+    },
+    films: {
+      type: 'image',
+      src: '/images/archive%20photos/movies.png?v=1768759751'
+    },
+    albums: {
+      type: 'image',
+      src: '/images/archive%20photos/chart.png'
+    }
+  };
+  
+  let currentContentIndex = -1;
+  let hoverTimeout = null;
+  let isScrolling = false;
+  let scrollTimeout = null;
+  const contentOrder = ['home', 'playlist', 'films', 'albums'];
+  
+  // Track scrolling
+  window.addEventListener('scroll', function() {
+    isScrolling = true;
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      hoverTimeout = null;
+    }
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(function() {
+      isScrolling = false;
+    }, 150);
+  }, { passive: true });
+  
+  // Create content items
+  contentOrder.forEach((key, index) => {
+    const data = contentData[key];
+    const item = document.createElement('div');
+    item.className = 'content-item';
+    item.dataset.contentKey = key;
+    
+    if (data.type === 'image') {
+      const img = document.createElement('img');
+      img.src = data.src;
+      img.alt = key;
+      // Preload images for smoother transitions
+      img.loading = 'eager';
+      item.appendChild(img);
+    } else if (data.type === 'spotify') {
+      item.innerHTML = data.embed;
+      // Ensure Spotify iframe loads immediately
+      const iframe = item.querySelector('iframe');
+      if (iframe) {
+        iframe.loading = 'eager';
+        // Force iframe to start loading by accessing its contentWindow
+        // This helps preload the iframe content
+        try {
+          // Trigger load by setting src again (browsers cache this)
+          const originalSrc = iframe.src;
+          iframe.src = originalSrc;
+        } catch (e) {
+          // Cross-origin restrictions may prevent access, that's okay
+        }
+      }
+    }
+    
+    carousel.appendChild(item);
+  });
+  
+  // Preload all iframes on page load to prevent stuttering
+  setTimeout(function() {
+    const allIframes = carousel.querySelectorAll('iframe');
+    allIframes.forEach(function(iframe) {
+      if (iframe.loading === 'lazy') {
+        iframe.loading = 'eager';
+      }
+      // Force iframe to start loading
+      try {
+        const src = iframe.src;
+        iframe.src = '';
+        iframe.src = src;
+      } catch (e) {
+        // Ignore cross-origin errors
+      }
+    });
+  }, 100);
+  
+  function updateCarousel(index, previousIndex, direction) {
+    const items = carousel.querySelectorAll('.content-item');
+    
+    // Validate indices
+    if (index < 0 || index >= items.length) return;
+    if (previousIndex !== undefined && previousIndex !== -1 && (previousIndex < 0 || previousIndex >= items.length)) {
+      previousIndex = -1;
+    }
+    
+    // Always rotate left regardless of position
+    let rotationDirection = 'left';
+    if (previousIndex !== undefined && previousIndex !== -1 && previousIndex !== index && !isScrolling) {
+      
+      // Force left rotation always
+      rotationDirection = 'left';
+      
+      // Animate in the new item FIRST to ensure something is always visible
+      const newItem = items[index];
+      if (newItem) {
+        // Make new item visible immediately before starting animation
+        newItem.style.visibility = 'visible';
+        newItem.style.opacity = '1';
+        newItem.style.zIndex = '3';
+        newItem.classList.remove('active', 'transitioning-out-left', 'transitioning-out-right', 'transitioning-in-left', 'transitioning-in-right');
+        
+        // Force reflow to ensure styles are applied
+        void newItem.offsetWidth;
+        
+        // Now start the transition animation
+        newItem.classList.add(rotationDirection === 'left' ? 'transitioning-in-left' : 'transitioning-in-right');
+        
+        setTimeout(() => {
+          if (currentContentIndex === index && newItem) {
+            newItem.classList.remove('transitioning-in-left', 'transitioning-in-right');
+            newItem.classList.add('active');
+          }
+        }, 100);
+      }
+      
+      // Animate out the previous item AFTER new item is visible (small delay)
+      const prevItem = items[previousIndex];
+      if (prevItem && prevItem.classList.contains('active')) {
+        // Small delay to ensure new item is visible first
+        setTimeout(() => {
+          prevItem.classList.remove('active');
+          prevItem.classList.add(rotationDirection === 'left' ? 'transitioning-out-left' : 'transitioning-out-right');
+          prevItem.style.zIndex = '1'; // Move behind new item
+          // Hide after transition completes
+          prevItem.addEventListener('transitionend', function handler() {
+            prevItem.style.visibility = 'hidden';
+            prevItem.removeEventListener('transitionend', handler);
+          }, { once: true });
+        }, 100); // Small delay to ensure new item appears first
+      }
+    } else {
+      // First item or no previous
+      items.forEach((item, i) => {
+        if (i === index) {
+          item.classList.remove('transitioning-out-left', 'transitioning-out-right', 'transitioning-in-left', 'transitioning-in-right');
+          item.classList.add('active');
+          item.style.visibility = 'visible';
+        } else {
+          item.classList.remove('active', 'transitioning-out-left', 'transitioning-out-right', 'transitioning-in-left', 'transitioning-in-right');
+          item.style.visibility = 'hidden';
+        }
+      });
+    }
+  }
+  
+  hoverableSections.forEach((section) => {
+    const contentKey = section.dataset.content;
+    const contentIndex = contentOrder.indexOf(contentKey);
+    
+    if (contentIndex === -1) return;
+    
+    section.addEventListener('mouseenter', function() {
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout);
+        hoverTimeout = null;
+      }
+      
+      hoverTimeout = setTimeout(function() {
+        if (isScrolling) {
+          hoverTimeout = null;
+          return;
+        }
+        
+        const previousIndex = currentContentIndex;
+        let direction = null;
+        if (previousIndex !== -1 && previousIndex !== contentIndex && previousIndex >= 0 && previousIndex < contentOrder.length) {
+          direction = contentIndex < previousIndex ? 'right' : 'left'; // Reversed directions
+        }
+        currentContentIndex = contentIndex;
+        updateCarousel(currentContentIndex, previousIndex, direction);
+        hoverTimeout = null;
+      }, 150);
+    });
+    
+    section.addEventListener('mouseleave', function() {
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout);
+        hoverTimeout = null;
+      }
+      
+      hoverTimeout = setTimeout(function() {
+        if (isScrolling) {
+          hoverTimeout = null;
+          return;
+        }
+        
+        // Return to default (home) content
+        // If mouse moved to another hoverable section, its mouseenter will override this
+        const previousIndex = currentContentIndex;
+        let direction = null;
+        if (previousIndex !== -1 && previousIndex !== 0 && previousIndex >= 0 && previousIndex < contentOrder.length) {
+          direction = 0 < previousIndex ? 'right' : 'left'; // Reversed directions
+        }
+        currentContentIndex = 0;
+        updateCarousel(currentContentIndex, previousIndex, direction);
+        hoverTimeout = null;
+      }, 150);
+    });
+  });
+  
+  // Initialize with first content (home image)
+  if (contentOrder.length > 0) {
+    currentContentIndex = 0;
+    updateCarousel(0, -1, null);
+  }
+});
+</script>
+
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+© ferdie is standing still in a moving scene
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

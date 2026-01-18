@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>projects</title>
+  <meta name="description" content="standing still in a moving scene.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://ftaruc.github.io/categories/projects/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="ferdie jay taruc" href="https://ftaruc.github.io/feed.xml">
+
+  <style>
+/* Page transition styles */
+html {
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  transition: filter 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+  will-change: filter;
+}
+
+body.page-transitioning {
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.page-transition-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.page-transition-container.active {
+  pointer-events: auto;
+}
+
+.page-transition-new {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  transform: translateX(-100%);
+  filter: blur(2px);
+  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1),
+              filter 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+  overflow-y: auto;
+  will-change: transform, filter;
+}
+
+.page-transition-new.reverse {
+  transform: translateX(100%);
+}
+
+.page-transition-new.loaded {
+  transform: translateX(0);
+  filter: blur(0px);
+}
+
+.page-transition-new iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* 3D Loading Screen */
+.loading-screen-3d {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(245, 245, 245, 0.95);
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  perspective-origin: center center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  transform: none !important;
+  will-change: opacity;
+}
+
+.loading-screen-3d.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.loading-screen-3d.hiding {
+  opacity: 0;
+}
+
+.loader-3d-container {
+  position: relative;
+  width: 150px;
+  height: 200px;
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-text {
+  font-family: "Arial-LC", sans-serif;
+  font-size: 13px;
+  color: #000000;
+  letter-spacing: 0.02em;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-left: 8px;
+  font-weight: 400;
+  text-align: center;
+  width: 100%;
+}
+
+/* 3D Moon Sphere */
+.moon-sphere {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  left: 50%;
+  top: 50%;
+  margin-left: -60px;
+  margin-top: -60px;
+  transform-style: preserve-3d;
+  animation: rotateMoon 8s infinite linear;
+}
+
+@keyframes rotateMoon {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+/* Moon rings (latitudes) */
+.moon-ring {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 2px solid rgba(60, 70, 97, 0.2);
+  border-radius: 50%;
+  left: 0;
+  top: 0;
+}
+
+.moon-ring.ring1 {
+  transform: rotateX(0deg);
+}
+
+.moon-ring.ring2 {
+  transform: rotateX(30deg);
+}
+
+.moon-ring.ring3 {
+  transform: rotateX(60deg);
+}
+
+.moon-ring.ring4 {
+  transform: rotateX(90deg);
+}
+
+.moon-ring.ring5 {
+  transform: rotateX(120deg);
+}
+
+.moon-ring.ring6 {
+  transform: rotateX(150deg);
+}
+
+/* Moon meridians (longitudes) */
+.moon-meridian {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 2px solid rgba(60, 70, 97, 0.15);
+  border-radius: 50%;
+  left: 0;
+  top: 0;
+}
+
+.moon-meridian.meridian1 {
+  transform: rotateY(0deg);
+}
+
+.moon-meridian.meridian2 {
+  transform: rotateY(45deg);
+}
+
+.moon-meridian.meridian3 {
+  transform: rotateY(90deg);
+}
+
+.moon-meridian.meridian4 {
+  transform: rotateY(135deg);
+}
+
+
+/* Moon surface texture */
+.moon-surface {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(200, 200, 200, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 60% 70%, rgba(190, 190, 190, 0.2) 1px, transparent 1px),
+    radial-gradient(circle at 80% 20%, rgba(210, 210, 210, 0.25) 1px, transparent 1px),
+    radial-gradient(circle at 40% 80%, rgba(195, 195, 195, 0.2) 1px, transparent 1px);
+  background-size: 30% 30%, 25% 25%, 20% 20%, 35% 35%;
+  background-position: 0% 0%, 100% 100%, 50% 50%, 0% 100%;
+  opacity: 0.6;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+</style>
+
+<script>
+(function() {
+  'use strict';
+  
+  let isTransitioning = false;
+  
+  // Only run on same-origin links
+  function isSameOrigin(href) {
+    try {
+      const url = new URL(href, window.location.href);
+      return url.origin === window.location.origin;
+    } catch (e) {
+      return false;
+    }
+  }
+  
+  // Intercept link clicks
+  document.addEventListener('click', function(e) {
+    if (isTransitioning) {
+      e.preventDefault();
+      return;
+    }
+    
+    // Check if target is an Element and has closest method
+    const target = e.target;
+    if (!target || typeof target.closest !== 'function') return;
+    
+    const link = target.closest('a');
+    if (!link) return;
+    
+    const href = link.getAttribute('href');
+    if (!href) return;
+    
+    // Skip if external link, mailto, tel, or anchor link
+    if (href.startsWith('#') || 
+        href.startsWith('mailto:') || 
+        href.startsWith('tel:') ||
+        href.startsWith('javascript:') ||
+        link.hasAttribute('target') ||
+        !isSameOrigin(href)) {
+      return;
+    }
+    
+    // Skip if it's a download link
+    if (link.hasAttribute('download')) {
+      return;
+    }
+    
+    // Skip transition for photos page - it has complex JavaScript that needs to run properly
+    if (href.includes('/photos/') || href.includes('/photos')) {
+      return;
+    }
+    
+    // Skip transition for archive page - it has complex JavaScript that causes double-loading
+    if (href.includes('/archives/') || href.includes('/archives')) {
+      return;
+    }
+    
+    e.preventDefault();
+    isTransitioning = true;
+    
+    // Create and show 3D loading screen
+    const loadingScreen = document.createElement('div');
+    loadingScreen.className = 'loading-screen-3d';
+    loadingScreen.innerHTML = `
+      <div class="loader-3d-container">
+        <div class="loading-text">loading...</div>
+        <div class="moon-sphere">
+          <div class="moon-ring ring1"></div>
+          <div class="moon-ring ring2"></div>
+          <div class="moon-ring ring3"></div>
+          <div class="moon-ring ring4"></div>
+          <div class="moon-ring ring5"></div>
+          <div class="moon-ring ring6"></div>
+          <div class="moon-meridian meridian1"></div>
+          <div class="moon-meridian meridian2"></div>
+          <div class="moon-meridian meridian3"></div>
+          <div class="moon-meridian meridian4"></div>
+          <div class="moon-surface"></div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(loadingScreen);
+    
+    // Show loading screen
+    requestAnimationFrame(function() {
+      loadingScreen.classList.add('active');
+    });
+    
+    // Add blur transition to current page (old page goes underneath)
+    document.body.classList.add('page-transitioning');
+    
+    // Create container for new page
+    const container = document.createElement('div');
+    container.className = 'page-transition-container';
+    
+    const newPage = document.createElement('div');
+    // Check if going back home - reverse the direction
+    // Normalize href to check if it's the home page
+    const url = new URL(href, window.location.origin);
+    const isGoingHome = url.pathname === '/' || url.pathname === '';
+    newPage.className = isGoingHome ? 'page-transition-new reverse' : 'page-transition-new';
+    
+    // Start transition immediately for smoother feel
+    requestAnimationFrame(function() {
+      container.appendChild(newPage);
+      document.body.appendChild(container);
+      
+      // Activate container immediately
+      container.classList.add('active');
+      
+      // Use fetch to load the new page content
+      fetch(href)
+        .then(response => response.text())
+        .then(html => {
+          // Parse the HTML
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          
+          // Get the body content
+          const bodyContent = doc.body || doc.querySelector('body');
+          if (bodyContent) {
+            newPage.innerHTML = bodyContent.innerHTML;
+            
+            // Copy styles
+            const styles = doc.querySelectorAll('style');
+            styles.forEach(style => {
+              const newStyle = document.createElement('style');
+              newStyle.textContent = style.textContent;
+              document.head.appendChild(newStyle);
+            });
+            
+            // Wait for DOM to be ready before executing scripts
+            // Use setTimeout to ensure DOM is fully parsed
+            setTimeout(() => {
+              // Copy and execute scripts after DOM is ready
+              const scripts = doc.querySelectorAll('script');
+              scripts.forEach(script => {
+                if (script.src) {
+                  // External scripts
+                  const newScript = document.createElement('script');
+                  newScript.src = script.src;
+                  newScript.async = false;
+                  document.head.appendChild(newScript);
+                } else if (script.textContent.trim()) {
+                  // Inline scripts - handle DOMContentLoaded case
+                  let scriptContent = script.textContent;
+                  
+                  // If script uses DOMContentLoaded, replace it with immediate execution
+                  // since DOM is already ready when we inject
+                  if (scriptContent.includes('DOMContentLoaded')) {
+                    // Replace DOMContentLoaded with immediate execution
+                    scriptContent = scriptContent.replace(
+                      /document\.addEventListener\(['"]DOMContentLoaded['"],\s*function\(\)\s*\{/g,
+                      '(function() {'
+                    );
+                    // Close the wrapper function at the end
+                    scriptContent = scriptContent.replace(
+                      /\}\);?\s*$/,
+                      '})();'
+                    );
+                  }
+                  
+                  const newScript = document.createElement('script');
+                  newScript.textContent = scriptContent;
+                  newPage.appendChild(newScript);
+                }
+              });
+            }, 150);
+          }
+          
+          // Wait for content to cache and show moon animation
+          setTimeout(function() {
+            // Start wipe animation immediately
+            requestAnimationFrame(function() {
+              newPage.classList.add('loaded');
+              
+              // Hide loading screen smoothly as wipe completes (at 80% of transition)
+              setTimeout(function() {
+                loadingScreen.classList.add('hiding');
+                setTimeout(function() {
+                  loadingScreen.remove();
+                }, 300);
+              }, 480); // 80% of 600ms transition
+            });
+            
+            // Navigate after transition completes smoothly
+            setTimeout(function() {
+              window.location.href = href;
+            }, 650); // Slightly after 600ms transition completes
+          }, 100); // Delay to show moon and cache content
+        })
+        .catch(function(error) {
+          console.error('Transition error:', error);
+          // Remove loading screen on error
+          const loadingScreen = document.querySelector('.loading-screen-3d');
+          if (loadingScreen) {
+            loadingScreen.remove();
+          }
+          // Fallback to normal navigation
+          document.body.classList.remove('page-transitioning');
+          window.location.href = href;
+          isTransitioning = false;
+        });
+    });
+  });
+  
+  // Prefetch links on hover for faster transitions
+  document.addEventListener('mouseenter', function(e) {
+    // Check if target is an Element and has closest method
+    const target = e.target;
+    if (!target || typeof target.closest !== 'function') return;
+    
+    const link = target.closest('a');
+    if (link && link.href && isSameOrigin(link.href) && !link.href.startsWith('#')) {
+      const linkElement = document.createElement('link');
+      linkElement.rel = 'prefetch';
+      linkElement.href = link.href;
+      document.head.appendChild(linkElement);
+    }
+  }, true);
+  
+  // Remove transition class when page loads
+  window.addEventListener('load', function() {
+    document.body.classList.remove('page-transitioning');
+    isTransitioning = false;
+  });
+  
+  // Also handle browser back/forward buttons
+  window.addEventListener('pageshow', function(e) {
+    if (e.persisted) {
+      document.body.classList.remove('page-transitioning');
+      isTransitioning = false;
+    }
+  });
+})();
+</script>
+
+
+
+  
+  <meta property="og:title" content="projects">
+  <meta property="og:site_name" content="ferdie jay taruc">
+  <meta property="og:url" content="https://ftaruc.github.io/categories/projects/">
+  <meta property="og:description" content="standing still in a moving scene.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="projects">
+  <meta name="twitter:description" content="standing still in a moving scene.">
+  
+  
+
+  <!-- Using system fonts - no external font loading needed -->
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">ferdie jay taruc</a>
+
+    <nav class="site-nav">
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="home">
+
+  
+  
+  
+  <h1 class="page-heading">Archive of category &#39;projects&#39;</h1>
+
+  
+
+  <ul class="post-archives">
+    
+      
+      
+
+      <li>
+        <span class="post-meta">
+          Apr 8, 2021
+          
+             •
+  
+    
+    
+      
+    
+      
+        <a href="/categories/projects/">projects</a>
+      
+    
+  
+
+
+
+
+          
+          
+        </span>
+
+        <h2>
+          
+            <a class="post-link" href="/2021/04/08/scraping-grailed/">Scraping Grailed</a>
+          
+        </h2>
+      </li>
+    
+  </ul>
+
+</div>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+© ferdie is standing still in a moving scene
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

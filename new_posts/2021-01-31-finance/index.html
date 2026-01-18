@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Understanding the Stock Market</title>
+  <meta name="description" content="standing still in a moving scene.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://ftaruc.github.io/new_posts/2021-01-31-finance/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="ferdie jay taruc" href="https://ftaruc.github.io/feed.xml">
+
+  <style>
+/* Page transition styles */
+html {
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  transition: filter 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+  will-change: filter;
+}
+
+body.page-transitioning {
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.page-transition-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.page-transition-container.active {
+  pointer-events: auto;
+}
+
+.page-transition-new {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  transform: translateX(-100%);
+  filter: blur(2px);
+  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1),
+              filter 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+  overflow-y: auto;
+  will-change: transform, filter;
+}
+
+.page-transition-new.reverse {
+  transform: translateX(100%);
+}
+
+.page-transition-new.loaded {
+  transform: translateX(0);
+  filter: blur(0px);
+}
+
+.page-transition-new iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* 3D Loading Screen */
+.loading-screen-3d {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(245, 245, 245, 0.95);
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  perspective-origin: center center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  transform: none !important;
+  will-change: opacity;
+}
+
+.loading-screen-3d.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.loading-screen-3d.hiding {
+  opacity: 0;
+}
+
+.loader-3d-container {
+  position: relative;
+  width: 150px;
+  height: 200px;
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-text {
+  font-family: "Arial-LC", sans-serif;
+  font-size: 13px;
+  color: #000000;
+  letter-spacing: 0.02em;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-left: 8px;
+  font-weight: 400;
+  text-align: center;
+  width: 100%;
+}
+
+/* 3D Moon Sphere */
+.moon-sphere {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  left: 50%;
+  top: 50%;
+  margin-left: -60px;
+  margin-top: -60px;
+  transform-style: preserve-3d;
+  animation: rotateMoon 8s infinite linear;
+}
+
+@keyframes rotateMoon {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+/* Moon rings (latitudes) */
+.moon-ring {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 2px solid rgba(60, 70, 97, 0.2);
+  border-radius: 50%;
+  left: 0;
+  top: 0;
+}
+
+.moon-ring.ring1 {
+  transform: rotateX(0deg);
+}
+
+.moon-ring.ring2 {
+  transform: rotateX(30deg);
+}
+
+.moon-ring.ring3 {
+  transform: rotateX(60deg);
+}
+
+.moon-ring.ring4 {
+  transform: rotateX(90deg);
+}
+
+.moon-ring.ring5 {
+  transform: rotateX(120deg);
+}
+
+.moon-ring.ring6 {
+  transform: rotateX(150deg);
+}
+
+/* Moon meridians (longitudes) */
+.moon-meridian {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 2px solid rgba(60, 70, 97, 0.15);
+  border-radius: 50%;
+  left: 0;
+  top: 0;
+}
+
+.moon-meridian.meridian1 {
+  transform: rotateY(0deg);
+}
+
+.moon-meridian.meridian2 {
+  transform: rotateY(45deg);
+}
+
+.moon-meridian.meridian3 {
+  transform: rotateY(90deg);
+}
+
+.moon-meridian.meridian4 {
+  transform: rotateY(135deg);
+}
+
+
+/* Moon surface texture */
+.moon-surface {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(200, 200, 200, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 60% 70%, rgba(190, 190, 190, 0.2) 1px, transparent 1px),
+    radial-gradient(circle at 80% 20%, rgba(210, 210, 210, 0.25) 1px, transparent 1px),
+    radial-gradient(circle at 40% 80%, rgba(195, 195, 195, 0.2) 1px, transparent 1px);
+  background-size: 30% 30%, 25% 25%, 20% 20%, 35% 35%;
+  background-position: 0% 0%, 100% 100%, 50% 50%, 0% 100%;
+  opacity: 0.6;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+</style>
+
+<script>
+(function() {
+  'use strict';
+  
+  let isTransitioning = false;
+  
+  // Only run on same-origin links
+  function isSameOrigin(href) {
+    try {
+      const url = new URL(href, window.location.href);
+      return url.origin === window.location.origin;
+    } catch (e) {
+      return false;
+    }
+  }
+  
+  // Intercept link clicks
+  document.addEventListener('click', function(e) {
+    if (isTransitioning) {
+      e.preventDefault();
+      return;
+    }
+    
+    // Check if target is an Element and has closest method
+    const target = e.target;
+    if (!target || typeof target.closest !== 'function') return;
+    
+    const link = target.closest('a');
+    if (!link) return;
+    
+    const href = link.getAttribute('href');
+    if (!href) return;
+    
+    // Skip if external link, mailto, tel, or anchor link
+    if (href.startsWith('#') || 
+        href.startsWith('mailto:') || 
+        href.startsWith('tel:') ||
+        href.startsWith('javascript:') ||
+        link.hasAttribute('target') ||
+        !isSameOrigin(href)) {
+      return;
+    }
+    
+    // Skip if it's a download link
+    if (link.hasAttribute('download')) {
+      return;
+    }
+    
+    // Skip transition for photos page - it has complex JavaScript that needs to run properly
+    if (href.includes('/photos/') || href.includes('/photos')) {
+      return;
+    }
+    
+    // Skip transition for archive page - it has complex JavaScript that causes double-loading
+    if (href.includes('/archives/') || href.includes('/archives')) {
+      return;
+    }
+    
+    e.preventDefault();
+    isTransitioning = true;
+    
+    // Create and show 3D loading screen
+    const loadingScreen = document.createElement('div');
+    loadingScreen.className = 'loading-screen-3d';
+    loadingScreen.innerHTML = `
+      <div class="loader-3d-container">
+        <div class="loading-text">loading...</div>
+        <div class="moon-sphere">
+          <div class="moon-ring ring1"></div>
+          <div class="moon-ring ring2"></div>
+          <div class="moon-ring ring3"></div>
+          <div class="moon-ring ring4"></div>
+          <div class="moon-ring ring5"></div>
+          <div class="moon-ring ring6"></div>
+          <div class="moon-meridian meridian1"></div>
+          <div class="moon-meridian meridian2"></div>
+          <div class="moon-meridian meridian3"></div>
+          <div class="moon-meridian meridian4"></div>
+          <div class="moon-surface"></div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(loadingScreen);
+    
+    // Show loading screen
+    requestAnimationFrame(function() {
+      loadingScreen.classList.add('active');
+    });
+    
+    // Add blur transition to current page (old page goes underneath)
+    document.body.classList.add('page-transitioning');
+    
+    // Create container for new page
+    const container = document.createElement('div');
+    container.className = 'page-transition-container';
+    
+    const newPage = document.createElement('div');
+    // Check if going back home - reverse the direction
+    // Normalize href to check if it's the home page
+    const url = new URL(href, window.location.origin);
+    const isGoingHome = url.pathname === '/' || url.pathname === '';
+    newPage.className = isGoingHome ? 'page-transition-new reverse' : 'page-transition-new';
+    
+    // Start transition immediately for smoother feel
+    requestAnimationFrame(function() {
+      container.appendChild(newPage);
+      document.body.appendChild(container);
+      
+      // Activate container immediately
+      container.classList.add('active');
+      
+      // Use fetch to load the new page content
+      fetch(href)
+        .then(response => response.text())
+        .then(html => {
+          // Parse the HTML
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          
+          // Get the body content
+          const bodyContent = doc.body || doc.querySelector('body');
+          if (bodyContent) {
+            newPage.innerHTML = bodyContent.innerHTML;
+            
+            // Copy styles
+            const styles = doc.querySelectorAll('style');
+            styles.forEach(style => {
+              const newStyle = document.createElement('style');
+              newStyle.textContent = style.textContent;
+              document.head.appendChild(newStyle);
+            });
+            
+            // Wait for DOM to be ready before executing scripts
+            // Use setTimeout to ensure DOM is fully parsed
+            setTimeout(() => {
+              // Copy and execute scripts after DOM is ready
+              const scripts = doc.querySelectorAll('script');
+              scripts.forEach(script => {
+                if (script.src) {
+                  // External scripts
+                  const newScript = document.createElement('script');
+                  newScript.src = script.src;
+                  newScript.async = false;
+                  document.head.appendChild(newScript);
+                } else if (script.textContent.trim()) {
+                  // Inline scripts - handle DOMContentLoaded case
+                  let scriptContent = script.textContent;
+                  
+                  // If script uses DOMContentLoaded, replace it with immediate execution
+                  // since DOM is already ready when we inject
+                  if (scriptContent.includes('DOMContentLoaded')) {
+                    // Replace DOMContentLoaded with immediate execution
+                    scriptContent = scriptContent.replace(
+                      /document\.addEventListener\(['"]DOMContentLoaded['"],\s*function\(\)\s*\{/g,
+                      '(function() {'
+                    );
+                    // Close the wrapper function at the end
+                    scriptContent = scriptContent.replace(
+                      /\}\);?\s*$/,
+                      '})();'
+                    );
+                  }
+                  
+                  const newScript = document.createElement('script');
+                  newScript.textContent = scriptContent;
+                  newPage.appendChild(newScript);
+                }
+              });
+            }, 150);
+          }
+          
+          // Wait for content to cache and show moon animation
+          setTimeout(function() {
+            // Start wipe animation immediately
+            requestAnimationFrame(function() {
+              newPage.classList.add('loaded');
+              
+              // Hide loading screen smoothly as wipe completes (at 80% of transition)
+              setTimeout(function() {
+                loadingScreen.classList.add('hiding');
+                setTimeout(function() {
+                  loadingScreen.remove();
+                }, 300);
+              }, 480); // 80% of 600ms transition
+            });
+            
+            // Navigate after transition completes smoothly
+            setTimeout(function() {
+              window.location.href = href;
+            }, 650); // Slightly after 600ms transition completes
+          }, 100); // Delay to show moon and cache content
+        })
+        .catch(function(error) {
+          console.error('Transition error:', error);
+          // Remove loading screen on error
+          const loadingScreen = document.querySelector('.loading-screen-3d');
+          if (loadingScreen) {
+            loadingScreen.remove();
+          }
+          // Fallback to normal navigation
+          document.body.classList.remove('page-transitioning');
+          window.location.href = href;
+          isTransitioning = false;
+        });
+    });
+  });
+  
+  // Prefetch links on hover for faster transitions
+  document.addEventListener('mouseenter', function(e) {
+    // Check if target is an Element and has closest method
+    const target = e.target;
+    if (!target || typeof target.closest !== 'function') return;
+    
+    const link = target.closest('a');
+    if (link && link.href && isSameOrigin(link.href) && !link.href.startsWith('#')) {
+      const linkElement = document.createElement('link');
+      linkElement.rel = 'prefetch';
+      linkElement.href = link.href;
+      document.head.appendChild(linkElement);
+    }
+  }, true);
+  
+  // Remove transition class when page loads
+  window.addEventListener('load', function() {
+    document.body.classList.remove('page-transitioning');
+    isTransitioning = false;
+  });
+  
+  // Also handle browser back/forward buttons
+  window.addEventListener('pageshow', function(e) {
+    if (e.persisted) {
+      document.body.classList.remove('page-transitioning');
+      isTransitioning = false;
+    }
+  });
+})();
+</script>
+
+
+
+  
+  <meta property="og:title" content="Understanding the Stock Market">
+  <meta property="og:site_name" content="ferdie jay taruc">
+  <meta property="og:url" content="https://ftaruc.github.io/new_posts/2021-01-31-finance/">
+  <meta property="og:description" content="standing still in a moving scene.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="Understanding the Stock Market">
+  <meta name="twitter:description" content="standing still in a moving scene.">
+  
+  
+
+  <!-- Using system fonts - no external font loading needed -->
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">ferdie jay taruc</a>
+
+    <nav class="site-nav">
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Understanding the Stock Market</h1>
+    
+    <p class="post-meta"><time datetime="2021-01-31T06:10:56+00:00" itemprop="datePublished">Jan 31, 2021</time> •
+  
+    
+    
+      
+    
+      
+    
+  
+
+
+ •
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Most traditional (i.e. boomer) investors usually try to make money by going long - i.e. “buy low and sell high”; this is when you buy a stock thinking it will go up in the future (bullish). Shorting is the opposite of this, you “sell high and buy low”, thinking the stock will go down in the future (bearish). This is usually done through the broker, where the prospective short seller would “borrow” the shares from them, and they would need to pay back these shares in some future date by “covering their shorts” - or buying back the exact same quantity of shares they owe the broker.</p>
+
+<p><strong>Short Squeezes</strong></p>
+
+<p>So when does a short seller need to cover their shorts? Well, either when a) The short seller wants to, either to take profit or to stop a loss, b) Their broker forces them to through a margin call, or c) The broker forces them to as the broker has recalled their loan, usually for a hard to borrow stock - they get “bought in”. Today, we’ll focus on C) because this is how short squeezes happen.</p>
+
+<!-- more -->
+
+<p><strong>What are Stock Options</strong></p>
+
+<p>A stock option is a contract between the writer and whoever holds it that gives the option holder the right to buy (call option) or sell (put option) 100 shares of the underlying stock on or before the expiry date at a specified strike price. So for example, buying a GME 1/29 $1000c gives whoever the holder of this contract is the option to buy from the writer of this contract 100 shares of GME at $1000 / share on or before 1/29. Obviously if GME is lower than $1000 before that date, the holder would be an idiot to exercise this option to buy GME shares for more than their current market value, so they expire worthless.</p>
+
+<p>This effectively provides the option holder an immense amount of leverage, and provides the opportunity for them to 10x or even 100x their original investment if the underlying asset moves the right way - for example because a subreddit declares war on a hedge fund and pumps up a stock to make them go bankrupt, while limiting their losses to the cost of the option. The option writer will in return receive a premium for the option, potentially risking an infinite amount of money, but with a high likelihood of making a small profit. These writers would either be</p>
+
+<ol>
+  <li>Theta gang - who are looking to generate a tidy income source from those option premiums and pray that the stock doesn’t move in the wrong direction too much</li>
+  <li>A market maker - who writes the contract when they see an arbitrage opportunity between the market value of an option and the theoretical value of it, and hedging their contract they wrote by buying / shorting the underlying assets so they effectively don’t actually take a position in the market.</li>
+</ol>
+
+<p>We’ll go over how 2) works and how this mechanism can be used as a financial nuclear bomb, but first you need to learn some greek.</p>
+
+<p><strong>The Greeks</strong></p>
+
+<p>The greeks in finance is a set of factors that can affect the price of a stock option / group of options</p>
+
+<p><u>Delta</u> - Change of the option price as the stock price changes</p>
+
+<p><u>Gamma</u> - Change in Delta as the stock price changes</p>
+
+<p><u>Vega</u> - Change in the option price as volatility of the stock changes</p>
+
+<p><u>Theta</u> - The decay in the option price as the expiration date gets nearer</p>
+
+<p><u>Rho</u> - Change of the option price as the interest rate changes; Most people ignore this</p>
+
+<p>Looking at the greeks of the gambling tickets you buy is very useful to analyzing the ways you can make or lose money on them. Think TSLA will go up a modest amount? Buy a high-Delta call. Think GME is going to 🚀🚀🚀 1000% more? Look for a high Gamma call so your Delta gains accelerate as GME 🚀🌕. Do you feel like a vampire and want to have a steady income source from degenerate <a href="https://www.reddit.com/r/wallstreetbet">r/wallstreetbet</a> gamblers on a stock you think will go flat (relative to historical volatility) over the next few months? Join theta gang and sell a high-Theta and high-Vega option!</p>
+
+<p><strong>Market Makers</strong></p>
+
+<p>The Black-Scholes model is a fancy mathematical model that describes a “perfect price” (a lot of caveats here) for a stock option. This is done by showing how every option written can theoretically be perfectly hedged by a series of purchases or short sells on the underlying stock. This means that theoretically, if there is a large gap between the theoretical price from Black Scholes and the actual price for an option, there is an “arbitrage” opportunity - this is where market makers come in.</p>
+
+<p>Market makers are companies that provide liquidity to a market by offering to be counterparty to trades. This is especially useful in stock options, where a single ticker can have thousands of options, and there might be someone who wants to buy a GME 1/29 $1000c but no one is actually actively selling it. However, this option might be listed anyways and Citadel will sell you the call if anyone tries to buy it and then immediately hedge it. In fact, when you buy an option chances are you’re not actually buying it from its previous owner selling an option they already own, but from a market maker like Citadel (who is responsible for over 99% of all options volume in 3000 stocks).</p>
+
+<p>So what happens when someone buys an option from a market maker? Since the market maker typically can’t (and probably don’t want to) take a position, meaning taking a directional bet if a stock goes up or down, they’ll immediately hedge the option they just conjured out of thin air by buying or shorting the equivalent number of shares such that the Delta of those shares is the same as the Delta of the option they wrote to remain Delta-neutral, so if the stock goes up or down their position value doesn’t change - this is called <strong>Delta hedging</strong>. Furthermore, as the stock price moves up (calls) or down (puts), they’ll need to buy or sell even more of those shares to remain Delta neutral since the Delta will change due to the option’s Gamma - this is called <strong>Gamma hedging</strong>.</p>
+
+<h3>Putting It All Together - How options can be used as weapons of mass destruction against short sellers</h3>
+
+<p>Now we have the tools to understand how these two financial concepts put together can make billion-dollar hedge funds go bankrupt. Through Delta and Gamma hedging of market makers, buyers can have the effect of buying shares dozens of times the value they actually spent buying their option; a XYZ 4/20 690c can cost only $100 in premiums but causes the market maker to buy $2000 in the underlying stock to hedge against it. If you get enough retail investors to do this, they’ll have the impact of billion-dollar whales on the market despite their small stimulus-check-funded portfolios.</p>
+
+<p>Now, you do this on a stock that is heavily shorted, and with very little institutions actually holding real shares of these - making it harder for brokers to find shares to borrow, and you have yourself a weapon of mass financial destruction capable of making billions of Melvin’s money disappear in a single day and potentially have GME 🚀🚀🚀 to a trillion dollar market cap.</p>
+
+<p>–</p>
+
+<p>For more resources:</p>
+
+<ol>
+  <li><a href="https://www.reddit.com/r/wallstreetbets/comments/l5ygab/dddd_how_rwallstreetbets_created_a_financial/">WSB</a></li>
+</ol>
+
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+© ferdie is standing still in a moving scene
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
