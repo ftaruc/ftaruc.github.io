@@ -58,6 +58,12 @@ jobs:
           rm -rf .git/objects/pack/*.keep 2>/dev/null || true
           git gc --prune=now --aggressive 2>/dev/null || true
       
+      - name: Configure Git for large pushes
+        run: |
+          git config --global http.postBuffer 524288000
+          git config --global http.maxRequestBuffer 100M
+          git config --global core.compression 0
+      
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/source'
@@ -68,6 +74,26 @@ jobs:
           destination_dir: ./
           force_orphan: false
           full_commit_message: "Deploy site from source branch"
+          disable_nojekyll: false
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
+          allow_empty_commit: false
+        env:
+          GIT_HTTP_LOW_SPEED_LIMIT: 0
+          GIT_HTTP_LOW_SPEED_TIME: 999999
+          GIT_HTTP_POST_BUFFER: 524288000
+        continue-on-error: true
+      
+      - name: Retry deployment if failed
+        if: failure()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: master
+          destination_dir: ./
+          force_orphan: false
+          full_commit_message: "Deploy site from source branch (retry)"
           disable_nojekyll: false
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
